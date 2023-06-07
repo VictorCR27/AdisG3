@@ -110,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="inicioEstudiante.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +131,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DB\conn_db.cs" />
+    <Compile Include="inicioEstudiante.xaml.cs">
+      <DependentUpon>inicioEstudiante.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginAdmin.xaml.cs">
       <DependentUpon>LoginAdmin.xaml</DependentUpon>
     </Compile>

@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace AdisG3
 {
     /// <summary>
-    /// Interaction logic for LoginAdmin.xaml
+    /// Interaction logic for inicioEstudiante.xaml
     /// </summary>
-    public partial class LoginAdmin : Window
+    public partial class inicioEstudiante : Window
     {
-        public LoginAdmin()
+        public inicioEstudiante()
         {
             InitializeComponent();
-        }
-
-        private void EnviarButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

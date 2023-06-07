@@ -57,7 +57,8 @@
                     </Grid>
                     <TextBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
                 </StackPanel>
-                <Button Content="Iniciar Sesión" Click="Button_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63"/>
+                
+                <Button Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63"/>
 
             </StackPanel>
         </StackPanel>
