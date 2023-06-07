@@ -7,7 +7,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-         WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen"
         Title="LoginEstudiante" Height="450" Width="800"
         WindowStyle="None"
         ResizeMode="NoResize">
@@ -17,21 +17,21 @@
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
                 <GradientStop Color="White" Offset="0"/>
-                <GradientStop Color="#3C8FE8" Offset="1"/>
+                <GradientStop Color="#3a0f59" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
 
-        <Border Height="390" VerticalAlignment="Top" CornerRadius="0 0 180 0" Background="#55A4D9">
+        <Border Height="390" VerticalAlignment="Top" CornerRadius="0 0 170 0" Background="White">
         </Border>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel Width="350">
-                <Image Source="img/ICON4801.png" Width="300" VerticalAlignment="Top" Margin="30" Stretch="Fill"/>
+                <Image Source="img/logo-u.jpeg" Width="322" Height="389"/>
             </StackPanel>
 
             <StackPanel Width="400">
                 <StackPanel Margin="0 40">
-                    <TextBlock Text="Login Administradores" Margin="20" Foreground="White" TextAlignment="Center" FontSize="30" FontFamily="Verdana" Width="346"/>
+                    <TextBlock Text="Login Administradores" Margin="20"  Foreground="#3f0e63" TextAlignment="Center" FontSize="30" FontFamily="Audrey" Width="346" FontWeight="Medium"/>
                 </StackPanel>
 
                 <StackPanel Margin="20 -10">
@@ -40,10 +40,10 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Correo" FontWeight="Medium" Foreground="White" FontSize="20" Grid.ColumnSpan="2" Margin="14,0,-14,0"/>
-                        <materialDesign:PackIcon Kind="Envelope" Width="25" Foreground="White" Height="25" Margin="-10,6,0,0"/>
+                        <Label Content="Correo" FontWeight="Medium" Foreground="#3f0e63" FontSize="20" Grid.ColumnSpan="2" Margin="14,0,-14,0"/>
+                        <materialDesign:PackIcon Kind="Envelope" Width="25" Foreground="#3f0e63" Height="25" Margin="-10,6,0,0"/>
                     </Grid>
-                    <TextBox x:Name="txtCorreo" Foreground="White" FontSize="16" Height="30" BorderBrush="White" Width="329"/>
+                    <TextBox x:Name="txtCorreo" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337" Width="362"/>
                 </StackPanel>
 
                 <StackPanel Margin="20 20">
@@ -52,16 +52,15 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Contraseña" FontWeight="Medium" Foreground="White" FontSize="20" Grid.ColumnSpan="2" Margin="13,0,-13,0"/>
-                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="White" Height="25" Margin="-11,0,0,0" VerticalAlignment="Center"/>
+                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#3f0e63" FontSize="20" Grid.ColumnSpan="2" Margin="13,0,-13,0"/>
+                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#3f0e63" Height="25" Margin="-11,0,0,0" VerticalAlignment="Center"/>
                     </Grid>
-                    <TextBox x:Name="txtPassword" Foreground="White" FontSize="16" Height="30" BorderBrush="White"/>
+                    <TextBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
                 </StackPanel>
-                
-                <Button Content="Iniciar Sesión" Click="EnviarButton_Click" FontSize="20" Width="154" Height="43" Background="White" Foreground="#1C6FE1"/>
+                <Button Content="Iniciar Sesión" Click="Button_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63"/>
 
             </StackPanel>
         </StackPanel>
-        
+
     </Grid>
 </Window>
