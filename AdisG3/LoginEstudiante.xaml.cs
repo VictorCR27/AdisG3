@@ -74,5 +74,13 @@ namespace AdisG3
                 }
             }
         }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            restablecerPassword restablecerPassword = new restablecerPassword();
+            restablecerPassword.Show();
+            this.Close();
+        }
+
     }
 }

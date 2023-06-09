@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdisG3"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         WindowStyle="None"
         ResizeMode="NoResize">
     <Window.Resources>
@@ -73,37 +73,37 @@
             </Setter>
         </Style>
 
-    <!-- Fin Estilo Btn -->
+        <!-- Fin Estilo Btn -->
     </Window.Resources>
 
     <Grid>
-  
+
         <Grid.Background>
             <ImageBrush ImageSource="/img/Ulacit-fondo-1.jpg" Opacity="0.9"/>
         </Grid.Background>
-        
+
         <Grid>
-            
+
             <Grid.Background>
                 <SolidColorBrush Color="#60000000"/>
             </Grid.Background>
-            
-            <Button x:Name="btnAdministrativo" Content="Administrativo" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnAdministrativo_Click" Margin="448,132,0,0"
-                Height ="200" Width="200"
+
+            <Button x:Name="btnAdministrativo" Content="Administrativo" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnAdministrativo_Click" Margin="464,129,0,0"
+                Height ="234" Width="228"
                 Background="#0A006A"
                 Foreground="Azure"
-                FontSize="25" FontWeight="DemiBold"
+                FontSize="30" FontWeight="DemiBold"
                 Style="{DynamicResource RoundButton}"/>
-            
-            <Button x:Name="btnEstudiantes" Content="Estudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnEstudiantes_Click" Margin="154,132,0,0"
-                Height ="200" Width="200"
+
+            <Button x:Name="btnEstudiantes" Content="Estudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnEstudiantes_Click" Margin="114,129,0,0"
+                Height ="234" Width="227"
                 Background="#0A006A"
                 Foreground="Azure"
-                FontSize="25" FontWeight="DemiBold"
+                FontSize="30" FontWeight="DemiBold"
                 Style="{DynamicResource RoundButton}"/>
-            
+
         </Grid>
-        
+
     </Grid>
 
 </Window>

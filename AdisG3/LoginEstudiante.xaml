@@ -29,7 +29,7 @@
             </StackPanel>
 
             <StackPanel Width="400">
-                <StackPanel Margin="0 40">
+                <StackPanel Margin="0 20">
                     <TextBlock Text="Login Estudiantes" Margin="20"  Foreground="#3f0e63" TextAlignment="Center" FontSize="30" FontFamily="Audrey" Width="346" FontWeight="Medium"/>
                 </StackPanel>
 
@@ -56,10 +56,15 @@
                     </Grid>
                     <TextBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
                 </StackPanel>
-                <Button Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63"/>
+                
 
             </StackPanel>
         </StackPanel>
+
+        <Button Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63" Margin="476,304,170,109"/>
+
+        <Button Content="Restablecer contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#0064fe" BorderThickness="0" Padding="0" Margin="367,244,309,174"/>
+
 
     </Grid>
 </Window>
