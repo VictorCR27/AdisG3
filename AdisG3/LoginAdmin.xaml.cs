@@ -25,6 +25,14 @@ namespace AdisG3
             InitializeComponent();
         }
 
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            // Abrir ventana de inicio de sesión
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
         private void EnviarButton_Click(object sender, RoutedEventArgs e)
         {
             string correo = txtCorreo.Text; // Obtener el valor del TextBox de usuario

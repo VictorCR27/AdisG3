@@ -65,6 +65,12 @@
 
         <Button Content="Restablecer contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#0064fe" BorderThickness="0" Padding="0" Margin="367,244,309,174"/>
 
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="-16,0,729,400">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="60" Foreground="#3f0e63" Height="37"/>
+            </StackPanel>
+        </Button>
+        
     </Grid>
 </Window>
 
