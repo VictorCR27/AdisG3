@@ -36,7 +36,7 @@ namespace AdisG3
         private void EnviarButton_Click(object sender, RoutedEventArgs e)
         {
             string correo = txtCorreo.Text; // Obtener el valor del TextBox de usuario
-            string password = txtPassword.Text; // Obtener el valor del TextBox de contraseña
+            string password = txtPassword.Password; // Obtener el valor del TextBox de contraseña
 
             bool credencialesValidas = CompararCredenciales(correo, password);
 

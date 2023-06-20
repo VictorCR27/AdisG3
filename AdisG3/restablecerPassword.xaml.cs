@@ -20,6 +20,14 @@ namespace AdisG3
             InitializeComponent();
         }
 
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            // Abrir ventana de inicio de sesión
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
         private void RestablecerButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -67,7 +75,7 @@ namespace AdisG3
                     SmtpClient SmtpServer = new SmtpClient("visualcr.com");
 
                     // Especificamos el correo desde el que se enviará el Email y el nombre de la persona que lo envía
-                    mail.From = new MailAddress("info@visualcr.com", "ULACIT - Proyecto AdisG3", Encoding.UTF8);
+                    mail.From = new MailAddress("info@visualcr.com", "Proyecto AdisG3 - ULACIT", Encoding.UTF8);
 
                     // Aquí ponemos el asunto del correo
                     mail.Subject = "Restablecimiento de Contraseña";
@@ -79,7 +87,7 @@ namespace AdisG3
                     mail.To.Add(destinatario);
 
                     // Configuración del SMTP
-                    SmtpServer.Port = 26; // Puerto que utiliza Gmail para sus servicios
+                    SmtpServer.Port = 587; // Puerto que utiliza Gmail para sus servicios
 
                     // Especificamos las credenciales con las que enviaremos el mail
                     SmtpServer.Credentials = new NetworkCredential("info@visualcr.com", "Mariana10&");
@@ -87,7 +95,7 @@ namespace AdisG3
                     SmtpServer.Send(mail);
 
                     // Correo exitoso
-                    MessageBox.Show("Se ha enviado un corro eelectrónico con la contraseña temporal.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Se ha enviado un corro electrónico con la contraseña temporal.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Abrir ventana de inicio de sesión
                     MainWindow mainWindow = new MainWindow();

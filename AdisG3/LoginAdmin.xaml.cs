@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MaterialDesignThemes.Wpf;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Google.Protobuf.WellKnownTypes.Field.Types;
 
 namespace AdisG3
 {
@@ -25,6 +27,7 @@ namespace AdisG3
             InitializeComponent();
         }
 
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             // Abrir ventana de inicio de sesión
@@ -36,7 +39,7 @@ namespace AdisG3
         private void EnviarButton_Click(object sender, RoutedEventArgs e)
         {
             string correo = txtCorreo.Text; // Obtener el valor del TextBox de usuario
-            string password = txtPassword.Text; // Obtener el valor del TextBox de contraseña
+            string password = txtPassword.Password; // Obtener el valor del TextBox de contraseña
 
             bool credencialesValidas = CompararCredenciales(correo, password);
 

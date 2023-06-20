@@ -11,6 +11,8 @@
         WindowStyle="None"
         ResizeMode="NoResize">
 
+
+
     <Grid>
 
         <Grid.Background>
@@ -51,12 +53,11 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#3f0e63" FontSize="20" Grid.ColumnSpan="2" Margin="13,0,-13,0"/>
-                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#3f0e63" Height="25" Margin="-11,0,0,0" VerticalAlignment="Center"/>
+                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#3f0e63" FontSize="20" Grid.ColumnSpan="2" Margin="13,8,-13,-8"/>
+                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#3f0e63" Height="25" Margin="-11,13,0,0"/>
                     </Grid>
-                    <TextBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
+                    <PasswordBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
                 </StackPanel>
-
 
             </StackPanel>
         </StackPanel>
@@ -70,7 +71,7 @@
                 <materialDesign:PackIcon Kind="ArrowBackCircle" Width="60" Foreground="#3f0e63" Height="37"/>
             </StackPanel>
         </Button>
-        
+
     </Grid>
 </Window>
 
