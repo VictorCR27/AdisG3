@@ -51,7 +51,7 @@
 
         <Image Source="/img/studen_icon.png" Margin="44,45,67,419"/>
 
-        <Label Content="¡Bienvenido Bryan!" HorizontalAlignment="Left" Height="33" Margin="36,225,0,0" VerticalAlignment="Top" Width="156" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Label Content="¡Bienvenido!" HorizontalAlignment="Left" Height="33" Margin="61,225,0,0" VerticalAlignment="Top" Width="106" Foreground="White" FontWeight="Bold" FontSize="16"/>
 
 
         <Rectangle HorizontalAlignment="Left" Height="48" Margin="229,76,0,0" VerticalAlignment="Top" Width="206" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.Column="1"/>

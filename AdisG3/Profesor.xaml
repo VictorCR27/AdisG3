@@ -59,7 +59,7 @@
 
         <Image Source="/img/profesor_icon.png" Margin="54,51,81,425"  />
 
-        <Label Content="¡Bienvenido Profesor!" HorizontalAlignment="Left" Height="43" Margin="27,219,0,0" VerticalAlignment="Top" Width="208" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        <Label Content="¡Bienvenido!" HorizontalAlignment="Left" Height="43" Margin="67,209,0,0" VerticalAlignment="Top" Width="106" Foreground="White" FontWeight="Bold" FontSize="16"/>
 
 
         <Rectangle HorizontalAlignment="Left" Height="48" Margin="229,76,0,0" VerticalAlignment="Top" Width="206" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.Column="1"/>
