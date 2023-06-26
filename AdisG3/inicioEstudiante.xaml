@@ -43,7 +43,7 @@
                         </StackPanel>
                     </Grid>
                     <Grid x:Name="CursosGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible">
-                        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150">
+                        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150" Margin="-338,-222,0,0" Click="CursosButton_Click">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>

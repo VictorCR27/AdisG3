@@ -21,7 +21,6 @@ namespace AdisG3
             // Ocultar el contenido de la institución
             TextoInstitucion.Visibility = Visibility.Collapsed;
 
-
         }
 
         private void Button_Cuenta(object sender, RoutedEventArgs e)
@@ -34,6 +33,8 @@ namespace AdisG3
 
             // Ocultar el contenido de la institución
             TextoInstitucion.Visibility = Visibility.Collapsed;
+
+
         }
 
         private void Button_Insti(object sender, RoutedEventArgs e)
@@ -56,6 +57,18 @@ namespace AdisG3
                                     "Las lecciones se imparten en aulas invertidas: la teoría se ve en casa, en las aulas virtuales; y la práctica, en el aula\n" +
                                     "presencial. Por tanto, el tiempo en el aula se centra en ejercicios, proyectos y discusiones, no en lecciones magistrales.\n" +
                                     "Familiarícese con nuestro modelo educativo y metodología de enseñanza basada en proyectos.";
+        }
+
+        private void CursosButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Crear una instancia de la ventana CursosEstudiantes
+            CursosEstudiantes cursosEstudiantes = new CursosEstudiantes();
+
+            // Mostrar la ventana de CursosEstudiantes
+            cursosEstudiantes.Show();
+
+            // Cerrar la ventana actual (inicioEstudiante)
+            this.Close();
         }
     }
 }
