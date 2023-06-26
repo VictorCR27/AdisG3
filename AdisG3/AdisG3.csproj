@@ -110,13 +110,69 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AgregarTarea.xaml.cs">
+      <DependentUpon>AgregarTarea.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CursosEstudiantes.xaml.cs">
       <DependentUpon>CursosEstudiantes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Datos_Tareas.cs" />
+    <Compile Include="Profesor.xaml.cs">
+      <DependentUpon>Profesor.xaml</DependentUpon>
     </Compile>
     <Compile Include="restablecerPassword.xaml.cs">
       <DependentUpon>restablecerPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Semanas\Pag_sem1.xaml.cs">
+      <DependentUpon>Pag_sem1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem10.xaml.cs">
+      <DependentUpon>Pag_sem10.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem11.xaml.cs">
+      <DependentUpon>Pag_sem11.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem12.xaml.cs">
+      <DependentUpon>Pag_sem12.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem13.xaml.cs">
+      <DependentUpon>Pag_sem13.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem14.xaml.cs">
+      <DependentUpon>Pag_sem14.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem15.xaml.cs">
+      <DependentUpon>Pag_sem15.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem2.xaml.cs">
+      <DependentUpon>Pag_sem2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem3.xaml.cs">
+      <DependentUpon>Pag_sem3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem4.xaml.cs">
+      <DependentUpon>Pag_sem4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem5.xaml.cs">
+      <DependentUpon>Pag_sem5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem6.xaml.cs">
+      <DependentUpon>Pag_sem6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem7.xaml.cs">
+      <DependentUpon>Pag_sem7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem8.xaml.cs">
+      <DependentUpon>Pag_sem8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Semanas\Pag_sem9.xaml.cs">
+      <DependentUpon>Pag_sem9.xaml</DependentUpon>
+    </Compile>
     <Page Include="administradorInicio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgregarTarea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +217,71 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Profesor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="restablecerPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem10.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem11.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem12.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem13.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem14.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem15.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Semanas\Pag_sem9.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +333,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\curso1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\bloqueado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

@@ -3,11 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="CursosEstudiantes" Height="607" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
-    <Grid>
-        
+        Title="CursosEstudiantes" Height="607" Width="960" ResizeMode="NoResize" MinHeight="650" MinWidth="1000">
+    <Grid Margin="0,0,10,11">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="251*"/>
+            <ColumnDefinition Width="739*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Rectangle HorizontalAlignment="Left" Height="579" Margin="10,20,0,0" VerticalAlignment="Top" Width="208" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="66" Margin="219,67,0,0" VerticalAlignment="Top" Width="226" Fill="#FF4E2F5B" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="20" RadiusY="20" Grid.Column="1"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="558" Margin="21,30,0,0" VerticalAlignment="Top" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,385,0,0" VerticalAlignment="Top" Width="153" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+
+        <ComboBox HorizontalAlignment="Left" Margin="188,138,0,0" VerticalAlignment="Top" Width="295" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" Grid.Column="1">
+            <Button Content="Semana 1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem1"/>
+            <Button Content="Semana 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem2"/>
+            <Button Content="Semana 3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem3"/>
+            <Button Content="Semana 4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem4"/>
+            <Button Content="Semana 5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem5"/>
+            <Button Content="Semana 6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem6"/>
+            <Button Content="Semana 7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem7"/>
+            <Button Content="Semana 8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem8"/>
+            <Button Content="Semana 9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem9"/>
+            <Button Content="Semana 10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem10"/>
+            <Button Content="Semana 11" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem11"/>
+            <Button Content="Semana 12" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem12"/>
+            <Button Content="Semana 13" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem13"/>
+            <Button Content="Semana 14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem14"/>
+            <Button Content="Semana 15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem15"/>
+
+        </ComboBox>
+
+        <StackPanel HorizontalAlignment="Left" Margin="235,174,0,0" VerticalAlignment="Top" Width="752" Height="440" Background="#FF110616" Grid.ColumnSpan="2">
+            <Frame x:Name="Semanas_Frame" Content="Frame" Width="752" Height="440" Navigated="Semanas_Frame_Navigated"/>
+
+
+        </StackPanel>
+
+        <Rectangle HorizontalAlignment="Left" Height="165" Margin="41,42,0,0" VerticalAlignment="Top" Width="147" Fill="White" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+
+        <Image Source="/img/studen_icon.png" Margin="44,45,67,419"/>
+
+        <Label Content="¡Bienvenido Bryan!" HorizontalAlignment="Left" Height="33" Margin="36,225,0,0" VerticalAlignment="Top" Width="156" Foreground="White" FontWeight="Bold" FontSize="16"/>
+
+
+        <Rectangle HorizontalAlignment="Left" Height="48" Margin="229,76,0,0" VerticalAlignment="Top" Width="206" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.Column="1"/>
+        <Label x:Name="semana_titulo" Content="Semanas" HorizontalAlignment="Left" Margin="253,68,0,0" VerticalAlignment="Top" Width="164" FontSize="36" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="56"/>
+
+        <Label x:Name="n_curso" Content="2CO23-169005G1 ANÁLISIS, DISEÑO E IMPLEMENTACIÓN DE SISTEMAS" HorizontalAlignment="Left" Margin="0,18,0,0" VerticalAlignment="Top" Width="687" FontSize="20" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="36" FontWeight="Bold"/>
+        <Rectangle HorizontalAlignment="Left" Height="1" Margin="10,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="677" Fill="Black" RenderTransformOrigin="0.5,1" Grid.Column="1">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="38" Margin="59,624,0,0" VerticalAlignment="Top" Width="208" Fill="#FF0A020E" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,293,0,0" VerticalAlignment="Top" Width="150" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+        <Button Content="Notas" HorizontalAlignment="Left" Height="52" Margin="59,297,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota"/>
+        <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="59,389,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota"/>
+
+        <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="59,389,70,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
+                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="55" Foreground="#fff" Height="53" RenderTransformOrigin="0.336,0.381"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
