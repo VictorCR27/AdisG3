@@ -55,7 +55,7 @@ namespace AdisG3
             }
             else
             {
-                MessageBox.Show("Acceso denegado.");
+                MessageBox.Show("El usuario y contraseña no coinciden.");
             }
 
         }
