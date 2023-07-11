@@ -43,16 +43,28 @@
                         </StackPanel>
                     </Grid>
                     <Grid x:Name="CursosGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible">
-                        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150" Margin="-338,-222,0,0" Click="CursosButton_Click">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Image Source="/img/curso1.png" Stretch="Uniform"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                        <ItemsControl>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Width="150" Height="150" Margin="10,100,100,10" Click="CursoButton_Click">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid>
+                                                    <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
+
                 </Grid>
             </ScrollViewer>
         </Border>
