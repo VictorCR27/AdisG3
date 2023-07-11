@@ -72,7 +72,7 @@ namespace AdisG3
             {
                 connection.Open();
 
-                string query = "SELECT COUNT(*) FROM administradoresRegistrados WHERE correo = @correo AND password = @password";
+                string query = "SELECT COUNT(*) FROM profesores WHERE correo = @correo AND password = @password";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
