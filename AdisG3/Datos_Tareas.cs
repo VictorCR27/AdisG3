@@ -12,11 +12,14 @@ namespace AdisG3
         public String Categoria { get; set; }
         public String Descripcion { get; set; }
 
-        public Datos_Tareas(string nombre, string categoria, string descripcion)
+        public String Fecha { get; set; }
+
+        public Datos_Tareas(string nombre, string categoria, string descripcion, string fecha)
         {
             Nombre = nombre;
             Categoria = categoria;
             Descripcion = descripcion;
+            Fecha = fecha;
         }
 
         public Datos_Tareas() { }
