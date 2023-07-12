@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,12 +20,48 @@ namespace AdisG3
     /// </summary>
     public partial class administradorInicio : Window
     {
-        public administradorInicio()
+        public int id_profesor { get; set; }
+
+        public administradorInicio(int id_profesor = 0)
         {
             InitializeComponent();
 
+            this.id_profesor = id_profesor;
+            //MessageBox.Show("Esta es el Id:" + id_profesor);
+
+            string query = "SELECT count(*) from asignaciones WHERE id_profesor = @id";
+            string cantidad;
+
+            // Cadena de conexión
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id_profesor);
+
+                    // Ejecutar el query y obtener el resultado
+                    object result = command.ExecuteScalar();
+
+                    // Verificar si el resultado es nulo
+                    if (result != null)
+                    {
+                        cantidad = result.ToString();
+                    }
+                    else
+                    {
+                        // Si el resultado es nulo, asignar un valor predeterminado o mostrar un mensaje de error, según tus necesidades
+                        cantidad = "0"; // Por ejemplo, asignar el valor "0" si no se encuentran registros
+                    }
+                }
+            }
+
             // Limita la cantidad de cursos a un máximo de 5
-            int cantidadMaxima = 3;
+            MessageBox.Show(cantidad);
+            int cantidadMaxima = int.Parse(cantidad);
 
             // Elimina los botones de cursos existentes en el grid
             CursosGrid.Children.Clear();
@@ -50,7 +87,7 @@ namespace AdisG3
                 Button cursoButton = new Button();
                 cursoButton.Width = 150;
                 cursoButton.Height = 150;
-                cursoButton.Margin = new Thickness(10);
+                cursoButton.Margin = new Thickness(10, -210, 10, 10);
                 cursoButton.Click += CursoButton_Click;
 
                 // Establecer el fondo del botón del curso como un color sólido

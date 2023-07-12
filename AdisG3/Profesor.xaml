@@ -37,7 +37,6 @@
             <Button Content="Semana 13"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem13"/>
             <Button Content="Semana 14"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem14"/>
             <Button Content="Semana 15"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Height="39" Width="207" Background="Black" Foreground="White" BorderBrush="{x:Null}" Click="Button_sem15"/>
-
         </ComboBox>
 
         <StackPanel HorizontalAlignment="Left" Margin="235,174,0,0" VerticalAlignment="Top" Width="752" Height="440" Background="#FF110616" Grid.ColumnSpan="2">

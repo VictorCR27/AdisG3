@@ -13,7 +13,7 @@ namespace AdisG3
             InitializeComponent();
 
             // Limita la cantidad de cursos a un máximo de 5
-            int cantidadMaxima = 3;
+            int cantidadMaxima = 5;
 
             // Elimina los botones de cursos existentes en el grid
             CursosGrid.Children.Clear();
