@@ -12,10 +12,15 @@
         <TextBox x:Name="txt_nombre_tarea" HorizontalAlignment="Left" Height="34" Margin="162,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" TextChanged="nombre_tarea_TextChanged"/>
         <TextBox x:Name="txt_categoria_tarea" HorizontalAlignment="Left" Height="34" Margin="162,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" TextChanged="categoría_tarea_TextChanged"/>
         <TextBox x:Name="txt_descripcion_tarea" HorizontalAlignment="Left" Height="34" Margin="162,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" TextChanged="descripción_tarea_TextChanged"/>
+        <DatePicker x:Name="fecha_entrega" Margin="190,243,528,0" VerticalAlignment="Top" Height="32"/>
+
 
         <Label Content=" Nombre:" HorizontalAlignment="Left" Margin="30,84,0,0" VerticalAlignment="Top" Height="42" Width="114" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
         <Label Content="Categoría:" HorizontalAlignment="Left" Margin="26,138,0,0" VerticalAlignment="Top" Height="42" Width="114" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
         <Label Content="Descripción:" HorizontalAlignment="Left" Margin="26,193,0,0" VerticalAlignment="Top" Height="42" Width="122" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content="Fecha de entrega:" HorizontalAlignment="Left" Margin="0,246,0,0" VerticalAlignment="Top" Height="42" Width="191" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+
+
 
         <ListBox x:Name="lb_Tareas" Margin="398,84,28,91" SelectionChanged="lb_Tareas_SelectionChanged_1">
             <ListBox.ItemTemplate>
@@ -30,14 +35,19 @@
                         <TextBlock Name="Nombre" Grid.Column="0" Text="{Binding Nombre}"></TextBlock>
                         <TextBlock Name="Categoria" Grid.Column="1" Text="{Binding Categoria}"></TextBlock>
                         <TextBlock Name="Descripcion" Grid.Column="2" Text="{Binding Descripcion}"></TextBlock>
+                        <TextBlock Name="Fecha" Grid.Column="2" Text="{Binding Fecha}"></TextBlock>
+
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button  x:Name="button_Add" Content="Añadir" HorizontalAlignment="Left" Margin="203,246,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
-        <Button x:Name="button_Subir" Content="Subir Tarea" HorizontalAlignment="Left" Margin="183,309,0,0" VerticalAlignment="Top" Height="34" Width="151" Click="button_Subir_Click"/>
-        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="26,342,0,0" VerticalAlignment="Top" Height="38" Width="99" Click="button_Regresar_Click"/>
+        <Button  x:Name="button_Add" Content="Añadir" HorizontalAlignment="Left" Margin="197,318,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
+        <Button x:Name="button_Subir" Content="Subir Tarea" HorizontalAlignment="Left" Margin="177,378,0,0" VerticalAlignment="Top" Height="34" Width="151" Click="button_Subir_Click"/>
+        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="26,337,0,0" VerticalAlignment="Top" Height="38" Width="99" Click="button_Regresar_Click"/>
+        <Button x:Name="button_Editar" Content="Editar" HorizontalAlignment="Left" Margin="203,428,0,0" VerticalAlignment="Top" Height="38" Width="99" Click="button_Editar_Click"/>
+
+
 
     </Grid>
 </Window>

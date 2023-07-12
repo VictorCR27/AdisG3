@@ -69,9 +69,10 @@ namespace AdisG3
                 string nombre = txt_nombre_tarea.Text;
                 string categoria = txt_categoria_tarea.Text;
                 string descripcion = txt_descripcion_tarea.Text;
+                string fecha=  fecha_entrega.Text; 
 
                 //Guardas las variables en la lista
-                Datos.Add(new Datos_Tareas($"{nombre}          ", $"|          {categoria}          |", $"           {descripcion}          |"));
+                Datos.Add(new Datos_Tareas($"{nombre}          ", $"|          {categoria}          |", $"           {descripcion}          |", $"           {fecha}          |"));
 
                 //Refresca el listbox de tareas
                 lb_Tareas.ItemsSource = null;
@@ -100,6 +101,11 @@ namespace AdisG3
             Profesor profesor = new Profesor();
             this.Close();
             profesor.Show();
+        }
+
+        private void button_Editar_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 
