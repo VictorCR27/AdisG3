@@ -95,6 +95,7 @@
         <Button Content="Cuenta" HorizontalAlignment="Left" Height="52" Margin="59,297,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cuenta"/>
         <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="59,389,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cursos"/>
         <Button Content="Institución" HorizontalAlignment="Left" Height="52" Margin="46,479,0,0" VerticalAlignment="Top" Width="134" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Insti"/>
+        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="48,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.001,-0.158" Click="Button_Click"/>
     </Grid>
 
 

@@ -122,5 +122,6 @@ namespace AdisG3
             incioEstudiante.Show();
             this.Close();
         }
+
     }
 }

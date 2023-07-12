@@ -175,5 +175,12 @@ namespace AdisG3
             // Cerrar la ventana actual (inicioEstudiante)
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarTarea agregar_Tarea = new AgregarTarea();
+            this.Close();
+            agregar_Tarea.Show();
+        }
     }
 }

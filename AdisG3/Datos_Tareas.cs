@@ -14,12 +14,18 @@ namespace AdisG3
 
         public String Fecha { get; set; }
 
-        public Datos_Tareas(string nombre, string categoria, string descripcion, string fecha)
+        public String Valor { get; set; }
+
+        public String Semanas { get; set; }
+
+        public Datos_Tareas(string nombre, string categoria, string descripcion, string fecha, string valor, string semanas)
         {
             Nombre = nombre;
             Categoria = categoria;
             Descripcion = descripcion;
             Fecha = fecha;
+            Valor = valor;
+            Semanas = semanas;
         }
 
         public Datos_Tareas() { }

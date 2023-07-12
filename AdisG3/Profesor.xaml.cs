@@ -135,5 +135,7 @@ namespace AdisG3
             administradorInicio.Show();
             this.Close();
         }
+
+
     }
 }

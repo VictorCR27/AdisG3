@@ -34,5 +34,10 @@ namespace AdisG3.Semanas
         {
 
         }
+
+        private void lb_Tareas_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

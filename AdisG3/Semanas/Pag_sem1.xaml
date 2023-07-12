@@ -27,6 +27,8 @@
             </LinearGradientBrush>
         </Grid.Background>
 
+
+
         <Border
 
                 Background="#1b1448"
@@ -57,6 +59,28 @@
         <Label Content="Realizar resumen de páginas 198 hasta la 204 del libro DevOps." HorizontalAlignment="Left" Margin="319,94,0,0" VerticalAlignment="Top" Width="376" Foreground="White" FontSize="11" FontFamily="Tw Cen MT" Height="22" Background="{x:Null}"/>
 
         <Label Content="Entregar los puntos indicados en la parte #2 del documento Avance.pdf" HorizontalAlignment="Left" Margin="319,136,0,0" VerticalAlignment="Top" Width="376" Foreground="White" FontSize="11" FontFamily="Tw Cen MT" Height="22"/>
+        <ListBox x:Name="lb_Tareas" Margin="397,235,41,25" SelectionChanged="lb_Tareas_SelectionChanged_2" Background="White">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="Nombre" Grid.Column="0" Text="{Binding Nombre}"/>
+                        <TextBlock x:Name="Categoria" Grid.Column="1" Text="{Binding Categoria}"/>
+                        <TextBlock x:Name="Descripcion" Grid.Column="2" Text="{Binding Descripcion}"/>
+                        <TextBlock x:Name="Fecha" Grid.Column="2" Text="{Binding Fecha}"/>
+                        <TextBlock x:Name="Valor" Grid.Column="2" Text="{Binding Valor}"/>
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Rectangle HorizontalAlignment="Left" Height="0" Margin="150,120,0,0" Stroke="Black" VerticalAlignment="Top" Width="62" Fill="Black" RenderTransformOrigin="0.5,1">
             <Rectangle.RenderTransform>
                 <TransformGroup>

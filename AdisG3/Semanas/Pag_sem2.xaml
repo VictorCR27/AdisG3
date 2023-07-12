@@ -59,6 +59,30 @@
         <Button Content="Adjuntar archivo" HorizontalAlignment="Left" Margin="202,98,0,0" VerticalAlignment="Top" FontFamily="Tw Cen MT" FontSize="11" Background="White" Foreground="Black" Height="18" Width="80" Click="Button_Click_2" />
         <Label Content="Realizar resumen de páginas 205 hasta la 258 del libro DevOps." HorizontalAlignment="Left" Margin="319,94,0,0" VerticalAlignment="Top" Width="376" Foreground="White" FontSize="11" FontFamily="Tw Cen MT" Height="22" Background="{x:Null}"/>
 
+        <ListBox x:Name="lb_Tareas" Margin="397,235,41,25" Background="White" SelectionChanged="lb_Tareas_SelectionChanged_2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="Nombre" Grid.Column="0" Text="{Binding Nombre}"/>
+                        <TextBlock x:Name="Categoria" Grid.Column="1" Text="{Binding Categoria}"/>
+                        <TextBlock x:Name="Descripcion" Grid.Column="2" Text="{Binding Descripcion}"/>
+                        <TextBlock x:Name="Fecha" Grid.Column="2" Text="{Binding Fecha}"/>
+                        <TextBlock x:Name="Valor" Grid.Column="2" Text="{Binding Valor}"/>
+
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
         <Label Content="Entregar los puntos indicados en la parte #3 del documento Avance.pdf" HorizontalAlignment="Left" Margin="319,136,0,0" VerticalAlignment="Top" Width="376" Foreground="White" FontSize="11" FontFamily="Tw Cen MT" Height="22"/>
         <Rectangle HorizontalAlignment="Left" Height="0" Margin="150,120,0,0" Stroke="Black" VerticalAlignment="Top" Width="62" Fill="White" RenderTransformOrigin="0.5,1">
             <Rectangle.RenderTransform>
