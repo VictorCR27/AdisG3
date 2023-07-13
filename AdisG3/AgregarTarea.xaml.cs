@@ -69,21 +69,20 @@ namespace AdisG3
 
         }
 
-        //Boton de añadir tarea
+        //Boton Añadir
         private void button_Add_Click(object sender, RoutedEventArgs e)
         {
-            if (cbox_semana.SelectedItem != null && txt_categoria_tarea.Text != null && txt_nombre_tarea.Text != null &&
-                txt_nombre_tarea.Text != " " && txt_descripcion_tarea.Text != null && txt_descripcion_tarea.Text != " " &&
-                txt_nombre_tarea.Text != string.Empty && txt_descripcion_tarea.Text != string.Empty)
+            if (cbox_semana.SelectedItem != null && !string.IsNullOrWhiteSpace(txt_categoria_tarea.Text) &&
+                !string.IsNullOrWhiteSpace(txt_nombre_tarea.Text) && !string.IsNullOrWhiteSpace(txt_descripcion_tarea.Text))
             {
                 // Obtener los valores de los controles
                 int semana = Convert.ToInt32(cbox_semana.SelectedItem);
                 string nombreAsignacion = txt_nombre_tarea.Text;
                 string descripcion = txt_descripcion_tarea.Text;
-                string tipo =""; // Reemplazar con el valor correcto
+                string tipo = ""; // Reemplazar con el valor correcto
                 DateTime fechaEntrega;
                 bool visibilidad = true; // Reemplazar con el valor correcto
-                decimal puntaje = Convert.ToDecimal(txt_valor_tarea.Text); // Reemplazar con el valor correcto
+                decimal puntaje = string.IsNullOrWhiteSpace(txt_valor_tarea.Text) ? 0 : Convert.ToDecimal(txt_valor_tarea.Text);
 
                 // Validar y obtener la fecha seleccionada del control DatePicker
                 if (fecha_entrega.SelectedDate.HasValue)
@@ -105,27 +104,25 @@ namespace AdisG3
                     connection.Open();
 
                     // Obtener el id de asignación del profesor y el id del curso
-                    int idProfesor = 1; // Reemplazar con el valor correcto
-                    int idCurso = 1; // Reemplazar con el valor correcto
+                    int idProfesor = id_profesor; // Reemplazar con el valor correcto
+                    int idCurso = 1; 
 
                     // Crear la consulta SQL INSERT
-                    string query = "INSERT INTO asignacionesSemanas (id_asignacion, id_semana, CedulaUsuario, IDCurso, NombreAsignacion, Descripcion, Semana, Tipo, FechaEntrega, Visibilidad, Puntaje) " +
-                                   "VALUES (@id_asignacion, @id_semana, @cedulaUsuario, @idCurso, @nombreAsignacion, @descripcion, @semana, @tipo, @fechaEntrega, @visibilidad, @puntaje)";
+                    string query = "INSERT INTO asignacionesSemanas (IdProfesor, IdCurso, titulo, tipo, descripcion, FechaEntrega, valor, semana, Visibilidad) " +
+                                   "VALUES (@idProfesor, @idCurso, @titulo, @tipo, @descripcion, @fechaEntrega, @valor, @semana, @visibilidad)";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
                         // Asignar los valores a los parámetros de la consulta
-                        command.Parameters.AddWithValue("@id_asignacion", 1); // Reemplazar con el valor correcto
-                        command.Parameters.AddWithValue("@id_semana", 1); // Reemplazar con el valor correcto
-                        command.Parameters.AddWithValue("@cedulaUsuario", 12345); // Reemplazar con el valor correcto
+                        command.Parameters.AddWithValue("@idProfesor", idProfesor);
                         command.Parameters.AddWithValue("@idCurso", idCurso);
-                        command.Parameters.AddWithValue("@nombreAsignacion", nombreAsignacion);
-                        command.Parameters.AddWithValue("@descripcion", descripcion);
-                        command.Parameters.AddWithValue("@semana", semana);
+                        command.Parameters.AddWithValue("@titulo", nombreAsignacion);
                         command.Parameters.AddWithValue("@tipo", tipo);
+                        command.Parameters.AddWithValue("@descripcion", descripcion);
                         command.Parameters.AddWithValue("@fechaEntrega", fechaEntrega);
+                        command.Parameters.AddWithValue("@valor", puntaje);
+                        command.Parameters.AddWithValue("@semana", semana);
                         command.Parameters.AddWithValue("@visibilidad", visibilidad);
-                        command.Parameters.AddWithValue("@puntaje", puntaje);
 
                         // Ejecutar la consulta
                         command.ExecuteNonQuery();
@@ -144,7 +141,8 @@ namespace AdisG3
                 MessageBox.Show("Debe llenar todos los espacios.", "¡Falta información!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
-        // Fin del boton
+        //Fin Boton Añadir
+
 
 
         private void Llenar_Tareas()
