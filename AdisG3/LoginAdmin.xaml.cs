@@ -74,8 +74,6 @@ namespace AdisG3
                 }
             }
 
-            MessageBox.Show("Acceso permitido.");
-
             administradorInicio administradorInicio = new administradorInicio(id_profesor);
             administradorInicio.Show();
             this.Close();

@@ -22,7 +22,7 @@
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,345,0,0" VerticalAlignment="Top" Width="153" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
 
         <Border HorizontalAlignment="Center" Margin="234,100,0,0" VerticalAlignment="Top" Width="752" Height="484" Background="#FF110616" Grid.ColumnSpan="2">
-            <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">

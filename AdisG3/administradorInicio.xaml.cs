@@ -29,7 +29,7 @@ namespace AdisG3
             this.id_profesor = id_profesor;
             //MessageBox.Show("Esta es el Id:" + id_profesor);
 
-            string query = "SELECT count(*) from asignaciones WHERE id_profesor = @id";
+            string query = "SELECT count(*) from asignacionesProfesor WHERE id_profesor = @id";
             string cantidad;
 
             // Cadena de conexión
@@ -60,7 +60,7 @@ namespace AdisG3
             }
 
             // Limita la cantidad de cursos a un máximo de 5
-            MessageBox.Show(cantidad);
+            //MessageBox.Show(cantidad);
             int cantidadMaxima = int.Parse(cantidad);
 
             // Elimina los botones de cursos existentes en el grid
@@ -175,7 +175,10 @@ namespace AdisG3
 
         private void CursoButton_Click(object sender, RoutedEventArgs e)
         {
-            // Lógica para manejar el evento de clic en el botón del curso
+           
+            Profesor profesor = new Profesor(id_profesor); 
+            profesor.Show();
+            this.Close();
         }
 
         private void Button_Cursos(object sender, RoutedEventArgs e)
@@ -256,7 +259,7 @@ namespace AdisG3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AgregarTarea agregar_Tarea = new AgregarTarea();
+            AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor);
             this.Close();
             agregar_Tarea.Show();
 

@@ -19,9 +19,12 @@ namespace AdisG3
     /// </summary>
     public partial class Profesor : Window
     {
-        public Profesor()
+        public int id_profesor { get; set; }
+        public Profesor(int id_profesor = 0)
         {
             InitializeComponent();
+
+            this.id_profesor = id_profesor;
         }
 
         private void Button_sem1(object sender, RoutedEventArgs e)
@@ -123,19 +126,16 @@ namespace AdisG3
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AgregarTarea agregar_Tarea = new AgregarTarea();
+            AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor);
             this.Close();
             agregar_Tarea.Show();
         }
 
-        private void BackButton_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Abrir ventana de inicio de sesión
-            administradorInicio administradorInicio = new administradorInicio();
+            administradorInicio administradorInicio = new administradorInicio(id_profesor);
             administradorInicio.Show();
             this.Close();
         }
-
-
     }
 }
