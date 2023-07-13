@@ -54,7 +54,7 @@ namespace AdisG3
                     else
                     {
                         // Si el resultado es nulo, asignar un valor predeterminado o mostrar un mensaje de error, según tus necesidades
-                        cantidad = "0"; // Por ejemplo, asignar el valor "0" si no se encuentran registros
+                        cantidad = "0"; 
                     }
                 }
             }

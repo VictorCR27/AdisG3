@@ -105,7 +105,7 @@ namespace AdisG3
 
                     // Obtener el id de asignación del profesor y el id del curso
                     int idProfesor = id_profesor; // Reemplazar con el valor correcto
-                    int idCurso = 1; 
+                    //int idCurso = id_curso; 
 
                     // Crear la consulta SQL INSERT
                     string query = "INSERT INTO asignacionesSemanas (IdProfesor, IdCurso, titulo, tipo, descripcion, FechaEntrega, valor, semana, Visibilidad) " +
@@ -115,7 +115,7 @@ namespace AdisG3
                     {
                         // Asignar los valores a los parámetros de la consulta
                         command.Parameters.AddWithValue("@idProfesor", idProfesor);
-                        command.Parameters.AddWithValue("@idCurso", idCurso);
+                        //command.Parameters.AddWithValue("@idCurso", idCurso);
                         command.Parameters.AddWithValue("@titulo", nombreAsignacion);
                         command.Parameters.AddWithValue("@tipo", tipo);
                         command.Parameters.AddWithValue("@descripcion", descripcion);

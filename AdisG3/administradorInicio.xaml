@@ -19,7 +19,7 @@
         <Rectangle HorizontalAlignment="Left" Height="583" Margin="10,0,0,0" VerticalAlignment="Center" Width="208" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
 
         <Rectangle HorizontalAlignment="Left" Height="564" Margin="21,0,0,0" VerticalAlignment="Center" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,345,0,0" VerticalAlignment="Top" Width="153" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,361,0,0" VerticalAlignment="Top" Width="153" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
 
         <Border HorizontalAlignment="Center" Margin="234,100,0,0" VerticalAlignment="Top" Width="752" Height="484" Background="#FF110616" Grid.ColumnSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
@@ -92,14 +92,14 @@
         </Rectangle>
 
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,272,0,0" VerticalAlignment="Top" Width="150" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,417,0,0" VerticalAlignment="Top" Width="150" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,449,0,0" VerticalAlignment="Top" Width="150" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
         <Button Content="Cuenta" HorizontalAlignment="Left" Height="52" Margin="59,276,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cuenta"/>
-        <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="59,349,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cursos"/>
-        <Button Content="Institución" HorizontalAlignment="Left" Height="52" Margin="46,421,0,0" VerticalAlignment="Top" Width="134" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Insti"/>
+        <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="59,365,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cursos"/>
+        <Button Content="Institución" HorizontalAlignment="Left" Height="52" Margin="46,453,0,0" VerticalAlignment="Top" Width="134" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Insti"/>
         <!-- Botón de retroceso -->
-        <Button Click="BackButton_Click" Height="50" BorderThickness="0" Margin="66,503,96,70">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
-                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="60" Foreground="white" Height="40"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="70,503,92,60">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
+                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="55" Foreground="#fff" Height="53" RenderTransformOrigin="0.336,0.381"/>
             </StackPanel>
         </Button>
 
@@ -107,4 +107,6 @@
 
 
 </Window>
+
+
 
