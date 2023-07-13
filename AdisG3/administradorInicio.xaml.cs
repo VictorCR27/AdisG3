@@ -85,9 +85,41 @@ namespace AdisG3
             for (int i = 0; i < cantidadMaxima; i++)
             {
                 Button cursoButton = new Button();
-                cursoButton.Width = 150;
+                cursoButton.Width = 200;
                 cursoButton.Height = 150;
-                cursoButton.Margin = new Thickness(10, -210, 10, 10);
+                cursoButton.Margin = new Thickness(10);
+
+                // Obtener el nombre del curso
+                string nombreCurso = ObtenerNombreCurso(i);
+
+                // Configurar el contenido del botón con el nombre y la descripción abajo a la izquierda
+                Grid grid = new Grid();
+
+                RowDefinition rowDefinition1 = new RowDefinition();
+                rowDefinition1.Height = new GridLength(1, GridUnitType.Auto);
+                grid.RowDefinitions.Add(rowDefinition1);
+
+                RowDefinition rowDefinition2 = new RowDefinition();
+                rowDefinition2.Height = new GridLength(1, GridUnitType.Star);
+                grid.RowDefinitions.Add(rowDefinition2);
+
+                ColumnDefinition columnDefinition = new ColumnDefinition();
+                columnDefinition.Width = new GridLength(1, GridUnitType.Star);
+                grid.ColumnDefinitions.Add(columnDefinition);
+
+                Label nombreLabel = new Label();
+                nombreLabel.Content = nombreCurso;
+                nombreLabel.HorizontalAlignment = HorizontalAlignment.Left;
+                nombreLabel.VerticalAlignment = VerticalAlignment.Bottom;
+                nombreLabel.Margin = new Thickness(-25, 0, 5, 0);
+
+                Grid.SetRow(nombreLabel, 1);
+                Grid.SetColumn(nombreLabel, 0);
+
+                grid.Children.Add(nombreLabel);
+
+                cursoButton.Content = grid;
+
                 cursoButton.Click += CursoButton_Click;
 
                 // Establecer el fondo del botón del curso como un color sólido
@@ -101,11 +133,44 @@ namespace AdisG3
                 Grid.SetRow(cursoButton, fila);
                 Grid.SetColumn(cursoButton, columna);
 
-                // Establecer la alineación vertical del botón como "Top"
-                cursoButton.VerticalAlignment = VerticalAlignment.Top;
-
                 CursosGrid.Children.Add(cursoButton);
             }
+
+
+
+        }
+
+        // Método para obtener el nombre del curso desde la base de datos
+        private string ObtenerNombreCurso(int cursoIndex)
+        {
+            string nombreCurso = string.Empty;
+
+            // Establece tu cadena de conexión
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                // Crea y ejecuta la consulta para obtener el nombre del curso
+                string query = "SELECT nombre_curso FROM cursos WHERE id_curso = @id_curso";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    // Establece el parámetro de la consulta
+                    command.Parameters.AddWithValue("@id_curso", cursoIndex + 1); // +1 para adaptarse a tu estructura de base de datos
+
+                    // Ejecuta la consulta y obtén el resultado
+                    object result = command.ExecuteScalar();
+
+                    // Verifica si el resultado no es nulo
+                    if (result != null)
+                    {
+                        nombreCurso = result.ToString();
+                    }
+                }
+            }
+
+            return nombreCurso;
         }
 
         private void CursoButton_Click(object sender, RoutedEventArgs e)
@@ -149,7 +214,9 @@ namespace AdisG3
             TextoInstitucion.Visibility = Visibility.Visible;
 
             // Establecer el texto
-            TextoInstitucion.Text = "   Para ULACIT, el aprendizaje es la capacidad de un individuo de utilizar el conocimiento en \n" +
+            TextoInstitucion.Text = "                                                                                                \n" +
+                                    "                                                                                                \n" +
+                                    "   Para ULACIT, el aprendizaje es la capacidad de un individuo de utilizar el conocimiento en \n" +
                                     "   situaciones novedosas (por ejemplo, solucionar problemas, \n" +
                                     "   diseñar productos o argumentar puntos de vista),\n" +
                                     "   de formas semejantes a las que modelan los expertos en disciplinas específicas. Los estudiantes \n" +
@@ -176,11 +243,23 @@ namespace AdisG3
             this.Close();
         }
 
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            MainWindow MainWindow = new MainWindow();
+            MainWindow.Show();
+            this.Close();
+        }
+
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AgregarTarea agregar_Tarea = new AgregarTarea();
             this.Close();
             agregar_Tarea.Show();
+
         }
     }
 }

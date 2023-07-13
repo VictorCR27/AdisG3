@@ -62,7 +62,7 @@
 
         <Button Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63" Margin="476,304,170,109"/>
 
-        <Button Content="Recuperar contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#0064fe" BorderThickness="0" Padding="0" Margin="367,244,309,174"/>
+        <Button Content="Recuperar contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#0064fe" BorderThickness="0" Padding="0" Margin="363,244,313,174"/>
 
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="-16,0,729,400">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
