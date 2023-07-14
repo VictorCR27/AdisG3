@@ -25,12 +25,14 @@ namespace AdisG3
         public static List<Datos_Tareas> Datos = new List<Datos_Tareas>();
 
         public int id_profesor { get; set; }
+        public int id_curso { get; set; }
 
-        public AgregarTarea(int id_profesor = 0)
+        public AgregarTarea(int id_profesor = 0, int id_curso = 0)
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
+            this.id_curso = id_curso;
 
             Semanas.Add("1");
             Semanas.Add("2");
@@ -50,6 +52,8 @@ namespace AdisG3
 
             cbox_semana.ItemsSource = Semanas;
 
+            // Establecer la fecha mínima del DatePicker como la fecha actual
+            fecha_entrega.SelectedDate = DateTime.Today;
         }
 
 
@@ -88,6 +92,13 @@ namespace AdisG3
                 if (fecha_entrega.SelectedDate.HasValue)
                 {
                     fechaEntrega = fecha_entrega.SelectedDate.Value;
+
+                    // Verificar si la fecha seleccionada es anterior a la fecha actual
+                    if (fechaEntrega < DateTime.Today)
+                    {
+                        MessageBox.Show("La fecha de entrega no puede ser anterior a la fecha actual.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return; // Salir del evento sin continuar con la inserción
+                    }
                 }
                 else
                 {
@@ -105,7 +116,7 @@ namespace AdisG3
 
                     // Obtener el id de asignación del profesor y el id del curso
                     int idProfesor = id_profesor; // Reemplazar con el valor correcto
-                    //int idCurso = id_curso; 
+                    int idCurso = 1;
 
                     // Crear la consulta SQL INSERT
                     string query = "INSERT INTO asignacionesSemanas (IdProfesor, IdCurso, titulo, tipo, descripcion, FechaEntrega, valor, semana, Visibilidad) " +
@@ -115,7 +126,7 @@ namespace AdisG3
                     {
                         // Asignar los valores a los parámetros de la consulta
                         command.Parameters.AddWithValue("@idProfesor", idProfesor);
-                        //command.Parameters.AddWithValue("@idCurso", idCurso);
+                        command.Parameters.AddWithValue("@idCurso", idCurso);
                         command.Parameters.AddWithValue("@titulo", nombreAsignacion);
                         command.Parameters.AddWithValue("@tipo", tipo);
                         command.Parameters.AddWithValue("@descripcion", descripcion);
@@ -142,7 +153,6 @@ namespace AdisG3
             }
         }
         //Fin Boton Añadir
-
 
 
         private void Llenar_Tareas()
@@ -190,6 +200,8 @@ namespace AdisG3
             this.Close();
             profesor.Show();
         }
+
+
 
         private void button_Editar_Click(object sender, RoutedEventArgs e)
         {

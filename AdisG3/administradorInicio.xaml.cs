@@ -169,7 +169,6 @@ namespace AdisG3
                     }
                 }
             }
-
             return nombreCurso;
         }
 
