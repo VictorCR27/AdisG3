@@ -196,9 +196,6 @@ namespace AdisG3
                 lb_Tareas.ItemsSource = null;
                 lb_Tareas.ItemsSource = Datos;
 
-
-
-
             }
             catch
             {

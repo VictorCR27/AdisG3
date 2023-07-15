@@ -145,6 +145,9 @@
     <Compile Include="AgregarTarea.xaml.cs">
       <DependentUpon>AgregarTarea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="cargarEstudiantes.xaml.cs">
+      <DependentUpon>cargarEstudiantes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CursosEstudiantes.xaml.cs">
       <DependentUpon>CursosEstudiantes.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AgregarTarea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="cargarEstudiantes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

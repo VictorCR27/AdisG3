@@ -148,81 +148,6 @@ namespace AdisG3
             mainWindow.Show();
         }
 
-        private void Button_Matricula(object sender, RoutedEventArgs e)
-        {
-            string connString = conn_db.GetConnectionString();
-
-            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            openFileDialog.Filter = "Archivos de Excel (*.xlsx)|*.xlsx|Todos los archivos (*.*)|*.*";
-
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string filePath = openFileDialog.FileName;
-
-                // Llamar al método para cargar el archivo de Excel en la base de datos
-                CargarExcelEnMySQL(filePath);
-            }
-        }
-
-        private void CargarExcelEnMySQL(string filePath)
-        {
-            Excel.Application excelApp = new Excel.Application();
-            Excel.Workbook workbook = excelApp.Workbooks.Open(filePath);
-            Excel.Worksheet worksheet = workbook.Sheets[1];
-            Excel.Range range = worksheet.UsedRange;
-            string connString = conn_db.GetConnectionString();
-
-            try
-            {
-                using (MySqlConnection connection = new MySqlConnection(connString))
-                {
-                    connection.Open();
-
-                    for (int row = 2; row <= range.Rows.Count; row++)
-                    {
-                        string nombre = ((Excel.Range)range.Cells[row, 1]).Value2.ToString();
-                        string apellido1 = ((Excel.Range)range.Cells[row, 2]).Value2.ToString();
-                        string apellido2 = ((Excel.Range)range.Cells[row, 3]).Value2.ToString();
-                        string correo = ((Excel.Range)range.Cells[row, 4]).Value2.ToString();
-                        string password = ((Excel.Range)range.Cells[row, 5]).Value2.ToString();
-                        int id_Profesor = id_profesor;
-                        int id_curso = id_cursoSeleccionado;
-                        
-
-
-                        string query = $"INSERT INTO estudiantes (nombre, apellido1, apellido2,id_curso ,id_profesor, correo, password) VALUES (@nombre, @apellido1,@apellido2, @id_curso, @id_profesor,@correo,@password)";
-
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
-                        {
-                            command.Parameters.AddWithValue("@nombre", nombre);
-                            command.Parameters.AddWithValue("@apellido1", apellido1);
-                            command.Parameters.AddWithValue("@apellido2", apellido2);
-                            command.Parameters.AddWithValue("@id_curso", id_curso);
-                            command.Parameters.AddWithValue("@id_profesor", id_Profesor);
-                            command.Parameters.AddWithValue("@correo", correo);
-                            command.Parameters.AddWithValue("@password", password);
-                            command.ExecuteNonQuery();
-                        }
-                    }
-
-                    connection.Close();
-                }
-
-                workbook.Close();
-                excelApp.Quit();
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
-
-                System.Windows.MessageBox.Show("El archivo de Excel se ha cargado correctamente en la base de datos.");
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Error al cargar el archivo de Excel: " + ex.Message);
-            }
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
@@ -249,5 +174,13 @@ namespace AdisG3
         {
 
         }
+
+        private void Button_estudiantes(object sender, RoutedEventArgs e)
+        {
+            cargarEstudiantes cargarEstudiantes = new cargarEstudiantes(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            cargarEstudiantes.Show();
+            this.Close();
+        }
     }
+    
 }

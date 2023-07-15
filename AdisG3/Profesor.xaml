@@ -57,7 +57,7 @@
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="38,248,0,0" VerticalAlignment="Top" Width="148" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
         <Button Content="Notas" HorizontalAlignment="Left" Height="52" Margin="60,252,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota" />
         <Button Grid.Column="1" Content="Agregar Material" HorizontalAlignment="Left" UseLayoutRounding="True" Margin="24,129,0,0" VerticalAlignment="Top" Width="146" Height="39" Click="Button_Click_1" />
-        <Button Content="Matricular" HorizontalAlignment="Left" Height="52" Margin="52,412,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="19" Click="Button_Matricula" />
+        <Button Content="Estudiantes" HorizontalAlignment="Left" Height="52" Margin="52,412,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_estudiantes" />
         <Button Content="Anuncios" HorizontalAlignment="Left" Height="52" Margin="48,331,0,0" VerticalAlignment="Top" Width="128" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota" />
 
         <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="57,494,72,29">
