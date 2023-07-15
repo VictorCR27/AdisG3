@@ -65,7 +65,7 @@
         <Rectangle HorizontalAlignment="Left" Height="48" Margin="229,76,0,0" VerticalAlignment="Top" Width="206" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.Column="1"/>
         <Label x:Name="semana_titulo" Content="Semanas" HorizontalAlignment="Left" Margin="253,68,0,0" VerticalAlignment="Top" Width="164" FontSize="36" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="56"/>
 
-        <Label x:Name="n_curso" Content="2CO23-169005G1 ANÁLISIS, DISEÑO E IMPLEMENTACIÓN DE SISTEMAS" HorizontalAlignment="Left" Margin="0,18,0,0" VerticalAlignment="Top" Width="687" FontSize="20" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="36" FontWeight="Bold"/>
+        <Label x:Name="curso" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.509,0.5"  Grid.Column="1" FontWeight="Bold" Margin="13,19,0,0"/>
         <Rectangle HorizontalAlignment="Left" Height="1" Margin="10,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="677" Fill="Black" RenderTransformOrigin="0.5,1" Grid.Column="1">
             <Rectangle.RenderTransform>
                 <TransformGroup>
@@ -79,7 +79,7 @@
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="38,248,0,0" VerticalAlignment="Top" Width="148" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
         <Button Content="Notas" HorizontalAlignment="Left" Height="52" Margin="60,252,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota"/>
         <Button Grid.Column="1" Content="Agregar Material" HorizontalAlignment="Left" UseLayoutRounding="True"  Margin="24,129,0,0" VerticalAlignment="Top" Width="146" Height="39" Click="Button_Click_1"/>
-        <Button Content="Matricular" HorizontalAlignment="Left" Height="52" Margin="52,412,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota"/>
+        <Button Content="Matricular" HorizontalAlignment="Left" Height="52" Margin="52,412,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="19" Click="Button_Nota"/>
         <Button Content="Anuncios" HorizontalAlignment="Left" Height="52" Margin="48,331,0,0" VerticalAlignment="Top" Width="128" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota"/>
 
         <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="57,494,72,29">

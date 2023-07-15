@@ -20,11 +20,16 @@ namespace AdisG3
     public partial class Profesor : Window
     {
         public int id_profesor { get; set; }
-        public Profesor(int id_profesor = 0)
+        public int id_cursoSeleccionado { get; set; }
+        public string nombreCursoSeleccionado { get; set; }
+        public Profesor(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
+            this.id_cursoSeleccionado = id_cursoSeleccionado;
+            //MessageBox.Show(id_cursoSeleccionado.ToString());
+            curso.Content = nombreCursoSeleccionado;
         }
 
         private void Button_sem1(object sender, RoutedEventArgs e)
@@ -126,16 +131,18 @@ namespace AdisG3
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor);
+            AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor, id_cursoSeleccionado);
             this.Close();
             agregar_Tarea.Show();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            administradorInicio administradorInicio = new administradorInicio(id_profesor);
+            administradorInicio administradorInicio = new administradorInicio(id_profesor, id_cursoSeleccionado);
             administradorInicio.Show();
             this.Close();
         }
+
+
     }
 }

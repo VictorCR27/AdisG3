@@ -15,7 +15,6 @@
             <ColumnDefinition Width="739" />
         </Grid.ColumnDefinitions>
 
-
         <Rectangle HorizontalAlignment="Left" Height="583" Margin="10,0,0,0" VerticalAlignment="Center" Width="208" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
 
         <Rectangle HorizontalAlignment="Left" Height="564" Margin="21,0,0,0" VerticalAlignment="Center" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>

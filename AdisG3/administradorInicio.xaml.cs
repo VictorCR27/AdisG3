@@ -21,12 +21,18 @@ namespace AdisG3
     public partial class administradorInicio : Window
     {
         public int id_profesor { get; set; }
+        public int id_cursoSeleccionado { get; set; } 
 
-        public administradorInicio(int id_profesor = 0)
+        string nombreCurso = "";
+
+        int idCurso = 0;
+
+        public administradorInicio(int id_profesor = 0, int id_cursoSeleccionado = 0)
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
+            this.id_cursoSeleccionado = id_cursoSeleccionado;
             //MessageBox.Show("Esta es el Id:" + id_profesor);
 
             string query = "SELECT count(*) from asignacionesProfesor WHERE id_profesor = @id";
@@ -54,7 +60,7 @@ namespace AdisG3
                     else
                     {
                         // Si el resultado es nulo, asignar un valor predeterminado o mostrar un mensaje de error, según tus necesidades
-                        cantidad = "0"; 
+                        cantidad = "0";
                     }
                 }
             }
@@ -81,104 +87,97 @@ namespace AdisG3
                 CursosGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
             }
 
+
+
             // Agrega los botones de cursos al grid
-            for (int i = 0; i < cantidadMaxima; i++)
-            {
-                Button cursoButton = new Button();
-                cursoButton.Width = 200;
-                cursoButton.Height = 150;
-                cursoButton.Margin = new Thickness(10);
-
-                // Obtener el nombre del curso
-                string nombreCurso = ObtenerNombreCurso(i);
-
-                // Configurar el contenido del botón con el nombre y la descripción abajo a la izquierda
-                Grid grid = new Grid();
-
-                RowDefinition rowDefinition1 = new RowDefinition();
-                rowDefinition1.Height = new GridLength(1, GridUnitType.Auto);
-                grid.RowDefinitions.Add(rowDefinition1);
-
-                RowDefinition rowDefinition2 = new RowDefinition();
-                rowDefinition2.Height = new GridLength(1, GridUnitType.Star);
-                grid.RowDefinitions.Add(rowDefinition2);
-
-                ColumnDefinition columnDefinition = new ColumnDefinition();
-                columnDefinition.Width = new GridLength(1, GridUnitType.Star);
-                grid.ColumnDefinitions.Add(columnDefinition);
-
-                Label nombreLabel = new Label();
-                nombreLabel.Content = nombreCurso;
-                nombreLabel.HorizontalAlignment = HorizontalAlignment.Left;
-                nombreLabel.VerticalAlignment = VerticalAlignment.Bottom;
-                nombreLabel.Margin = new Thickness(-25, 0, 5, 0);
-
-                Grid.SetRow(nombreLabel, 1);
-                Grid.SetColumn(nombreLabel, 0);
-
-                grid.Children.Add(nombreLabel);
-
-                cursoButton.Content = grid;
-
-                cursoButton.Click += CursoButton_Click;
-
-                // Establecer el fondo del botón del curso como un color sólido
-                cursoButton.Background = new SolidColorBrush(Colors.LightBlue);
-
-                // Calcula la posición de la fila y columna en la cuadrícula
-                int fila = i / 4;
-                int columna = i % 4;
-
-                // Establecer la posición de la fila y columna en el botón del curso
-                Grid.SetRow(cursoButton, fila);
-                Grid.SetColumn(cursoButton, columna);
-
-                CursosGrid.Children.Add(cursoButton);
-            }
-
-
-
-        }
-
-        // Método para obtener el nombre del curso desde la base de datos
-        private string ObtenerNombreCurso(int cursoIndex)
-        {
-            string nombreCurso = string.Empty;
-
-            // Establece tu cadena de conexión
-            string connString = conn_db.GetConnectionString();
+            int index = 0; // Variable para controlar el índice de los resultados de la consulta
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
-                connection.Open();
+                // Crea y ejecuta la consulta para obtener los nombres de los cursos
+                string query1 = "SELECT cursos.id_curso, nombre_curso FROM cursos JOIN asignacionesProfesor ON cursos.id_curso = asignacionesProfesor.id_curso WHERE asignacionesProfesor.id_profesor = @id_profesor";
 
-                // Crea y ejecuta la consulta para obtener el nombre del curso
-                string query = "SELECT nombre_curso FROM cursos WHERE id_curso = @id_curso";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlCommand command = new MySqlCommand(query1, connection))
                 {
-                    // Establece el parámetro de la consulta
-                    command.Parameters.AddWithValue("@id_curso", cursoIndex + 1); // +1 para adaptarse a tu estructura de base de datos
+                    command.Parameters.AddWithValue("@id_profesor", id_profesor);
 
-                    // Ejecuta la consulta y obtén el resultado
-                    object result = command.ExecuteScalar();
+                    connection.Open();
 
-                    // Verifica si el resultado no es nulo
-                    if (result != null)
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        nombreCurso = result.ToString();
+                        while (reader.Read())
+                        {
+                            idCurso = reader.GetInt32("id_curso");
+                            nombreCurso = reader.GetString("nombre_curso");
+
+                            Button cursoButton = new Button();
+                            cursoButton.Width = 200;
+                            cursoButton.Height = 150;
+                            cursoButton.Margin = new Thickness(10);
+
+                            // Configurar el contenido del botón con el nombre y la descripción abajo a la izquierda
+                            Grid grid = new Grid();
+
+                            RowDefinition rowDefinition1 = new RowDefinition();
+                            rowDefinition1.Height = new GridLength(1, GridUnitType.Auto);
+                            grid.RowDefinitions.Add(rowDefinition1);
+
+                            RowDefinition rowDefinition2 = new RowDefinition();
+                            rowDefinition2.Height = new GridLength(1, GridUnitType.Star);
+                            grid.RowDefinitions.Add(rowDefinition2);
+
+                            ColumnDefinition columnDefinition = new ColumnDefinition();
+                            columnDefinition.Width = new GridLength(1, GridUnitType.Star);
+                            grid.ColumnDefinitions.Add(columnDefinition);
+
+                            Label nombreLabel = new Label();
+                            nombreLabel.Content = nombreCurso;
+                            nombreLabel.HorizontalAlignment = HorizontalAlignment.Left;
+                            nombreLabel.VerticalAlignment = VerticalAlignment.Bottom;
+                            nombreLabel.Margin = new Thickness(-25, 0, 5, 0);
+
+                            Grid.SetRow(nombreLabel, 1);
+                            Grid.SetColumn(nombreLabel, 0);
+
+                            grid.Children.Add(nombreLabel);
+
+                            cursoButton.Content = grid;
+
+                            cursoButton.Click += CursoButton_Click;
+                            cursoButton.Tag = idCurso; // Almacena el ID del curso en la propiedad Tag del botón
+
+                            // Establecer el fondo del botón del curso como un color sólido
+                            cursoButton.Background = new SolidColorBrush(Colors.LightBlue);
+
+                            // Calcula la posición de la fila y columna en la cuadrícula
+                            int fila = index / 4;
+                            int columna = index % 4;
+
+                            // Establecer la posición de la fila y columna en el botón del curso
+                            Grid.SetRow(cursoButton, fila);
+                            Grid.SetColumn(cursoButton, columna);
+
+                            CursosGrid.Children.Add(cursoButton);
+
+                            index++;
+                        }
                     }
                 }
             }
-            return nombreCurso;
         }
 
         private void CursoButton_Click(object sender, RoutedEventArgs e)
         {
-           
-            Profesor profesor = new Profesor(id_profesor); 
+            // Obtener el ID del curso seleccionado del botón
+            Button cursoButton = (Button)sender;
+            int idCursoSeleccionado = (int)cursoButton.Tag;
+            string nombreCursoSeleccionado = ((Label)((Grid)cursoButton.Content).Children[0]).Content.ToString();
+
+            Profesor profesor = new Profesor(id_profesor, idCursoSeleccionado, nombreCursoSeleccionado);
             profesor.Show();
             this.Close();
         }
+
 
         private void Button_Cursos(object sender, RoutedEventArgs e)
         {
