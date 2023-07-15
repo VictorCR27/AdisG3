@@ -183,11 +183,14 @@ namespace AdisG3
                         string nombre = ((Excel.Range)range.Cells[row, 1]).Value2.ToString();
                         string apellido1 = ((Excel.Range)range.Cells[row, 2]).Value2.ToString();
                         string apellido2 = ((Excel.Range)range.Cells[row, 3]).Value2.ToString();
+                        string correo = ((Excel.Range)range.Cells[row, 4]).Value2.ToString();
+                        string password = ((Excel.Range)range.Cells[row, 5]).Value2.ToString();
                         int id_Profesor = id_profesor;
                         int id_curso = id_cursoSeleccionado;
+                        
 
 
-                        string query = $"INSERT INTO estudiantes (nombre, apellido1, apellido2,id_curso ,id_profesor) VALUES (@nombre, @apellido1,@apellido2, @id_curso, @id_profesor)";
+                        string query = $"INSERT INTO estudiantes (nombre, apellido1, apellido2,id_curso ,id_profesor, correo, password) VALUES (@nombre, @apellido1,@apellido2, @id_curso, @id_profesor,@correo,@password)";
 
                         using (MySqlCommand command = new MySqlCommand(query, connection))
                         {
@@ -196,6 +199,8 @@ namespace AdisG3
                             command.Parameters.AddWithValue("@apellido2", apellido2);
                             command.Parameters.AddWithValue("@id_curso", id_curso);
                             command.Parameters.AddWithValue("@id_profesor", id_Profesor);
+                            command.Parameters.AddWithValue("@correo", correo);
+                            command.Parameters.AddWithValue("@password", password);
                             command.ExecuteNonQuery();
                         }
                     }
