@@ -28,12 +28,15 @@ namespace AdisG3
         
         public int id_cursoSeleccionado { get; set; }
 
-        public AgregarTarea(int id_profesor = 0, int id_cursoSeleccionado = 0)
+        public string nombreCursoSeleccionado { get; set; }
+
+        public AgregarTarea(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
+            this.nombreCursoSeleccionado = nombreCursoSeleccionado;
 
             Semanas.Add("1");
             Semanas.Add("2");
@@ -55,6 +58,7 @@ namespace AdisG3
 
             // Establecer la fecha mínima del DatePicker como la fecha actual
             fecha_entrega.SelectedDate = DateTime.Today;
+            this.nombreCursoSeleccionado = nombreCursoSeleccionado;
         }
 
 
@@ -84,9 +88,9 @@ namespace AdisG3
                 int semana = Convert.ToInt32(cbox_semana.SelectedItem);
                 string nombreAsignacion = txt_nombre_tarea.Text;
                 string descripcion = txt_descripcion_tarea.Text;
-                string tipo = txt_categoria_tarea.Text; // Reemplazar con el valor correcto
+                string tipo = txt_categoria_tarea.Text; 
                 DateTime fechaEntrega;
-                bool visibilidad = true; // Reemplazar con el valor correcto
+                bool visibilidad = true; 
                 int valor;
 
                 if (!int.TryParse(txt_valor_tarea.Text, out valor))
@@ -160,6 +164,8 @@ namespace AdisG3
                 // Limpiar los controles
                 txt_nombre_tarea.Clear();
                 txt_descripcion_tarea.Clear();
+                txt_categoria_tarea.Clear();
+                txt_valor_tarea.Clear();
             }
             else
             {
@@ -212,10 +218,11 @@ namespace AdisG3
 
         private void button_Regresar_Click(object sender, RoutedEventArgs e)
         {
-            Profesor profesor = new Profesor(id_profesor);
+            Profesor profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             this.Close();
             profesor.Show();
         }
+
 
 
 

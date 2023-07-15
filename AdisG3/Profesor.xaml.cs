@@ -225,7 +225,7 @@ namespace AdisG3
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor, id_cursoSeleccionado);
+            AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             agregar_Tarea.Closed += AgregarTarea_Closed; // Suscribir al evento Closed de la ventana AgregarTarea
             this.Close();
             agregar_Tarea.Show();

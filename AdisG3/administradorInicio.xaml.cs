@@ -111,9 +111,9 @@ namespace AdisG3
                             nombreCurso = reader.GetString("nombre_curso");
 
                             Button cursoButton = new Button();
-                            cursoButton.Width = 200;
+                            cursoButton.Width = 150;
                             cursoButton.Height = 150;
-                            cursoButton.Margin = new Thickness(10);
+                            cursoButton.Margin = new Thickness(3);
 
                             // Configurar el contenido del botón con el nombre y la descripción abajo a la izquierda
                             Grid grid = new Grid();
