@@ -95,6 +95,13 @@ namespace AdisG3
                     return; // Salir del evento sin continuar con la inserción
                 }
 
+                // Validar el rango del valor
+                if (valor < 0 || valor > 100)
+                {
+                    MessageBox.Show("El valor debe estar en el rango de 0 a 100.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return; // Salir del evento sin continuar con la inserción
+                }
+
                 // Validar y obtener la fecha seleccionada del control DatePicker
                 if (fecha_entrega.SelectedDate.HasValue)
                 {
@@ -122,14 +129,12 @@ namespace AdisG3
                     connection.Open();
 
                     // Obtener el id de asignación del profesor y el id del curso
-                    int id_Profesor = id_profesor; 
+                    int id_Profesor = id_profesor;
                     int id_Curso = id_cursoSeleccionado;
 
                     // Crear la consulta SQL INSERT
                     string query = "INSERT INTO asignacionesSemanas (id_profesor, id_curso, titulo, tipo, descripcion, FechaEntrega, valor, semana, Visibilidad) " +
                                    "VALUES (@id_profesor, @id_curso, @titulo, @tipo, @descripcion, @fechaEntrega, @valor, @semana, @visibilidad)";
-
-                    
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -143,18 +148,12 @@ namespace AdisG3
                         command.Parameters.AddWithValue("@valor", valor);
                         command.Parameters.AddWithValue("@semana", semana);
                         command.Parameters.AddWithValue("@visibilidad", visibilidad);
-                        //Console.WriteLine("INSERT INTO asignacionesSemanas (id_profesor, id_curso, titulo, tipo, descripcion, FechaEntrega, valor, semana, Visibilidad) " +
-                                   //"VALUES ("+ id_Profesor +", "+ id_Curso + ",'"+ nombreAsignacion + "','"+ tipo + "','"+ descripcion + "','"+ fechaEntrega + "', "+ valor + ", "+ semana + ",'" +visibilidad+"')");
-                        //Console.ReadLine(); 
 
                         // Ejecutar la consulta
                         command.ExecuteNonQuery();
 
-                       
-
                         // Mostrar un mensaje de éxito
                         MessageBox.Show("La asignación se ha agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        
                     }
                 }
 
@@ -168,6 +167,7 @@ namespace AdisG3
             }
         }
         // Fin Boton Añadir
+
 
 
 
