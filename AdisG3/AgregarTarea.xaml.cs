@@ -30,6 +30,8 @@ namespace AdisG3
 
         public string nombreCursoSeleccionado { get; set; }
 
+
+
         public AgregarTarea(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
@@ -210,7 +212,7 @@ namespace AdisG3
 
         private void button_Subir_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("¡La tarea se subió con éxito!");
+            
         }
 
         private void button_Regresar_Click(object sender, RoutedEventArgs e)

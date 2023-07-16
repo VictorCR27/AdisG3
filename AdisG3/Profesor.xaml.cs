@@ -189,5 +189,5 @@ namespace AdisG3
             this.Close();
         }
     }
-    
+
 }

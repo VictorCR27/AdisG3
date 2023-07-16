@@ -3,42 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        Title="cargarAnuncios" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
+        Title="Cargar Anuncios" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!-- Encabezado de la tabla -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <!-- Contenido de la tabla -->
-        <ListView x:Name="estudiantesListView" ItemsSource="{Binding Estudiantes}" Margin="20,40,12,19" Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
-                    <GridViewColumn Header="Mensaje" DisplayMemberBinding="{Binding Mensaje}" />
-                    <GridViewColumn Header="Fecha" DisplayMemberBinding="{Binding Fecha}" />
-                    <GridViewColumn Header="Anexos" DisplayMemberBinding="{Binding Anexos}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Enviar Mensaje" HorizontalAlignment="Left" Margin="20,37,0,0" VerticalAlignment="Top" Click="Button_Enviar" Height="54" Width="262" Grid.RowSpan="2" FontSize="18"/>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="932,3,0,17" HorizontalAlignment="Left" Width="71">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
-                <materialDesign:PackIcon Kind="CloseCircle" Width="63" Foreground="#3f0e63" Height="41"/>
-            </StackPanel>
-        </Button>
+
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Título de Anuncio:" FontSize="15" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="txtTitulo" Width="297" Height="30" Margin="-450,0,0,5" TextChanged="txtTitulo_TextChanged" />
+
+            <TextBlock Text="Descripción de Anuncio:" FontSize="15" FontWeight="Bold" Margin="0,25,0,5"/>
+            <TextBox x:Name="txtDescripcion" Width="735" Height="196" Margin="-10,0,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextChanged="txtDescripcion_TextChanged" />
+            <Button Content="Publicar" Width="104" Margin="0,10,-600,10" Click="btnPublicar_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
-
