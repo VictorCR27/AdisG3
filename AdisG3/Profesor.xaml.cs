@@ -181,6 +181,13 @@ namespace AdisG3
             cargarEstudiantes.Show();
             this.Close();
         }
+
+        private void Button_Anuncios(object sender, RoutedEventArgs e)
+        {
+            cargarAnuncios cargarAnuncios = new cargarAnuncios(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            cargarAnuncios.Show();
+            this.Close();
+        }
     }
     
 }
