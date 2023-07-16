@@ -25,62 +25,12 @@ namespace AdisG3
             InitializeComponent();
         }
 
-        private void BackButton_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Abrir ventana de inicio de sesión
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
-        }
-
-        private void EnviarButton_Click(object sender, RoutedEventArgs e)
-        {
-            string correo = txtCorreo.Text; // Obtener el valor del TextBox de usuario
-            string password = txtPassword.Password; // Obtener el valor del TextBox de contraseña
-
-            bool credencialesValidas = CompararCredenciales(correo, password);
-
-            if (credencialesValidas)
-            {
-                MessageBox.Show("Acceso permitido.");
-
-                // Crear una instancia de la pantalla InicioEstudiante
-                inicioEstudiante inicioEstudiante = new inicioEstudiante();
-
-                // Mostrar la pantalla InicioEstudiante
-                inicioEstudiante.Show();
-
-                // Cerrar la pantalla actual (LoginEstudiante)
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("El usuario y contraseña no coinciden.");
-            }
-
-        }
-
-        private bool CompararCredenciales(string correo, string password)
-        {
-            // Cadena de conexión
-            string connString = conn_db.GetConnectionString();
-
-            using (MySqlConnection connection = new MySqlConnection(connString))
-            {
-                connection.Open();
-
-                string query = "SELECT COUNT(*) FROM estudiantesRegistrados WHERE correo = @correo AND password = @password";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@correo", correo);
-                    command.Parameters.AddWithValue("@password", password);
-
-                    int count = Convert.ToInt32(command.ExecuteScalar());
-
-                    return count > 0;
-                }
-            }
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -90,5 +40,44 @@ namespace AdisG3
             this.Close();
         }
 
+        private void EnviarButton_Click(object sender, RoutedEventArgs e)
+        {
+            string correo = txtCorreo.Text;
+            string password = txtPassword.Password;
+            int id_estudiante = 0;
+
+            // Cadena de conexión
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT id_estudiante, correo, password FROM estudiantes WHERE correo = @correo AND password = @password";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@correo", correo);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            id_estudiante = reader.GetInt32("id_estudiante");
+                        }
+                        else
+                        {
+                            MessageBox.Show("El usuario y contraseña no coinciden.");
+                            return;
+                        }
+                    }
+                }
+            }
+
+            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante);
+            inicioEstudiante.Show();
+            this.Close();
+        }
     }
 }

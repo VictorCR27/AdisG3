@@ -73,7 +73,6 @@ namespace AdisG3
                     }
                 }
             }
-
             administradorInicio administradorInicio = new administradorInicio(id_profesor);
             administradorInicio.Show();
             this.Close();

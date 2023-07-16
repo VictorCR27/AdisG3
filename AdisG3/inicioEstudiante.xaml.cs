@@ -8,9 +8,12 @@ namespace AdisG3
 {
     public partial class inicioEstudiante : Window
     {
-        public inicioEstudiante()
+        public int id_estudiante { get; set; }
+        public inicioEstudiante(int id_estudiante = 0)
         {
             InitializeComponent();
+
+            this.id_estudiante = id_estudiante;
 
             // Limita la cantidad de cursos a un máximo de 5
             int cantidadMaxima = 5;
@@ -58,6 +61,7 @@ namespace AdisG3
 
                 CursosGrid.Children.Add(cursoButton);
             }
+
         }
 
         private void CursoButton_Click(object sender, RoutedEventArgs e)
@@ -125,6 +129,13 @@ namespace AdisG3
             cursosEstudiantes.Show();
 
             // Cerrar la ventana actual (inicioEstudiante)
+            this.Close();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow MainWindow = new MainWindow();
+            MainWindow.Show();
             this.Close();
         }
     }

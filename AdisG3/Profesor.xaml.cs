@@ -40,7 +40,7 @@ namespace AdisG3
 
         private void CargarCursosPublicados()
         {
-            string connString = conn_db.GetConnectionString(); // Reemplaza con tu cadena de conexión
+            string connString = conn_db.GetConnectionString(); 
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
@@ -75,7 +75,7 @@ namespace AdisG3
         private void CargarSemanas()
         {
 
-            string connString = conn_db.GetConnectionString(); // Reemplaza con tu cadena de conexión
+            string connString = conn_db.GetConnectionString(); 
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
@@ -104,7 +104,7 @@ namespace AdisG3
 
         private void CargarAsignacionesSemana(int semana)
         {
-            string connString = conn_db.GetConnectionString(); // Reemplaza con tu cadena de conexión
+            string connString = conn_db.GetConnectionString(); 
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
