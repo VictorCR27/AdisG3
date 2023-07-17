@@ -117,17 +117,25 @@ namespace AdisG3
 
         private bool EstudianteExists(string correo)
         {
-            if (ParentWindow != null)
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
             {
-                foreach (cargarEstudiantes.Estudiante estudiante in ParentWindow.Estudiantes)
+                connection.Open();
+
+                string query = "SELECT COUNT(*) FROM estudiantes " +
+                               "WHERE id_curso = @id_curso AND correo = @correo";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    if (estudiante.Correo.Equals(correo))
-                    {
-                        return true;
-                    }
+                    command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                    command.Parameters.AddWithValue("@correo", correo);
+
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    return count > 0;
                 }
             }
-            return false;
         }
 
         private void txt_nombre_TextChanged(object sender, TextChangedEventArgs e)
