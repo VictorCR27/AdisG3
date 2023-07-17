@@ -103,6 +103,9 @@ namespace AdisG3
             Excel.Worksheet worksheet = workbook.Sheets[1];
             Excel.Range range = worksheet.UsedRange;
 
+            int estudiantesCargados = 0;
+            int estudiantesRepetidos = 0;
+
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(connString))
@@ -122,7 +125,7 @@ namespace AdisG3
                         // Verificar si el estudiante ya existe en la base de datos
                         if (EstudianteExists(correo))
                         {
-                            MessageBox.Show($"El estudiante con el correo '{correo}' ya existe en la base de datos.");
+                            estudiantesRepetidos++;
                             continue;
                         }
 
@@ -150,6 +153,8 @@ namespace AdisG3
                             Correo = correo
                         };
                         Estudiantes.Add(estudiante);
+
+                        estudiantesCargados++;
                     }
 
                     connection.Close();
@@ -162,7 +167,21 @@ namespace AdisG3
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
 
-                System.Windows.MessageBox.Show("El archivo de Excel se ha cargado correctamente en la base de datos.");
+                if (estudiantesCargados > 0)
+                {
+                    if (estudiantesRepetidos > 0)
+                    {
+                        System.Windows.MessageBox.Show($"El archivo de Excel se ha cargado correctamente en la base de datos. {estudiantesCargados} estudiantes cargados, {estudiantesRepetidos} estudiantes repetidos.");
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show($"El archivo de Excel se ha cargado correctamente en la base de datos. {estudiantesCargados} estudiantes cargados.");
+                    }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("No se han cargado estudiantes nuevos en la base de datos.");
+                }
             }
             catch (Exception ex)
             {

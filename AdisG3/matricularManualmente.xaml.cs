@@ -17,6 +17,7 @@ namespace AdisG3
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
+        public cargarEstudiantes ParentWindow { get; set; }
 
         public matricularManualmente(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
@@ -88,8 +89,7 @@ namespace AdisG3
                     MessageBox.Show("Estudiante matriculado exitosamente.");
 
                     // Agregar el estudiante a la colección en la clase cargarEstudiantes
-                    cargarEstudiantes cargarEstudiantes = (cargarEstudiantes)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive && x.GetType() == typeof(cargarEstudiantes));
-                    if (cargarEstudiantes != null)
+                    if (ParentWindow != null)
                     {
                         cargarEstudiantes.Estudiante estudiante = new cargarEstudiantes.Estudiante
                         {
@@ -98,7 +98,7 @@ namespace AdisG3
                             ApellidoMaterno = apellido2,
                             Correo = correo
                         };
-                        cargarEstudiantes.Estudiantes.Add(estudiante);
+                        ParentWindow.Estudiantes.Add(estudiante);
                     }
 
                     // Vaciar los campos de texto
@@ -117,20 +117,17 @@ namespace AdisG3
 
         private bool EstudianteExists(string correo)
         {
-            string connString = conn_db.GetConnectionString();
-            using (MySqlConnection connection = new MySqlConnection(connString))
+            if (ParentWindow != null)
             {
-                connection.Open();
-
-                string query = "SELECT COUNT(*) FROM estudiantes WHERE correo = @correo";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                foreach (cargarEstudiantes.Estudiante estudiante in ParentWindow.Estudiantes)
                 {
-                    command.Parameters.AddWithValue("@correo", correo);
-                    int count = Convert.ToInt32(command.ExecuteScalar());
-
-                    return count > 0;
+                    if (estudiante.Correo.Equals(correo))
+                    {
+                        return true;
+                    }
                 }
             }
+            return false;
         }
 
         private void txt_nombre_TextChanged(object sender, TextChangedEventArgs e)
