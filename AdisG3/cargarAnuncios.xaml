@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
-        Title="Cargar Anuncios" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="Cargar Anuncios"  Height="500" Width="960">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,12 +16,19 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Margin="20">
-            <TextBlock Text="Título de Anuncio:" FontSize="15" FontWeight="Bold" Margin="0,0,0,5"/>
-            <TextBox x:Name="txtTitulo" Width="297" Height="30" Margin="-450,0,0,5" TextChanged="txtTitulo_TextChanged" />
+            <TextBlock Text="Título de Anuncio:" FontSize="15" FontWeight="Bold" Height="28" Width="884"/>
+            <TextBox x:Name="txtTitulo" Width="298" Height="30" Margin="-580,0,0,10" TextChanged="txtTitulo_TextChanged" />
 
-            <TextBlock Text="Descripción de Anuncio:" FontSize="15" FontWeight="Bold" Margin="0,25,0,5"/>
-            <TextBox x:Name="txtDescripcion" Width="735" Height="196" Margin="-10,0,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextChanged="txtDescripcion_TextChanged" />
-            <Button Content="Publicar" Width="104" Margin="0,10,-600,10" Click="btnPublicar_Click"/>
+            <TextBlock Text="Descripción de Anuncio:" FontSize="15" FontWeight="Bold" Margin="0,25,0,5" Height="44" Width="882"/>
+            <TextBox x:Name="txtDescripcion" Width="774" Height="233" Margin="-100,0,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextChanged="txtDescripcion_TextChanged" />
+
+            <Button Content="Publicar" Width="104" Margin="0,10,-800,10" Click="btnPublicar_Click"/>
+
+            <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="700,-700,-170,130">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
+                    <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

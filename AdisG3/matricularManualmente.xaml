@@ -1,0 +1,34 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdisG3"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="AdisG3.matricularManualmente"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="matricularManualmente" Height="450" Width="800">
+    <Grid>
+        <Label Content="Matricular:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="45,88,0,0" VerticalAlignment="Top" Height="31" Width="108" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="Apellido 1:" HorizontalAlignment="Left" Margin="45,129,0,0" VerticalAlignment="Top" Height="42" Width="130" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Apellido 2:" HorizontalAlignment="Left" Margin="45,181,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Correo:" HorizontalAlignment="Left" Margin="45,231,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="45,283,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="669,7,-52,393">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
+                <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
+            </StackPanel>
+        </Button>
+
+        <TextBox x:Name="txt_nombre" HorizontalAlignment="Left" Height="34" Margin="184,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged"/>
+        <TextBox x:Name="txt_apellido1" HorizontalAlignment="Left" Height="34" Margin="184,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido1_TextChanged"/>
+        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Left" Height="34" Margin="184,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido2_TextChanged"/>
+        <TextBox x:Name="txt_correo" HorizontalAlignment="Left" Height="34" Margin="184,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_correo_TextChanged"/>
+        <TextBox x:Name="txt_password" HorizontalAlignment="Left" Height="34" Margin="184,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged"/>
+        
+        <Button x:Name="btn_matricular" Content="Matricular" HorizontalAlignment="Left" Margin="657,374,0,0" VerticalAlignment="Top" Click="btn_matricular_Click"/>
+
+    </Grid>
+</Window>

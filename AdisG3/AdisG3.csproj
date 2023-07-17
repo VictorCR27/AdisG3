@@ -145,6 +145,9 @@
     <Compile Include="AgregarTarea.xaml.cs">
       <DependentUpon>AgregarTarea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="calificar.xaml.cs">
+      <DependentUpon>calificar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="cargarAnuncios.xaml.cs">
       <DependentUpon>cargarAnuncios.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,9 @@
       <DependentUpon>CursosEstudiantes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Datos_Tareas.cs" />
+    <Compile Include="matricularManualmente.xaml.cs">
+      <DependentUpon>matricularManualmente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profesor.xaml.cs">
       <DependentUpon>Profesor.xaml</DependentUpon>
     </Compile>
@@ -214,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="calificar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="cargarAnuncios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -263,6 +273,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="matricularManualmente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Profesor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

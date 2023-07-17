@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
         Title="AgregarTarea" Background="White"
+        WindowStyle="None"
         Height="536" Width="968" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid Margin="0,0,0,-6">
         <Label Content="Detalles de la Tarea" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="362" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>

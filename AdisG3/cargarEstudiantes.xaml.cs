@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
-
 namespace AdisG3
 {
     /// <summary>
@@ -120,6 +119,13 @@ namespace AdisG3
                         int id_Profesor = id_profesor;
                         int id_curso = id_cursoSeleccionado;
 
+                        // Verificar si el estudiante ya existe en la base de datos
+                        if (EstudianteExists(correo))
+                        {
+                            MessageBox.Show($"El estudiante con el correo '{correo}' ya existe en la base de datos.");
+                            continue;
+                        }
+
                         string query = "INSERT INTO estudiantes (nombre, apellido1, apellido2, id_curso, id_profesor, correo, password) " +
                             "VALUES (@nombre, @apellido1, @apellido2, @id_curso, @id_profesor, @correo, @password)";
 
@@ -134,6 +140,16 @@ namespace AdisG3
                             command.Parameters.AddWithValue("@password", password);
                             command.ExecuteNonQuery();
                         }
+
+                        // Agregar el estudiante a la colección
+                        Estudiante estudiante = new Estudiante
+                        {
+                            Nombre = nombre,
+                            ApellidoPaterno = apellido1,
+                            ApellidoMaterno = apellido2,
+                            Correo = correo
+                        };
+                        Estudiantes.Add(estudiante);
                     }
 
                     connection.Close();
@@ -154,10 +170,29 @@ namespace AdisG3
             }
         }
 
+        private bool EstudianteExists(string correo)
+        {
+            foreach (Estudiante estudiante in Estudiantes)
+            {
+                if (estudiante.Correo.Equals(correo))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Profesor Profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             Profesor.Show();
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            matricularManualmente matricularManualmente = new matricularManualmente(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            matricularManualmente.Show();
             this.Close();
         }
     }

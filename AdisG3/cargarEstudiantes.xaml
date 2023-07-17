@@ -36,9 +36,9 @@
             </ListView.View>
         </ListView>
         <Button Content="Matricular" HorizontalAlignment="Left" Margin="27,16,0,0" VerticalAlignment="Top" Click="Button_Matricular"/>
-        <Button Content="Matricular manualmente" HorizontalAlignment="Left" Margin="28,68,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="932,3,0,17" HorizontalAlignment="Left" Width="71">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+        <Button Content="Matricular manualmente" HorizontalAlignment="Left" Margin="28,68,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Click="Button_Click"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="932,3,-3,17">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
                 <materialDesign:PackIcon Kind="CloseCircle" Width="63" Foreground="#3f0e63" Height="41"/>
             </StackPanel>
         </Button>

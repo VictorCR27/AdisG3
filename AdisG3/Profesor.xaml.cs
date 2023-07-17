@@ -188,6 +188,13 @@ namespace AdisG3
             cargarAnuncios.Show();
             this.Close();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            calificar calificar = new calificar(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            calificar.Show();
+            this.Close(); 
+        }
     }
 
 }

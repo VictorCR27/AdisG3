@@ -88,5 +88,12 @@ namespace AdisG3
         {
 
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Profesor Profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            Profesor.Show();
+            this.Close();
+        }
     }
 }
