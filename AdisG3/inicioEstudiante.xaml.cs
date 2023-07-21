@@ -14,6 +14,7 @@ namespace AdisG3
             InitializeComponent();
 
             this.id_estudiante = id_estudiante;
+            MessageBox.Show("El Id del estudiante es: "+ id_estudiante);
 
             // Limita la cantidad de cursos a un máximo de 5
             int cantidadMaxima = 5;

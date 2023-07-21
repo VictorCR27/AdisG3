@@ -48,7 +48,7 @@ namespace AdisG3
                 {
                     connection.Open();
 
-                    string selectQuery = "SELECT COUNT(*) FROM estudiantesRegistrados WHERE correo = @correo";
+                    string selectQuery = "SELECT id_estudiante FROM estudiantes WHERE correo = @correo";
                     MySqlCommand selectCommand = new MySqlCommand(selectQuery, connection);
                     selectCommand.Parameters.AddWithValue("@correo", destinatario);
                     int count = Convert.ToInt32(selectCommand.ExecuteScalar());
@@ -64,7 +64,7 @@ namespace AdisG3
                     int password = random.Next(1000, 9999);
 
                     // Actualizar la contraseña en la base de datos
-                    string updateQuery = "UPDATE estudiantesRegistrados SET password = @password WHERE correo = @correo";
+                    string updateQuery = "UPDATE estudiantes SET password = @password WHERE correo = @correo";
                     MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection);
                     updateCommand.Parameters.AddWithValue("@password", password);
                     updateCommand.Parameters.AddWithValue("@correo", destinatario);
