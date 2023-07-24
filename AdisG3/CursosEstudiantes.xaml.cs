@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace AdisG3
         public string correo { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
+        private List<AsignacionSemana> asignacionesSemana;
+
         public CursosEstudiantes(string correo = "",int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
@@ -36,14 +39,89 @@ namespace AdisG3
             this.correo = correo;
 
             curso.Content = nombreCursoSeleccionado;
-            MessageBox.Show($"Id del estudiante:{id_estudiante}");
+            MessageBox.Show($"Id del curso seleccionado{id_cursoSeleccionado}");
 
+            // Inicializar la lista de asignaciones de la semana
+            asignacionesSemana = new List<AsignacionSemana>();
+
+            // Llenar el ComboBox con las semanas del 1 al 15
+            List<int> semanas = Enumerable.Range(1, 15).ToList();
+            cbox_semana.ItemsSource = semanas;
         }
+
+        public class AsignacionSemana
+        {
+            public string titulo { get; set; }
+            public string tipo { get; set; }
+            public string descripcion { get; set; }
+            public DateTime FechaEntrega { get; set; }
+            public int valor { get; set; }
+        }
+
 
         private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+            // Obtener la semana seleccionada del ComboBox
+            int semanaSeleccionada = (int)cbox_semana.SelectedItem;
 
+            // Desvincular el ListView de la lista asignacionesSemana temporalmente
+            lvAsignacionesSemana.ItemsSource = null;
+
+            // Llenar el ListView con las asignaciones de la semana seleccionada
+            CargarAsignacionesSemana(semanaSeleccionada);
+
+            // Vincular nuevamente la lista asignacionesSemana al ListView
+            lvAsignacionesSemana.ItemsSource = asignacionesSemana;
         }
+
+
+        private void CargarAsignacionesSemana(int semana)
+        {
+            // Limpiar la lista de asignaciones de la semana
+            asignacionesSemana.Clear();
+
+            // Realizar la consulta a la base de datos para obtener las asignaciones de la semana seleccionada
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT titulo, tipo, descripcion, FechaEntrega, valor " +
+                               "FROM asignacionesSemanas " +
+                               "WHERE id_curso = @id_curso AND semana = @semana";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                    command.Parameters.AddWithValue("@semana", semana);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AsignacionSemana asignacion = new AsignacionSemana
+                            {
+                                titulo = reader.GetString("titulo"),
+                                tipo = reader.GetString("tipo"),
+                                descripcion = reader.GetString("descripcion"),
+                                FechaEntrega = reader.GetDateTime("FechaEntrega"),
+                                valor = reader.GetInt32("valor")
+                            };
+
+                            asignacionesSemana.Add(asignacion);
+                        }
+                    }
+                }
+            }
+
+            // Asignar la lista de asignaciones de la semana al ListView
+            lvAsignacionesSemana.ItemsSource = asignacionesSemana;
+        }
+
+
+
+
 
         private void Semanas_Frame_Navigated(object sender, NavigationEventArgs e)
         {
