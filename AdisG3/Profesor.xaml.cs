@@ -17,7 +17,6 @@ namespace AdisG3
     public partial class Profesor : Window
     {
         public int id_profesor { get; set; }
-
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 

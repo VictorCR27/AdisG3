@@ -20,9 +20,24 @@ namespace AdisG3
     /// </summary>
     public partial class CursosEstudiantes : Window
     {
-        public CursosEstudiantes()
+
+        public int id_estudiante { get; set; }
+        public int id_cursoSeleccionado { get; set; }
+        public string correo { get; set; }
+        public string nombreCursoSeleccionado { get; set; }
+
+        public CursosEstudiantes(string correo = "",int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
+
+            this.id_estudiante = id_estudiante;
+            this.id_cursoSeleccionado = id_cursoSeleccionado;
+            this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+            this.correo = correo;
+
+            curso.Content = nombreCursoSeleccionado;
+            MessageBox.Show($"Id del estudiante:{id_estudiante}");
+
         }
 
         private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -115,13 +130,15 @@ namespace AdisG3
 
         }
 
-        private void BackButton_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Abrir ventana de inicio de sesión
-            inicioEstudiante incioEstudiante = new inicioEstudiante();
-            incioEstudiante.Show();
+            // Abrir ventana de inicioEstudiante
+            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante, correo, id_cursoSeleccionado);
+            inicioEstudiante.Show();
             this.Close();
         }
+
+
 
     }
 }

@@ -1,23 +1,10 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MySql.Data.MySqlClient;
 
 namespace AdisG3
 {
-    /// <summary>
-    /// Interaction logic for LoginEstudiante.xaml
-    /// </summary>
     public partial class LoginEstudiante : Window
     {
         public LoginEstudiante()
@@ -65,6 +52,7 @@ namespace AdisG3
                         if (reader.Read())
                         {
                             id_estudiante = reader.GetInt32("id_estudiante");
+                            correo = reader.GetString("correo");
                         }
                         else
                         {
@@ -75,7 +63,7 @@ namespace AdisG3
                 }
             }
 
-            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante);
+            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante, correo);
             inicioEstudiante.Show();
             this.Close();
         }
