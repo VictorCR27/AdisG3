@@ -47,6 +47,23 @@ namespace AdisG3
             // Llenar el ComboBox con las semanas del 1 al 15
             List<int> semanas = Enumerable.Range(1, 15).ToList();
             cbox_semana.ItemsSource = semanas;
+
+            // Agregar el evento de clic al ListView
+            lvAsignacionesSemana.MouseDoubleClick += LvAsignacionesSemana_MouseDoubleClick;
+        }
+
+        private void LvAsignacionesSemana_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Verificar si se ha seleccionado un elemento
+            if (lvAsignacionesSemana.SelectedItem != null)
+            {
+                // Obtener la asignación seleccionada
+                AsignacionSemana asignacionSeleccionada = (AsignacionSemana)lvAsignacionesSemana.SelectedItem;
+
+                // Abrir la ventana para enviar la asignación y pasar la asignación seleccionada a esa ventana
+                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada);
+                enviarAsignacionWindow.ShowDialog();
+            }
         }
 
         public class AsignacionSemana
