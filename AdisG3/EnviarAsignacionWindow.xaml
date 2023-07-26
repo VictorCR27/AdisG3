@@ -30,7 +30,7 @@
         </GroupBox>
 
         <!-- Espacio para enviar la tarea -->
-        <GroupBox Header="Enviar Tarea" Margin="9,234,5,6">
+        <GroupBox Header="Enviar Tarea" Margin="9,250,5,6">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -38,13 +38,13 @@
                 </Grid.RowDefinitions>
 
                 <!-- Espacio para ingresar texto -->
-                <TextBox x:Name="txtTexto" Grid.Row="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                <TextBox x:Name="txtTextoTarea" Grid.Row="0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
                 <!-- Botón para enviar la tarea con el texto -->
                 <Button x:Name="btnEnviar" Grid.Row="1" Margin="0,10" Content="Enviar" Click="BtnEnviar_Click"/>
 
                 <!-- Espacio para cargar un archivo -->
-                <Button x:Name="btnCargarArchivo" Grid.Row="0" Margin="0,-8,-8,0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Cargar Archivo" Click="BtnCargarArchivo_Click" Height="32" Width="127"/>
+                <Button x:Name="btnCargarArchivo" Grid.Row="0" Margin="0,-95,-17,0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Cargar Archivo" Click="BtnCargarArchivo_Click" Height="32" Width="127"/>
                 <TextBlock x:Name="txtArchivoSeleccionado" Grid.Row="0" Margin="10,56,10,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>

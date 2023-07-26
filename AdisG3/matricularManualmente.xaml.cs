@@ -40,7 +40,6 @@ namespace AdisG3
             string connString = conn_db.GetConnectionString();
 
             // Obtener los valores de los campos de texto
-            string cedula = txt_cedula.Text;
             string nombre = txt_nombre.Text;
             string apellido1 = txt_apellido1.Text;
             string apellido2 = txt_apellido2.Text;
@@ -52,7 +51,7 @@ namespace AdisG3
             // Validar que todos los campos estén llenos
             if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(apellido1) ||
                 string.IsNullOrWhiteSpace(apellido2) || string.IsNullOrWhiteSpace(correo) ||
-                string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(cedula))
+                string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Por favor, complete todos los campos.");
                 return;
@@ -67,30 +66,18 @@ namespace AdisG3
 
             // Realizar la inserción en la tabla estudiantes
             try
-            {
-
-                // Verificar que la cédula tenga exactamente 9 caracteres
-                if (cedula.Length != 9)
-                {
-                    MessageBox.Show("La cédula debe tener exactamente 9 caracteres.");
-                    return;
-                }
-
-                using (MySqlConnection connection = new MySqlConnection(connString))
+            { 
+               using (MySqlConnection connection = new MySqlConnection(connString))
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO estudiantes (cedula,nombre, apellido1, apellido2, id_curso, id_profesor, correo, password) " +
-                           "VALUES (@cedula,@nombre, @apellido1, @apellido2, @id_curso, @id_profesor, @correo, @password)";
+                    string query = "INSERT INTO estudiantes (nombre, apellido1, apellido2, correo, password) VALUES (@nombre, @apellido1, @apellido2, @correo, @password)";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@cedula", cedula);
                         command.Parameters.AddWithValue("@nombre", nombre);
                         command.Parameters.AddWithValue("@apellido1", apellido1);
                         command.Parameters.AddWithValue("@apellido2", apellido2);
-                        command.Parameters.AddWithValue("@id_curso", id_curso);
-                        command.Parameters.AddWithValue("@id_profesor", id_Profesor);
                         command.Parameters.AddWithValue("@correo", correo);
                         command.Parameters.AddWithValue("@password", password);
                         command.ExecuteNonQuery();
@@ -112,7 +99,6 @@ namespace AdisG3
                     }
 
                     // Vaciar los campos de texto
-                    txt_cedula.Text = string.Empty;
                     txt_nombre.Text = string.Empty;
                     txt_apellido1.Text = string.Empty;
                     txt_apellido2.Text = string.Empty;

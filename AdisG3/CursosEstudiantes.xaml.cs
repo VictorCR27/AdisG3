@@ -24,22 +24,24 @@ namespace AdisG3
 
         public int id_estudiante { get; set; }
         public int id_cursoSeleccionado { get; set; }
-        public string correo { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
         private List<AsignacionSemana> asignacionesSemana;
 
-        public CursosEstudiantes(string correo = "",int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
+        public CursosEstudiantes(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
 
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
-            this.correo = correo;
 
             curso.Content = nombreCursoSeleccionado;
+
             MessageBox.Show($"Id del curso seleccionado{id_cursoSeleccionado}");
+            MessageBox.Show($"Id del curso id_estudiante{id_estudiante}");
+
+
 
             // Inicializar la lista de asignaciones de la semana
             asignacionesSemana = new List<AsignacionSemana>();
@@ -146,7 +148,7 @@ namespace AdisG3
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // Abrir ventana de inicioEstudiante
-            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante, correo, id_cursoSeleccionado);
+            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante, id_cursoSeleccionado);
             inicioEstudiante.Show();
             this.Close();
         }

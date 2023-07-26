@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using static AdisG3.CursosEstudiantes;
 
 namespace AdisG3
@@ -9,22 +11,77 @@ namespace AdisG3
     {
         private AsignacionSemana asignacion;
 
-        public EnviarAsignacionWindow(AsignacionSemana asignacion)
+        private bool esArchivo;
+        public string correo { get; set; }
+        public int id_cursoSeleccionado { get; set; }
+        
+
+        public EnviarAsignacionWindow(AsignacionSemana asignacion, string correo = "", int id_cursoSeleccionado = 0)
         {
             InitializeComponent();
             this.asignacion = asignacion;
-            DataContext = this.asignacion; // Asignar la asignación como el contexto de datos para el enlace de datos
+            this.correo = correo;
+            this.id_cursoSeleccionado= id_cursoSeleccionado;
+            DataContext = this.asignacion;
+            MessageBox.Show($"Correo {correo}");
+            MessageBox.Show($"Id_cursoSeleccionado {id_cursoSeleccionado}");
         }
 
         private void BtnEnviar_Click(object sender, RoutedEventArgs e)
         {
-            // Aquí puedes obtener el texto ingresado por el usuario en el TextBox (txtTexto.Text)
-            // y realizar la lógica para enviar la tarea con el texto.
-            // Por ejemplo, podrías guardar el texto en una base de datos o en un archivo.
+            // Verificar si se ha seleccionado un archivo o texto
+            if (!string.IsNullOrWhiteSpace(txtArchivoSeleccionado.Text) || !string.IsNullOrWhiteSpace(txtTextoTarea.Text))
+            {
+                try
+                {
+                    // Leer el contenido del archivo seleccionado o el texto ingresado
+                    string archivoOTexto = esArchivo ? File.ReadAllText(txtArchivoSeleccionado.Text) : txtTextoTarea.Text;
 
-            MessageBox.Show("Tarea enviada correctamente.");
-            this.Close();
+                    // Obtener las claves primarias del profesor, curso y estudiante
+                    int idCurso = 1;
+                    string estudianteCorreo = "v@gmail.com";
+
+                    // Insertar los datos en la tabla TareasEnviadas
+                    string connString = conn_db.GetConnectionString();
+                    using (MySqlConnection connection = new MySqlConnection(connString))
+                    {
+                        connection.Open();
+
+                        string query = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tarea) " +
+                                       "VALUES (@profesor, @curso, @estudiante, @tarea)";
+
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            //command.Parameters.AddWithValue("@profesor", idProfesor);
+                            command.Parameters.AddWithValue("@curso", idCurso);
+                            command.Parameters.AddWithValue("@estudiante", estudianteCorreo);
+                            command.Parameters.AddWithValue("@tarea", archivoOTexto);
+
+                            int rowsAffected = command.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Tarea enviada correctamente.");
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se pudo enviar la tarea.");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un archivo o ingrese un texto para la tarea.");
+            }
         }
+
+
 
         private void BtnCargarArchivo_Click(object sender, RoutedEventArgs e)
         {
@@ -36,8 +93,7 @@ namespace AdisG3
                 string archivoSeleccionado = openFileDialog.FileName;
                 txtArchivoSeleccionado.Text = Path.GetFileName(archivoSeleccionado);
 
-                // Aquí puedes guardar el archivo en la ubicación que desees o enviarlo como parte de la tarea.
-                // Por ejemplo, podrías guardar el archivo en una carpeta específica en el servidor.
+               
             }
         }
     }

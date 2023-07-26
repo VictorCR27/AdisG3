@@ -10,11 +10,11 @@
         Title="matricularManualmente" Height="450" Width="800">
     <Grid>
         <Label Content="Matricular:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="45,136,0,0" VerticalAlignment="Top" Height="31" Width="108" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="Apellido 1:" HorizontalAlignment="Left" Margin="45,177,0,0" VerticalAlignment="Top" Height="42" Width="130" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Apellido 2:" HorizontalAlignment="Left" Margin="45,222,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Correo:" HorizontalAlignment="Left" Margin="45,259,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="45,307,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="43,95,0,0" VerticalAlignment="Top" Height="31" Width="108" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="Apellido 1:" HorizontalAlignment="Left" Margin="43,136,0,0" VerticalAlignment="Top" Height="42" Width="130" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Apellido 2:" HorizontalAlignment="Left" Margin="43,182,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Correo:" HorizontalAlignment="Left" Margin="43,218,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="43,260,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
 
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="669,7,-52,393">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
@@ -22,15 +22,13 @@
             </StackPanel>
         </Button>
 
-        <TextBox x:Name="txt_nombre" HorizontalAlignment="Left" Height="34" Margin="184,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged"/>
-        <TextBox x:Name="txt_apellido1" HorizontalAlignment="Left" Height="34" Margin="184,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido1_TextChanged"/>
-        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Left" Height="34" Margin="184,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido2_TextChanged"/>
-        <TextBox x:Name="txt_correo" HorizontalAlignment="Left" Height="34" Margin="184,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_correo_TextChanged"/>
-        <TextBox x:Name="txt_password" HorizontalAlignment="Left" Height="34" Margin="184,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged"/>
+        <TextBox x:Name="txt_nombre" HorizontalAlignment="Left" Height="34" Margin="182,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged"/>
+        <TextBox x:Name="txt_apellido1" HorizontalAlignment="Left" Height="34" Margin="182,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido1_TextChanged"/>
+        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Left" Height="34" Margin="182,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido2_TextChanged"/>
+        <TextBox x:Name="txt_correo" HorizontalAlignment="Left" Height="34" Margin="182,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_correo_TextChanged"/>
+        <TextBox x:Name="txt_password" HorizontalAlignment="Left" Height="34" Margin="182,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged"/>
 
         <Button x:Name="btn_matricular" Content="Matricular" HorizontalAlignment="Left" Margin="657,374,0,0" VerticalAlignment="Top" Click="btn_matricular_Click"/>
-        <Label Content="Cédula:" HorizontalAlignment="Left" Margin="45,94,0,0" VerticalAlignment="Top" Height="31" Width="108" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.5"/>
-        <TextBox x:Name="txt_cedula" HorizontalAlignment="Left" Height="34" Margin="184,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_cedula_TextChanged"/>
 
     </Grid>
 </Window>

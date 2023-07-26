@@ -52,7 +52,7 @@ namespace AdisG3
                         if (reader.Read())
                         {
                             id_estudiante = reader.GetInt32("id_estudiante");
-                            correo = reader.GetString("correo");
+          
                         }
                         else
                         {
@@ -63,7 +63,7 @@ namespace AdisG3
                 }
             }
 
-            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante, correo);
+            inicioEstudiante inicioEstudiante = new inicioEstudiante(id_estudiante);
             inicioEstudiante.Show();
             this.Close();
         }

@@ -11,22 +11,21 @@ namespace AdisG3
     {
         public int id_estudiante { get; set; }
         public int id_cursoSeleccionado { get; set; }
-        public string correo { get; set; }
 
         string nombreCurso = "";
 
         int idCurso = 0;
 
-        public inicioEstudiante(int id_estudiante = 0, string correo = "", int id_cursoSeleccionado = 0)
+        public inicioEstudiante(int id_estudiante = 0, int id_cursoSeleccionado = 0)
         {
             InitializeComponent();
 
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
-            this.correo = correo;
-            MessageBox.Show($"Este es el correo {correo}");
+            
+            MessageBox.Show($"Este es el id {id_estudiante}");
 
-            string query = "SELECT COUNT(*) FROM estudiantes WHERE correo = @correo;";
+            string query = "SELECT COUNT(*) FROM estudiantes WHERE id_estudiante = @id_estudiante;";
             string cantidad;
 
             // Cadena de conexión
@@ -38,8 +37,8 @@ namespace AdisG3
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    //command.Parameters.AddWithValue("@id", id_estudiante);
-                    command.Parameters.AddWithValue("@correo", correo);
+                    
+                    command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
 
                     // Ejecutar el query y obtener el resultado
                     object result = command.ExecuteScalar();
@@ -88,12 +87,13 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 // Crea y ejecuta la consulta para obtener los nombres de los cursos
-                string query1 = "SELECT cursos.id_curso, nombre_curso FROM cursos JOIN estudiantes ON cursos.id_curso = estudiantes.id_curso WHERE estudiantes.correo = @correo";
+                string query1 = "SELECT cursos.id_curso, cursos.nombre_curso FROM cursos JOIN estudiantesMatriculados ON cursos.id_curso = estudiantesMatriculados.id_curso WHERE estudiantesMatriculados.id_estudiante = @id_estudiante;";
+
+
 
                 using (MySqlCommand command = new MySqlCommand(query1, connection))
                 {
                     command.Parameters.AddWithValue("@id_estudiante", id_estudiante); 
-                    command.Parameters.AddWithValue("@correo", correo);
                     connection.Open();
 
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -168,7 +168,7 @@ namespace AdisG3
             int idCursoSeleccionado = (int)cursoButton.Tag;
             string nombreCursoSeleccionado = ((Label)((Grid)cursoButton.Content).Children[0]).Content.ToString();
 
-            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(correo,id_estudiante, idCursoSeleccionado, nombreCursoSeleccionado);
+            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, idCursoSeleccionado, nombreCursoSeleccionado);
             CursosEstudiantes.Show();
             this.Close();
         }

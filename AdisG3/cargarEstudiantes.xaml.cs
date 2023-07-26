@@ -1,19 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace AdisG3
 {
-    /// <summary>
-    /// Interaction logic for cargarEstudiantes.xaml
-    /// </summary>
     public partial class cargarEstudiantes : Window
     {
         public int id_profesor { get; set; }
@@ -54,8 +47,11 @@ namespace AdisG3
             {
                 connection.Open();
 
-                string query = "SELECT nombre, apellido1, apellido2, correo FROM estudiantes " +
-                    "WHERE id_curso = @id_curso AND id_profesor = @id_profesor";
+                string query = "SELECT e.nombre, e.apellido1, e.apellido2, e.correo " +
+                               "FROM estudiantesMatriculados em " +
+                               "JOIN estudiantes e ON em.id_estudiante = e.id_estudiante " +
+                               "WHERE em.id_curso = @id_curso AND em.id_profesor = @id_profesor";
+
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
@@ -79,6 +75,7 @@ namespace AdisG3
                 }
             }
         }
+
 
         private void Button_Matricular(object sender, RoutedEventArgs e)
         {
@@ -119,8 +116,7 @@ namespace AdisG3
                         string apellido2 = ((Excel.Range)range.Cells[row, 3]).Value2.ToString();
                         string correo = ((Excel.Range)range.Cells[row, 4]).Value2.ToString();
                         string password = ((Excel.Range)range.Cells[row, 5]).Value2.ToString();
-                        int id_Profesor = id_profesor;
-                        int id_curso = id_cursoSeleccionado;
+                        int id_estudiante = -1;
 
                         // Verificar si el estudiante ya existe en la base de datos
                         if (EstudianteExists(correo))
@@ -129,18 +125,49 @@ namespace AdisG3
                             continue;
                         }
 
-                        string query = "INSERT INTO estudiantes (nombre, apellido1, apellido2, id_curso, id_profesor, correo, password) " +
-                            "VALUES (@nombre, @apellido1, @apellido2, @id_curso, @id_profesor, @correo, @password)";
+                        // Verificar si el estudiante ya existe en la tabla 'estudiantes' por su correo
+                        string selectEstudianteQuery = "SELECT id_estudiante FROM estudiantes WHERE correo = @correo";
 
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        using (MySqlCommand command = new MySqlCommand(selectEstudianteQuery, connection))
                         {
-                            command.Parameters.AddWithValue("@nombre", nombre);
-                            command.Parameters.AddWithValue("@apellido1", apellido1);
-                            command.Parameters.AddWithValue("@apellido2", apellido2);
-                            command.Parameters.AddWithValue("@id_curso", id_curso);
-                            command.Parameters.AddWithValue("@id_profesor", id_Profesor);
                             command.Parameters.AddWithValue("@correo", correo);
-                            command.Parameters.AddWithValue("@password", password);
+
+                            var result = command.ExecuteScalar();
+                            if (result != null)
+                            {
+                                // El estudiante ya existe, obtener su ID
+                                id_estudiante = Convert.ToInt32(result);
+                            }
+                            else
+                            {
+                                // El estudiante no existe, insertarlo en la tabla 'estudiantes'
+                                string insertEstudianteQuery = "INSERT INTO estudiantes (nombre, apellido1, apellido2, correo, password) " +
+                                                              "VALUES (@nombre, @apellido1, @apellido2, @correo, @password); " +
+                                                              "SELECT LAST_INSERT_ID();";
+
+                                using (MySqlCommand insertCommand = new MySqlCommand(insertEstudianteQuery, connection))
+                                {
+                                    insertCommand.Parameters.AddWithValue("@nombre", nombre);
+                                    insertCommand.Parameters.AddWithValue("@apellido1", apellido1);
+                                    insertCommand.Parameters.AddWithValue("@apellido2", apellido2);
+                                    insertCommand.Parameters.AddWithValue("@correo", correo);
+                                    insertCommand.Parameters.AddWithValue("@password", password);
+
+                                    // Ejecutar la consulta y obtener el ID generado
+                                    id_estudiante = Convert.ToInt32(insertCommand.ExecuteScalar());
+                                }
+                            }
+                        }
+
+                        // Insertar en estudiantesMatriculados con el ID del estudiante obtenido
+                        string insertMatriculadosQuery = "INSERT INTO estudiantesMatriculados (id_estudiante, id_profesor, id_curso) " +
+                                                         "VALUES (@id_estudiante, @id_profesor, @id_curso)";
+
+                        using (MySqlCommand command = new MySqlCommand(insertMatriculadosQuery, connection))
+                        {
+                            command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
+                            command.Parameters.AddWithValue("@id_profesor", id_profesor);
+                            command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                             command.ExecuteNonQuery();
                         }
 
