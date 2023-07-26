@@ -9,91 +9,104 @@ namespace AdisG3
 {
     public partial class EnviarAsignacionWindow : Window
     {
-        private AsignacionSemana asignacion;
+        private AsignacionSemana asignacionSemana;
+        private int id_estudiante;
+        private int id_cursoSeleccionado;
 
-        private bool esArchivo;
-        public string correo { get; set; }
-        public int id_cursoSeleccionado { get; set; }
-        
-
-        public EnviarAsignacionWindow(AsignacionSemana asignacion, string correo = "", int id_cursoSeleccionado = 0)
+        public EnviarAsignacionWindow(AsignacionSemana asignacionSemana, int id_estudiante, int id_cursoSeleccionado)
         {
             InitializeComponent();
-            this.asignacion = asignacion;
-            this.correo = correo;
-            this.id_cursoSeleccionado= id_cursoSeleccionado;
-            DataContext = this.asignacion;
-            MessageBox.Show($"Correo {correo}");
+            this.asignacionSemana = asignacionSemana;
+            this.id_estudiante = id_estudiante;
+            this.id_cursoSeleccionado = id_cursoSeleccionado;
+
+            // Set the DataContext to the current instance of EnviarAsignacionWindow (this)
+            DataContext = asignacionSemana;
+
+            MessageBox.Show($"id_estudiante: {id_estudiante}");
             MessageBox.Show($"Id_cursoSeleccionado {id_cursoSeleccionado}");
+        }
+
+        // Property to bind to the DataContext in XAML
+        public AsignacionSemana Asignacion
+        {
+            get { return asignacionSemana; }
         }
 
         private void BtnEnviar_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar si se ha seleccionado un archivo o texto
-            if (!string.IsNullOrWhiteSpace(txtArchivoSeleccionado.Text) || !string.IsNullOrWhiteSpace(txtTextoTarea.Text))
+            string tareaTexto = txtTareaTexto.Text;
+            string tareaArchivo = txtArchivoSeleccionado.Text; 
+
+            string connString = conn_db.GetConnectionString();
+
+            try
             {
-                try
+                int id_curso = 0;
+                int id_profesor = 0;
+
+                // Fetch the id_curso and id_profesor from estudiantesMatriculados
+                using (MySqlConnection connection = new MySqlConnection(connString))
                 {
-                    // Leer el contenido del archivo seleccionado o el texto ingresado
-                    string archivoOTexto = esArchivo ? File.ReadAllText(txtArchivoSeleccionado.Text) : txtTextoTarea.Text;
+                    connection.Open();
 
-                    // Obtener las claves primarias del profesor, curso y estudiante
-                    int idCurso = 1;
-                    string estudianteCorreo = "v@gmail.com";
+                    string query = "SELECT id_curso, id_profesor FROM estudiantesMatriculados " +
+                                   "WHERE id_estudiante = @id_estudiante";
 
-                    // Insertar los datos en la tabla TareasEnviadas
-                    string connString = conn_db.GetConnectionString();
-                    using (MySqlConnection connection = new MySqlConnection(connString))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        connection.Open();
+                        command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
 
-                        string query = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tarea) " +
-                                       "VALUES (@profesor, @curso, @estudiante, @tarea)";
-
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            //command.Parameters.AddWithValue("@profesor", idProfesor);
-                            command.Parameters.AddWithValue("@curso", idCurso);
-                            command.Parameters.AddWithValue("@estudiante", estudianteCorreo);
-                            command.Parameters.AddWithValue("@tarea", archivoOTexto);
-
-                            int rowsAffected = command.ExecuteNonQuery();
-                            if (rowsAffected > 0)
+                            if (reader.Read())
                             {
-                                MessageBox.Show("Tarea enviada correctamente.");
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se pudo enviar la tarea.");
+                                id_curso = reader.GetInt32("id_curso");
+                                id_profesor = reader.GetInt32("id_profesor");
                             }
                         }
                     }
                 }
-                catch (Exception ex)
+
+                // Insert the assignment into the TareasEnviadas table
+                using (MySqlConnection connection = new MySqlConnection(connString))
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    connection.Open();
+
+                    string query = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tareaTXT, tareaArchivo) " +
+                                   "VALUES (@profesor, @curso, @estudiante, @tareaTXT, @tareaArchivo)";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@profesor", id_profesor);
+                        command.Parameters.AddWithValue("@curso", id_curso);
+                        command.Parameters.AddWithValue("@estudiante", id_estudiante);
+                        command.Parameters.AddWithValue("@tareaTXT", tareaTexto);
+                        command.Parameters.AddWithValue("@tareaArchivo", tareaArchivo);
+
+                        command.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Tarea enviada exitosamente.");
+                    this.Close();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Por favor, seleccione un archivo o ingrese un texto para la tarea.");
+                MessageBox.Show("Error al enviar la tarea: " + ex.Message);
             }
         }
 
-
-
-        private void BtnCargarArchivo_Click(object sender, RoutedEventArgs e)
+        private void BtnAdjuntarArchivo_Click(object sender, RoutedEventArgs e)
         {
-            // Abrir el cuadro de diálogo para seleccionar un archivo
+            // Show a file dialog to select the file
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos PDF e Imágenes|*.pdf;*.jpg;*.jpeg;*.png;*.gif";
             if (openFileDialog.ShowDialog() == true)
             {
-                // Obtener el nombre del archivo seleccionado y mostrarlo en el TextBlock
-                string archivoSeleccionado = openFileDialog.FileName;
-                txtArchivoSeleccionado.Text = Path.GetFileName(archivoSeleccionado);
-
-               
+                // Get the selected file path and display it (you can also save the file to a temporary location if needed)
+                string filePath = openFileDialog.FileName;
+                txtArchivoSeleccionado.Text = filePath;
             }
         }
     }

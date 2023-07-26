@@ -63,10 +63,15 @@ namespace AdisG3
                 AsignacionSemana asignacionSeleccionada = (AsignacionSemana)lvAsignacionesSemana.SelectedItem;
 
                 // Abrir la ventana para enviar la asignación y pasar la asignación seleccionada a esa ventana
-                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada);
+                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada, id_estudiante, id_cursoSeleccionado);
                 enviarAsignacionWindow.ShowDialog();
+
+                // Refresh the assignments after closing the EnviarAsignacionWindow to show any updates
+                CargarAsignacionesSemana((int)cbox_semana.SelectedItem);
             }
         }
+
+
 
         public class AsignacionSemana
         {

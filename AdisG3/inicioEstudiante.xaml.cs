@@ -23,7 +23,7 @@ namespace AdisG3
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             
-            MessageBox.Show($"Este es el id {id_estudiante}");
+            //MessageBox.Show($"Este es el id {id_estudiante}");
 
             string query = "SELECT COUNT(*) FROM estudiantes WHERE id_estudiante = @id_estudiante;";
             string cantidad;
@@ -57,7 +57,6 @@ namespace AdisG3
             }
 
             // Limita la cantidad de cursos a un máximo de 5
-            MessageBox.Show(cantidad);
             int cantidadMaxima = int.Parse(cantidad);
             
 

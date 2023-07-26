@@ -1,17 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AdisG3
 {
-    /// <summary>
-    /// Interaction logic for matricularManualmente.xaml
-    /// </summary>
     public partial class matricularManualmente : Window
     {
         public int id_profesor { get; set; }
@@ -58,62 +50,97 @@ namespace AdisG3
             }
 
             // Verificar si el estudiante ya existe en la base de datos
-            if (EstudianteExists(correo))
+            int id_estudiante = GetExistingEstudianteId(correo);
+
+            // Si el estudiante no existe, realizar la inserción en la tabla estudiantes
+            if (id_estudiante == -1)
             {
-                MessageBox.Show($"El estudiante con el correo '{correo}' ya existe en la base de datos.");
+                try
+                {
+                    using (MySqlConnection connection = new MySqlConnection(connString))
+                    {
+                        connection.Open();
+
+                        string insertEstudianteQuery = "INSERT INTO estudiantes (nombre, apellido1, apellido2, correo, password) " +
+                                                       "VALUES (@nombre, @apellido1, @apellido2, @correo, @password); " +
+                                                       "SELECT LAST_INSERT_ID();";
+
+                        using (MySqlCommand command = new MySqlCommand(insertEstudianteQuery, connection))
+                        {
+                            command.Parameters.AddWithValue("@nombre", nombre);
+                            command.Parameters.AddWithValue("@apellido1", apellido1);
+                            command.Parameters.AddWithValue("@apellido2", apellido2);
+                            command.Parameters.AddWithValue("@correo", correo);
+                            command.Parameters.AddWithValue("@password", password);
+
+                            // Ejecutar la consulta y obtener el ID generado
+                            id_estudiante = Convert.ToInt32(command.ExecuteScalar());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al matricular al estudiante: " + ex.Message);
+                    return;
+                }
+            }
+
+            // Verificar si el estudiante ya está matriculado en el curso
+            if (IsEstudianteMatriculado(id_estudiante, id_cursoSeleccionado))
+            {
+                MessageBox.Show($"El estudiante ya está matriculado en el curso seleccionado.");
                 return;
             }
 
-            // Realizar la inserción en la tabla estudiantes
+            // Insertar en estudiantesMatriculados con el ID del estudiante obtenido
+            string insertMatriculadosQuery = "INSERT INTO estudiantesMatriculados (id_estudiante, id_profesor, id_curso) " +
+                                             "VALUES (@id_estudiante, @id_profesor, @id_curso)";
+
             try
-            { 
-               using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                using (MySqlConnection connection = new MySqlConnection(connString))
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO estudiantes (nombre, apellido1, apellido2, correo, password) VALUES (@nombre, @apellido1, @apellido2, @correo, @password)";
-
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(insertMatriculadosQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@nombre", nombre);
-                        command.Parameters.AddWithValue("@apellido1", apellido1);
-                        command.Parameters.AddWithValue("@apellido2", apellido2);
-                        command.Parameters.AddWithValue("@correo", correo);
-                        command.Parameters.AddWithValue("@password", password);
+                        command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
+                        command.Parameters.AddWithValue("@id_profesor", id_profesor);
+                        command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                         command.ExecuteNonQuery();
                     }
-
-                    MessageBox.Show("Estudiante matriculado exitosamente.");
-
-                    // Agregar el estudiante a la colección en la clase cargarEstudiantes
-                    if (ParentWindow != null)
-                    {
-                        cargarEstudiantes.Estudiante estudiante = new cargarEstudiantes.Estudiante
-                        {
-                            Nombre = nombre,
-                            ApellidoPaterno = apellido1,
-                            ApellidoMaterno = apellido2,
-                            Correo = correo
-                        };
-                        ParentWindow.Estudiantes.Add(estudiante);
-                    }
-
-                    // Vaciar los campos de texto
-                    txt_nombre.Text = string.Empty;
-                    txt_apellido1.Text = string.Empty;
-                    txt_apellido2.Text = string.Empty;
-                    txt_correo.Text = string.Empty;
-                    txt_password.Text = string.Empty;
                 }
+
+                // Agregar el estudiante a la colección en la clase cargarEstudiantes
+                if (ParentWindow != null)
+                {
+                    cargarEstudiantes.Estudiante estudiante = new cargarEstudiantes.Estudiante
+                    {
+                        Nombre = nombre,
+                        ApellidoPaterno = apellido1,
+                        ApellidoMaterno = apellido2,
+                        Correo = correo
+                    };
+                    ParentWindow.Estudiantes.Add(estudiante);
+                }
+
+                MessageBox.Show("Estudiante matriculado exitosamente.");
+
+                // Vaciar los campos de texto
+                txt_nombre.Text = string.Empty;
+                txt_apellido1.Text = string.Empty;
+                txt_apellido2.Text = string.Empty;
+                txt_correo.Text = string.Empty;
+                txt_password.Text = string.Empty;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al matricular al estudiante: " + ex.Message);
             }
-
         }
 
-        private bool EstudianteExists(string correo)
+
+        private bool IsEstudianteMatriculado(int id_estudiante, int id_curso)
         {
             string connString = conn_db.GetConnectionString();
 
@@ -121,13 +148,13 @@ namespace AdisG3
             {
                 connection.Open();
 
-                string query = "SELECT COUNT(*) FROM estudiantes " +
-                               "WHERE id_curso = @id_curso AND correo = @correo";
+                string query = "SELECT COUNT(*) FROM estudiantesMatriculados " +
+                               "WHERE id_estudiante = @id_estudiante AND id_curso = @id_curso";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
-                    command.Parameters.AddWithValue("@correo", correo);
+                    command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
+                    command.Parameters.AddWithValue("@id_curso", id_curso);
 
                     int count = Convert.ToInt32(command.ExecuteScalar());
 
@@ -136,32 +163,55 @@ namespace AdisG3
             }
         }
 
-        private void txt_nombre_TextChanged(object sender, TextChangedEventArgs e)
+        private int GetExistingEstudianteId(string correo)
+        {
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT id_estudiante FROM estudiantes WHERE correo = @correo";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@correo", correo);
+
+                    var result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        // El estudiante ya existe, obtener su ID
+                        return Convert.ToInt32(result);
+                    }
+
+                    // El estudiante no existe, return -1
+                    return -1;
+                }
+            }
+        }
+
+
+        private void txt_nombre_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
 
-        private void txt_apellido1_TextChanged(object sender, TextChangedEventArgs e)
+        private void txt_apellido1_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
 
-        private void txt_apellido2_TextChanged(object sender, TextChangedEventArgs e)
+        private void txt_apellido2_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
 
-        private void txt_correo_TextChanged(object sender, TextChangedEventArgs e)
+        private void txt_correo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
 
-        private void txt_password_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txt_cedula_TextChanged(object sender, TextChangedEventArgs e)
+        private void txt_password_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
