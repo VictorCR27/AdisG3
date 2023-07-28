@@ -9,7 +9,8 @@
         WindowStartupLocation="CenterScreen"
         Title="profesores" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
 
-    <Grid Margin="0,0,10,11">
+    <Grid Margin="0,0,0,11">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="251" />
             <ColumnDefinition Width="739" />
@@ -43,16 +44,17 @@
                             <Button Content="Guardar Cambios" Background="#FF845E94" Foreground="White" FontSize="16" Padding="10" HorizontalAlignment="Center" Height="48"/>
                         </StackPanel>
                     </Grid>
-                    <Grid x:Name="CursosGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible">
+                    <UniformGrid x:Name="CursosGrid" Columns="4" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible">
                         <ItemsControl>
                             <ItemsControl.ItemsPanel>
+                                <!-- Aquí cambiamos el WrapPanel para que sea vertical -->
                                 <ItemsPanelTemplate>
-                                    <WrapPanel/>
+                                    <WrapPanel Orientation="Vertical"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Width="150" Height="150" Margin="10,100,100,10" Click="CursoButton_Click">
+                                    <Button Width="150" Height="150" Margin="10" Click="CursoButton_Click">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Grid>
@@ -64,8 +66,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </Grid>
-
+                    </UniformGrid>
                 </Grid>
             </ScrollViewer>
         </Border>

@@ -69,26 +69,6 @@ namespace AdisG3
             //MessageBox.Show(cantidad);
             int cantidadMaxima = int.Parse(cantidad);
 
-            // Elimina los botones de cursos existentes en el grid
-            CursosGrid.Children.Clear();
-            CursosGrid.ColumnDefinitions.Clear();
-
-            // Calcula la cantidad de filas necesarias
-            int filas = (int)Math.Ceiling((double)cantidadMaxima / 4);
-
-            // Agrega las filas y columnas al grid
-            for (int i = 0; i < filas; i++)
-            {
-                CursosGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (int i = 0; i < 4; i++)
-            {
-                CursosGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            }
-
-
-
             // Agrega los botones de cursos al grid
             int index = 0; // Variable para controlar el índice de los resultados de la consulta
 
@@ -105,6 +85,11 @@ namespace AdisG3
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
+
+                        StackPanel coursesStackPanel = new StackPanel();
+                        coursesStackPanel.Orientation = Orientation.Horizontal;
+                        coursesStackPanel.HorizontalAlignment = HorizontalAlignment.Left;
+
                         while (reader.Read())
                         {
                             idCurso = reader.GetInt32("id_curso");
@@ -149,18 +134,22 @@ namespace AdisG3
                             // Establecer el fondo del botón del curso como un color sólido
                             cursoButton.Background = new SolidColorBrush(Colors.LightBlue);
 
-                            // Calcula la posición de la fila y columna en la cuadrícula
-                            int fila = index / 4;
-                            int columna = index % 4;
-
-                            // Establecer la posición de la fila y columna en el botón del curso
-                            Grid.SetRow(cursoButton, fila);
-                            Grid.SetColumn(cursoButton, columna);
-
                             CursosGrid.Children.Add(cursoButton);
 
                             index++;
+
+                            if (index % 4 == 0)
+                            {
+                                // Create a new row (WrapPanel) every four buttons
+                                WrapPanel wrapPanel = new WrapPanel();
+                                wrapPanel.Orientation = Orientation.Vertical;
+                                wrapPanel.Margin = new Thickness(10, 0, 0, 0);
+                                coursesStackPanel.Children.Add(wrapPanel);
+                            }
                         }
+
+                        // Add the stack panel containing the buttons to the main CursosGrid
+                        CursosGrid.Children.Add(coursesStackPanel);
                     }
                 }
             }
