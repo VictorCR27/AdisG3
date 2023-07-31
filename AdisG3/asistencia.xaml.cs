@@ -19,7 +19,7 @@ namespace AdisG3
     /// </summary>
     public partial class asistencia : Window
     {
-        public asistencia()
+        public asistencia(int id_profesor, int id_cursoSeleccionado, string nombreCursoSeleccionado)
         {
             InitializeComponent();
         }
