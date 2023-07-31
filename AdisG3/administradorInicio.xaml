@@ -10,19 +10,18 @@
         Title="profesores" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
 
     <Grid Margin="0,0,0,11">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="251" />
             <ColumnDefinition Width="739" />
         </Grid.ColumnDefinitions>
 
-        <Rectangle HorizontalAlignment="Left" Height="583" Margin="10,0,0,0" VerticalAlignment="Center" Width="208" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-
         <Rectangle HorizontalAlignment="Left" Height="564" Margin="21,0,0,0" VerticalAlignment="Center" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+
         <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,361,0,0" VerticalAlignment="Top" Width="153" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
 
         <Border HorizontalAlignment="Center" Margin="234,100,0,0" VerticalAlignment="Top" Width="752" Height="484" Background="#FF110616" Grid.ColumnSpan="2">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
@@ -44,34 +43,15 @@
                             <Button Content="Guardar Cambios" Background="#FF845E94" Foreground="White" FontSize="16" Padding="10" HorizontalAlignment="Center" Height="48"/>
                         </StackPanel>
                     </Grid>
-                    <UniformGrid x:Name="CursosGrid" Columns="4" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible">
-                        <ItemsControl>
-                            <ItemsControl.ItemsPanel>
-                                <!-- Aquí cambiamos el WrapPanel para que sea vertical -->
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Vertical"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Width="150" Height="150" Margin="10" Click="CursoButton_Click">
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="Button">
-                                                <Grid>
-                                                    <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Button.Template>
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </UniformGrid>
+                    <Grid x:Name="CursosGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible">
+                        <WrapPanel Orientation="Horizontal">
+                            <!-- Los botones de cursos se agregarán aquí dinámicamente desde el código C# -->
+                        </WrapPanel>
+                    </Grid>
+
                 </Grid>
             </ScrollViewer>
         </Border>
-
-
 
         <Rectangle HorizontalAlignment="Left" Height="142" Margin="40,69,0,0" VerticalAlignment="Top" Width="152" Fill="White" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
 
@@ -104,9 +84,4 @@
         </Button>
 
     </Grid>
-
-
 </Window>
-
-
-

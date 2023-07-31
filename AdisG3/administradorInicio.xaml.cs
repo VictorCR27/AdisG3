@@ -21,7 +21,7 @@ namespace AdisG3
     public partial class administradorInicio : Window
     {
         public int id_profesor { get; set; }
-        public int id_cursoSeleccionado { get; set; } 
+        public int id_cursoSeleccionado { get; set; }
 
         string nombreCurso = "";
 
@@ -33,12 +33,10 @@ namespace AdisG3
 
             this.id_profesor = id_profesor;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
-            //MessageBox.Show("Esta es el Id:" + id_profesor);
 
             string query = "SELECT count(*) from asignacionesProfesor WHERE id_profesor = @id";
             string cantidad;
 
-            // Cadena de conexión
             string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
@@ -48,33 +46,18 @@ namespace AdisG3
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", id_profesor);
-
-                    // Ejecutar el query y obtener el resultado
                     object result = command.ExecuteScalar();
 
-                    // Verificar si el resultado es nulo
-                    if (result != null)
-                    {
-                        cantidad = result.ToString();
-                    }
-                    else
-                    {
-                        // Si el resultado es nulo, asignar un valor predeterminado o mostrar un mensaje de error, según tus necesidades
-                        cantidad = "0";
-                    }
+                    cantidad = (result != null) ? result.ToString() : "0";
                 }
             }
 
-            // Limita la cantidad de cursos a un máximo de 5
-            //MessageBox.Show(cantidad);
             int cantidadMaxima = int.Parse(cantidad);
 
-            // Agrega los botones de cursos al grid
-            int index = 0; // Variable para controlar el índice de los resultados de la consulta
+            int index = 0;
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
-                // Crea y ejecuta la consulta para obtener los nombres de los cursos
                 string query1 = "SELECT cursos.id_curso, nombre_curso FROM cursos JOIN asignacionesProfesor ON cursos.id_curso = asignacionesProfesor.id_curso WHERE asignacionesProfesor.id_profesor = @id_profesor";
 
                 using (MySqlCommand command = new MySqlCommand(query1, connection))
@@ -85,10 +68,8 @@ namespace AdisG3
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-
-                        StackPanel coursesStackPanel = new StackPanel();
-                        coursesStackPanel.Orientation = Orientation.Horizontal;
-                        coursesStackPanel.HorizontalAlignment = HorizontalAlignment.Left;
+                        WrapPanel coursesWrapPanel = new WrapPanel();
+                        coursesWrapPanel.Orientation = Orientation.Horizontal;
 
                         while (reader.Read())
                         {
@@ -98,13 +79,14 @@ namespace AdisG3
                             Button cursoButton = new Button();
                             cursoButton.Width = 150;
                             cursoButton.Height = 150;
-                            cursoButton.Margin = new Thickness(3);
+                            cursoButton.Margin = new Thickness(10);
+                            cursoButton.Tag = idCurso;
+                            cursoButton.Click += CursoButton_Click;
 
-                            // Configurar el contenido del botón con el nombre y la descripción abajo a la izquierda
                             Grid grid = new Grid();
 
                             RowDefinition rowDefinition1 = new RowDefinition();
-                            rowDefinition1.Height = new GridLength(1, GridUnitType.Auto);
+                            rowDefinition1.Height = new GridLength(1, GridUnitType.Star);
                             grid.RowDefinitions.Add(rowDefinition1);
 
                             RowDefinition rowDefinition2 = new RowDefinition();
@@ -129,27 +111,16 @@ namespace AdisG3
                             cursoButton.Content = grid;
 
                             cursoButton.Click += CursoButton_Click;
-                            cursoButton.Tag = idCurso; // Almacena el ID del curso en la propiedad Tag del botón
+                            cursoButton.Tag = idCurso;
 
-                            // Establecer el fondo del botón del curso como un color sólido
                             cursoButton.Background = new SolidColorBrush(Colors.LightBlue);
 
-                            CursosGrid.Children.Add(cursoButton);
+                            coursesWrapPanel.Children.Add(cursoButton);
 
                             index++;
-
-                            if (index % 4 == 0)
-                            {
-                                // Create a new row (WrapPanel) every four buttons
-                                WrapPanel wrapPanel = new WrapPanel();
-                                wrapPanel.Orientation = Orientation.Vertical;
-                                wrapPanel.Margin = new Thickness(10, 0, 0, 0);
-                                coursesStackPanel.Children.Add(wrapPanel);
-                            }
                         }
 
-                        // Add the stack panel containing the buttons to the main CursosGrid
-                        CursosGrid.Children.Add(coursesStackPanel);
+                        CursosGrid.Children.Add(coursesWrapPanel);
                     }
                 }
             }

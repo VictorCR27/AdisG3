@@ -141,10 +141,6 @@ namespace AdisG3
             lvAsignacionesSemana.ItemsSource = asignacionesSemana;
         }
 
-
-
-
-
         private void Semanas_Frame_Navigated(object sender, NavigationEventArgs e)
         {
 
