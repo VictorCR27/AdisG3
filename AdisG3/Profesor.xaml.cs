@@ -194,6 +194,13 @@ namespace AdisG3
             calificar.Show();
             this.Close(); 
         }
+
+        private void Button_Asist(object sender, RoutedEventArgs e)
+        {
+            asistencia asistencia = new asistencia(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            asistencia.Show();
+            this.Close();
+        }
     }
 
 }

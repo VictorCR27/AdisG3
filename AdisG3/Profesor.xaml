@@ -78,6 +78,7 @@
             </ListView.View>
         </ListView>
         <Button Grid.Column="1" Content="Calificar" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top" Height="38" Width="111" Click="Button_Click_2"/>
+        <Button Grid.Column="1" Content="Asistencia" HorizontalAlignment="Left" Margin="519,129,0,0" VerticalAlignment="Top" Height="38" Width="111" Click="Button_Asist"/>
 
 
 
