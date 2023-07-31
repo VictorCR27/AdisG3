@@ -145,6 +145,9 @@
     <Compile Include="AgregarTarea.xaml.cs">
       <DependentUpon>AgregarTarea.xaml</DependentUpon>
     </Compile>
+    <Compile Include="asistencia.xaml.cs">
+      <DependentUpon>asistencia.xaml</DependentUpon>
+    </Compile>
     <Compile Include="calificar.xaml.cs">
       <DependentUpon>calificar.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AgregarTarea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="asistencia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
