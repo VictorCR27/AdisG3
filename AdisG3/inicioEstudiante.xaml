@@ -44,11 +44,27 @@
                         </StackPanel>
                     </Grid>
                     <Grid x:Name="CursosGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible">
-                        <WrapPanel Orientation="Horizontal">
-                            <!-- Los botones de cursos se agregarán aquí dinámicamente desde el código C# -->
-                        </WrapPanel>
+                        <ItemsControl>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Width="150" Height="150" Margin="10,100,100,10" Click="CursoButton_Click">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid>
+                                                    <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
-
                 </Grid>
             </ScrollViewer>
         </Border>

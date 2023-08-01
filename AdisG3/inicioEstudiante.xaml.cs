@@ -58,30 +58,33 @@ namespace AdisG3
             }
 
             // Limita la cantidad de cursos a un máximo de 5
+            //MessageBox.Show(cantidad);
             int cantidadMaxima = int.Parse(cantidad);
 
             // Elimina los botones de cursos existentes en el grid
             CursosGrid.Children.Clear();
-            CursosGrid.RowDefinitions.Clear();
+            CursosGrid.ColumnDefinitions.Clear();
 
             // Calcula la cantidad de filas necesarias
             int filas = (int)Math.Ceiling((double)cantidadMaxima / 4);
 
-            // Agrega las filas al grid
+            // Agrega las filas y columnas al grid
             for (int i = 0; i < filas; i++)
             {
                 CursosGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            // Crea el WrapPanel y configura su orientación
-            coursesWrapPanel = new WrapPanel();
-            coursesWrapPanel.Orientation = Orientation.Horizontal;
+            for (int i = 0; i < 4; i++)
+            {
+                CursosGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            }
 
             // Agrega los botones de cursos al grid
             int index = 0; // Variable para controlar el índice de los resultados de la consulta
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
+                // Crea y ejecuta la consulta para obtener los nombres de los cursos
                 string query1 = "SELECT cursos.id_curso, cursos.nombre_curso FROM cursos JOIN estudiantesMatriculados ON cursos.id_curso = estudiantesMatriculados.id_curso WHERE estudiantesMatriculados.id_estudiante = @id_estudiante;";
 
                 using (MySqlCommand command = new MySqlCommand(query1, connection))
@@ -100,14 +103,13 @@ namespace AdisG3
                             Button cursoButton = new Button();
                             cursoButton.Width = 150;
                             cursoButton.Height = 150;
-                            cursoButton.Margin = new Thickness(10);
-                            cursoButton.Tag = idCurso;
-                            cursoButton.Click += CursoButton_Click;
+                            cursoButton.Margin = new Thickness(3);
 
+                            // Configurar el contenido del botón con el nombre y la descripción abajo a la izquierda
                             Grid grid = new Grid();
 
                             RowDefinition rowDefinition1 = new RowDefinition();
-                            rowDefinition1.Height = new GridLength(1, GridUnitType.Star);
+                            rowDefinition1.Height = new GridLength(1, GridUnitType.Auto);
                             grid.RowDefinitions.Add(rowDefinition1);
 
                             RowDefinition rowDefinition2 = new RowDefinition();
@@ -132,22 +134,30 @@ namespace AdisG3
                             cursoButton.Content = grid;
 
                             cursoButton.Click += CursoButton_Click;
-                            cursoButton.Tag = idCurso;
+                            cursoButton.Tag = idCurso; // Almacena el ID del curso en la propiedad Tag del botón
 
+                            // Establecer el fondo del botón del curso como un color sólido
                             cursoButton.Background = new SolidColorBrush(Colors.LightBlue);
 
-                            coursesWrapPanel.Children.Add(cursoButton);
+                            // Calcula la posición de la fila y columna en la cuadrícula
+                            int fila = index / 4;
+                            int columna = index % 4;
+
+                            // Establecer la posición de la fila y columna en el botón del curso
+                            Grid.SetRow(cursoButton, fila);
+                            Grid.SetColumn(cursoButton, columna);
+
+                            CursosGrid.Children.Add(cursoButton);
 
                             index++;
                         }
-
-                        CursosGrid.Children.Add(coursesWrapPanel);
                     }
                 }
             }
         }
 
-        private void CursoButton_Click(object sender, RoutedEventArgs e)
+
+    private void CursoButton_Click(object sender, RoutedEventArgs e)
         {
             // Obtener el ID del curso seleccionado del botón
             Button cursoButton = (Button)sender;
