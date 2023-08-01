@@ -210,18 +210,6 @@ namespace AdisG3
                                     "   Familiarícese con nuestro modelo educativo y metodología de enseñanza basada en proyectos.";
         }
 
-        private void CursosButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Crear una instancia de la ventana CursosEstudiantes
-            CursosEstudiantes cursosEstudiantes = new CursosEstudiantes();
-
-            // Mostrar la ventana de CursosEstudiantes
-            cursosEstudiantes.Show();
-
-            // Cerrar la ventana actual (inicioEstudiante)
-            this.Close();
-        }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow MainWindow = new MainWindow();

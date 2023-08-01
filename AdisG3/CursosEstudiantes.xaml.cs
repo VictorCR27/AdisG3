@@ -41,8 +41,6 @@ namespace AdisG3
             MessageBox.Show($"Id del curso seleccionado{id_cursoSeleccionado}");
             MessageBox.Show($"Id del curso id_estudiante{id_estudiante}");
 
-
-
             // Inicializar la lista de asignaciones de la semana
             asignacionesSemana = new List<AsignacionSemana>();
 

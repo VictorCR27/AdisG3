@@ -131,6 +131,7 @@ namespace AdisG3
             }
         }
 
+
         private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (cbox_semana.SelectedItem != null)
