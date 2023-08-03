@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static AdisG3.cargarEstudiantes;
+using static AdisG3.CursosEstudiantes;
+using static AdisG3.Profesor;
 
 namespace AdisG3
 {
@@ -20,59 +23,73 @@ namespace AdisG3
     /// </summary>
     public partial class calificar : Window
     {
-        public int id_profesor { get; set; }
+        public AsignacionSemana asignacionSeleccionada;
+        public int id_profesor;
+        public int id_cursoSeleccionado;
+        public string nombreCursoSeleccionado;
+        public int semanaSeleccionada;
 
-        public int id_cursoSeleccionado { get; set; }
-        public string nombreCursoSeleccionado { get; set; }
-        public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
+        public calificar(int id_profesor, int id_cursoSeleccionado, string nombreCursoSeleccionado, int semanaSeleccionada)
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+            this.semanaSeleccionada = semanaSeleccionada; // Almacenar la semana seleccionada en la variable de clase
 
-            // Llenar el ComboBox con las 15 opciones de semanas
-            for (int semana = 1; semana <= 15; semana++)
+            // Load data for the selected course and display it in the ListView
+            LoadDataForSelectedCourse();
+        }
+
+        private void LoadDataForSelectedCourse()
+        {
+            CargarTareasEnviadas();
+        }
+        private void CargarTareasEnviadas()
+        {
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
             {
-                cbox_semana.Items.Add($"Semana {semana}");
+                connection.Open();
+
+                string query = "SELECT e.nombre AS estudiante, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor " +
+                               "FROM asignacionesSemanas asg " +
+                               "JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id " +
+                               "JOIN estudiantes e ON te.estudiante = e.id_estudiante " +
+                               "WHERE asg.id_profesor = @id_profesor AND asg.id_curso = @id_curso AND asg.semana = @semana";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_profesor", id_profesor);
+                    command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                    command.Parameters.AddWithValue("@semana", semanaSeleccionada); // Asignar el valor de semanaSeleccionada al parámetro @semana
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        List<Estudiante> tareasEnviadas = new List<Estudiante>();
+
+                        while (reader.Read())
+                        {
+                            Estudiante estudiante = new Estudiante
+                            {
+                                nombre = reader.GetString("estudiante"),
+                                titulo = reader.GetString("titulo"),
+                                tipo = reader.GetString("tipo"),
+                                descripcion = reader.GetString("descripcion"),
+                                FechaEntrega = reader.GetDateTime("FechaEntrega"),
+                                valor = reader.GetInt32("valor"),
+                            };
+
+                            tareasEnviadas.Add(estudiante);
+                        }
+
+                        // Assign the list of tasks to the ListView
+                        lvAsignacionesSemana.ItemsSource = tareasEnviadas;
+                    }
+                }
             }
-
-            CargarEstudiantesSemana(1);
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Profesor Profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
-            Profesor.Show();
-            this.Close();
-        }
-
-        private void ComboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
-        {
-            // Obtener el número de semana seleccionado del ComboBox
-            if (cbox_semana.SelectedIndex != -1)
-            {
-                string selectedItem = cbox_semana.SelectedItem.ToString();
-                int numeroSemana = int.Parse(selectedItem.Replace("Semana ", ""));
-
-                // Cargar los estudiantes correspondientes a la semana seleccionada en el ListView
-                CargarEstudiantesSemana(numeroSemana);
-            }
-        }
-
-        private void CargarEstudiantesSemana(int numeroSemana)
-        {
-            // Crear una lista de estudiantes de la semana seleccionada
-            List<Estudiante> estudiantesSemana = new List<Estudiante>
-            {
-            new Estudiante { nombre = "Estudiante 1", titulo = "Título 1", tipo = "Tipo 1", descripcion = "Descripción 1", FechaEntrega = DateTime.Now, valor = 10, nota = 8 },
-            new Estudiante { nombre = "Estudiante 2", titulo = "Título 2", tipo = "Tipo 2", descripcion = "Descripción 2", FechaEntrega = DateTime.Now, valor = 8, nota = 6 },
-            new Estudiante { nombre = "Estudiante 3", titulo = "Título 3", tipo = "Tipo 3", descripcion = "Descripción 3", FechaEntrega = DateTime.Now, valor = 6, nota = 4 }
-            };
-
-            // Asignar la lista de estudiantes al ListView
-            lvAsignacionesSemana.ItemsSource = estudiantesSemana;
         }
 
         public class Estudiante
@@ -86,9 +103,17 @@ namespace AdisG3
             public int nota { get; set; }
         }
 
+
         private void lvAsignacionesSemana_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Profesor Profesor = new Profesor(id_profesor, id_cursoSeleccionado);
+            Profesor.Show();
+            this.Close();
         }
     }
 }

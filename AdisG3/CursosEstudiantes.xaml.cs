@@ -73,6 +73,9 @@ namespace AdisG3
 
         public class AsignacionSemana
         {
+            internal object asignacionesSemanas;
+            internal object semana;
+
             public string titulo { get; set; }
             public string tipo { get; set; }
             public string descripcion { get; set; }

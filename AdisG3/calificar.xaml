@@ -11,9 +11,7 @@
         Title="calificar" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
 
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="285,69,0,0" VerticalAlignment="Top" Width="386" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_2" RenderTransformOrigin="0.38,0.237" />
-
-        <ListView x:Name="lvAsignacionesSemana" Margin="49,126,41,35" SelectionChanged="lvAsignacionesSemana_SelectionChanged">
+        <ListView x:Name="lvAsignacionesSemana" Margin="49,81,41,35" SelectionChanged="lvAsignacionesSemana_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding nombre}" />

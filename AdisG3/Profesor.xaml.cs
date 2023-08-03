@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
 using OfficeOpenXml;
+using static AdisG3.CursosEstudiantes;
+using System.Windows.Input;
 
 namespace AdisG3
 {
@@ -19,6 +21,8 @@ namespace AdisG3
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
+
+        public int semanaSeleccionada;
 
 
         public Profesor(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
@@ -32,6 +36,7 @@ namespace AdisG3
             curso.Content = nombreCursoSeleccionado;
 
             cbox_semana.SelectionChanged += ComboBox_SelectionChanged_1;
+            lvAsignacionesSemana.MouseDoubleClick += lvAsignacionesSemana_MouseDoubleClick;
 
             CargarCursosPublicados();
             CargarSemanas();
@@ -141,6 +146,37 @@ namespace AdisG3
             }
         }
 
+        private void lvAsignacionesSemana_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Verificar si se ha seleccionado una asignación en el ListView
+            if (lvAsignacionesSemana.SelectedItem != null)
+            {
+                // Obtener la asignación seleccionada
+                DataRowView rowView = (DataRowView)lvAsignacionesSemana.SelectedItem;
+                int index = lvAsignacionesSemana.Items.IndexOf(rowView);
+                DataRow dataRow = ((DataView)lvAsignacionesSemana.ItemsSource)[index].Row;
+
+                AsignacionSemana asignacionSeleccionada = new AsignacionSemana
+                {
+                    titulo = dataRow["titulo"].ToString(),
+                    tipo = dataRow["tipo"].ToString(),
+                    descripcion = dataRow["descripcion"].ToString(),
+                    FechaEntrega = Convert.ToDateTime(dataRow["FechaEntrega"]),
+                    valor = Convert.ToInt32(dataRow["valor"])
+                };
+
+                // Obtener la semana seleccionada del ComboBox
+                int semana = Convert.ToInt32(cbox_semana.SelectedItem);
+
+                calificar calificar = new calificar(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado, semana);
+                calificar.ShowDialog();
+
+                // Cerrar la ventana actual
+                this.Close();
+            }
+        }
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -191,9 +227,7 @@ namespace AdisG3
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            calificar calificar = new calificar(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
-            calificar.Show();
-            this.Close(); 
+           
         }
 
         private void Button_Asist(object sender, RoutedEventArgs e)
