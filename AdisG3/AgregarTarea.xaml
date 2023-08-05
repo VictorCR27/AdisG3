@@ -52,10 +52,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button  x:Name="button_Add" Content="Añadir" HorizontalAlignment="Left" Margin="204,386,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
-        <Button x:Name="button_Subir" Content="Subir Tarea" HorizontalAlignment="Left" Margin="184,446,0,0" VerticalAlignment="Top" Height="34" Width="151" Click="button_Subir_Click"/>
-        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="26,386,0,0" VerticalAlignment="Top" Height="38" Width="98" Click="button_Regresar_Click"/>
-        <Button x:Name="button_Editar" Content="Editar" HorizontalAlignment="Left" Margin="26,444,0,0" VerticalAlignment="Top" Height="38" Width="99" Click="button_Editar_Click"/>
+        <Button  x:Name="button_Add" Content="Subir Tarea" HorizontalAlignment="Left" Margin="204,386,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
+        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="208,460,0,0" VerticalAlignment="Top" Height="38" Width="98" Click="button_Regresar_Click"/>
 
 
 

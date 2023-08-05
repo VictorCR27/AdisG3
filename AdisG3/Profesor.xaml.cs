@@ -50,14 +50,14 @@ namespace AdisG3
             {
                 connection.Open();
 
-                // Crea la consulta SQL para obtener los cursos publicados por el profesor
+                
                 string query = "SELECT DISTINCT c.nombre_curso FROM cursos AS c " +
                                "INNER JOIN asignacionesSemanas AS a ON c.id_curso = a.id_curso " +
                                "WHERE a.id_profesor = @id_profesor";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    // Asigna el valor al parámetro de la consulta
+                    
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -85,12 +85,12 @@ namespace AdisG3
             {
                 connection.Open();
 
-                // Crea la consulta SQL para obtener las semanas
+                
                 string query = "SELECT DISTINCT semana FROM asignacionesSemanas WHERE id_profesor = @id_profesor AND id_curso = @id_curso";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    // Asigna los valores a los parámetros de la consulta
+                   
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
 
@@ -120,7 +120,7 @@ namespace AdisG3
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    // Asigna los valores a los parámetros de la consulta
+                    
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                     command.Parameters.AddWithValue("@semana", semana);
@@ -148,33 +148,31 @@ namespace AdisG3
 
         private void lvAsignacionesSemana_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Verificar si se ha seleccionado una asignación en el ListView
             if (lvAsignacionesSemana.SelectedItem != null)
             {
-                // Obtener la asignación seleccionada
-                DataRowView rowView = (DataRowView)lvAsignacionesSemana.SelectedItem;
-                int index = lvAsignacionesSemana.Items.IndexOf(rowView);
-                DataRow dataRow = ((DataView)lvAsignacionesSemana.ItemsSource)[index].Row;
-
-                AsignacionSemana asignacionSeleccionada = new AsignacionSemana
-                {
-                    titulo = dataRow["titulo"].ToString(),
-                    tipo = dataRow["tipo"].ToString(),
-                    descripcion = dataRow["descripcion"].ToString(),
-                    FechaEntrega = Convert.ToDateTime(dataRow["FechaEntrega"]),
-                    valor = Convert.ToInt32(dataRow["valor"])
-                };
-
-                // Obtener la semana seleccionada del ComboBox
                 int semana = Convert.ToInt32(cbox_semana.SelectedItem);
 
-                calificar calificar = new calificar(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado, semana);
-                calificar.ShowDialog();
+                DataRowView selectedItem = (DataRowView)lvAsignacionesSemana.SelectedItem;
 
-                // Cerrar la ventana actual
+                editarTarea editarTarea = new editarTarea(
+                    id_profesor,
+                    id_cursoSeleccionado,
+                    nombreCursoSeleccionado,
+                    selectedItem["titulo"].ToString(),
+                    selectedItem["tipo"].ToString(),
+                    selectedItem["descripcion"].ToString(),
+                    Convert.ToDateTime(selectedItem["FechaEntrega"]),
+                    Convert.ToDouble(selectedItem["valor"])
+                );
+
+                editarTarea.ShowDialog();
+
                 this.Close();
             }
         }
+
+
+
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -187,15 +185,15 @@ namespace AdisG3
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
-            agregar_Tarea.Closed += AgregarTarea_Closed; // Suscribir al evento Closed de la ventana AgregarTarea
-            this.Close();
-            agregar_Tarea.Show();
+            agregar_Tarea.Closed += AgregarTarea_Closed;
+            agregar_Tarea.ShowDialog();
         }
         private void AgregarTarea_Closed(object sender, EventArgs e)
         {
-            // Vuelve a cargar las asignaciones de tareas después de cerrar la ventana AgregarTarea
+            
             CargarAsignacionesSemana(Convert.ToInt32(cbox_semana.SelectedItem));
-            lvAsignacionesSemana.Items.Refresh(); // Actualiza la vista de la lista de asignaciones de tareas
+            lvAsignacionesSemana.Items.Refresh(); 
+            this.Show();
         }
 
 
