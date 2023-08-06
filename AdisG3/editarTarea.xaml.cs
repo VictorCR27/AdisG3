@@ -7,20 +7,17 @@ namespace AdisG3
 {
     public partial class editarTarea : Window
     {
-        private object id_Asignacion;
-        private string v1;
-        private string v2;
-        private DateTime dateTime;
-        private double v3;
 
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
+        public int idAsignacion;
+
         public ObservableCollection<int> Semanas { get; set; }
 
 
-        public editarTarea(int id_profesor, int id_cursoSeleccionado, string nombreCursoSeleccionado, string titulo, string tipo, string descripcion, DateTime fechaEntrega, double valor)
+        public editarTarea(int id_profesor, int id_cursoSeleccionado, string nombreCursoSeleccionado, string titulo, string tipo, string descripcion, DateTime fechaEntrega, double valor, int idAsignacion)
         {
             InitializeComponent();
 
@@ -28,7 +25,8 @@ namespace AdisG3
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
 
-            // Populate the fields with the provided data
+            this.idAsignacion = idAsignacion;
+
             txt_nombre_tarea.Text = titulo;
             txt_categoria_tarea.Text = tipo;
             txt_descripcion_tarea.Text = descripcion;
@@ -57,42 +55,10 @@ namespace AdisG3
             this.Close();
         }
 
-        private int ObtenerIdAsignacionDesdeTitulo(string titulo, int semana)
-        {
-            int idAsignacion = 0;
-
-            string connString = conn_db.GetConnectionString();
-
-            using (MySqlConnection connection = new MySqlConnection(connString))
-            {
-                connection.Open();
-
-                string query = "SELECT asignacionesSemanas FROM asignacionesSemanas " +
-                               "WHERE id_profesor = @id_profesor AND id_curso = @id_curso AND semana = @semana AND titulo = @titulo";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id_profesor", id_profesor);
-                    command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
-                    command.Parameters.AddWithValue("@semana", semana);
-                    command.Parameters.AddWithValue("@titulo", titulo);
-
-                    object result = command.ExecuteScalar();
-
-                    if (result != null)
-                    {
-                        idAsignacion = Convert.ToInt32(result);
-                    }
-                }
-            }
-
-            return idAsignacion;
-        }
-
-
 
         private void button_Editar_Click(object sender, RoutedEventArgs e)
         {
+
             if (cbox_semana.SelectedItem != null && !string.IsNullOrWhiteSpace(txt_categoria_tarea.Text) &&
                 !string.IsNullOrWhiteSpace(txt_nombre_tarea.Text) && !string.IsNullOrWhiteSpace(txt_descripcion_tarea.Text))
             {
@@ -137,11 +103,9 @@ namespace AdisG3
                 {
                     connection.Open();
 
-                    // Obtener el id de la asignación que se desea editar
-                    int id_Asignacion = ObtenerIdAsignacionDesdeTitulo(nombreAsignacion, semana);
 
                     // Crear la consulta SQL UPDATE
-                    string query = "UPDATE asignacionesSemanas SET titulo = @titulo, tipo = @tipo, descripcion = @descripcion, FechaEntrega = @fechaEntrega, valor = @valor, semana = @semana WHERE asignacionesSemanas = @id_Asignacion;";
+                    string query = "UPDATE asignacionesSemanas SET titulo = @titulo, tipo = @tipo, descripcion = @descripcion, FechaEntrega = @fechaEntrega, valor = @valor, semana = @semana WHERE asignacionesSemanas = @idAsignacion;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -152,7 +116,7 @@ namespace AdisG3
                         command.Parameters.AddWithValue("@fechaEntrega", fechaEntrega);
                         command.Parameters.AddWithValue("@valor", valor);
                         command.Parameters.AddWithValue("@semana", semana);
-                        command.Parameters.AddWithValue("@id_Asignacion", id_Asignacion);
+                        command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
 
                         // Ejecutar la consulta
                         command.ExecuteNonQuery();
@@ -174,7 +138,7 @@ namespace AdisG3
                 MessageBox.Show(fechaEntrega.ToString());
                 MessageBox.Show(valor.ToString());
                 MessageBox.Show(semana.ToString());
-                MessageBox.Show(id_Asignacion.ToString());
+                MessageBox.Show(idAsignacion.ToString());
 
 
             }

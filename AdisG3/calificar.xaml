@@ -37,7 +37,10 @@
             </StackPanel>
         </Button>
         <Label Content="Calificar:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="316,78,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="352" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" RenderTransformOrigin="0.38,0.237"/>
+        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="347,70,384,0" VerticalAlignment="Top">
+            <!-- Opciones del ComboBox -->
+        </ComboBox>
+
         <Button Content="Calificar" HorizontalAlignment="Left" Height="45" Margin="876,626,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
 
     </Grid>

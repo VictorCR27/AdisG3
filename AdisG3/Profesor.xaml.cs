@@ -154,6 +154,9 @@ namespace AdisG3
 
                 DataRowView selectedItem = (DataRowView)lvAsignacionesSemana.SelectedItem;
 
+                // Obtener el idAsignacion usando la función ObtenerIdAsignacionDesdeTitulo
+                int idAsignacion = ObtenerIdAsignacionDesdeTitulo(selectedItem["titulo"].ToString(), semana);
+
                 editarTarea editarTarea = new editarTarea(
                     id_profesor,
                     id_cursoSeleccionado,
@@ -162,13 +165,49 @@ namespace AdisG3
                     selectedItem["tipo"].ToString(),
                     selectedItem["descripcion"].ToString(),
                     Convert.ToDateTime(selectedItem["FechaEntrega"]),
-                    Convert.ToDouble(selectedItem["valor"])
+                    Convert.ToDouble(selectedItem["valor"]),
+                    idAsignacion // Pasar el idAsignacion como parámetro
                 );
 
                 editarTarea.Closed += EditarTarea_Closed; // Manejador del evento Closed
                 editarTarea.ShowDialog();
             }
         }
+
+        private int ObtenerIdAsignacionDesdeTitulo(string titulo, int semana)
+        {
+            int idAsignacion = 0;
+
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT asignacionesSemanas FROM asignacionesSemanas " +
+                               "WHERE id_profesor = @id_profesor AND id_curso = @id_curso AND semana = @semana AND titulo = @titulo";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_profesor", id_profesor);
+                    command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                    command.Parameters.AddWithValue("@semana", semana);
+                    command.Parameters.AddWithValue("@titulo", titulo);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            idAsignacion = reader.GetInt32("asignacionesSemanas");
+                        }
+                    }
+                }
+            }
+
+            return idAsignacion;
+        }
+
+
 
         private void EditarTarea_Closed(object sender, EventArgs e)
         {
@@ -179,10 +218,6 @@ namespace AdisG3
             // Muestra la ventana actual nuevamente
             this.Show();
         }
-
-
-
-
 
 
         private void Button_Click(object sender, RoutedEventArgs e)

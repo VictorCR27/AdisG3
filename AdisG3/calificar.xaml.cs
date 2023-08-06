@@ -1,8 +1,10 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MaterialDesignThemes.Wpf;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace AdisG3
 {
@@ -30,23 +32,26 @@ namespace AdisG3
 
         private void CargarTareasEnviadas()
         {
-            string connString = conn_db.GetConnectionString(); 
+            string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-
                 string query = "SELECT e.nombre AS estudiante, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor " +
                                "FROM asignacionesSemanas asg " +
-                               "JOIN TareasEnviadas te ON asg.id_asignacion = te.id_asignacion " +
+                               "JOIN TareasEnviadas te ON asg.id = te.id_asignacion " +
                                "JOIN estudiantes e ON te.id_estudiante = e.id_estudiante " +
-                               "WHERE asg.id_profesor = @id_profesor AND asg.id_curso = @id_curso AND asg.semana = @semana";
+                               "WHERE te.id_profesor = @id_profesor AND te.id_curso = @id_curso AND asg.semana = @semana";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+
+                    // Obtener la semana seleccionada del ComboBox
+                    int semanaSeleccionada = (int)cbox_semana.SelectedItem;
                     command.Parameters.AddWithValue("@semana", semanaSeleccionada);
+
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -72,6 +77,7 @@ namespace AdisG3
                 }
             }
         }
+
 
         public class Tarea
         {
@@ -99,5 +105,11 @@ namespace AdisG3
         {
 
         }
+
+        private void cbox_semana_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CargarTareasEnviadas();
+        }
+
     }
 }
