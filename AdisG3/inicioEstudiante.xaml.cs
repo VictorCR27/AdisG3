@@ -16,7 +16,11 @@ namespace AdisG3
 
         int idCurso = 0;
 
+        int id_profesor = 0;
+
         WrapPanel coursesWrapPanel; // Agregamos el WrapPanel
+
+        List<int> idProfesores = new List<int>();
 
         public inicioEstudiante(int id_estudiante = 0, int id_cursoSeleccionado = 0)
         {
@@ -85,7 +89,8 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 // Crea y ejecuta la consulta para obtener los nombres de los cursos
-                string query1 = "SELECT cursos.id_curso, cursos.nombre_curso FROM cursos JOIN estudiantesMatriculados ON cursos.id_curso = estudiantesMatriculados.id_curso WHERE estudiantesMatriculados.id_estudiante = @id_estudiante;";
+                string query1 = "SELECT cursos.id_curso, cursos.nombre_curso, estudiantesMatriculados.id_profesor FROM cursos JOIN estudiantesMatriculados " +
+                    "ON cursos.id_curso = estudiantesMatriculados.id_curso WHERE estudiantesMatriculados.id_estudiante = @id_estudiante;";
 
                 using (MySqlCommand command = new MySqlCommand(query1, connection))
                 {
@@ -99,6 +104,8 @@ namespace AdisG3
                         {
                             idCurso = reader.GetInt32("id_curso");
                             nombreCurso = reader.GetString("nombre_curso");
+                            int idProfesor = reader.GetInt32("id_profesor");
+                            idProfesores.Add(idProfesor);
 
                             Button cursoButton = new Button();
                             cursoButton.Width = 150;
@@ -157,14 +164,20 @@ namespace AdisG3
         }
 
 
-    private void CursoButton_Click(object sender, RoutedEventArgs e)
+        private void CursoButton_Click(object sender, RoutedEventArgs e)
         {
             // Obtener el ID del curso seleccionado del botón
             Button cursoButton = (Button)sender;
             int idCursoSeleccionado = (int)cursoButton.Tag;
             string nombreCursoSeleccionado = ((Label)((Grid)cursoButton.Content).Children[0]).Content.ToString();
 
-            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, idCursoSeleccionado, nombreCursoSeleccionado);
+            // Obtener el índice del botón seleccionado
+            int index = CursosGrid.Children.IndexOf(cursoButton);
+
+            // Obtener el id_profesor correspondiente al índice del botón
+            int idProfesorSeleccionado = idProfesores[index];
+
+            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, idCursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             CursosEstudiantes.Show();
             this.Close();
         }

@@ -24,8 +24,9 @@
         <Label Content="Valor:" HorizontalAlignment="Left" Margin="46,288,0,0" VerticalAlignment="Top" Height="42" Width="78" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
         <Label Content="Semana:" HorizontalAlignment="Left" Margin="34,335,0,0" VerticalAlignment="Top" Height="42" Width="98" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
 
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="162,340,0,0" ItemsSource="{Binding semanas}"  VerticalAlignment="Top" Width="211" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_2" RenderTransformOrigin="0.38,0.237">
+        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="162,340,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="211" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" RenderTransformOrigin="0.38,0.237">
         </ComboBox>
+
 
         <ListBox x:Name="lb_Tareas" Margin="407,90,0,83" SelectionChanged="lb_Tareas_SelectionChanged_1" HorizontalAlignment="Left" Width="538">
             <ListBox.ItemTemplate>

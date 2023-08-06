@@ -33,7 +33,7 @@ namespace AdisG3
 
             this.id_profesor = id_profesor;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
-            //MessageBox.Show("Esta es el Id:" + id_profesor);
+            //MessageBox.Show("Esta es el Id profesor:" + id_profesor);
 
             string query = "SELECT count(*) from asignacionesProfesor WHERE id_profesor = @id";
             string cantidad;

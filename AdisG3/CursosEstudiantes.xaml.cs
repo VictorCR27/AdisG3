@@ -25,21 +25,27 @@ namespace AdisG3
         public int id_estudiante { get; set; }
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
+        public int idProfesorSeleccionado { get; set; }
 
         private List<AsignacionSemana> asignacionesSemana;
+        
 
-        public CursosEstudiantes(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
+        public CursosEstudiantes(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "",int idProfesorSeleccionado = 0)
         {
             InitializeComponent();
 
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+            this.idProfesorSeleccionado = idProfesorSeleccionado;
+
 
             curso.Content = nombreCursoSeleccionado;
 
-            MessageBox.Show($"Id del curso seleccionado{id_cursoSeleccionado}");
-            MessageBox.Show($"Id del curso id_estudiante{id_estudiante}");
+            MessageBox.Show($"Id del curso seleccionado {id_cursoSeleccionado}");
+            MessageBox.Show($"Id del curso id_estudiante {id_estudiante}");
+            MessageBox.Show($"Id del id_Profe {idProfesorSeleccionado}");
+
 
             // Inicializar la lista de asignaciones de la semana
             asignacionesSemana = new List<AsignacionSemana>();
@@ -60,14 +66,15 @@ namespace AdisG3
                 // Obtener la asignación seleccionada
                 AsignacionSemana asignacionSeleccionada = (AsignacionSemana)lvAsignacionesSemana.SelectedItem;
 
-                // Abrir la ventana para enviar la asignación y pasar la asignación seleccionada a esa ventana
-                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada, id_estudiante, id_cursoSeleccionado);
+                // Abrir la ventana para enviar la asignación y pasar la asignación seleccionada y el idProfesorSeleccionado a esa ventana
+                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada, id_estudiante, id_cursoSeleccionado, idProfesorSeleccionado);
                 enviarAsignacionWindow.ShowDialog();
 
                 // Refresh the assignments after closing the EnviarAsignacionWindow to show any updates
                 CargarAsignacionesSemana((int)cbox_semana.SelectedItem);
             }
         }
+
 
 
 

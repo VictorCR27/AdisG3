@@ -10,20 +10,26 @@
         WindowStyle="None"
         Title="calificar" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
-
-        <ListView x:Name="lvAsignacionesSemana" Margin="49,81,41,35" SelectionChanged="lvAsignacionesSemana_SelectionChanged">
+        <ListView x:Name="lvTareas" Margin="49,132,41,68" SelectionChanged="lvTareas_SelectionChanged">
+            <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding nombre}" />
-                    <GridViewColumn Header="Título" DisplayMemberBinding="{Binding titulo}" />
-                    <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding tipo}" />
-                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding descripcion}" />
+                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
+                    <GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" />
+                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" />
                     <GridViewColumn Header="Fecha de Entrega" DisplayMemberBinding="{Binding FechaEntrega}" />
-                    <GridViewColumn Header="Valor" DisplayMemberBinding="{Binding valor}" />
-                    <GridViewColumn Header="Nota" DisplayMemberBinding="{Binding nota}" />
+                    <GridViewColumn Header="Valor" DisplayMemberBinding="{Binding Valor}" />
+                    <GridViewColumn Header="Calificación">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="50" Text="{Binding Calificacion, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+
 
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="734,5,-204,635">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
@@ -31,6 +37,8 @@
             </StackPanel>
         </Button>
         <Label Content="Calificar:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
+        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="316,78,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="352" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" RenderTransformOrigin="0.38,0.237"/>
+        <Button Content="Calificar" HorizontalAlignment="Left" Height="45" Margin="876,626,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
 
     </Grid>
 </Window>

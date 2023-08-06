@@ -165,11 +165,21 @@ namespace AdisG3
                     Convert.ToDouble(selectedItem["valor"])
                 );
 
+                editarTarea.Closed += EditarTarea_Closed; // Manejador del evento Closed
                 editarTarea.ShowDialog();
-
-                this.Close();
             }
         }
+
+        private void EditarTarea_Closed(object sender, EventArgs e)
+        {
+            // Vuelve a cargar las asignaciones para la semana seleccionada
+            int semana = Convert.ToInt32(cbox_semana.SelectedItem);
+            CargarAsignacionesSemana(semana);
+
+            // Muestra la ventana actual nuevamente
+            this.Show();
+        }
+
 
 
 
@@ -225,7 +235,9 @@ namespace AdisG3
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-           
+            calificar calificar = new calificar(id_profesor, id_cursoSeleccionado);
+            calificar.Show();
+            this.Close();
         }
 
         private void Button_Asist(object sender, RoutedEventArgs e)
