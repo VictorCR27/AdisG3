@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using static AdisG3.cargarEstudiantes;
 
 namespace AdisG3
@@ -36,7 +38,7 @@ namespace AdisG3
             }
 
             // Lógica para cargar los datos desde la base de datos
-            LoadEstudiantesFromDatabase();        
+            LoadEstudiantesFromDatabase();
         }
 
         private void LoadEstudiantesFromDatabase()
@@ -110,7 +112,139 @@ namespace AdisG3
 
         private void Guardar_Click(object sender, RoutedEventArgs e)
         {
+            string connString = conn_db.GetConnectionString();
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
 
+                int selectedWeek = (int)cbox_semana.SelectedItem; // Obtener la semana seleccionada
+
+                foreach (Estudiante estudiante in Estudiantes)
+                {
+                    // Buscar el ListViewItem correspondiente al estudiante
+                    ListViewItem listViewItem = StudentListView
+                        .ItemContainerGenerator
+                        .ContainerFromItem(estudiante) as ListViewItem;
+
+                    if (listViewItem != null)
+                    {
+                        // Busca el ComboBox dentro del ListViewItem
+                        ComboBox comboBox = FindVisualChild<ComboBox>(listViewItem);
+                        if (comboBox != null)
+                        {
+                            // Obtén el valor de asistencia del ComboBox para cada estudiante
+                            string asistencia = comboBox.SelectedValue.ToString();
+
+                            // Verificar si ya existe un registro para la semana seleccionada
+                            string existingQuery = "SELECT COUNT(*) FROM asistencia " +
+                                                   "WHERE id_profesor = @id_profesor " +
+                                                   "AND id_curso = @id_curso " +
+                                                   "AND id_estudiante = @id_estudiante " +
+                                                   "AND semana = @semana";
+
+                            using (MySqlCommand existingCommand = new MySqlCommand(existingQuery, connection))
+                            {
+                                existingCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                existingCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                                existingCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
+                                existingCommand.Parameters.AddWithValue("@semana", selectedWeek);
+
+                                int existingCount = Convert.ToInt32(existingCommand.ExecuteScalar());
+
+                                if (existingCount > 0)
+                                {
+                                    // Si ya existe un registro, realizar una actualización en lugar de inserción
+                                    string updateQuery = "UPDATE asistencia " +
+                                                         "SET estado_estudiante = @estado_estudiante " +
+                                                         "WHERE id_profesor = @id_profesor " +
+                                                         "AND id_curso = @id_curso " +
+                                                         "AND id_estudiante = @id_estudiante " +
+                                                         "AND semana = @semana";
+
+                                    using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+                                    {
+                                        updateCommand.Parameters.AddWithValue("@estado_estudiante", asistencia);
+                                        updateCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                        updateCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                                        updateCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
+                                        updateCommand.Parameters.AddWithValue("@semana", selectedWeek);
+                                        updateCommand.ExecuteNonQuery();
+                                    }
+                                }
+                                else
+                                {
+                                    // Si no existe un registro, realizar la inserción
+                                    string insertQuery = "INSERT INTO asistencia (id_profesor, id_curso, id_estudiante, nombre, estado_estudiante, semana) " +
+                                                         "VALUES (@id_profesor, @id_curso, @id_estudiante, @nombre, @estado_estudiante, @semana)";
+
+                                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                                    {
+                                        insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                        insertCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                                        insertCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
+                                        insertCommand.Parameters.AddWithValue("@nombre", estudiante.Nombre);
+                                        insertCommand.Parameters.AddWithValue("@estado_estudiante", asistencia);
+                                        insertCommand.Parameters.AddWithValue("@semana", selectedWeek);
+                                        insertCommand.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                MessageBox.Show("Asistencia guardada correctamente.");
+            }
         }
+
+
+        private ListViewItem FindListViewItemFromEstudiante(ListView listView, Estudiante estudiante)
+        {
+            foreach (ListViewItem item in listView.Items)
+            {
+                if (item.DataContext == estudiante)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+
+
+
+        private ComboBox FindComboBoxFromListViewItem(ListView listView, int idEstudiante)
+        {
+            foreach (ListViewItem item in listView.Items)
+            {
+                Estudiante estudiante = item.DataContext as Estudiante;
+                if (estudiante != null && estudiante.id_estudiante == idEstudiante)
+                {
+                    // Buscar el ComboBox dentro del ListViewItem
+                    ComboBox comboBox = FindVisualChild<ComboBox>(item);
+                    return comboBox;
+                }
+            }
+            return null;
+        }
+
+        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T visualChild)
+                {
+                    return visualChild;
+                }
+                T childItem = FindVisualChild<T>(child);
+                if (childItem != null)
+                {
+                    return childItem;
+                }
+            }
+            return null;
+        }
+
     }
 }
