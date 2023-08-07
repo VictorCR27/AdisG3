@@ -20,18 +20,20 @@ namespace AdisG3
     {
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
+        public int id_estudiante { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
         public int semanaSeleccionada;
 
 
-        public Profesor(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
+        public Profesor(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "", int id_estudiante = 0)
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+            this.id_estudiante = id_estudiante;
 
             curso.Content = nombreCursoSeleccionado;
 
@@ -44,20 +46,20 @@ namespace AdisG3
 
         private void CargarCursosPublicados()
         {
-            string connString = conn_db.GetConnectionString(); 
+            string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
 
-                
+
                 string query = "SELECT DISTINCT c.nombre_curso FROM cursos AS c " +
                                "INNER JOIN asignacionesSemanas AS a ON c.id_curso = a.id_curso " +
                                "WHERE a.id_profesor = @id_profesor";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    
+
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -79,18 +81,18 @@ namespace AdisG3
         private void CargarSemanas()
         {
 
-            string connString = conn_db.GetConnectionString(); 
+            string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
 
-                
+
                 string query = "SELECT DISTINCT semana FROM asignacionesSemanas WHERE id_profesor = @id_profesor AND id_curso = @id_curso";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                   
+
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
 
@@ -108,7 +110,7 @@ namespace AdisG3
 
         private void CargarAsignacionesSemana(int semana)
         {
-            string connString = conn_db.GetConnectionString(); 
+            string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
@@ -120,7 +122,7 @@ namespace AdisG3
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    
+
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                     command.Parameters.AddWithValue("@semana", semana);
@@ -171,6 +173,7 @@ namespace AdisG3
 
                 editarTarea.Closed += EditarTarea_Closed; // Manejador del evento Closed
                 editarTarea.ShowDialog();
+                this.Close();
             }
         }
 
@@ -235,10 +238,10 @@ namespace AdisG3
         }
         private void AgregarTarea_Closed(object sender, EventArgs e)
         {
-            
+
             CargarAsignacionesSemana(Convert.ToInt32(cbox_semana.SelectedItem));
-            lvAsignacionesSemana.Items.Refresh(); 
-            this.Show();
+            lvAsignacionesSemana.Items.Refresh();
+            this.Close();
         }
 
 
@@ -270,12 +273,13 @@ namespace AdisG3
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            calificar calificar = new calificar(id_profesor, id_cursoSeleccionado);
-            calificar.Show();
+            calificar Calificar = new calificar(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            Calificar.Show();
             this.Close();
+
         }
 
-        private void Button_Asist(object sender, RoutedEventArgs e)
+        private void Button_Asistencia(object sender, RoutedEventArgs e)
         {
             asistencia asistencia = new asistencia(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             asistencia.Show();

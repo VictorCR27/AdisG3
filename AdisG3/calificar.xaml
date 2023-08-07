@@ -10,7 +10,7 @@
         WindowStyle="None"
         Title="calificar" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
-        <ListView x:Name="lvTareas" Margin="49,132,41,68" SelectionChanged="lvTareas_SelectionChanged">
+        <ListView x:Name="lvTareas" Margin="49,132,41,90" SelectionChanged="lvTareas_SelectionChanged">
             <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>
@@ -38,10 +38,9 @@
         </Button>
         <Label Content="Calificar:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
         <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="347,70,384,0" VerticalAlignment="Top">
-            <!-- Opciones del ComboBox -->
         </ComboBox>
 
-        <Button Content="Calificar" HorizontalAlignment="Left" Height="45" Margin="876,626,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Height="58" Margin="878,613,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click"/>
 
     </Grid>
 </Window>

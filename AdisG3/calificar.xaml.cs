@@ -10,17 +10,25 @@ namespace AdisG3
 {
     public partial class calificar : Window
     {
-        public int id_profesor;
-        public int id_cursoSeleccionado;
-        public int semanaSeleccionada;
+        public int id_profesor { get; set; }
+        public int id_cursoSeleccionado { get; set; }
+        public int semanaSeleccionada { get; set; }
+        public string nombreCursoSeleccionado { get; set; }
 
-        public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, int semanaSeleccionada = 0)
+        public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, /*int semanaSeleccionada = 0,*/ string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
 
             this.id_profesor = id_profesor;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.semanaSeleccionada = semanaSeleccionada;
+            this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+
+            // Llena el ComboBox con las semanas del 1 al 15
+            for (int semana = 1; semana <= 15; semana++)
+            {
+                cbox_semana.Items.Add(semana);
+            }
 
             LoadDataForSelectedCourse();
         }
@@ -38,46 +46,47 @@ namespace AdisG3
             {
                 connection.Open();
                 string query = "SELECT e.nombre AS estudiante, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor " +
-                               "FROM asignacionesSemanas asg " +
-                               "JOIN TareasEnviadas te ON asg.id = te.id_asignacion " +
-                               "JOIN estudiantes e ON te.id_estudiante = e.id_estudiante " +
-                               "WHERE te.id_profesor = @id_profesor AND te.id_curso = @id_curso AND asg.semana = @semana";
+                                "FROM asignacionesSemanas asg " +
+                                "JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id " +
+                                "JOIN estudiantes e ON te.estudiante = e.id_estudiante " +
+                                "WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
 
-                    // Obtener la semana seleccionada del ComboBox
-                    int semanaSeleccionada = (int)cbox_semana.SelectedItem;
-                    command.Parameters.AddWithValue("@semana", semanaSeleccionada);
-
-
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    if (cbox_semana.SelectedItem != null)
                     {
-                        List<Tarea> tareasEnviadas = new List<Tarea>();
+                        int semanaSeleccionada = (int)cbox_semana.SelectedItem;
+                        command.Parameters.AddWithValue("@semana", semanaSeleccionada);
 
-                        while (reader.Read())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            Tarea tarea = new Tarea
+                            List<Tarea> tareasEnviadas = new List<Tarea>();
+
+                            while (reader.Read())
                             {
-                                Nombre = reader.GetString("estudiante"),
-                                Titulo = reader.GetString("titulo"),
-                                Descripcion = reader.GetString("descripcion"),
-                                FechaEntrega = reader.GetDateTime("FechaEntrega"),
-                                Valor = reader.GetDouble("valor"),
-                            };
+                                Tarea tarea = new Tarea
+                                {
+                                    //IdAsignacion = reader.GetInt32("id_asignacion"),
+                                    Nombre = reader.GetString("estudiante"),
+                                    Titulo = reader.GetString("titulo"),
+                                    Descripcion = reader.GetString("descripcion"),
+                                    FechaEntrega = reader.GetDateTime("FechaEntrega"),
+                                    Valor = reader.GetDouble("valor"),
+                                };
 
-                            tareasEnviadas.Add(tarea);
+                                tareasEnviadas.Add(tarea);
+                            }
+
+                            // Assign the list of tasks to the ListView
+                            lvTareas.ItemsSource = tareasEnviadas;
                         }
-
-                        // Assign the list of tasks to the ListView
-                        lvTareas.ItemsSource = tareasEnviadas;
                     }
                 }
             }
         }
-
 
         public class Tarea
         {
@@ -87,11 +96,12 @@ namespace AdisG3
             public DateTime FechaEntrega { get; set; }
             public double Valor { get; set; }
             public int Calificacion { get; set; }
+            public int IdAsignacion { get; internal set; }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Profesor profesor = new Profesor(id_profesor, id_cursoSeleccionado);
+            Profesor profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             profesor.Show();
             this.Close();
         }
@@ -108,8 +118,10 @@ namespace AdisG3
 
         private void cbox_semana_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CargarTareasEnviadas();
+            if (cbox_semana.SelectedItem != null)
+            {
+                CargarTareasEnviadas();
+            }
         }
-
     }
 }

@@ -12,6 +12,7 @@ namespace AdisG3
         public AsignacionSemana asignacionSemana;
         public int id_estudiante;
         private int id_cursoSeleccionado;
+        public int id_asignacionSemana;
 
         public int idProfesorSeleccionado { get; set; }
         public int Id_cursoSeleccionado { get; set; }
@@ -28,9 +29,9 @@ namespace AdisG3
             // Set the DataContext to the current instance of EnviarAsignacionWindow (this)
             DataContext = asignacionSemana;
 
-            MessageBox.Show($"id_estudiante: {id_estudiante}");
-            MessageBox.Show($"Id_cursoSeleccionado {id_cursoSeleccionado}");
-            MessageBox.Show($"idProfesorSeleccionado {idProfesorSeleccionado}");
+            //MessageBox.Show($"id_estudiante: {id_estudiante}");
+            //MessageBox.Show($"Id_cursoSeleccionado {id_cursoSeleccionado}");
+            //MessageBox.Show($"idProfesorSeleccionado {idProfesorSeleccionado}");
         }
 
         // Property to bind to the DataContext in XAML
@@ -39,12 +40,12 @@ namespace AdisG3
             get { return asignacionSemana; }
         }
 
-        
+
 
         private void BtnEnviar_Click(object sender, RoutedEventArgs e)
         {
             string tareaTexto = txtTareaTexto.Text;
-            string tareaArchivo = txtArchivoSeleccionado.Text; 
+            string tareaArchivo = txtArchivoSeleccionado.Text;
 
             string connString = conn_db.GetConnectionString();
 
@@ -53,52 +54,39 @@ namespace AdisG3
                 int id_curso = id_cursoSeleccionado;
                 int id_profesor = idProfesorSeleccionado;
 
-                //// Fetch the id_curso and id_profesor from estudiantesMatriculados
-                //using (MySqlConnection connection = new MySqlConnection(connString))
-                //{
-                //    connection.Open();
-
-                //    string query = "SELECT id_curso, id_profesor FROM estudiantesMatriculados " +
-                //                   "WHERE id_estudiante = @id_estudiante";
-
-                //    using (MySqlCommand command = new MySqlCommand(query, connection))
-                //    {
-                //        command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
-
-                //        using (MySqlDataReader reader = command.ExecuteReader())
-                //        {
-                //            if (reader.Read())
-                //            {
-                //                id_curso = reader.GetInt32("id_curso");
-                //                id_profesor = reader.GetInt32("id_profesor");
-                //            }
-                //        }
-                //    }
-                //}
-
-                // Insert the assignment into the TareasEnviadas table
+                // Obtener el id_asignacionSemana correspondiente de la tabla asignacionesSemanas
                 using (MySqlConnection connection = new MySqlConnection(connString))
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tareaTXT, tareaArchivo) " +
-                                   "VALUES (@id_profesor, @id_curso, @estudiante, @tareaTXT, @tareaArchivo)";
+                    string asignacionQuery = "SELECT asignacionesSemanas FROM asignacionesSemanas " +
+                             "WHERE id_profesor = @id_profesor AND id_curso = @id_curso AND titulo = @titulo";
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    using (MySqlCommand asignacionCommand = new MySqlCommand(asignacionQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@id_profesor", id_profesor);
-                        command.Parameters.AddWithValue("@id_curso", id_curso);
-                        command.Parameters.AddWithValue("@estudiante", id_estudiante);
-                        command.Parameters.AddWithValue("@tareaTXT", tareaTexto);
-                        command.Parameters.AddWithValue("@tareaArchivo", tareaArchivo);
+                        asignacionCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                        asignacionCommand.Parameters.AddWithValue("@id_curso", id_curso);
+                        asignacionCommand.Parameters.AddWithValue("@titulo", asignacionSemana.titulo);
 
-                        command.ExecuteNonQuery();
+                        id_asignacionSemana = Convert.ToInt32(asignacionCommand.ExecuteScalar());
                     }
-                    MessageBox.Show(id_profesor.ToString());
-                    MessageBox.Show(id_curso.ToString());
-                    MessageBox.Show(id_estudiante.ToString());
-                    MessageBox.Show(tareaTexto.ToString());
-                    MessageBox.Show(tareaArchivo.ToString());
+
+                    // Insertar la tarea en la tabla TareasEnviadas
+                    string insertQuery = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tareaTXT, tareaArchivo, id_asignacionSemana) " +
+                                        "VALUES (@id_profesor, @id_curso, @estudiante, @tareaTXT, @tareaArchivo, @id_asignacionSemana)";
+
+                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                        insertCommand.Parameters.AddWithValue("@id_curso", id_curso);
+                        insertCommand.Parameters.AddWithValue("@estudiante", id_estudiante);
+                        insertCommand.Parameters.AddWithValue("@tareaTXT", tareaTexto);
+                        insertCommand.Parameters.AddWithValue("@tareaArchivo", tareaArchivo);
+                        insertCommand.Parameters.AddWithValue("@id_asignacionSemana", id_asignacionSemana);
+
+                        insertCommand.ExecuteNonQuery();
+                    }
+
                     MessageBox.Show("Tarea enviada exitosamente.");
                     this.Close();
                 }
@@ -108,6 +96,7 @@ namespace AdisG3
                 MessageBox.Show("Error al enviar la tarea: " + ex.Message);
             }
         }
+
 
         private void BtnAdjuntarArchivo_Click(object sender, RoutedEventArgs e)
         {

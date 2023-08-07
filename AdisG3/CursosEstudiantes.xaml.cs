@@ -84,6 +84,7 @@ namespace AdisG3
             internal object semana;
 
             public string titulo { get; set; }
+            public object Titulo { get; internal set; }
             public string tipo { get; set; }
             public string descripcion { get; set; }
             public DateTime FechaEntrega { get; set; }

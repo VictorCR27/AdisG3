@@ -15,6 +15,8 @@ namespace AdisG3
 
         public class Estudiante
         {
+            internal int id_estudiante;
+
             public string Nombre { get; set; }
             public string ApellidoPaterno { get; set; }
             public string ApellidoMaterno { get; set; }

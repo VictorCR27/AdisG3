@@ -44,7 +44,7 @@ namespace AdisG3
 
             // Establecer la fecha mínima del DatePicker como la fecha actual
             fecha_entrega.SelectedDate = DateTime.Today;
-            this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+            
 
         }
 
@@ -132,13 +132,13 @@ namespace AdisG3
                 txt_categoria_tarea.Clear();
                 txt_valor_tarea.Clear();
 
-                MessageBox.Show(nombreAsignacion);
-                MessageBox.Show(tipo);
-                MessageBox.Show(descripcion);
-                MessageBox.Show(fechaEntrega.ToString());
-                MessageBox.Show(valor.ToString());
-                MessageBox.Show(semana.ToString());
-                MessageBox.Show(idAsignacion.ToString());
+                //MessageBox.Show(nombreAsignacion);
+                //MessageBox.Show(tipo);
+                //MessageBox.Show(descripcion);
+                //MessageBox.Show(fechaEntrega.ToString());
+                //MessageBox.Show(valor.ToString());
+                //MessageBox.Show(semana.ToString());
+                //MessageBox.Show(idAsignacion.ToString());
 
 
             }
