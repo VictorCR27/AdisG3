@@ -17,7 +17,7 @@
             <ColumnDefinition Width="739" />
         </Grid.ColumnDefinitions>
 
-        <Rectangle HorizontalAlignment="Left" Height="743" VerticalAlignment="Bottom" Width="214" Fill="#FF532D69" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Margin="0,0,0,-37"/>
+        <Rectangle HorizontalAlignment="Left" Width="214" Fill="#FF532D69" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Margin="0,-27,0,-37"/>
 
         <Border HorizontalAlignment="Right" Margin="0,100,24,0" VerticalAlignment="Top" Width="715" Height="484" Background="#FF110616" Grid.Column="1">
             <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White">
@@ -75,7 +75,7 @@
                 <ImageBrush ImageSource="/img/icono2_est.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button Content="Cuenta" HorizontalAlignment="Left" Height="52" Margin="44,264,0,0" VerticalAlignment="Top" Width="126" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Cuenta" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Button Content="Cuenta" HorizontalAlignment="Left" Height="52" Margin="44,264,0,0" VerticalAlignment="Top" Width="130" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Cuenta" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
         <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="46,368,0,0" VerticalAlignment="Top" Width="128" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Cursos" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
         <Button Content="Institución" HorizontalAlignment="Left" Height="52" Margin="9,488,0,0" VerticalAlignment="Top" Width="196" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Insti" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
         <!-- Botón de retroceso -->

@@ -77,7 +77,7 @@
 
         <Rectangle HorizontalAlignment="Left" Height="142" Margin="27,31,0,0" VerticalAlignment="Top" Width="152" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.ColumnSpan="2">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="/img/icono2_estudiante.png"/>
+                <ImageBrush ImageSource="/img/icono2_prof.png"/>
             </Rectangle.Fill>
         </Rectangle>
 
