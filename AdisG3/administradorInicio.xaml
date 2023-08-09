@@ -7,21 +7,26 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="profesores" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
+        Title="profesores" Height="690" Width="960" MinHeight="650" MinWidth="1000"
+        WindowStyle="None"
+        ResizeMode="NoResize" >
 
-    <Grid Margin="0,0,0,11">
+    <Grid Margin="0,0,0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="173*"/>
+            <RowDefinition Height="167*"/>
+        </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="251" />
+            <ColumnDefinition Width="95.333" />
+            <ColumnDefinition Width="155.667"/>
             <ColumnDefinition Width="739" />
         </Grid.ColumnDefinitions>
 
-        <Rectangle HorizontalAlignment="Left" Height="564" Margin="21,0,0,0" VerticalAlignment="Center" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
+        <Rectangle Margin="0,-37,45,-39" Fill="#FF532D69" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,361,0,0" VerticalAlignment="Top" Width="153" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-
-        <Border HorizontalAlignment="Center" Margin="234,100,0,0" VerticalAlignment="Top" Width="752" Height="484" Background="#FF110616" Grid.ColumnSpan="2">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White">
+        <Border HorizontalAlignment="Left" Margin="141,100,0,0" VerticalAlignment="Top" Width="718" Height="482" Background="#FF110616" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White" HorizontalAlignment="Center" Width="718">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
@@ -65,38 +70,35 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Grid>
-                    
+
                 </Grid>
             </ScrollViewer>
         </Border>
 
-        <Rectangle HorizontalAlignment="Left" Height="142" Margin="40,69,0,0" VerticalAlignment="Top" Width="152" Fill="White" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-
-        <Image Source="/img/studen_icon.png" Margin="54,80,76,465"  />
-
-        <Label  x:Name="bienvenidolbl" Content="¡Bienvenido!" HorizontalAlignment="Left" Height="33" Margin="62,225,0,0" VerticalAlignment="Top" Width="105" Foreground="White" FontWeight="Bold" FontSize="16"/>
-
-        <Label x:Name="Dashboard" Content="Dashboard" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Width="160" FontSize="30" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="45" FontWeight="Bold"/>
-        <Rectangle HorizontalAlignment="Left" Height="1" Margin="10,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="677" Fill="Black" RenderTransformOrigin="0.5,1" Grid.Column="1">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
+        <Rectangle HorizontalAlignment="Left" Height="142" Margin="27,31,0,0" VerticalAlignment="Top" Width="152" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.ColumnSpan="2">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/img/icono2_estudiante.png"/>
+            </Rectangle.Fill>
         </Rectangle>
 
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,272,0,0" VerticalAlignment="Top" Width="150" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="36,449,0,0" VerticalAlignment="Top" Width="150" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28"/>
-        <Button Content="Cuenta" HorizontalAlignment="Left" Height="52" Margin="59,276,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cuenta"/>
-        <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="59,365,0,0" VerticalAlignment="Top" Width="104" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Cursos"/>
-        <Button Content="Institución" HorizontalAlignment="Left" Height="52" Margin="46,453,0,0" VerticalAlignment="Top" Width="134" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Insti"/>
+        <Label x:Name="Dashboard" Content="¡Bienvenido!" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" Width="243" FontSize="40" RenderTransformOrigin="0.509,0.347" Grid.Column="2" Height="87" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Button Content="Cuenta" HorizontalAlignment="Left" Height="52" Margin="29,261,0,0" VerticalAlignment="Top" Width="148" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Cuenta" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Button Content="Cursos" HorizontalAlignment="Left" Height="52" Margin="29,10,0,0" VerticalAlignment="Top" Width="148" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Cursos" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Button Content="Institución" HorizontalAlignment="Left" Height="52" Margin="14,115,0,0" VerticalAlignment="Top" Width="178" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Insti" Grid.Row="1" Grid.ColumnSpan="2"/>
         <!-- Botón de retroceso -->
-        <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="70,503,92,60">
+        <Button Click="BackButton_Click" BorderThickness="0" Margin="77,253,120,49" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.ColumnSpan="2">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-179.641"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <ImageBrush ImageSource="/img/flecha.png"/>
+            </Button.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
-                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="55" Foreground="#fff" Height="53" RenderTransformOrigin="0.336,0.381"/>
             </StackPanel>
         </Button>
 

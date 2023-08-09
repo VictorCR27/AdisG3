@@ -101,7 +101,7 @@
                 Foreground="#FFFF821C"
                 FontSize="34"
                 Style="{DynamicResource RoundButton}" Grid.RowSpan="2" FontFamily="Segoe UI Emoji"/>
-        <Label x:Name="lb_tituloLogin" Content="Bienvenido a la universidad #1 de Costa Rica" Margin="64,135,64,32" FontFamily="Malgun Gothic" FontSize="30" FontWeight="Bold" Background="Transparent" Foreground="White"/>
+        <Label x:Name="lb_tituloLogin" Content="Bienvenido a la universidad #1 de Costa Rica" Margin="83,134,83,33" FontFamily="Segoe UI Emoji" FontSize="30" Background="Transparent" Foreground="White" FontWeight="Bold"/>
         <Label x:Name="lb_iconoEst" Content="" Margin="161,218,524,153" Grid.RowSpan="2">
             <Label.Background>
                 <ImageBrush ImageSource="/img/icono_estudiante.png"/>

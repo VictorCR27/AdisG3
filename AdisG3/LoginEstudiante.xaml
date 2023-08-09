@@ -47,12 +47,16 @@
 
                 <StackPanel Margin="20 20">
                     <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#FF532D69" FontSize="20" Grid.ColumnSpan="2" Margin="13,0,-13,0" FontFamily="Segoe UI Emoji"/>
-                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#FF532D69" Height="25" Margin="-11,0,0,0" VerticalAlignment="Center"/>
+                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#FF532D69" FontSize="20" Grid.ColumnSpan="2" Margin="14,9,-14,-9" FontFamily="Segoe UI Emoji" Grid.RowSpan="2"/>
+                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#FF532D69" Height="25" Margin="-11,15,0,0" Grid.Row="1"/>
                     </Grid>
                     <PasswordBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
                 </StackPanel>
