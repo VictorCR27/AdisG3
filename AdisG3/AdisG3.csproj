@@ -418,6 +418,24 @@
   <ItemGroup>
     <Resource Include="img\bloqueado.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Universidad.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Ulacit_fondo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icono_profesor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icono_estudiante.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\flecha.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

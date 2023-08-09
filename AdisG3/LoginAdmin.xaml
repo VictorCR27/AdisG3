@@ -14,6 +14,10 @@
 
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="139*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
 
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
@@ -22,17 +26,16 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <Border Height="390" VerticalAlignment="Top" CornerRadius="0 0 170 0" Background="White">
-        </Border>
+        <Border Height="390" VerticalAlignment="Top" CornerRadius="0 0 170 0" Background="White"/>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Background="White" Grid.RowSpan="2">
             <StackPanel Width="350">
                 <Image Source="img/logo-u.jpeg" Width="322" Height="389"/>
             </StackPanel>
 
             <StackPanel Width="400">
                 <StackPanel Margin="0 20">
-                    <TextBlock Text="Login Profesores" Margin="20"  Foreground="#210337" TextAlignment="Center" FontSize="30" FontFamily="Audrey" Width="346" FontWeight="Medium"/>
+                    <TextBlock Text="Login Profesores" Margin="20"  Foreground="#FF532D69" TextAlignment="Center" FontSize="30" FontFamily="Audrey" Width="346" FontWeight="Medium"/>
                 </StackPanel>
 
                 <StackPanel Margin="20 -10">
@@ -41,8 +44,8 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Correo" FontWeight="Medium" Foreground="#3f0e63" FontSize="20" Grid.ColumnSpan="2" Margin="14,0,-14,0"/>
-                        <materialDesign:PackIcon Kind="Envelope" Width="25" Foreground="#3f0e63" Height="25" Margin="-10,6,0,0"/>
+                        <Label Content="Correo" FontWeight="Medium" Foreground="#FF532D69" FontSize="20" Grid.ColumnSpan="2" Margin="14,0,-14,0" FontFamily="Segoe UI Emoji"/>
+                        <materialDesign:PackIcon Kind="Envelope" Width="25" Foreground="#FF532D69" Height="25" Margin="-10,6,0,0"/>
                     </Grid>
                     <TextBox x:Name="txtCorreo" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337" Width="362"/>
                 </StackPanel>
@@ -53,8 +56,8 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#3f0e63" FontSize="20" Grid.ColumnSpan="2" Margin="13,8,-13,-8"/>
-                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#3f0e63" Height="25" Margin="-11,13,0,0"/>
+                        <Label Content="Contraseña" FontWeight="Medium" Foreground="#FF532D69" FontSize="20" Grid.ColumnSpan="2" Margin="13,8,-13,-8" FontFamily="Segoe UI Emoji"/>
+                        <materialDesign:PackIcon Kind="Password" Width="25" Foreground="#FF532D69" Height="25" Margin="-11,13,0,0"/>
                     </Grid>
                     <PasswordBox x:Name="txtPassword" Foreground="Black" FontSize="16" Height="30" BorderBrush="#210337"/>
                 </StackPanel>
@@ -62,15 +65,26 @@
             </StackPanel>
         </StackPanel>
 
-        <Button Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="20" Width="154" Height="37" Background="White" Foreground="#3f0e63" Margin="476,304,170,109"/>
+        <Button x:Name="btn_iniciarSesion" Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="18" Width="154" Height="37" Background="#FF532D69" Foreground="White" Margin="476,304,170,76" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
 
-        <Button Content="Recuperar contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#0064fe" BorderThickness="0" Padding="0" Margin="363,244,313,174"/>
-
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="-16,0,729,400">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
-                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="60" Foreground="#3f0e63" Height="37"/>
-            </StackPanel>
+        <Button Content="Recuperar contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#FF5271FF" BorderThickness="0" Padding="0" Margin="363,244,313,141" FontFamily="Arial" BorderBrush="#FF5271FF"/>
+        <Canvas x:Name="rectangulo_morado" HorizontalAlignment="Center" Height="82" Margin="0,368,0,0" VerticalAlignment="Top" Width="800" Background="#FF532D69" Grid.RowSpan="2"/>
+        <Button x:Name="boton_back" Click="BackButton_Click" Height="50" BorderThickness="0" Margin="10,384,722,16" Grid.RowSpan="2" BorderBrush="#FF532D69" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180.613"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <ImageBrush ImageSource="/img/flecha.png"/>
+            </Button.Background>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40"/>
         </Button>
+
+
 
     </Grid>
 </Window>

@@ -43,8 +43,8 @@
                         <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Offset="1" Color="#1A003A"/>
-                                    <GradientStop Offset="0" Color="#2C0E79"/>
+                                    <GradientStop Offset="1" Color="#FF821C"/>
+                                    <GradientStop Offset="0" Color="#FF821C"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -76,34 +76,44 @@
         <!-- Fin Estilo Btn -->
     </Window.Resources>
 
-    <Grid>
-
+    <Grid x:Name="img_fondo">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="267*"/>
+            <RowDefinition Height="233*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="/img/Ulacit-fondo-1.jpg" Opacity="0.9"/>
+            <ImageBrush ImageSource="/img/Ulacit_fondo.jpg" Opacity="0.85"/>
         </Grid.Background>
-
-        <Grid>
-
-            <Grid.Background>
-                <SolidColorBrush Color="#60000000"/>
-            </Grid.Background>
-
-            <Button x:Name="btnAdministrativo" Content="Profesores" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnAdministrativo_Click" Margin="464,129,0,0"
+        <Canvas x:Name="color_fondo" Margin="-10,0,0,-10" Grid.RowSpan="2">
+            <Canvas.Background>
+                <SolidColorBrush Color="#FF532D69" Opacity="0.85"/>
+            </Canvas.Background>
+        </Canvas>
+        <Image x:Name="img_Logo" Source="/img/Logo.png" Margin="0,-24,543,110"/>
+        <Button x:Name="btnEstudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnEstudiantes_Click" Margin="104,209,0,0"
                 Height ="234" Width="228"
-                Background="#0A006A"
-                Foreground="Azure"
-                FontSize="30" FontWeight="DemiBold"
-                Style="{DynamicResource RoundButton}"/>
-
-            <Button x:Name="btnEstudiantes" Content="Estudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnEstudiantes_Click" Margin="114,129,0,0"
-                Height ="234" Width="227"
-                Background="#0A006A"
-                Foreground="Azure"
-                FontSize="30" FontWeight="DemiBold"
-                Style="{DynamicResource RoundButton}"/>
-
-        </Grid>
-
+                Background="#FFFF821C"
+                FontSize="34"
+                Style="{DynamicResource RoundButton}" BorderBrush="#FFFF821C" FontFamily="Segoe UI Emoji" Foreground="White" OpacityMask="#FFFF821C" AutomationProperties.IsOffscreenBehavior="FromClip" Grid.RowSpan="2"/>
+        <Button x:Name="btnAdministrativo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnAdministrativo_Click" Margin="470,209,0,0"
+                Height ="234" Width="228"
+                Background="#FFFF821C"
+                Foreground="#FFFF821C"
+                FontSize="34"
+                Style="{DynamicResource RoundButton}" Grid.RowSpan="2" FontFamily="Segoe UI Emoji"/>
+        <Label x:Name="lb_tituloLogin" Content="Bienvenido a la universidad #1 de Costa Rica" Margin="64,135,64,32" FontFamily="Malgun Gothic" FontSize="30" FontWeight="Bold" Background="Transparent" Foreground="White"/>
+        <Label x:Name="lb_iconoEst" Content="" Margin="161,218,524,153" Grid.RowSpan="2">
+            <Label.Background>
+                <ImageBrush ImageSource="/img/icono_estudiante.png"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="lb_estudiante" Content="Estudiante" Margin="138,85,468,98" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="34"/>
+        <Label x:Name="lb_iconoProf" Content="" Margin="495,218,102,123" Grid.RowSpan="2">
+            <Label.Background>
+                <ImageBrush ImageSource="/img/icono_profesor.png"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="lb_profesor" Content="Profesor" Margin="521,94,85,89" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="34"/>
     </Grid>
 
 </Window>
