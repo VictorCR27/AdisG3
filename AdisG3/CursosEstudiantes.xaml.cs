@@ -27,6 +27,8 @@ namespace AdisG3
         public string nombreCursoSeleccionado { get; set; }
         public int idProfesorSeleccionado { get; set; }
 
+        private int idAsignacionSeleccionada;   
+
         private List<AsignacionSemana> asignacionesSemana;
         
 
@@ -66,6 +68,9 @@ namespace AdisG3
                 // Obtener la asignación seleccionada
                 AsignacionSemana asignacionSeleccionada = (AsignacionSemana)lvAsignacionesSemana.SelectedItem;
 
+                // Asignar el valor de idAsignacionSeleccionada
+                idAsignacionSeleccionada = asignacionSeleccionada.idAsignacion;
+
                 // Abrir la ventana para enviar la asignación y pasar la asignación seleccionada y el idProfesorSeleccionado a esa ventana
                 EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada, id_estudiante, id_cursoSeleccionado, idProfesorSeleccionado);
                 enviarAsignacionWindow.ShowDialog();
@@ -74,6 +79,7 @@ namespace AdisG3
                 CargarAsignacionesSemana((int)cbox_semana.SelectedItem);
             }
         }
+
 
 
 
@@ -94,7 +100,15 @@ namespace AdisG3
 
             public string estudiante { get; set; }
 
+
             public int idAsignacion { get; set; }
+
+            public string NombreEstudiante { get; set; }
+            public string TituloTarea { get; set; }
+
+            public string DescripcionTarea { get; set; }
+
+
         }
 
 
@@ -176,7 +190,7 @@ namespace AdisG3
 
         private void Button_Nota(object sender, RoutedEventArgs e)
         {
-            notasStd notasStd = new notasStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
+            notasStd notasStd = new notasStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado, idAsignacionSeleccionada);
             notasStd.Show();
             this.Close();
         }

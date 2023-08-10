@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
-        Title="reclamosStd" Height="450" Width="800">
+        Title="Reclamos de Nota" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <TextBlock Text="Reclamos de Nota" FontSize="18" FontWeight="Bold" Margin="10,10"/>
+
+        <StackPanel Margin="10,40">
+            <TextBlock Text="Estudiante:" FontSize="17"/>
+            <TextBox x:Name="txtEstudiante" IsReadOnly="True" Margin="5,5,0,0" TextChanged="txtEstudiante_TextChanged"/>
+
+            <TextBlock Text="Título de la Tarea:" FontSize="17" Margin="0,10"/>
+            <TextBox x:Name="txtTituloTarea" Margin="5,5,0,0" IsReadOnly="True" TextChanged="txtTituloTarea_TextChanged"/>
+
+            <TextBlock Text="Descripción de la Tarea:" FontSize="17" Margin="0,10"/>
+            <TextBox x:Name="txtDescripcionTarea" IsReadOnly="True" Margin="5,5,0,0" TextChanged="txtDescripcionTarea_TextChanged"/>
+
+            <TextBlock Text="Reclamo:" FontSize="17" Margin="0,10"/>
+            <TextBox x:Name="txtReclamo" Margin="5,5,0,0" TextChanged="txtReclamo_TextChanged" Height="245"/>
+
+            <Button Content="Enviar Reclamo" Width="137" HorizontalAlignment="Right" Click="EnviarReclamo_Click" Margin="0,20,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

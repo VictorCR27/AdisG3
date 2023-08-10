@@ -313,6 +313,13 @@ namespace AdisG3
             asistencia.Show();
             this.Close();
         }
+
+        private void Button_notificaciones(object sender, RoutedEventArgs e)
+        {
+            notificacionesPfs notificacionesPfs = new notificacionesPfs(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            notificacionesPfs.Show();
+            this.Close();
+        }
     }
 
 }

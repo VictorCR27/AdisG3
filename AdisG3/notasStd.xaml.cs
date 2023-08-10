@@ -15,10 +15,11 @@ namespace AdisG3
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
         public int idProfesorSeleccionado { get; set; }
+        public int idAsignacionSeleccionada { get; set; }
 
         private List<AsignacionSemana> tareasEnviadas = new List<AsignacionSemana>();
 
-        public notasStd(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "", int idProfesorSeleccionado = 0)
+        public notasStd(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "", int idProfesorSeleccionado = 0, int idAsignacionSeleccionada = 0)
         {
             InitializeComponent();
 
@@ -26,6 +27,7 @@ namespace AdisG3
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
             this.idProfesorSeleccionado = idProfesorSeleccionado;
+            this.idAsignacionSeleccionada = idAsignacionSeleccionada;
 
             List<int> semanas = Enumerable.Range(1, 15).ToList();
             cbox_semana.ItemsSource = semanas;
@@ -43,7 +45,7 @@ namespace AdisG3
                 AsignacionSemana tareaEnviadaSeleccionada = (AsignacionSemana)lvAsignacionesSemana.SelectedItem;
 
                 // Abrir la ventana para ver la tarea enviada
-                reclamosStd reclamosStd = new reclamosStd(tareaEnviadaSeleccionada);
+                reclamosStd reclamosStd = new reclamosStd(tareaEnviadaSeleccionada, id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado, idAsignacionSeleccionada);
                 reclamosStd.ShowDialog();
             }
         }

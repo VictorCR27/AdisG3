@@ -19,8 +19,8 @@
         <Rectangle HorizontalAlignment="Left" Height="66" Margin="219,67,0,0" VerticalAlignment="Top" Width="226" Fill="#FF4E2F5B" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="20" RadiusY="20" Grid.Column="1" />
 
         <Rectangle HorizontalAlignment="Left" Height="558" Margin="21,30,0,0" VerticalAlignment="Top" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Rectangle HorizontalAlignment="Left" Height="48" Margin="43,396,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Rectangle HorizontalAlignment="Left" Height="47" Margin="41,333,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
+        <Rectangle HorizontalAlignment="Left" Height="48" Margin="43,382,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
+        <Rectangle HorizontalAlignment="Left" Height="47" Margin="41,325,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
 
         <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="188,138,0,0" VerticalAlignment="Top" Width="295" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" Grid.Column="1" />
 
@@ -55,8 +55,8 @@
         <Rectangle HorizontalAlignment="Left" Height="47" Margin="41,270,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
         <Button Content="Notas" HorizontalAlignment="Left" Height="41" Margin="63,273,0,0" VerticalAlignment="Top" Width="105" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota" />
         <Button Grid.Column="1" Content="Agregar Material" HorizontalAlignment="Left" UseLayoutRounding="True" Margin="24,129,0,0" VerticalAlignment="Top" Width="146" Height="39" Click="Button_Click_1" />
-        <Button Content="Estudiantes" HorizontalAlignment="Left" Height="40" Margin="55,400,0,0" VerticalAlignment="Top" Width="123" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_estudiantes" />
-        <Button Content="Anuncios" HorizontalAlignment="Left" Height="41" Margin="51,336,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Anuncios" />
+        <Button Content="Estudiantes" HorizontalAlignment="Left" Height="40" Margin="55,386,0,0" VerticalAlignment="Top" Width="123" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_estudiantes" />
+        <Button Content="Anuncios" HorizontalAlignment="Left" Height="41" Margin="51,328,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Anuncios" />
 
         <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="57,494,72,29">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
@@ -76,10 +76,9 @@
             </ListView.View>
         </ListView>
         <Button Grid.Column="1" Content="Calificar" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top" Height="38" Width="111" Click="Button_Click_2"/>
-        <Rectangle HorizontalAlignment="Left" Height="47" Margin="42,206,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Button Content="Asistencia" HorizontalAlignment="Left" Height="41" Margin="61,209,0,0" VerticalAlignment="Top" Width="105" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="16" Click="Button_Asistencia" />
-
-
-
+        <Rectangle HorizontalAlignment="Left" Height="47" Margin="42,216,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
+        <Button Content="Asistencia" HorizontalAlignment="Left" Height="41" Margin="61,219,0,0" VerticalAlignment="Top" Width="105" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="16" Click="Button_Asistencia" />
+        <Rectangle HorizontalAlignment="Left" Height="48" Margin="43,440,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
+        <Button Content="Notificaciones" HorizontalAlignment="Left" Height="40" Margin="45,444,0,0" VerticalAlignment="Top" Width="145" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_notificaciones" />
     </Grid>
 </Window>
