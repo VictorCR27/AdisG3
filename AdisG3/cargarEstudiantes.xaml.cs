@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,7 @@ namespace AdisG3
             public string ApellidoPaterno { get; set; }
             public string ApellidoMaterno { get; set; }
             public string Correo { get; set; }
+            public IEnumerable<KeyValuePair<int, string>> AsistenciaPorSemana { get; internal set; }
         }
         public ObservableCollection<Estudiante> Estudiantes { get; set; }
 

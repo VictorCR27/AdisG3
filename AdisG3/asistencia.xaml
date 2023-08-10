@@ -9,11 +9,18 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="Asistencia" Height="560" Width="800">
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="PresenteColor" Color="Green"/>
+        <SolidColorBrush x:Key="JustificadoColor" Color="Yellow"/>
+        <SolidColorBrush x:Key="AusenteColor" Color="Red"/>
+    </Window.Resources>
+
 
     <Grid>
         <Label Content="Asistencia" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="172" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium" Margin="312,2,0,0"/>
-        <ComboBox x:Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="31" Margin="265,62,279,0" VerticalAlignment="Top"/>
-
+        <ComboBox x:Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="31" Margin="265,62,279,0" VerticalAlignment="Top">
+        </ComboBox>
         <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="764" Height="364" Margin="0,117,0,0">
             <ListView.View>
                 <GridView>
@@ -23,14 +30,33 @@
                     <GridViewColumn Header="Attendance" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox SelectedValue="{Binding Attendance}" Width="80">
-                                    <ComboBoxItem Content="Presente" Tag="Presente"/>
-                                    <ComboBoxItem Content="Ausente" Tag="Ausente"/>
-                                    <ComboBoxItem Content="Justificado" Tag="Justificado"/>
-                                </ComboBox>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Ellipse Width="16" Height="16" Margin="0,0,5,0">
+                                        <Ellipse.Style>
+                                            <Style TargetType="Ellipse">
+                                                <Setter Property="Fill" Value="{StaticResource PresenteColor}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Attendance}" Value="Ausente">
+                                                        <Setter Property="Fill" Value="{StaticResource AusenteColor}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Attendance}" Value="Justificado">
+                                                        <Setter Property="Fill" Value="{StaticResource JustificadoColor}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Ellipse.Style>
+                                    </Ellipse>
+                                    <ComboBox SelectedValue="{Binding Attendance}" Width="80">
+                                        <ComboBoxItem Content="Presente" Tag="Presente"/>
+                                        <ComboBoxItem Content="Ausente" Tag="Ausente"/>
+                                        <ComboBoxItem Content="Justificado" Tag="Justificado"/>
+                                    </ComboBox>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
+
                 </GridView>
             </ListView.View>
         </ListView>
