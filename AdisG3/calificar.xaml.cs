@@ -85,19 +85,18 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-                string query = "SELECT e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor " +
-                               "FROM asignacionesSemanas asg " +
-                               "JOIN TareasEnviadas te " +
-                               "JOIN estudiantes e ON e.id_estudiante = te.estudiante " +
-                               "WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
-
+                string query = @"SELECT e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
+                        FROM asignacionesSemanas asg 
+                        JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
+                        JOIN estudiantes e ON e.id_estudiante = te.estudiante 
+                        WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
-                    command.Parameters.AddWithValue("@estudiante", idEstudiante); // Utiliza idEstudiante
-                    command.Parameters.AddWithValue("@semana", semanaSeleccionada); // Utiliza semanaSeleccionada
+                    command.Parameters.AddWithValue("@semana", semanaSeleccionada);
+                    command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -109,20 +108,16 @@ namespace AdisG3
                             {
                                 Nombre = reader.GetString("estudiante"),
                                 Titulo = reader.GetString("titulo"),
-                                Tipo = reader.GetString("Tipo"),
+                                Tipo = reader.GetString("tipo"),
                                 Descripcion = reader.GetString("descripcion"),
                                 FechaEntrega = reader.GetDateTime("FechaEntrega"),
                                 Valor = reader.GetDouble("valor"),
-                                IdAsignacion = reader.GetInt32("idAsignacion"), // Corrige el alias aquí
+                                Calificacion = reader.GetInt32("calificacion"),
+                                IdAsignacion = reader.GetInt32("idAsignacion")
                             };
 
-                            //MessageBox.Show($"{id_profesor}");
-                            //MessageBox.Show($"{id_cursoSeleccionado}");
-                            //MessageBox.Show($"{idEstudiante}");
-                            //MessageBox.Show($"{semanaSeleccionada}");
                             tareasEnviadas.Add(tarea);
                         }
-
 
                         lvTareas.ItemsSource = tareasEnviadas;
                     }
