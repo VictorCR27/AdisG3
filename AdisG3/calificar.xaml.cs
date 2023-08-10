@@ -109,13 +109,17 @@ namespace AdisG3
                             {
                                 Nombre = reader.GetString("estudiante"),
                                 Titulo = reader.GetString("titulo"),
+                                Tipo = reader.GetString("Tipo"),
                                 Descripcion = reader.GetString("descripcion"),
                                 FechaEntrega = reader.GetDateTime("FechaEntrega"),
                                 Valor = reader.GetDouble("valor"),
                                 IdAsignacion = reader.GetInt32("idAsignacion"), // Corrige el alias aquí
                             };
 
-
+                            //MessageBox.Show($"{id_profesor}");
+                            //MessageBox.Show($"{id_cursoSeleccionado}");
+                            //MessageBox.Show($"{idEstudiante}");
+                            //MessageBox.Show($"{semanaSeleccionada}");
                             tareasEnviadas.Add(tarea);
                         }
 
@@ -136,6 +140,7 @@ namespace AdisG3
             public double Valor { get; set; }
             public int Calificacion { get; set; }
             public int IdAsignacion { get; set; }
+            public string Tipo { get; internal set; }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

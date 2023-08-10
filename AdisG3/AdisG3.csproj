@@ -173,8 +173,14 @@
     <Compile Include="matricularManualmente.xaml.cs">
       <DependentUpon>matricularManualmente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="notasStd.xaml.cs">
+      <DependentUpon>notasStd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profesor.xaml.cs">
       <DependentUpon>Profesor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="reclamosStd.xaml.cs">
+      <DependentUpon>reclamosStd.xaml</DependentUpon>
     </Compile>
     <Compile Include="restablecerPassword.xaml.cs">
       <DependentUpon>restablecerPassword.xaml</DependentUpon>
@@ -308,7 +314,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="notasStd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Profesor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="reclamosStd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

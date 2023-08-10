@@ -89,6 +89,12 @@ namespace AdisG3
             public string descripcion { get; set; }
             public DateTime FechaEntrega { get; set; }
             public int valor { get; set; }
+
+            public int calificacion { get; set; }
+
+            public string estudiante { get; set; }
+
+            public int idAsignacion { get; set; }
         }
 
 
@@ -170,7 +176,9 @@ namespace AdisG3
 
         private void Button_Nota(object sender, RoutedEventArgs e)
         {
-
+            notasStd notasStd = new notasStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
+            notasStd.Show();
+            this.Close();
         }
 
         private void asistencia_button(object sender, RoutedEventArgs e)

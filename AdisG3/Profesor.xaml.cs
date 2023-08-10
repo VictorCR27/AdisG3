@@ -143,39 +143,64 @@ namespace AdisG3
         {
             if (cbox_semana.SelectedItem != null)
             {
-                int semana = Convert.ToInt32(cbox_semana.SelectedItem);
-                CargarAsignacionesSemana(semana);
+                string selectedWeek = cbox_semana.SelectedItem.ToString();
+
+                if (int.TryParse(selectedWeek.Replace("Semana ", ""), out int semana))
+                {
+                    CargarAsignacionesSemana(semana);
+                }
+                else
+                {
+                    
+                }
             }
         }
+
 
         private void lvAsignacionesSemana_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (lvAsignacionesSemana.SelectedItem != null)
+            if (lvAsignacionesSemana.SelectedItem != null && cbox_semana.SelectedItem != null)
             {
-                int semana = Convert.ToInt32(cbox_semana.SelectedItem);
+                string selectedWeek = cbox_semana.SelectedItem.ToString();
 
-                DataRowView selectedItem = (DataRowView)lvAsignacionesSemana.SelectedItem;
+                if (selectedWeek.StartsWith("Semana "))
+                {
+                    string weekNumberStr = selectedWeek.Substring(7); // Remover "Semana "
 
-                // Obtener el idAsignacion usando la función ObtenerIdAsignacionDesdeTitulo
-                int idAsignacion = ObtenerIdAsignacionDesdeTitulo(selectedItem["titulo"].ToString(), semana);
+                    if (int.TryParse(weekNumberStr, out int semana))
+                    {
+                        DataRowView selectedItem = (DataRowView)lvAsignacionesSemana.SelectedItem;
 
-                editarTarea editarTarea = new editarTarea(
-                    id_profesor,
-                    id_cursoSeleccionado,
-                    nombreCursoSeleccionado,
-                    selectedItem["titulo"].ToString(),
-                    selectedItem["tipo"].ToString(),
-                    selectedItem["descripcion"].ToString(),
-                    Convert.ToDateTime(selectedItem["FechaEntrega"]),
-                    Convert.ToDouble(selectedItem["valor"]),
-                    idAsignacion // Pasar el idAsignacion como parámetro
-                );
+                        int idAsignacion = ObtenerIdAsignacionDesdeTitulo(selectedItem["titulo"].ToString(), semana);
 
-                editarTarea.Closed += EditarTarea_Closed; // Manejador del evento Closed
-                editarTarea.ShowDialog();
-                this.Close();
+                        editarTarea editarTarea = new editarTarea(
+                            id_profesor,
+                            id_cursoSeleccionado,
+                            nombreCursoSeleccionado,
+                            selectedItem["titulo"].ToString(),
+                            selectedItem["tipo"].ToString(),
+                            selectedItem["descripcion"].ToString(),
+                            Convert.ToDateTime(selectedItem["FechaEntrega"]),
+                            Convert.ToDouble(selectedItem["valor"]),
+                            idAsignacion
+                        );
+
+                        editarTarea.Closed += EditarTarea_Closed;
+                        editarTarea.ShowDialog();
+                        this.Close();
+                    }
+                    else
+                    {
+                        // Manejo de error: la cadena después de "Semana " no es un número válido
+                    }
+                }
+                else
+                {
+                    // Manejo de error: la cadena no tiene el formato esperado ("Semana ")
+                }
             }
         }
+
 
         private int ObtenerIdAsignacionDesdeTitulo(string titulo, int semana)
         {
@@ -188,7 +213,7 @@ namespace AdisG3
                 connection.Open();
 
                 string query = "SELECT asignacionesSemanas FROM asignacionesSemanas " +
-                               "WHERE id_profesor = @id_profesor AND id_curso = @id_curso AND semana = @semana AND titulo = @titulo";
+               "WHERE id_profesor = @id_profesor AND id_curso = @id_curso AND semana = @semana AND titulo = @titulo";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -207,19 +232,22 @@ namespace AdisG3
                 }
             }
 
-            return idAsignacion;
+                return idAsignacion;
         }
 
 
 
         private void EditarTarea_Closed(object sender, EventArgs e)
         {
-            // Vuelve a cargar las asignaciones para la semana seleccionada
-            int semana = Convert.ToInt32(cbox_semana.SelectedItem);
-            CargarAsignacionesSemana(semana);
+            if (cbox_semana.SelectedItem != null && int.TryParse(cbox_semana.SelectedItem.ToString().Replace("Semana ", ""), out int semana))
+            {
+                CargarAsignacionesSemana(semana);
+            }
+            else
+            {
+                // Manejo de error: la cadena seleccionada no es válida para conversión a entero
+            }
 
-            // Muestra la ventana actual nuevamente
-            this.Show();
         }
 
 
