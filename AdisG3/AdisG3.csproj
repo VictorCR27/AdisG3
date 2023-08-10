@@ -148,6 +148,9 @@
     <Compile Include="asistencia.xaml.cs">
       <DependentUpon>asistencia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="asistenciaStd.xaml.cs">
+      <DependentUpon>asistenciaStd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="calificar.xaml.cs">
       <DependentUpon>calificar.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="asistencia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="asistenciaStd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -114,7 +114,7 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Profesor profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            Profesor profesor = new Profesor(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
             profesor.Show();
             this.Close();
         }

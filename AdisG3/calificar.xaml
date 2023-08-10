@@ -37,7 +37,7 @@
             </StackPanel>
         </Button>
         <Label Content="Calificar:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="347,70,384,0" VerticalAlignment="Top">
+        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="347,56,384,0" VerticalAlignment="Top">
         </ComboBox>
 
         <Button Content="Guardar" HorizontalAlignment="Left" Height="58" Margin="878,613,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click"/>

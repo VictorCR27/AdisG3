@@ -74,5 +74,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="38,407,0,0" VerticalAlignment="Top" Width="148" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
+        <Button Content="Asistencia" HorizontalAlignment="Left" Height="52" Margin="48,411,0,0" VerticalAlignment="Top" Width="128" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="asistencia_button" />
     </Grid>
 </Window>

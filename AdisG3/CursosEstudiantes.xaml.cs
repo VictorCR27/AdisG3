@@ -172,5 +172,12 @@ namespace AdisG3
         {
 
         }
+
+        private void asistencia_button(object sender, RoutedEventArgs e)
+        {
+             asistenciaStd asistenciaStd = new asistenciaStd(id_estudiante,id_cursoSeleccionado,nombreCursoSeleccionado);
+             asistenciaStd.Show();
+             this.Close();
+        }
     }
 }

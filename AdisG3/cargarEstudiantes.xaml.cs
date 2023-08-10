@@ -17,12 +17,15 @@ namespace AdisG3
         public class Estudiante
         {
             internal int id_estudiante;
+            internal string estado_asistencia;
 
             public string Nombre { get; set; }
             public string ApellidoPaterno { get; set; }
             public string ApellidoMaterno { get; set; }
+            public string estado_estudiante { get; set; }
             public string Correo { get; set; }
             public IEnumerable<KeyValuePair<int, string>> AsistenciaPorSemana { get; internal set; }
+            public string Attendance { get; set; }
         }
         public ObservableCollection<Estudiante> Estudiantes { get; set; }
 
