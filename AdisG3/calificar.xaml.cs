@@ -192,7 +192,7 @@ namespace AdisG3
 
                     string query = "UPDATE TareasEnviadas " +
                                    "SET calificacion = @calificacion " +
-                                   "WHERE id = @idAsignacion AND estudiante = @idEstudiante";
+                                   "WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -205,6 +205,7 @@ namespace AdisG3
                 }
                 MessageBox.Show($"{idAsignacion}");
                 MessageBox.Show($"{idEstudiante}");
+                MessageBox.Show($"{calificacion}");
                 // Actualiza la calificación en la lista de tareas
                 tarea.Calificacion = calificacion;
             }
