@@ -6,19 +6,22 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using static AdisG3.cargarEstudiantes;
+
+
 
 namespace AdisG3
 {
     public partial class calificar : Window
     {
         public int idEstudiante;
+
+        public int IdAsignacion;
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
         public int semanaSeleccionada { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
-        public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, /*int semanaSeleccionada = 0,*/ string nombreCursoSeleccionado = "")
+        public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
 
@@ -44,9 +47,10 @@ namespace AdisG3
             // Carga las tareas enviadas para cada estudiante
             foreach (int idEstudiante in idEstudiantes)
             {
-                CargarTareasEnviadas(idEstudiante);
+                CargarTareasEnviadas(idEstudiante, semanaSeleccionada); // Pasa el valor de semanaSeleccionada
             }
         }
+
 
         private List<int> GetIdEstudiantesFromTareasEnviadas()
         {
@@ -72,58 +76,57 @@ namespace AdisG3
                     }
                 }
             }
-
             return idEstudiantes;
         }
 
-        private void CargarTareasEnviadas(int idEstudiante)
+        private void CargarTareasEnviadas(int idEstudiante, int semanaSeleccionada)
         {
             string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-                string query = "SELECT e.nombre AS estudiante, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor " +
-                                "FROM asignacionesSemanas asg " +
-                                "JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id " +
-                                "JOIN estudiantes e ON e.id_estudiante = te.estudiante " + // Utiliza la columna estudiante de TareasEnviadas
-                                "WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
+                string query = "SELECT e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor " +
+                               "FROM asignacionesSemanas asg " +
+                               "JOIN TareasEnviadas te " +
+                               "JOIN estudiantes e ON e.id_estudiante = te.estudiante " +
+                               "WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
+
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
                     command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                     command.Parameters.AddWithValue("@estudiante", idEstudiante); // Utiliza idEstudiante
+                    command.Parameters.AddWithValue("@semana", semanaSeleccionada); // Utiliza semanaSeleccionada
 
-                    if (cbox_semana.SelectedItem != null)
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        int semanaSeleccionada = (int)cbox_semana.SelectedItem;
-                        command.Parameters.AddWithValue("@semana", semanaSeleccionada);
+                        List<Tarea> tareasEnviadas = new List<Tarea>();
 
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            List<Tarea> tareasEnviadas = new List<Tarea>();
-
-                            while (reader.Read())
+                            Tarea tarea = new Tarea
                             {
-                                Tarea tarea = new Tarea
-                                {
-                                    Nombre = reader.GetString("estudiante"),
-                                    Titulo = reader.GetString("titulo"),
-                                    Descripcion = reader.GetString("descripcion"),
-                                    FechaEntrega = reader.GetDateTime("FechaEntrega"),
-                                    Valor = reader.GetDouble("valor"),
-                                };
+                                Nombre = reader.GetString("estudiante"),
+                                Titulo = reader.GetString("titulo"),
+                                Descripcion = reader.GetString("descripcion"),
+                                FechaEntrega = reader.GetDateTime("FechaEntrega"),
+                                Valor = reader.GetDouble("valor"),
+                                IdAsignacion = reader.GetInt32("idAsignacion"), // Corrige el alias aquí
+                            };
 
-                                tareasEnviadas.Add(tarea);
-                            }
 
-                            lvTareas.ItemsSource = tareasEnviadas;
+                            tareasEnviadas.Add(tarea);
                         }
+
+
+                        lvTareas.ItemsSource = tareasEnviadas;
                     }
                 }
             }
         }
+
 
         public class Tarea
         {
@@ -133,7 +136,7 @@ namespace AdisG3
             public DateTime FechaEntrega { get; set; }
             public double Valor { get; set; }
             public int Calificacion { get; set; }
-            public int IdAsignacion { get; internal set; }
+            public int IdAsignacion { get; set; }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -143,15 +146,45 @@ namespace AdisG3
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private int GetIdEstudiante(string nombreEstudiante)
+        {
+            int idEstudiante = -1; // Valor por defecto en caso de que no se encuentre el estudiante
+
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT id_estudiante FROM estudiantes WHERE nombre = @nombreEstudiante";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@nombreEstudiante", nombreEstudiante);
+
+                    var result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        idEstudiante = Convert.ToInt32(result);
+                    }
+                }
+            }
+            //MessageBox.Show($"{nombreEstudiante}");
+            return idEstudiante;
+        }
+
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string connString = conn_db.GetConnectionString();
 
             foreach (Tarea tarea in lvTareas.Items)
             {
-                //int idAsignacion = ObtenerIdAsignacion(tarea); // Obtener el id de la asignación de la tarea
-                //int idEstudiante = ObtenerIdEstudiante(tarea); // Obtener el id del estudiante de la tarea
-                double calificacion = tarea.Calificacion; // Obtiene la calificación desde la propiedad de la tarea
+                int idAsignacion = tarea.IdAsignacion;
+                int idEstudiante = GetIdEstudiante(tarea.Nombre);
+
+                // Convierte la calificación de double a int
+                int calificacion = (int)tarea.Calificacion;
 
                 using (MySqlConnection connection = new MySqlConnection(connString))
                 {
@@ -159,22 +192,36 @@ namespace AdisG3
 
                     string query = "UPDATE TareasEnviadas " +
                                    "SET calificacion = @calificacion " +
-                                   "WHERE id = 2 AND estudiante = 3";
+                                   "WHERE id = @idAsignacion AND estudiante = @idEstudiante";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        //command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
-                        //command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
+                        command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
+                        command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
                         command.Parameters.AddWithValue("@calificacion", calificacion);
 
                         command.ExecuteNonQuery();
                     }
                 }
+                MessageBox.Show($"{idAsignacion}");
+                MessageBox.Show($"{idEstudiante}");
+                // Actualiza la calificación en la lista de tareas
+                tarea.Calificacion = calificacion;
             }
 
-            // Después de la inserción, puedes actualizar la lista de tareas enviadas si es necesario
-            CargarTareasEnviadas(idEstudiante);
+            // Mostrar la notificación
+            MessageBox.Show("Estudiantes calificados");
+
+            // Actualiza la lista de tareas enviadas
+            int semanaSeleccionada = (int)cbox_semana.SelectedItem;
+            foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
+            {
+                CargarTareasEnviadas(idEstudiante, semanaSeleccionada);
+            }
         }
+
+
+
 
 
         private void lvTareas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -186,12 +233,16 @@ namespace AdisG3
         {
             if (cbox_semana.SelectedItem != null)
             {
+                int semanaSeleccionada = (int)cbox_semana.SelectedItem;
+
                 foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
                 {
-                    CargarTareasEnviadas(idEstudiante);
+                    CargarTareasEnviadas(idEstudiante, semanaSeleccionada); // Pasa el valor de semanaSeleccionada
                 }
             }
         }
+
+
 
     }
 }
