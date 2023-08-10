@@ -26,7 +26,7 @@
         <Rectangle Margin="0,-37,45,-39" Fill="#FF532D69" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
         <Border HorizontalAlignment="Left" Margin="141,100,0,0" VerticalAlignment="Top" Width="718" Height="482" Background="white" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White" HorizontalAlignment="Center" Width="718">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White" HorizontalAlignment="Center" Width="718" FontFamily="Segoe UI Emoji" FontSize="30" FontWeight="Bold">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">

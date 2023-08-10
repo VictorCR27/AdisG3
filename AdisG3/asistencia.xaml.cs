@@ -40,7 +40,7 @@ namespace AdisG3
             // Llena el ComboBox con las semanas del 1 al 15
             for (int semana = 1; semana <= 15; semana++)
             {
-                cbox_semana.Items.Add(semana);
+                cbox_semana.Items.Add($"Semana {semana}");
             }
 
             // Lógica para cargar los datos desde la base de datos

@@ -107,13 +107,13 @@
                 <ImageBrush ImageSource="/img/icono_estudiante.png"/>
             </Label.Background>
         </Label>
-        <Label x:Name="lb_estudiante" Content="Estudiante" Margin="138,85,468,98" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="34"/>
+        <Label x:Name="lb_estudiante" Content="Estudiante" Margin="138,85,506,98" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="30"/>
         <Label x:Name="lb_iconoProf" Content="" Margin="495,218,102,123" Grid.RowSpan="2">
             <Label.Background>
                 <ImageBrush ImageSource="/img/icono_profesor.png"/>
             </Label.Background>
         </Label>
-        <Label x:Name="lb_profesor" Content="Profesor" Margin="521,94,85,89" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="34"/>
+        <Label x:Name="lb_profesor" Content="Profesor" Margin="521,94,152,89" Grid.Row="1" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="30"/>
     </Grid>
 
 </Window>

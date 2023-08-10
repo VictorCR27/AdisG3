@@ -179,5 +179,10 @@ namespace AdisG3
              asistenciaStd.Show();
              this.Close();
         }
+
+        private void lvAsignacionesSemana_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -41,7 +41,7 @@
         <Rectangle HorizontalAlignment="Left" Height="48" Margin="229,76,0,0" VerticalAlignment="Top" Width="206" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.Column="1" />
         <Label x:Name="semana_titulo" Content="Semanas" HorizontalAlignment="Left" Margin="253,68,0,0" VerticalAlignment="Top" Width="164" FontSize="36" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="56" />
 
-        <Label x:Name="curso" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.509,0.5" Grid.Column="1" FontWeight="Bold" Margin="13,19,0,0" />
+        <Label x:Name="curso" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" RenderTransformOrigin="0.509,0.5" Grid.Column="1" Margin="13,19,0,0" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
         <Rectangle HorizontalAlignment="Left" Height="1" Margin="10,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="677" Fill="Black" RenderTransformOrigin="0.5,1" Grid.Column="1">
             <Rectangle.RenderTransform>
                 <TransformGroup>

@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="Asistencia" Height="560" Width="800">
-    
+
     <Window.Resources>
         <SolidColorBrush x:Key="PresenteColor" Color="Green"/>
         <SolidColorBrush x:Key="JustificadoColor" Color="Yellow"/>
@@ -18,10 +18,9 @@
 
 
     <Grid>
-        <Label Content="Asistencia" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="172" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium" Margin="312,2,0,0"/>
-        <ComboBox x:Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="31" Margin="265,62,279,0" VerticalAlignment="Top">
-        </ComboBox>
-        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="764" Height="364" Margin="0,117,0,0">
+        <Label Content="Asistencia" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="194" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold" Margin="296,10,0,0"/>
+        <ComboBox x:Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="31" Margin="265,75,279,0" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold" FontFamily="Arial"/>
+        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="624" Height="364" Margin="0,117,0,0" Foreground="#FF532D69" FontFamily="Arial" Background="White" FontSize="12">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" Width="150"/>

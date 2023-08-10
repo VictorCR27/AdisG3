@@ -101,7 +101,7 @@ namespace AdisG3
 
                         for (int semana = 1; semana <= 15; semana++)
                         {
-                            cbox_semana.Items.Add(semana);
+                            cbox_semana.Items.Add($"Semana {semana}");
                         }
                     }
                 }
