@@ -31,9 +31,6 @@ namespace AdisG3
             {
                 this.tareaEnviadaSeleccionada = tareaEnviadaSeleccionada;
 
-                txtEstudiante.Text = tareaEnviadaSeleccionada.NombreEstudiante;
-                txtTituloTarea.Text = tareaEnviadaSeleccionada.TituloTarea;
-                txtDescripcionTarea.Text = tareaEnviadaSeleccionada.DescripcionTarea;
             }
         
 
