@@ -19,7 +19,7 @@ namespace AdisG3
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
 
-            // Cargar los reclamos de los estudiantes al ListView
+            // Cargar los reclamos de los estudiantes del curso seleccionado al ListView
             CargarReclamos();
         }
 
@@ -38,25 +38,30 @@ namespace AdisG3
                                    "FROM reclamos r " +
                                    "INNER JOIN estudiantes e ON r.id_estudiante = e.id_estudiante " +
                                    "INNER JOIN cursos c ON r.id_curso = c.id_curso " +
-                                   "INNER JOIN asignacionesSemanas a ON r.id_asignacion = a.asignacionesSemanas";
+                                   "INNER JOIN asignacionesSemanas a ON r.id_asignacion = a.asignacionesSemanas " +
+                                   "WHERE c.id_curso = @id_curso";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
-                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        while (reader.Read())
-                        {
-                            string estudiante = reader.GetString("Estudiante");
-                            string curso = reader.GetString("Curso");
-                            string asignacion = reader.GetString("Asignacion");
-                            string reclamo = reader.GetString("reclamo");
+                        command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
 
-                            reclamos.Add(new ReclamoEstudiante
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
                             {
-                                Estudiante = estudiante,
-                                Curso = curso,
-                                Asignacion = asignacion,
-                                Reclamo = reclamo
-                            });
+                                string estudiante = reader.GetString("Estudiante");
+                                string curso = reader.GetString("Curso");
+                                string asignacion = reader.GetString("Asignacion");
+                                string reclamo = reader.GetString("reclamo");
+
+                                reclamos.Add(new ReclamoEstudiante
+                                {
+                                    Estudiante = estudiante,
+                                    Curso = curso,
+                                    Asignacion = asignacion,
+                                    Reclamo = reclamo
+                                });
+                            }
                         }
                     }
                 }
@@ -72,7 +77,9 @@ namespace AdisG3
 
         private void Cerrar_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Profesor Profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            Profesor.Show();
+            this.Close();
         }
     }
 
