@@ -6,8 +6,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-
-
+using System.Windows.Input;
 
 namespace AdisG3
 {
@@ -176,52 +175,143 @@ namespace AdisG3
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            string connString = conn_db.GetConnectionString();
-
-            foreach (Tarea tarea in lvTareas.Items)
+            try
             {
-                int idAsignacion = tarea.IdAsignacion;
-                int idEstudiante = GetIdEstudiante(tarea.Nombre);
+                string connString = conn_db.GetConnectionString();
+                bool calificacionesAgregadas = false;
 
-                // Convierte la calificación de double a int
-                int calificacion = (int)tarea.Calificacion;
-
-                using (MySqlConnection connection = new MySqlConnection(connString))
+                foreach (Tarea tarea in lvTareas.Items)
                 {
-                    connection.Open();
+                    int idAsignacion = tarea.IdAsignacion;
+                    int idEstudiante = GetIdEstudiante(tarea.Nombre);
 
-                    string query = "UPDATE TareasEnviadas " +
-                                   "SET calificacion = @calificacion " +
-                                   "WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante";
+                    // Convierte la calificación de double a int
+                    int calificacion = (int)tarea.Calificacion;
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    if (calificacion >= 0) // Verifica si se agregó una calificación válida
                     {
-                        command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
-                        command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
-                        command.Parameters.AddWithValue("@calificacion", calificacion);
+                        using (MySqlConnection connection = new MySqlConnection(connString))
+                        {
+                            connection.Open();
 
-                        command.ExecuteNonQuery();
+                            string query = "UPDATE TareasEnviadas " +
+                                           "SET calificacion = @calificacion " +
+                                           "WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante";
+
+                            using (MySqlCommand command = new MySqlCommand(query, connection))
+                            {
+                                command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
+                                command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
+                                command.Parameters.AddWithValue("@calificacion", calificacion);
+
+                                command.ExecuteNonQuery();
+                            }
+
+                            calificacionesAgregadas = true;
+                        }
+
+                        // Actualiza la calificación en la lista de tareas
+                        tarea.Calificacion = calificacion;
                     }
                 }
-                MessageBox.Show($"{idAsignacion}");
-                MessageBox.Show($"{idEstudiante}");
-                MessageBox.Show($"{calificacion}");
-                // Actualiza la calificación en la lista de tareas
-                tarea.Calificacion = calificacion;
+
+                if (calificacionesAgregadas)
+                {
+                    // Mostrar la notificación
+                    MessageBox.Show("Estudiantes calificados");
+
+                    // Actualiza la lista de tareas enviadas
+                    int semanaSeleccionada = (int)cbox_semana.SelectedItem;
+                    foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
+                    {
+                        CargarTareasEnviadas(idEstudiante, semanaSeleccionada);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se agregaron calificaciones.");
+                }
             }
-
-            // Mostrar la notificación
-            MessageBox.Show("Estudiantes calificados");
-
-            // Actualiza la lista de tareas enviadas
-            int semanaSeleccionada = (int)cbox_semana.SelectedItem;
-            foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
+            catch (Exception ex)
             {
-                CargarTareasEnviadas(idEstudiante, semanaSeleccionada);
+                MessageBox.Show("Error al calificar estudiantes: " + ex.Message);
             }
         }
 
 
+        private void lvTareas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lvTareas.SelectedItem != null)
+            {
+                Tarea tareaSeleccionada = (Tarea)lvTareas.SelectedItem;
+                int idAsignacion = tareaSeleccionada.IdAsignacion;
+                string nombreEstudiante = tareaSeleccionada.Nombre;
+                string tituloTarea = tareaSeleccionada.Titulo;
+
+                // Realizar una consulta a la base de datos para obtener tareaTXT y tareaArchivo
+                string tareaTXT = ObtenerTareaTXTDesdeBD(idAsignacion);
+                string tareaArchivo = ObtenerTareaArchivoDesdeBD(idAsignacion);
+
+                // Crear e mostrar la ventana revTareas con los datos
+                revTareas ventanaRevTareas = new revTareas(nombreEstudiante, tituloTarea, tareaTXT, tareaArchivo);
+                ventanaRevTareas.ShowDialog();
+            }
+        }
+
+
+        private string ObtenerTareaTXTDesdeBD(int idAsignacion)
+        {
+            string connString = conn_db.GetConnectionString();
+            string tareaTXT = string.Empty;
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT tareaTXT FROM TareasEnviadas WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante"; 
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
+                    command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
+
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        tareaTXT = result.ToString();
+                    }
+                }
+            }
+
+            return tareaTXT;
+        }
+
+        private string ObtenerTareaArchivoDesdeBD(int idAsignacion)
+        {
+            string connString = conn_db.GetConnectionString();
+            string tareaArchivo = string.Empty;
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                string query = "SELECT tareaArchivo FROM TareasEnviadas WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante"; 
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
+                    command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
+
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        tareaArchivo = result.ToString();
+                    }
+                }
+            }
+
+            return tareaArchivo;
+        }
 
 
 

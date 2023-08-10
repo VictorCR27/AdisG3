@@ -179,6 +179,9 @@
     <Compile Include="restablecerPassword.xaml.cs">
       <DependentUpon>restablecerPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="revTareas.xaml.cs">
+      <DependentUpon>revTareas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Semanas\Pag_sem1.xaml.cs">
       <DependentUpon>Pag_sem1.xaml</DependentUpon>
     </Compile>
@@ -310,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="restablecerPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="revTareas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

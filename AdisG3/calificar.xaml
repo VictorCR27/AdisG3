@@ -10,7 +10,7 @@
         WindowStyle="None"
         Title="calificar" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
-        <ListView x:Name="lvTareas" Margin="49,132,41,90" SelectionChanged="lvTareas_SelectionChanged">
+        <ListView x:Name="lvTareas" Margin="49,132,41,90" SelectionChanged="lvTareas_SelectionChanged" MouseDoubleClick="lvTareas_MouseDoubleClick" IsSynchronizedWithCurrentItem="True">
             <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>
