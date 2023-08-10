@@ -77,7 +77,7 @@ namespace AdisG3
 
                 string query = @"SELECT e.nombre AS estudiante, asg.asignacionesSemanas, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
                                 FROM asignacionesSemanas asg 
-                                JOIN TareasEnviadas te 
+                                JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
                                 JOIN estudiantes e ON e.id_estudiante = te.estudiante 
                                 WHERE te.profesor = @idProfesor AND te.curso = @idCurso AND asg.semana = @semana AND te.estudiante = @id_estudiante";
 
