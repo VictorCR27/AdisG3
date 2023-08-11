@@ -14,11 +14,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="lb_nuevoAnuncio" Content="Nuevo Anuncio" HorizontalAlignment="Left" Height="72" Margin="301,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="291" FontFamily="Segoe UI Emoji" FontSize="40" FontWeight="Bold" Background="{x:Null}" Foreground="#FF532D69"/>
+        <Label x:Name="lb_nuevoAnuncio" Content="Nuevo Anuncio" HorizontalAlignment="Center" Height="72" Margin="0,11,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="292" FontFamily="Segoe UI Emoji" FontSize="40" FontWeight="Bold" Background="{x:Null}" Foreground="#FF532D69"/>
         <Label x:Name="lb_titulo" Content="Título" HorizontalAlignment="Left" Height="78" Margin="92,152,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="171" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji"/>
         <Label x:Name="lb_descripcion" Content="Descripción" HorizontalAlignment="Left" Height="83" Margin="77,300,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="205" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji"/>
-        <TextBlock x:Name="txtDescripcion" HorizontalAlignment="Left" Height="108" Margin="373,342,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="Digite una descripción" VerticalAlignment="Top" Width="438"/>
-        <TextBox x:Name="txtTitulo" HorizontalAlignment="Left" Height="39" Margin="373,152,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="50" Margin="811,419,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="109"/>
+        <TextBox x:Name="txtTitulo" HorizontalAlignment="Center" Height="39" Margin="0,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Grid.Row="1" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" FontFamily="Segoe UI Emoji" BorderBrush="#FF532D69"/>
+        <Button x:Name="btnPublicar" Content="Publicar" HorizontalAlignment="Left" Height="50" Margin="811,419,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="109" Click="btnPublicar_Click" Background="#FF532D69" BorderBrush="#FF532D69" FontSize="18" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button x:Name="BackButton" Content="" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Height="65" Width="76" Click="BackButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
+        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Margin="321,225,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="101" SelectionBrush="{x:Null}" FontFamily="Arial" BorderBrush="#FF532D69" CaretBrush="{x:Null}"/>
     </Grid>
 </Window>

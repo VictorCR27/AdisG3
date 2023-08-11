@@ -9,26 +9,24 @@
         WindowStyle="None"
         Title="matricularManualmente" Height="450" Width="800">
     <Grid>
-        <Label Content="Matricular:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="43,95,0,0" VerticalAlignment="Top" Height="31" Width="108" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="Apellido 1:" HorizontalAlignment="Left" Margin="43,136,0,0" VerticalAlignment="Top" Height="42" Width="130" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Apellido 2:" HorizontalAlignment="Left" Margin="43,182,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Correo:" HorizontalAlignment="Left" Margin="43,218,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="43,260,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Matricular" HorizontalAlignment="Center" Height="58" Margin="0,10,0,0" VerticalAlignment="Top" Width="200" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Margin="109,106,0,0" VerticalAlignment="Top" Height="41" Width="108" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="Apellido 1" HorizontalAlignment="Left" Margin="109,160,0,0" VerticalAlignment="Top" Height="42" Width="130" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Apellido 2" HorizontalAlignment="Left" Margin="109,211,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Correo" HorizontalAlignment="Left" Margin="109,256,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Contraseña" HorizontalAlignment="Left" Margin="109,307,0,0" VerticalAlignment="Top" Height="42" Width="132" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
 
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="669,7,-52,393">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
-                <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
-            </StackPanel>
-        </Button>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
 
-        <TextBox x:Name="txt_nombre" HorizontalAlignment="Left" Height="34" Margin="182,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged"/>
-        <TextBox x:Name="txt_apellido1" HorizontalAlignment="Left" Height="34" Margin="182,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido1_TextChanged"/>
-        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Left" Height="34" Margin="182,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido2_TextChanged"/>
-        <TextBox x:Name="txt_correo" HorizontalAlignment="Left" Height="34" Margin="182,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_correo_TextChanged"/>
-        <TextBox x:Name="txt_password" HorizontalAlignment="Left" Height="34" Margin="182,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="6,14,709,386"></Button>
 
-        <Button x:Name="btn_matricular" Content="Matricular" HorizontalAlignment="Left" Margin="657,374,0,0" VerticalAlignment="Top" Click="btn_matricular_Click"/>
+        <TextBox x:Name="txt_nombre" HorizontalAlignment="Center" Height="34" Margin="0,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged"/>
+        <TextBox x:Name="txt_apellido1" HorizontalAlignment="Center" Height="34" Margin="0,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido1_TextChanged"/>
+        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Center" Height="34" TextWrapping="Wrap" VerticalAlignment="Center" Width="182" TextChanged="txt_apellido2_TextChanged"/>
+        <TextBox x:Name="txt_correo" HorizontalAlignment="Center" Height="34" Margin="0,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_correo_TextChanged"/>
+        <TextBox x:Name="txt_password" HorizontalAlignment="Center" Height="34" Margin="0,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged"/>
+
+        <Button x:Name="btn_matricular" Content="Guardar" HorizontalAlignment="Left" Margin="657,374,0,0" VerticalAlignment="Top" Click="btn_matricular_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
 
     </Grid>
 </Window>
