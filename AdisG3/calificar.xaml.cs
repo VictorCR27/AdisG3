@@ -85,7 +85,7 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-                string query = @"SELECT e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
+                string query = @"SELECT te.id, e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
                         FROM asignacionesSemanas asg 
                         JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
                         JOIN estudiantes e ON e.id_estudiante = te.estudiante 
@@ -106,6 +106,7 @@ namespace AdisG3
                         {
                             Tarea tarea = new Tarea
                             {
+                                id = reader.GetInt32("id"),
                                 Nombre = reader.GetString("estudiante"),
                                 Titulo = reader.GetString("titulo"),
                                 Tipo = reader.GetString("tipo"),
@@ -134,6 +135,7 @@ namespace AdisG3
             public DateTime FechaEntrega { get; set; }
             public double Valor { get; set; }
             public int Calificacion { get; set; }
+            public int id { get; set; }
             public int IdAsignacion { get; set; }
             public string Tipo { get; internal set; }
         }
@@ -244,12 +246,14 @@ namespace AdisG3
             {
                 Tarea tareaSeleccionada = (Tarea)lvTareas.SelectedItem;
                 int idAsignacion = tareaSeleccionada.IdAsignacion;
+                int idTarea = tareaSeleccionada.id; // Captura el Id de la tarea seleccionada
 
-                // Crear e mostrar la ventana revTareas con el IdAsignacion de la tarea seleccionada
-                revTareas ventanaRevTareas = new revTareas(idAsignacion);
+                // Crear e mostrar la ventana revTareas con los IdAsignacion e Id de la tarea seleccionada
+                revTareas ventanaRevTareas = new revTareas(idAsignacion, idTarea);
                 ventanaRevTareas.ShowDialog();
             }
         }
+
 
 
 

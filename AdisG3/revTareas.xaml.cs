@@ -13,17 +13,19 @@ namespace AdisG3
         private string tareaArchivo;
 
         public int idAsignacion { get; set; }
+        public int idTarea { get; set; }
 
-        public revTareas(int idAsignacion)
+        public revTareas(int idAsignacion, int idTarea)
         {
             InitializeComponent();
 
             // Lógica para obtener y mostrar los datos en la interfaz
             ObtenerYMostrarDatos(idAsignacion);
+            ObtenerYMostrarDatos(idTarea);
         }
 
 
-        private void ObtenerYMostrarDatos(int idAsignacion)
+        private void ObtenerYMostrarDatos(int idTarea)
         {
             try
             {
@@ -41,7 +43,7 @@ namespace AdisG3
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@idTarea", idAsignacion);
+                        command.Parameters.AddWithValue("@idTarea", idTarea);
 
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {

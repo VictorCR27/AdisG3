@@ -7,7 +7,7 @@
             <TextBlock FontWeight="Bold" FontSize="20" Text="Detalles de la Tarea Enviada"/>
 
             <TextBlock FontSize="16" Text="Tarea de:"/>
-            <TextBox x:Name="txtNombreEstudiante" HorizontalAlignment="Left" FontSize="14" IsReadOnly="True" Height="28" Width="196"/>
+            <TextBox x:Name="txtNombreEstudiante" HorizontalAlignment="Left" FontSize="14" IsReadOnly="True" Height="28" Width="96"/>
 
             <TextBlock x:Name="txtTitulo" FontSize="16" Text="Título de la Tarea:" Margin="0 10 0 0"/>
             <TextBlock x:Name="txtTituloTarea" FontSize="16" Text=""/>
