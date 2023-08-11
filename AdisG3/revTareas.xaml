@@ -16,7 +16,10 @@
             <TextBox x:Name="txtTareaTXT" FontSize="14" IsReadOnly="True" Height="98"/>
 
             <TextBlock FontSize="16" Text="Archivo de la tarea:" Margin="0 10 0 0"/>
-            <TextBox x:Name="txtTareaArchivo" FontSize="14" IsReadOnly="True" Height="133"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtTareaArchivo" FontSize="14" Height="28"/>
+                <Button Content="Visualizar archivo" Click="DownloadButton_Click" Margin="0 50 0 0"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

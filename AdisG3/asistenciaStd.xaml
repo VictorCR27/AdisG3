@@ -17,9 +17,10 @@
         <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="764" Height="364" Margin="0,117,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" Width="150"/>
+                    <!--<GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" Width="150"/>
                     <GridViewColumn Header="Apellido Paterno" DisplayMemberBinding="{Binding ApellidoPaterno}" Width="170"/>
-                    <GridViewColumn Header="Apellido Materno" DisplayMemberBinding="{Binding ApellidoMaterno}" Width="170"/>
+                    <GridViewColumn Header="Apellido Materno" DisplayMemberBinding="{Binding ApellidoMaterno}" Width="170"/>-->
+                    <GridViewColumn Header="Semana" DisplayMemberBinding="{Binding semana}" Width="170"/>
                     <GridViewColumn Header="Attendance" DisplayMemberBinding="{Binding estado_estudiante}" Width="170"/>
                 </GridView>
             </ListView.View>

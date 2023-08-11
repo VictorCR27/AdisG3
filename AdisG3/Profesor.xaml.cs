@@ -322,6 +322,13 @@ namespace AdisG3
             notificacionesPfs.Show();
             this.Close();
         }
+
+        private void Grupos_click(object sender, RoutedEventArgs e)
+        {
+            gruposPfs gruposPfs = new gruposPfs(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            gruposPfs.Show();
+            this.Close();
+        }
     }
 
 }

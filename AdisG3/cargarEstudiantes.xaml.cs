@@ -20,6 +20,8 @@ namespace AdisG3
             internal string estado_asistencia;
 
             public string Nombre { get; set; }
+
+            public int semana { get; set; }
             public string ApellidoPaterno { get; set; }
             public string ApellidoMaterno { get; set; }
             public string estado_estudiante { get; set; }

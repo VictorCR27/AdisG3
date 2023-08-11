@@ -80,5 +80,6 @@
         <Button Content="Asistencia" HorizontalAlignment="Left" Height="41" Margin="61,219,0,0" VerticalAlignment="Top" Width="105" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="16" Click="Button_Asistencia" />
         <Rectangle HorizontalAlignment="Left" Height="48" Margin="43,440,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
         <Button Content="Notificaciones" HorizontalAlignment="Left" Height="40" Margin="45,444,0,0" VerticalAlignment="Top" Width="145" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_notificaciones" />
+        <Button Grid.Column="1" Content="Grupos" HorizontalAlignment="Left" Margin="577,66,0,0" VerticalAlignment="Top" Height="38" Width="111" Click="Grupos_click"/>
     </Grid>
 </Window>

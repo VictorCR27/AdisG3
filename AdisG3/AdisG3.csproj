@@ -173,6 +173,9 @@
     <Compile Include="EnviarAsignacionWindow.xaml.cs">
       <DependentUpon>EnviarAsignacionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gruposPfs.xaml.cs">
+      <DependentUpon>gruposPfs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="matricularManualmente.xaml.cs">
       <DependentUpon>matricularManualmente.xaml</DependentUpon>
     </Compile>
@@ -283,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EnviarAsignacionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gruposPfs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

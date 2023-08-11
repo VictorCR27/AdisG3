@@ -44,9 +44,9 @@ namespace AdisG3
 
             curso.Content = nombreCursoSeleccionado;
 
-            MessageBox.Show($"Id del curso seleccionado {id_cursoSeleccionado}");
-            MessageBox.Show($"Id del curso id_estudiante {id_estudiante}");
-            MessageBox.Show($"Id del id_Profe {idProfesorSeleccionado}");
+            //MessageBox.Show($"Id del curso seleccionado {id_cursoSeleccionado}");
+            //MessageBox.Show($"Id del curso id_estudiante {id_estudiante}");
+            //MessageBox.Show($"Id del id_Profe {idProfesorSeleccionado}");
 
 
             // Inicializar la lista de asignaciones de la semana

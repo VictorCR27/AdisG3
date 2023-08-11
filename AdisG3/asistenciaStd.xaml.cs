@@ -42,7 +42,7 @@ namespace AdisG3
             string connString = conn_db.GetConnectionString();
             selectedWeek = (int)cbox_semana.SelectedItem; // Actualiza la semana seleccionada
 
-            string query = "SELECT e.nombre, e.apellido1, e.apellido2, a.estado_estudiante " +
+            string query = "SELECT a.semana, a.estado_estudiante " +
                            "FROM estudiantes e " +
                            "JOIN asistencia a ON e.id_estudiante = a.id_estudiante " +
                            "WHERE e.id_estudiante = @id_estudiante AND a.semana = @semana AND a.id_curso = @id_cursoSeleccionado";
@@ -63,17 +63,17 @@ namespace AdisG3
                     {
                         if (reader.Read())
                         {
-                            string nombre = $"{reader.GetString(0)}";
-                            string apellido1 = $"{reader.GetString(1)}";
-                            string apellido2 = $"{reader.GetString(2)}";
-                            string estado = $"{reader.GetString(3)}";
+                            int semana = reader.GetInt32(0);
+                            string estado = $"{reader.GetString(1)}";
+                            //string apellido2 = $"{reader.GetString(2)}";
+                            //string estado = $"{reader.GetString(3)}";
 
                             // Agrega el estudiante a la colección
                             Estudiantes.Add(new Estudiante
                             {
-                                Nombre = nombre,
-                                ApellidoPaterno = apellido1,
-                                ApellidoMaterno = apellido2,
+                                semana = semana,
+                                //ApellidoPaterno = apellido1,
+                                //ApellidoMaterno = apellido2,
                                 estado_estudiante = estado
                             });
 

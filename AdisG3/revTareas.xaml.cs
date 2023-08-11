@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Net;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using System.IO;
 using static AdisG3.calificar;
 
 namespace AdisG3
@@ -59,7 +62,7 @@ namespace AdisG3
                                 txtTituloTarea.Text = tituloAsignacion;
                                 txtTareaTXT.Text = tareaTXT;
                                 txtTareaArchivo.Text = tareaArchivo;
-                                MessageBox.Show($"{idAsignacion}");
+                                //MessageBox.Show($"{idAsignacion}");
                             }
                         }
                     }
@@ -70,5 +73,39 @@ namespace AdisG3
                 MessageBox.Show("Error al obtener los datos: " + ex.Message);
             }
         }
+
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tareaArchivo))
+            {
+                try
+                {
+                    WebClient webClient = new WebClient();
+                    byte[] fileBytes = webClient.DownloadData(tareaArchivo);
+
+                    // Replace "filename.ext" with the actual filename from the URL or path
+                    string fileName = "filename.ext";
+
+                    // Save the file to the user's Downloads folder
+                    string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\" + fileName;
+                    File.WriteAllBytes(downloadsPath, fileBytes);
+
+                    // Open the downloaded file using the default associated program
+                    Process.Start(downloadsPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al descargar el archivo: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay archivo adjunto para descargar.");
+            }
+        }
+
+
+
+
     }
 }
