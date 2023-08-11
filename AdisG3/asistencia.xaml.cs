@@ -282,5 +282,10 @@ namespace AdisG3
         {
 
         }
+
+        private void StudentListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

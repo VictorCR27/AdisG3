@@ -1,38 +1,39 @@
-﻿<Window x:Class="AdisG3.AgregarTarea"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdisG3"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="AdisG3.AgregarTarea"
         mc:Ignorable="d"
         Title="AgregarTarea" Background="White"
         WindowStyle="None"
         Height="536" Width="982" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid Margin="0,0,15,-6">
-        <Label Content="Detalles de la Tarea" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="362" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <TextBox x:Name="txt_nombre_tarea" HorizontalAlignment="Left" Height="34" Margin="184,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="nombre_tarea_TextChanged"/>
-        <TextBox x:Name="txt_categoria_tarea" HorizontalAlignment="Left" Height="34" Margin="184,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="categoría_tarea_TextChanged"/>
-        <TextBox x:Name="txt_descripcion_tarea" HorizontalAlignment="Left" Height="34" Margin="184,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="descripción_tarea_TextChanged"/>
-        <DatePicker x:Name="fecha_entrega" Margin="184,243,602,0" VerticalAlignment="Top" Height="32"/>
-        <TextBox x:Name="txt_valor_tarea" HorizontalAlignment="Left" Height="34" Margin="184,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="descripción_tarea_TextChanged"/>
+        <Label x:Name="lb_nuevaTarea" Content="Detalles de la Tarea" HorizontalAlignment="Center" Height="71" Margin="0,25,0,0" VerticalAlignment="Top" Width="370" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
+        <TextBox x:Name="txt_nombre_tarea" HorizontalAlignment="Center" Height="34" Margin="0,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="nombre_tarea_TextChanged" CaretBrush="{x:Null}" BorderBrush="#FF532D69" FontFamily="Arial" RenderTransformOrigin="1,0.5" Background="{x:Null}" SelectionBrush="{x:Null}"/>
+        <TextBox x:Name="txt_categoria_tarea" HorizontalAlignment="Center" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="categoría_tarea_TextChanged" Margin="0,175,0,0" SelectionBrush="{x:Null}" CaretBrush="#FF532D69" BorderBrush="#FF532D69" Background="{x:Null}" FontFamily="Arial"/>
+        <TextBox x:Name="txt_descripcion_tarea" HorizontalAlignment="Center" Height="34" Margin="0,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="descripción_tarea_TextChanged" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF532D69" FontFamily="Arial"/>
+        <DatePicker x:Name="fecha_entrega" Margin="392,313,395,0" VerticalAlignment="Top" Height="32" BorderBrush="#FF532D69" FontFamily="Arial"/>
+        <TextBox x:Name="txt_valor_tarea" HorizontalAlignment="Center" Height="34" Margin="0,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="descripción_tarea_TextChanged" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="#FF532D69" FontFamily="Arial"/>
 
 
-        <Label Content=" Título:" HorizontalAlignment="Left" Margin="45,88,0,0" VerticalAlignment="Top" Height="42" Width="70" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="51,138,0,0" VerticalAlignment="Top" Height="42" Width="64" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Descripción:" HorizontalAlignment="Left" Margin="26,193,0,0" VerticalAlignment="Top" Height="42" Width="122" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Fecha de entrega:" HorizontalAlignment="Left" Margin="0,246,0,0" VerticalAlignment="Top" Height="42" Width="179" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Valor:" HorizontalAlignment="Left" Margin="46,288,0,0" VerticalAlignment="Top" Height="42" Width="78" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Semana:" HorizontalAlignment="Left" Margin="34,335,0,0" VerticalAlignment="Top" Height="42" Width="98" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content=" Título" HorizontalAlignment="Left" Margin="137,110,0,0" VerticalAlignment="Top" Height="42" Width="104" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Tipo" HorizontalAlignment="Left" Margin="143,184,0,0" VerticalAlignment="Top" Height="42" Width="64" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent"/>
+        <Label Content="Descripción" HorizontalAlignment="Left" Margin="143,246,0,0" VerticalAlignment="Top" Height="42" Width="142" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent"/>
+        <Label Content="Fecha de entrega" HorizontalAlignment="Left" Margin="137,320,0,0" VerticalAlignment="Top" Height="42" Width="205" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent"/>
+        <Label Content="Valor" HorizontalAlignment="Left" Margin="143,385,0,0" VerticalAlignment="Top" Height="42" Width="78" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent"/>
+        <Label Content="Semana" HorizontalAlignment="Left" Margin="143,448,0,0" VerticalAlignment="Top" Height="42" Width="98" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent"/>
 
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="162,340,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="211" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" RenderTransformOrigin="0.38,0.237">
-        </ComboBox>
+        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Center" Margin="0,459,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="182" Height="31" BorderBrush="#FF532D69" RenderTransformOrigin="0.38,0.237" FontFamily="Arial"/>
 
-        <Label Content=" Cambiar visibilidad:" HorizontalAlignment="Left" Margin="438,20,0,0" VerticalAlignment="Top" Height="42" Width="184" Foreground="Black" FontSize="20" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <ToggleButton x:Name="toggleVisibilidad" Content="" HorizontalAlignment="Left" Margin="448,54,0,0" VerticalAlignment="Top" Height="38" Width="150" Checked="toggleVisibilidad_Checked" Unchecked="toggleVisibilidad_Unchecked"/>
+        <Label Content="Visibilidad" HorizontalAlignment="Left" Margin="763,86,0,0" VerticalAlignment="Top" Height="42" Width="135" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <ToggleButton x:Name="toggleVisibilidad" Content="" HorizontalAlignment="Left" Margin="748,133,0,0" VerticalAlignment="Top" Height="38" Width="150" Checked="toggleVisibilidad_Checked" Unchecked="toggleVisibilidad_Unchecked" Background="#FF532D69" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold" IsChecked="False"/>
 
 
-        <Button  x:Name="button_Add" Content="Subir Tarea" HorizontalAlignment="Left" Margin="204,386,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
-        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="208,460,0,0" VerticalAlignment="Top" Height="38" Width="98" Click="button_Regresar_Click"/>
+        <Button  x:Name="button_Add" Content="Subir Tarea" HorizontalAlignment="Left" Margin="783,459,0,0" VerticalAlignment="Top" Height="44" Width="135" Click="button_Add_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
+        <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button x:Name="button_Regresar" Content="" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Height="65" Width="76" Click="button_Regresar_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
 
     </Grid>
 </Window>

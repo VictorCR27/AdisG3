@@ -10,7 +10,7 @@
         WindowStyle="None"
         Title="calificar" Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
-        <ListView x:Name="lvTareas" Margin="49,132,41,90" SelectionChanged="lvTareas_SelectionChanged" MouseDoubleClick="lvTareas_MouseDoubleClick" IsSynchronizedWithCurrentItem="True">
+        <ListView x:Name="lvTareas" Margin="82,159,82,95" SelectionChanged="lvTareas_SelectionChanged" MouseDoubleClick="lvTareas_MouseDoubleClick" IsSynchronizedWithCurrentItem="True" FontFamily="Arial" FontSize="12" Foreground="Black">
             <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>
@@ -30,18 +30,15 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
 
 
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="734,5,-204,635">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
-                <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
-            </StackPanel>
-        </Button>
-        <Label Content="Calificar:" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="347,56,384,0" VerticalAlignment="Top">
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,16,913,624"></Button>
+        <Label Content="Calificar" HorizontalAlignment="Center" Height="58" Margin="0,18,0,0" VerticalAlignment="Top" Width="184" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
+        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="366,101,366,0" VerticalAlignment="Top" FontFamily="Arial" FontWeight="Bold">
         </ComboBox>
 
-        <Button Content="Guardar" HorizontalAlignment="Left" Height="58" Margin="878,613,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Height="47" Margin="844,624,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold" FontSize="20" Background="#FF532D69"/>
 
     </Grid>
 </Window>

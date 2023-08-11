@@ -9,13 +9,10 @@
         WindowStyle="None"
         Title="anunciosStd" Height="607" Width="960" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1000">
     <Grid>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="734,13,-204,587">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
-                <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
-            </StackPanel>
-        </Button>
-        <Label Content="Anuncios" FontSize="40px" Margin="11,2,795,589"/>
-        <ListView Name="lvAnuncios" Margin="11,80,13,27">
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,914,586"/>
+        <Label Content="Anuncios" FontSize="40px" Margin="409,21,409,570" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <ListView x:Name="lvAnuncios" Margin="79,101,70,92" Foreground="Black" FontFamily="Arial" FontSize="15">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" Width="150"/>
@@ -23,5 +20,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
     </Grid>
 </Window>

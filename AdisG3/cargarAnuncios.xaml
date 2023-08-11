@@ -14,21 +14,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="1" Margin="20">
-            <TextBlock Text="Título de Anuncio:" FontSize="15" FontWeight="Bold" Height="28" Width="884"/>
-            <TextBox x:Name="txtTitulo" Width="298" Height="30" Margin="-580,0,0,10" TextChanged="txtTitulo_TextChanged" />
-
-            <TextBlock Text="Descripción de Anuncio:" FontSize="15" FontWeight="Bold" Margin="0,25,0,5" Height="44" Width="882"/>
-            <TextBox x:Name="txtDescripcion" Width="774" Height="233" Margin="-100,0,0,10" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextChanged="txtDescripcion_TextChanged" />
-
-            <Button Content="Publicar" Width="104" Margin="0,10,-800,10" Click="btnPublicar_Click"/>
-
-            <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="700,-700,-170,130">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
-                    <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+        <Label x:Name="lb_nuevoAnuncio" Content="Nuevo Anuncio" HorizontalAlignment="Left" Height="72" Margin="301,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="291" FontFamily="Segoe UI Emoji" FontSize="40" FontWeight="Bold" Background="{x:Null}" Foreground="#FF532D69"/>
+        <Label x:Name="lb_titulo" Content="Título" HorizontalAlignment="Left" Height="78" Margin="92,152,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="171" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji"/>
+        <Label x:Name="lb_descripcion" Content="Descripción" HorizontalAlignment="Left" Height="83" Margin="77,300,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="205" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji"/>
+        <TextBlock x:Name="txtDescripcion" HorizontalAlignment="Left" Height="108" Margin="373,342,0,0" Grid.RowSpan="2" TextWrapping="Wrap" Text="Digite una descripción" VerticalAlignment="Top" Width="438"/>
+        <TextBox x:Name="txtTitulo" HorizontalAlignment="Left" Height="39" Margin="373,152,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="50" Margin="811,419,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="109"/>
     </Grid>
 </Window>

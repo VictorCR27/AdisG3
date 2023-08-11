@@ -13,14 +13,14 @@
 
     <Grid Margin="0,0,10,11">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="251" />
-            <ColumnDefinition Width="739" />
+            <ColumnDefinition Width="233" />
+            <ColumnDefinition Width="757" />
         </Grid.ColumnDefinitions>
 
         <Rectangle HorizontalAlignment="Left" Width="214" Fill="#FF532D69" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Margin="0,-27,0,-37"/>
 
-        <Border HorizontalAlignment="Right" Margin="0,100,24,0" VerticalAlignment="Top" Width="715" Height="484" Background="#FF110616" Grid.Column="1">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White">
+        <Border HorizontalAlignment="Right" Margin="0,100,24,0" VerticalAlignment="Top" Width="706" Height="484" Background="#FF110616" Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White" Height="484" VerticalAlignment="Center" HorizontalAlignment="Center" Width="706">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
@@ -94,7 +94,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
             </StackPanel>
         </Button>
-        <Label x:Name="Dashboard" Content="¡Bienvenido!" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" Width="243" FontSize="40" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="87" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Label x:Name="Dashboard" Content="¡Bienvenido!" HorizontalAlignment="Center" Margin="0,15,0,0" VerticalAlignment="Top" Width="244" FontSize="40" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="87" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
 
     </Grid>
 
