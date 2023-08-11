@@ -9,11 +9,12 @@
         mc:Ignorable="d"
         Title="notasPfs" Height="607" Width="960" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1000">
     <Grid>
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Center" Margin="0,43,0,0" VerticalAlignment="Top" Width="295" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" />
+        <ComboBox x:Name="cbox_semana" SelectedValuePath="Content" HorizontalAlignment="Center" Margin="0,43,0,0" VerticalAlignment="Top" Width="295" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" />
         <Label x:Name="semana_titulo" Content="Calificaciones" HorizontalAlignment="Left" Margin="12,4,0,0" VerticalAlignment="Top" Width="249" FontSize="36" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Height="56" />
         <ListView x:Name="lvAsignacionesSemana" Margin="38,125,24,39" SelectionChanged="lvAsignacionesSemana_SelectionChanged" FontFamily="Arial" FontSize="12">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding estudiante}" Width="110" />
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding titulo}" />
                     <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding tipo}" />
                     <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding descripcion}" />

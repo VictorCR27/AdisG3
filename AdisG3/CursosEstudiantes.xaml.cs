@@ -184,7 +184,9 @@ namespace AdisG3
 
         private void Button_Anuncios(object sender, RoutedEventArgs e)
         {
-
+            anunciosStd anunciosStd = new anunciosStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
+            anunciosStd.Show();
+            this.Close();
         }
 
         private void Button_Nota(object sender, RoutedEventArgs e)

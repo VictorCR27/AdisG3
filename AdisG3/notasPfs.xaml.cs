@@ -38,6 +38,7 @@ namespace AdisG3
 
             List<int> semanas = Enumerable.Range(1, 15).ToList();
             cbox_semana.ItemsSource = semanas;
+
         }
 
 
@@ -53,18 +54,17 @@ namespace AdisG3
             {
                 connection.Open();
 
-                string query = @"SELECT e.nombre AS estudiante, asg.asignacionesSemanas, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
+                string query = @"SELECT e.nombre AS estudiante, asg.asignacionesSemanas, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion  
                                 FROM asignacionesSemanas asg 
                                 JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
-                                JOIN estudiantes e ON e.id_estudiante = te.estudiante 
-                                WHERE te.profesor = @idProfesor AND te.curso = @idCurso AND asg.semana = @semana AND te.estudiante = @id_estudiante";
+                                JOIN estudiantes e ON e.id_estudiante = te.estudiante
+                                WHERE te.profesor = @idProfesor AND te.curso = @idCurso AND asg.semana = @semana";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@idProfesor", id_profesor);
                     command.Parameters.AddWithValue("@idCurso", id_cursoSeleccionado);
                     command.Parameters.AddWithValue("@semana", semana);
-                    command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -101,11 +101,14 @@ namespace AdisG3
 
         private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if (cbox_semana.SelectedItem != null)
-            {
-                int semanaSeleccionada = (int)cbox_semana.SelectedItem;
-                CargarTareasEnviadas(semanaSeleccionada);
-            }
+            // Obtener la semana seleccionada del ComboBox
+            int semanaSeleccionada = (int)cbox_semana.SelectedItem;
+
+            // Desvincular el ListView de la lista tareasEnviadas temporalmente
+            lvAsignacionesSemana.ItemsSource = null;
+
+            // Llenar el ListView con las tareas enviadas de la semana seleccionada
+            CargarTareasEnviadas(semanaSeleccionada);
         }
 
         private void lvAsignacionesSemana_SelectionChanged(object sender, SelectionChangedEventArgs e)
