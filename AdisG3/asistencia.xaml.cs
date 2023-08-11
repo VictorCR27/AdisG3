@@ -12,8 +12,8 @@ using static AdisG3.cargarEstudiantes;
 namespace AdisG3
 {
 
-        public partial class asistencia : Window
-        {
+    public partial class asistencia : Window
+    {
 
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
@@ -114,7 +114,7 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Profesor profesor = new Profesor(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            Profesor profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             profesor.Show();
             this.Close();
         }
@@ -133,7 +133,24 @@ namespace AdisG3
             {
                 connection.Open();
 
-                int selectedWeek = (int)cbox_semana.SelectedItem; // Obtener la semana seleccionada
+                if (cbox_semana.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor, selecciona una semana válida.");
+                    return;
+                }
+
+                string selectedWeekStr = cbox_semana.SelectedItem.ToString();
+                if (selectedWeekStr.StartsWith("Semana ") && int.TryParse(selectedWeekStr.Substring(7), out int selectedWeek))
+                {
+                    // Aquí tienes el valor de selectedWeek como un entero válido
+                    // Resto de tu código...
+                }
+                else
+                {
+                    MessageBox.Show("La semana seleccionada no tiene el formato esperado.");
+                    return;
+                }
+
 
                 foreach (Estudiante estudiante in Estudiantes)
                 {
@@ -194,7 +211,7 @@ namespace AdisG3
                                     // Si no existe un registro, realizar la inserción
                                     string insertQuery = "INSERT INTO asistencia (id_profesor, id_curso, id_estudiante, nombre, estado_estudiante, semana) " +
                                                          "VALUES (@id_profesor, @id_curso, @id_estudiante, @nombre, @estado_estudiante, @semana)";
-                                    
+
                                     using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
                                     {
                                         insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);

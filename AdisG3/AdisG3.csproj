@@ -173,6 +173,9 @@
     <Compile Include="matricularManualmente.xaml.cs">
       <DependentUpon>matricularManualmente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="notasPfs.xaml.cs">
+      <DependentUpon>notasPfs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="notasStd.xaml.cs">
       <DependentUpon>notasStd.xaml</DependentUpon>
     </Compile>
@@ -314,6 +317,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="matricularManualmente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="notasPfs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

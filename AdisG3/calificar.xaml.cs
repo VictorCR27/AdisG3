@@ -86,10 +86,10 @@ namespace AdisG3
             {
                 connection.Open();
                 string query = @"SELECT te.id, e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
-                        FROM asignacionesSemanas asg 
-                        JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
-                        JOIN estudiantes e ON e.id_estudiante = te.estudiante 
-                        WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
+                FROM asignacionesSemanas asg 
+                JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
+                JOIN estudiantes e ON e.id_estudiante = te.estudiante 
+                WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -106,15 +106,15 @@ namespace AdisG3
                         {
                             Tarea tarea = new Tarea
                             {
-                                id = reader.GetInt32("id"),
-                                Nombre = reader.GetString("estudiante"),
-                                Titulo = reader.GetString("titulo"),
-                                Tipo = reader.GetString("tipo"),
-                                Descripcion = reader.GetString("descripcion"),
-                                FechaEntrega = reader.GetDateTime("FechaEntrega"),
-                                Valor = reader.GetDouble("valor"),
-                                Calificacion = reader.GetInt32("calificacion"),
-                                IdAsignacion = reader.GetInt32("idAsignacion")
+                                id = reader.IsDBNull(reader.GetOrdinal("id")) ? -1 : reader.GetInt32("id"),
+                                Nombre = reader.IsDBNull(reader.GetOrdinal("estudiante")) ? string.Empty : reader.GetString("estudiante"),
+                                Titulo = reader.IsDBNull(reader.GetOrdinal("titulo")) ? string.Empty : reader.GetString("titulo"),
+                                Tipo = reader.IsDBNull(reader.GetOrdinal("tipo")) ? string.Empty : reader.GetString("tipo"),
+                                Descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString("descripcion"),
+                                FechaEntrega = reader.IsDBNull(reader.GetOrdinal("FechaEntrega")) ? DateTime.MinValue : reader.GetDateTime("FechaEntrega"),
+                                Valor = reader.IsDBNull(reader.GetOrdinal("valor")) ? 0.0 : reader.GetDouble("valor"),
+                                Calificacion = reader.IsDBNull(reader.GetOrdinal("calificacion")) ? -1 : reader.GetInt32("calificacion"),
+                                IdAsignacion = reader.IsDBNull(reader.GetOrdinal("idAsignacion")) ? -1 : reader.GetInt32("idAsignacion")
                             };
 
                             tareasEnviadas.Add(tarea);
@@ -125,6 +125,7 @@ namespace AdisG3
                 }
             }
         }
+
 
 
         public class Tarea

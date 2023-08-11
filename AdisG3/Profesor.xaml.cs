@@ -282,7 +282,9 @@ namespace AdisG3
 
         private void Button_Nota(object sender, RoutedEventArgs e)
         {
-
+            notasPfs notasPfs = new notasPfs(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            notasPfs.Show();
+            this.Close();
         }
 
         private void Button_estudiantes(object sender, RoutedEventArgs e)
