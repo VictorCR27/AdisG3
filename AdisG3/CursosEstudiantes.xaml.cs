@@ -140,7 +140,7 @@ namespace AdisG3
             {
                 connection.Open();
 
-                string query = "SELECT titulo, tipo, descripcion, FechaEntrega, valor FROM asignacionesSemanas WHERE id_curso = @id_curso AND semana = @semana";
+                string query = "SELECT titulo, tipo, descripcion, FechaEntrega, valor, Visibilidad FROM asignacionesSemanas WHERE id_curso = @id_curso AND semana = @semana AND Visibilidad = 1";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {

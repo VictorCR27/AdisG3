@@ -17,6 +17,8 @@ namespace AdisG3
         public String Valor { get; set; }
 
         public String Semanas { get; set; }
+        public int Id_Asignacion { get; internal set; }
+        public bool Visibilidad { get; internal set; }
 
         public Datos_Tareas(string nombre, string categoria, string descripcion, string fecha, string valor, string semanas)
         {

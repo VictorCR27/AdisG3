@@ -6,29 +6,32 @@
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
         WindowStyle="None"
-        Height="536" Width="891" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
-    <Grid Margin="3,0,60,-6">
-        <Label Content="Editar la Tarea" HorizontalAlignment="Left" Height="58" Margin="26,18,0,0" VerticalAlignment="Top" Width="362" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
-        <TextBox x:Name="txt_nombre_tarea" HorizontalAlignment="Left" Height="34" Margin="287,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" TextChanged="nombre_tarea_TextChanged"/>
-        <TextBox x:Name="txt_categoria_tarea" HorizontalAlignment="Left" Height="34" Margin="285,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" TextChanged="categoría_tarea_TextChanged"/>
-        <TextBox x:Name="txt_descripcion_tarea" HorizontalAlignment="Left" Height="34" Margin="286,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TextChanged="descripción_tarea_TextChanged"/>
-        <DatePicker x:Name="fecha_entrega" Margin="288,267,367,0" VerticalAlignment="Top" Height="32"/>
-        <TextBox x:Name="txt_valor_tarea" HorizontalAlignment="Left" Height="34" Margin="287,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" TextChanged="descripción_tarea_TextChanged"/>
+        Height="536" Width="982" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+    <Grid Margin="0,0,15,-6">
+        <Label Content="Detalles de la Tarea" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="362" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
+        <TextBox x:Name="txt_nombre_tarea" HorizontalAlignment="Left" Height="34" Margin="184,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="nombre_tarea_TextChanged"/>
+        <TextBox x:Name="txt_categoria_tarea" HorizontalAlignment="Left" Height="34" Margin="184,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="categoría_tarea_TextChanged"/>
+        <TextBox x:Name="txt_descripcion_tarea" HorizontalAlignment="Left" Height="34" Margin="184,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="descripción_tarea_TextChanged"/>
+        <DatePicker x:Name="fecha_entrega" Margin="184,243,602,0" VerticalAlignment="Top" Height="32"/>
+        <TextBox x:Name="txt_valor_tarea" HorizontalAlignment="Left" Height="34" Margin="184,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="descripción_tarea_TextChanged"/>
 
 
-        <Label Content=" Título:" HorizontalAlignment="Left" Margin="128,109,0,0" VerticalAlignment="Top" Height="42" Width="70" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
-        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="134,159,0,0" VerticalAlignment="Top" Height="42" Width="64" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Descripción:" HorizontalAlignment="Left" Margin="109,214,0,0" VerticalAlignment="Top" Height="42" Width="122" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Fecha de entrega:" HorizontalAlignment="Left" Margin="83,267,0,0" VerticalAlignment="Top" Height="42" Width="179" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Valor:" HorizontalAlignment="Left" Margin="129,309,0,0" VerticalAlignment="Top" Height="42" Width="78" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
-        <Label Content="Semana:" HorizontalAlignment="Left" Margin="117,356,0,0" VerticalAlignment="Top" Height="42" Width="98" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content=" Título:" HorizontalAlignment="Left" Margin="45,88,0,0" VerticalAlignment="Top" Height="42" Width="70" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <Label Content="Tipo:" HorizontalAlignment="Left" Margin="51,138,0,0" VerticalAlignment="Top" Height="42" Width="64" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content="Descripción:" HorizontalAlignment="Left" Margin="26,193,0,0" VerticalAlignment="Top" Height="42" Width="122" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content="Fecha de entrega:" HorizontalAlignment="Left" Margin="0,246,0,0" VerticalAlignment="Top" Height="42" Width="179" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content="Valor:" HorizontalAlignment="Left" Margin="46,288,0,0" VerticalAlignment="Top" Height="42" Width="78" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
+        <Label Content="Semana:" HorizontalAlignment="Left" Margin="34,335,0,0" VerticalAlignment="Top" Height="42" Width="98" Foreground="Black" FontSize="24" FontFamily="Tw Cen MT" Background="Transparent"/>
 
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="286,355,0,0" ItemsSource="{Binding semanas}"  VerticalAlignment="Top" Width="175" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_2" RenderTransformOrigin="0.38,0.237">
+        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="162,340,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="211" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" RenderTransformOrigin="0.38,0.237">
         </ComboBox>
-        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="316,458,0,0" VerticalAlignment="Top" Height="38" Width="101" Click="button_Regresar_Click"/>
-        <Button x:Name="button_Editar" Content="Editar" HorizontalAlignment="Left" Margin="316,408,0,0" VerticalAlignment="Top" Height="38" Width="99" Click="button_Editar_Click"/>
+
+        <Label Content=" Cambiar visibilidad:" HorizontalAlignment="Left" Margin="438,20,0,0" VerticalAlignment="Top" Height="42" Width="184" Foreground="Black" FontSize="20" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <ToggleButton x:Name="toggleVisibilidad" Content="" HorizontalAlignment="Left" Margin="448,54,0,0" VerticalAlignment="Top" Height="38" Width="150" Checked="toggleVisibilidad_Checked" Unchecked="toggleVisibilidad_Unchecked"/>
 
 
+        <Button  x:Name="button_Add" Content="Subir Tarea" HorizontalAlignment="Left" Margin="204,386,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
+        <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="208,460,0,0" VerticalAlignment="Top" Height="38" Width="98" Click="button_Regresar_Click"/>
 
     </Grid>
 </Window>

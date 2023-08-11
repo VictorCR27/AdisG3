@@ -56,9 +56,8 @@ namespace AdisG3
         }
 
 
-        private void button_Editar_Click(object sender, RoutedEventArgs e)
+        private void button_Add_Click(object sender, RoutedEventArgs e)
         {
-
             if (cbox_semana.SelectedItem != null && !string.IsNullOrWhiteSpace(txt_categoria_tarea.Text) &&
                 !string.IsNullOrWhiteSpace(txt_nombre_tarea.Text) && !string.IsNullOrWhiteSpace(txt_descripcion_tarea.Text))
             {
@@ -68,9 +67,10 @@ namespace AdisG3
                 string descripcion = txt_descripcion_tarea.Text;
                 string tipo = txt_categoria_tarea.Text;
                 DateTime fechaEntrega;
-                //bool visibilidad = true;
-                int valor;
+                bool visibilidad = toggleVisibilidad.IsChecked ?? false;
+                int valor; // Asignar un valor inicial aquí
 
+                // Validar y obtener el valor
                 if (!int.TryParse(txt_valor_tarea.Text, out valor))
                 {
                     MessageBox.Show("El valor debe ser un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -103,9 +103,8 @@ namespace AdisG3
                 {
                     connection.Open();
 
-
                     // Crear la consulta SQL UPDATE
-                    string query = "UPDATE asignacionesSemanas SET titulo = @titulo, tipo = @tipo, descripcion = @descripcion, FechaEntrega = @fechaEntrega, valor = @valor, semana = @semana WHERE asignacionesSemanas = @idAsignacion;";
+                    string query = "UPDATE asignacionesSemanas SET titulo = @titulo, tipo = @tipo, descripcion = @descripcion, FechaEntrega = @fechaEntrega, valor = @valor, semana = @semana, Visibilidad = @visibilidad WHERE asignacionesSemanas = @idAsignacion;";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
@@ -116,6 +115,7 @@ namespace AdisG3
                         command.Parameters.AddWithValue("@fechaEntrega", fechaEntrega);
                         command.Parameters.AddWithValue("@valor", valor);
                         command.Parameters.AddWithValue("@semana", semana);
+                        command.Parameters.AddWithValue("@visibilidad", visibilidad);
                         command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
 
                         // Ejecutar la consulta
@@ -131,16 +131,6 @@ namespace AdisG3
                 txt_descripcion_tarea.Clear();
                 txt_categoria_tarea.Clear();
                 txt_valor_tarea.Clear();
-
-                //MessageBox.Show(nombreAsignacion);
-                //MessageBox.Show(tipo);
-                //MessageBox.Show(descripcion);
-                //MessageBox.Show(fechaEntrega.ToString());
-                //MessageBox.Show(valor.ToString());
-                //MessageBox.Show(semana.ToString());
-                //MessageBox.Show(idAsignacion.ToString());
-
-
             }
             else
             {
@@ -168,5 +158,16 @@ namespace AdisG3
         {
 
         }
+
+        private void toggleVisibilidad_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void toggleVisibilidad_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // Código para manejar el evento toggleVisibilidad_Unchecked
+        }
+
     }
 }

@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="AgregarTarea" Background="White"
         WindowStyle="None"
-        Height="536" Width="968" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
-    <Grid Margin="0,0,0,-6">
+        Height="536" Width="982" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+    <Grid Margin="0,0,15,-6">
         <Label Content="Detalles de la Tarea" HorizontalAlignment="Left" Height="58" Margin="10,10,0,0" VerticalAlignment="Top" Width="362" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium"/>
         <TextBox x:Name="txt_nombre_tarea" HorizontalAlignment="Left" Height="34" Margin="184,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="nombre_tarea_TextChanged"/>
         <TextBox x:Name="txt_categoria_tarea" HorizontalAlignment="Left" Height="34" Margin="184,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="categoría_tarea_TextChanged"/>
@@ -27,36 +27,12 @@
         <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="162,340,0,0" ItemsSource="{Binding Semanas}" VerticalAlignment="Top" Width="211" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" RenderTransformOrigin="0.38,0.237">
         </ComboBox>
 
+        <Label Content=" Cambiar visibilidad:" HorizontalAlignment="Left" Margin="438,20,0,0" VerticalAlignment="Top" Height="42" Width="184" Foreground="Black" FontSize="20" FontFamily="Tw Cen MT" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
+        <ToggleButton x:Name="toggleVisibilidad" Content="" HorizontalAlignment="Left" Margin="448,54,0,0" VerticalAlignment="Top" Height="38" Width="150" Checked="toggleVisibilidad_Checked" Unchecked="toggleVisibilidad_Unchecked"/>
 
-        <ListBox x:Name="lb_Tareas" Margin="407,90,0,83" SelectionChanged="lb_Tareas_SelectionChanged_1" HorizontalAlignment="Left" Width="538">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Name="Nombre" Grid.Column="0" Text="{Binding Nombre}"></TextBlock>
-                        <TextBlock Name="Categoria" Grid.Column="1" Text="{Binding Categoria}"></TextBlock>
-                        <TextBlock Name="Descripcion" Grid.Column="2" Text="{Binding Descripcion}"></TextBlock>
-                        <TextBlock Name="Fecha" Grid.Column="3" Text="{Binding Fecha}"></TextBlock>
-                        <TextBlock Name="Valor" Grid.Column="4" Text="{Binding Valor}"></TextBlock>
-                        <TextBlock Name="Semanas" Grid.Column="5" Text="{Binding Semanas}"></TextBlock>
-
-
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
         <Button  x:Name="button_Add" Content="Subir Tarea" HorizontalAlignment="Left" Margin="204,386,0,0" VerticalAlignment="Top" Height="44" Width="111" Click="button_Add_Click"/>
         <Button x:Name="button_Regresar" Content="Regresar" HorizontalAlignment="Left" Margin="208,460,0,0" VerticalAlignment="Top" Height="38" Width="98" Click="button_Regresar_Click"/>
-
-
 
     </Grid>
 </Window>
