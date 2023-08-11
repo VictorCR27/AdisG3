@@ -238,79 +238,17 @@ namespace AdisG3
             }
         }
 
-
         private void lvTareas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lvTareas.SelectedItem != null)
             {
                 Tarea tareaSeleccionada = (Tarea)lvTareas.SelectedItem;
                 int idAsignacion = tareaSeleccionada.IdAsignacion;
-                string nombreEstudiante = tareaSeleccionada.Nombre;
-                string tituloTarea = tareaSeleccionada.Titulo;
 
-                // Realizar una consulta a la base de datos para obtener tareaTXT y tareaArchivo
-                string tareaTXT = ObtenerTareaTXTDesdeBD(idAsignacion);
-                string tareaArchivo = ObtenerTareaArchivoDesdeBD(idAsignacion);
-
-                // Crear e mostrar la ventana revTareas con los datos
-                revTareas ventanaRevTareas = new revTareas(nombreEstudiante, tituloTarea, tareaTXT, tareaArchivo);
+                // Crear e mostrar la ventana revTareas con el IdAsignacion de la tarea seleccionada
+                revTareas ventanaRevTareas = new revTareas(idAsignacion);
                 ventanaRevTareas.ShowDialog();
             }
-        }
-
-
-        private string ObtenerTareaTXTDesdeBD(int idAsignacion)
-        {
-            string connString = conn_db.GetConnectionString();
-            string tareaTXT = string.Empty;
-
-            using (MySqlConnection connection = new MySqlConnection(connString))
-            {
-                connection.Open();
-
-                string query = "SELECT tareaTXT FROM TareasEnviadas WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante"; 
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
-                    command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
-
-                    object result = command.ExecuteScalar();
-                    if (result != null)
-                    {
-                        tareaTXT = result.ToString();
-                    }
-                }
-            }
-
-            return tareaTXT;
-        }
-
-        private string ObtenerTareaArchivoDesdeBD(int idAsignacion)
-        {
-            string connString = conn_db.GetConnectionString();
-            string tareaArchivo = string.Empty;
-
-            using (MySqlConnection connection = new MySqlConnection(connString))
-            {
-                connection.Open();
-
-                string query = "SELECT tareaArchivo FROM TareasEnviadas WHERE id_asignacionSemana = @idAsignacion AND estudiante = @idEstudiante"; 
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@idAsignacion", idAsignacion);
-                    command.Parameters.AddWithValue("@idEstudiante", idEstudiante);
-
-                    object result = command.ExecuteScalar();
-                    if (result != null)
-                    {
-                        tareaArchivo = result.ToString();
-                    }
-                }
-            }
-
-            return tareaArchivo;
         }
 
 

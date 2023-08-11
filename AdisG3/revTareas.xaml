@@ -1,37 +1,22 @@
 ﻿<Window x:Class="AdisG3.revTareas"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AdisG3"
-        mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Title="revTareas"  Height="690" Width="960" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
-        
+        Title="Detalles de la Tarea Enviada" Height="500" Width="700">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Margin="10">
+        <StackPanel Margin="20">
             <TextBlock FontWeight="Bold" FontSize="20" Text="Detalles de la Tarea Enviada"/>
-        </StackPanel>
 
-        <StackPanel Margin="6,43,10,10" Grid.RowSpan="2">
             <TextBlock FontSize="16" Text="Tarea de:"/>
-            <TextBox x:Name="txtNombreEstudiante" FontSize="14" Text="{Binding NombreEstudiante}" IsReadOnly="True" Height="28"/>
+            <TextBox x:Name="txtNombreEstudiante" HorizontalAlignment="Left" FontSize="14" IsReadOnly="True" Height="28" Width="196"/>
 
-            <TextBlock x:Name="txtTituloTarea" FontSize="16" Text="Título de la Tarea:" Margin="0 10 0 0"/>
-            <TextBlock FontSize="14" Text="{Binding TituloTarea}"/>
-
-            <TextBlock FontSize="16" Text="Descripción de la Tarea:" Margin="0 10 0 0"/>
-            <TextBlock FontSize="14" Text="{Binding DescripcionTarea}"/>
+            <TextBlock x:Name="txtTitulo" FontSize="16" Text="Título de la Tarea:" Margin="0 10 0 0"/>
+            <TextBlock x:Name="txtTituloTarea" FontSize="16" Text=""/>
 
             <TextBlock FontSize="16" Text="Tarea:" Margin="0 10 0 0"/>
-            <TextBox x:Name="txtTareaTXT" FontSize="14" Text="{Binding TareaTXT}" IsReadOnly="True" Height="134"/>
-            <TextBlock FontSize="16" Text="Archivo de la tarea:" Height="28"/>
-            <TextBox x:Name="txtTareaArchivo" FontSize="14" Text="{Binding TareaArchivo}" IsReadOnly="True" Height="300"/>
+            <TextBox x:Name="txtTareaTXT" FontSize="14" IsReadOnly="True" Height="98"/>
+
+            <TextBlock FontSize="16" Text="Archivo de la tarea:" Margin="0 10 0 0"/>
+            <TextBox x:Name="txtTareaArchivo" FontSize="14" IsReadOnly="True" Height="133"/>
         </StackPanel>
     </Grid>
 </Window>
