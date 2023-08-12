@@ -35,11 +35,46 @@ namespace AdisG3
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             //MessageBox.Show("Esta es el Id profesor:" + id_profesor);
 
+            string connString = conn_db.GetConnectionString();
+            string perfilQuery = "SELECT nombre, apellido1, apellido2, correo, password FROM profesores WHERE id_profesor = @id_profesor";
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                connection.Open();
+
+                // Obtener información del perfil del usuario
+                using (MySqlCommand perfilCommand = new MySqlCommand(perfilQuery, connection))
+                {
+                    perfilCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+
+                    using (MySqlDataReader perfilReader = perfilCommand.ExecuteReader())
+                    {
+                        if (perfilReader.Read())
+                        {
+                            string nombreUsuario = perfilReader.GetString("nombre");
+                            string apellido1Usuario = perfilReader.GetString("apellido1");
+                            string apellido2Usuario = perfilReader.GetString("apellido2");
+                            string correoUsuario = perfilReader.GetString("correo");
+                            string password = perfilReader.GetString("password");
+
+                            // Combinar los apellidos y nombre en un solo campo
+                            string nombreCompleto = $"{nombreUsuario} {apellido1Usuario} {apellido2Usuario}";
+
+                            // Mostrar la información en los controles de la interfaz
+                            NombreTextBlock.Text = nombreCompleto;
+                            CorreoTextBlock.Text = correoUsuario;
+                            passwordtxt.Text = password;
+                        }
+                    }
+                }
+            }
+
+
             string query = "SELECT count(*) from asignacionesProfesor WHERE id_profesor = @id";
             string cantidad;
 
             // Cadena de conexión
-            string connString = conn_db.GetConnectionString();
+            //string connString = conn_db.GetConnectionString();
 
             using (MySqlConnection connection = new MySqlConnection(connString))
             {

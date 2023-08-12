@@ -23,25 +23,34 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White" Height="484" VerticalAlignment="Center" HorizontalAlignment="Center" Width="706">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
+
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                         <StackPanel Margin="100,0,100,160" VerticalAlignment="Center">
-                            <TextBlock Text="Editar Perfil" Foreground="Black" FontSize="20" FontWeight="Bold" Margin="50,50,50,0" Width="auto" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Perfil" Foreground="White" FontSize="20" FontWeight="Bold" Margin="50,50,50,0" Width="auto" HorizontalAlignment="Center"/>
+
+                            <!-- Espacio para la foto -->
+                            <Border Width="120" Height="120" Background="#fff" BorderBrush="#FF313131" BorderThickness="1">
+                                <Image Source="/img/studen_icon.png" Stretch="UniformToFill"/>
+                            </Border>
+
                             <!-- Opciones de perfil -->
-                            <StackPanel Margin="0,0,0,10">
+                            <StackPanel Margin="0,10,0,10">
                                 <TextBlock Text="Nombre:" Foreground="Black" FontSize="16" Width="172"/>
-                                <TextBox Text="" Foreground="White" FontSize="16" Background="#FF171717" BorderBrush="#FF313131" BorderThickness="1" Padding="5" Width="168"/>
+                                <TextBlock x:Name="NombreTextBlock" Foreground="Black" FontSize="16" Background="#fff" Padding="5" Width="168"/>
                             </StackPanel>
+
                             <StackPanel Margin="0,0,0,10">
                                 <TextBlock Text="Correo electrónico:" Foreground="Black" FontSize="16" Width="176"/>
-                                <TextBox Text="" Foreground="White" FontSize="16" Background="#FF171717" BorderBrush="#FF313131" BorderThickness="1" Padding="5" Width="168"/>
+                                <TextBlock x:Name="CorreoTextBlock" Foreground="Black" FontSize="16" Background="#fff" Padding="5" Width="168"/>
                             </StackPanel>
+
                             <StackPanel Margin="0,0,0,10">
                                 <TextBlock Text="Contraseña:" Foreground="Black" FontSize="16" Width="172"/>
-                                <PasswordBox Password="" Foreground="White" FontSize="16" Background="#FF171717" BorderBrush="#FF313131" BorderThickness="1" Padding="5" Width="172"/>
+                                <TextBlock x:Name="passwordtxt" Foreground="Black" FontSize="16" Background="#fff" Padding="5" Width="168"/>
                             </StackPanel>
-                            <Button Content="Guardar Cambios" Background="#FF845E94" Foreground="Black" FontSize="16" Padding="10" HorizontalAlignment="Center" Height="48"/>
                         </StackPanel>
                     </Grid>
+                    
                     <Grid x:Name="CursosGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible">
                         <ItemsControl>
                             <ItemsControl.ItemsPanel>

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="Asistencia" Height="560" Width="800">
+        Title="Asistencia" Height="600" Width="900">
 
     <Window.Resources>
         <SolidColorBrush x:Key="PresenteColor" Color="Green"/>
@@ -20,9 +20,9 @@
     <Grid>
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,703,496"/>
 
-        <Label Content="Asistencia" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="194" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold" Margin="296,10,0,0"/>
+        <Label Content="Asistencia" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="194" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold" Margin="357,10,0,0"/>
         <ComboBox x:Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="31" Margin="265,75,279,0" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold" FontFamily="Arial"/>
-        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="624" Height="364" Margin="0,117,0,0" Foreground="Black" FontFamily="Arial" FontSize="12" SelectionChanged="StudentListView_SelectionChanged">
+        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="864" Height="413" Foreground="Black" FontFamily="Arial" FontSize="12" SelectionChanged="StudentListView_SelectionChanged" Margin="15,122,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" Width="150"/>
@@ -63,7 +63,7 @@
         </ListView>
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
 
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="656,499,0,0" VerticalAlignment="Top" Height="39" Width="114" Click="Guardar_Click" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold" FontSize="20"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="760,545,0,0" VerticalAlignment="Top" Height="39" Width="114" Click="Guardar_Click" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold" FontSize="20"/>
 
     </Grid>
 </Window>

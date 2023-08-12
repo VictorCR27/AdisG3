@@ -68,7 +68,7 @@ namespace AdisG3
                         else
                         {
                             // El estudiante no fue encontrado en la base de datos
-                            MessageBox.Show("Estudiante no encontrado en la base de datos.");
+                            //MessageBox.Show("No hay estudiantes.");
                         }
                     }
                 }
