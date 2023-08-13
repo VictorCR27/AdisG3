@@ -110,5 +110,6 @@ namespace AdisG3
                 txtArchivoSeleccionado.Text = filePath;
             }
         }
+
     }
 }

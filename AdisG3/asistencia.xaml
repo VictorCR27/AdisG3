@@ -22,7 +22,7 @@
 
         <Label Content="Asistencia" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="194" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold" Margin="357,10,0,0"/>
         <ComboBox x:Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="31" Margin="265,75,279,0" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold" FontFamily="Arial"/>
-        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="864" Height="413" Foreground="Black" FontFamily="Arial" FontSize="12" SelectionChanged="StudentListView_SelectionChanged" Margin="15,122,0,0">
+        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="638" Height="413" Foreground="Black" FontFamily="Arial" FontSize="12" SelectionChanged="StudentListView_SelectionChanged" Margin="124,132,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" Width="150"/>

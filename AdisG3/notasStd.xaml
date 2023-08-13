@@ -9,9 +9,8 @@
         WindowStyle="None"
         Title="notasStd" Height="607" Width="960" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1000">
     <Grid>
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Center" Margin="0,43,0,0" VerticalAlignment="Top" Width="295" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" />
-        <Label x:Name="semana_titulo" Content="Calificaciones" HorizontalAlignment="Left" Margin="12,4,0,0" VerticalAlignment="Top" Width="249" FontSize="36" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Height="56" />
-        <ListView x:Name="lvAsignacionesSemana" Margin="38,125,24,39" SelectionChanged="lvAsignacionesSemana_SelectionChanged" FontFamily="Arial" FontSize="12">
+        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Width="296" Height="31" BorderBrush="#FF532D69" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" Foreground="Black" FontFamily="Arial" FontWeight="Bold" />
+        <ListView x:Name="lvAsignacionesSemana" Margin="124,180,124,43" SelectionChanged="lvAsignacionesSemana_SelectionChanged" FontFamily="Arial" FontSize="12" Foreground="Black">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding titulo}" />
@@ -23,11 +22,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="734,5,-204,579">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="53">
-                <materialDesign:PackIcon Kind="CloseCircle" Width="60" Foreground="#3f0e63" Height="35"/>
-            </StackPanel>
+        <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button Click="BackButton_Click" Background="Transparent" BorderThickness="0" Margin="16,22,921,596">
         </Button>
+        <Label x:Name="semana_titulo" Content="Calificaciones" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top" Width="260" FontSize="40" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Height="56" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" />
 
     </Grid>
 </Window>

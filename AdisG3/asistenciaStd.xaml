@@ -11,10 +11,10 @@
         Title="Asistencia" Height="560" Width="800">
 
     <Grid>
-        <Label Content="Asistencia" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="172" FontFamily="Tw Cen MT" FontSize="40" Foreground="Black" FontWeight="Medium" Margin="312,2,0,0"/>
-        <ComboBox x:Name="cbox_semana" SelectionChanged="Cbox_semana_SelectionChanged" Height="31" Margin="265,62,279,0" VerticalAlignment="Top">
+        <Label Content="Asistencia" HorizontalAlignment="Center" Height="60" VerticalAlignment="Top" Width="208" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold" Margin="0,10,0,0"/>
+        <ComboBox x:Name="cbox_semana" SelectionChanged="Cbox_semana_SelectionChanged" Height="31" Margin="272,95,272,0" VerticalAlignment="Top" FontFamily="Arial" Foreground="Black" FontWeight="Bold">
         </ComboBox>
-        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="764" Height="364" Margin="0,117,0,0">
+        <ListView x:Name="StudentListView" ItemsSource="{Binding Estudiantes}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="289" Height="361" Margin="0,149,0,0" FontFamily="Arial" FontSize="12" Foreground="#DD000000">
             <ListView.View>
                 <GridView>
                     <!--<GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" Width="150"/>
@@ -25,11 +25,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="-18,-2,731,502">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
-                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="60" Foreground="#3f0e63" Height="37"/>
-            </StackPanel>
-        </Button>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="5,14,708,496"/>
 
     </Grid>
 </Window>
