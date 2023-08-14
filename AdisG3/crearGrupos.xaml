@@ -10,13 +10,13 @@
         WindowStyle="None"
         Title="crearGrupos" Height="450" Width="800">
     <Grid>
-        <Label Content="Integrantes:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,59,0,0" FontSize="20"/>
-        <ComboBox x:Name="cmbEstudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="144,65,0,0" Width="200" SelectionChanged="cmbEstudiantes_SelectionChanged"/>
+        <Label Content="Integrantes:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="97,112,0,0" FontSize="20" Foreground="#FF532D69"/>
+        <ComboBox x:Name="cmbEstudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="227,112,0,0" Width="200" SelectionChanged="cmbEstudiantes_SelectionChanged"/>
 
-        <Label Content="Grupo:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,18,0,0" FontSize="20"/>
-        <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" FontSize="17px" Margin="146,22,457,398"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="97,66,0,0" FontSize="20" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" FontSize="17px" Margin="227,66,376,354"/>
 
-        <ListView x:Name="lstIntegrantes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="739" Height="328" Margin="22,100,0,0">
+        <ListView x:Name="lstIntegrantes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="725" Height="268" Margin="36,158,0,0" FontFamily="Arial" FontSize="12">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre del grupo" Width="300" DisplayMemberBinding="{Binding nombreGrupo}" />
@@ -25,9 +25,10 @@
             </ListView.View>
         </ListView>
 
-        <materialDesign:PackIcon Kind="CloseCircle" Width="59" Foreground="#3f0e63" Height="38" Margin="737,4,0,0"/>
-        <Button Click="BackButton_Click" Background="Transparent" BorderThickness="0" Margin="730,2,-2,405"/>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
 
-        <Button Content="Crear grupo" FontSize="14" HorizontalAlignment="Left" Height="29" Margin="367,64,0,0" VerticalAlignment="Top" Width="109" Click="Crear_Click"/>
+        <Button Content="Crear grupo" FontSize="18" HorizontalAlignment="Left" Height="36" Margin="544,88,0,0" VerticalAlignment="Top" Width="140" Click="Crear_Click" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Button  Click="BackButton_Click"  HorizontalAlignment="Left" Height="60" Margin="10,10,0,0" VerticalAlignment="Top" Width="77" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Label Content="Grupos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="321,0,0,0" FontSize="40" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
     </Grid>
 </Window>

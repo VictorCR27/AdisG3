@@ -23,13 +23,13 @@
             <ColumnDefinition Width="739" />
         </Grid.ColumnDefinitions>
 
-        <Rectangle Margin="0,-37,45,-39" Fill="#FF532D69" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Grid.RowSpan="2" Stroke="#FF532D69" Width="209" Fill="#FF532D69" Margin="0,0,0,-10" Grid.ColumnSpan="2"/>
 
         <Border HorizontalAlignment="Left" Margin="141,100,0,0" VerticalAlignment="Top" Width="722" Height="482" Background="white" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1">
             <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="White" HorizontalAlignment="Center" Width="722" FontFamily="Segoe UI Emoji" FontSize="30">
                 <Grid>
                     <TextBlock x:Name="TextoInstitucion" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" Visibility="Collapsed" TextWrapping="Wrap"/>
-                    
+
                     <Grid x:Name="PerfilGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                         <StackPanel Margin="100,0,100,160" VerticalAlignment="Center">
                             <TextBlock Text="Perfil" Foreground="White" FontSize="20" FontWeight="Bold" Margin="50,50,50,0" Width="auto" HorizontalAlignment="Center"/>
@@ -69,7 +69,7 @@
                                 <DataTemplate>
                                     <Button Width="150" Height="150" Margin="10,100,100,10" Click="CursoButton_Click">
                                         <Button.Template>
-                                            <ControlTemplate TargetType="Button">
+                                            <ControlTemplate TargetType="{x:Type Button}">
                                                 <Grid>
                                                     <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
                                                 </Grid>
@@ -108,8 +108,7 @@
             <Button.Background>
                 <ImageBrush ImageSource="/img/flecha.png"/>
             </Button.Background>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66"/>
         </Button>
 
     </Grid>

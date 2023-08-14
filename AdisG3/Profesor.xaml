@@ -6,25 +6,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdisG3"
         mc:Ignorable="d"
-        Title="Profesor" Height="607" Width="960" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1000">
-    <Grid Margin="0,0,10,11">
+        WindowStartupLocation="CenterScreen"
+        Title="profesor" Height="690" Width="960" MinHeight="650" MinWidth="1000"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+
+    <Grid Margin="0,0,10,0" Height="679" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="206*"/>
+            <RowDefinition Height="473*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="251*" />
             <ColumnDefinition Width="739*" />
         </Grid.ColumnDefinitions>
 
 
-        <Rectangle HorizontalAlignment="Left" Height="579" Margin="10,20,0,0" VerticalAlignment="Top" Width="208" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
 
-        <Rectangle HorizontalAlignment="Left" Height="66" Margin="219,67,0,0" VerticalAlignment="Top" Width="226" Fill="#FF4E2F5B" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="20" RadiusY="20" Grid.Column="1" />
 
-        <Rectangle HorizontalAlignment="Left" Height="558" Margin="21,30,0,0" VerticalAlignment="Top" Width="186" Fill="#CC240831" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Rectangle HorizontalAlignment="Left" Height="48" Margin="43,382,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Rectangle HorizontalAlignment="Left" Height="47" Margin="41,325,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
 
-        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Left" Margin="188,138,0,0" VerticalAlignment="Top" Width="295" Height="31" BorderBrush="{x:Null}" Background="#dcdcdc" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" Grid.Column="1" />
 
-        <Rectangle HorizontalAlignment="Left" Height="141" Margin="41,52,0,0" VerticalAlignment="Top" Width="147" Fill="White" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" RenderTransformOrigin="0.5,0.5">
+
+        <Rectangle HorizontalAlignment="Left" Grid.RowSpan="2" Stroke="#FF532D69" Width="241" Fill="#FF532D69" Margin="0,0,0,-11"/>
+
+
+
+
+
+
+
+        <ComboBox x:Name="cbox_semana" HorizontalAlignment="Center" Margin="0,137,0,0" VerticalAlignment="Top" Width="257" Height="31" BorderBrush="#FF532D69" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" Grid.Column="1" FontFamily="Arial" FontWeight="Bold" />
+
+        <Rectangle HorizontalAlignment="Left" Height="141" Margin="48,37,0,0" VerticalAlignment="Top" Width="147" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/img/icono2_prof.png"/>
+            </Rectangle.Fill>
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -35,14 +51,11 @@
             </Rectangle.RenderTransform>
         </Rectangle>
 
-        <Image Source="/img/profesor_icon.png" Margin="54,51,81,425" />
 
-
-        <Rectangle HorizontalAlignment="Left" Height="48" Margin="229,76,0,0" VerticalAlignment="Top" Width="206" Fill="#dcdcdc" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" Grid.Column="1" />
-        <Label x:Name="semana_titulo" Content="Semanas" HorizontalAlignment="Left" Margin="253,68,0,0" VerticalAlignment="Top" Width="164" FontSize="36" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="56" />
+        <Label x:Name="semana_titulo" Content="Semanas" HorizontalAlignment="Left" Margin="272,59,0,0" VerticalAlignment="Top" Width="176" FontSize="40" RenderTransformOrigin="0.509,0.347" Grid.Column="1" Height="56" Foreground="#FF532D69" FontWeight="Bold" FontFamily="Segoe UI Emoji" />
 
         <Label x:Name="curso" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" RenderTransformOrigin="0.509,0.5" Grid.Column="1" Margin="13,19,0,0" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
-        <Rectangle HorizontalAlignment="Left" Height="1" Margin="10,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="677" Fill="Black" RenderTransformOrigin="0.5,1" Grid.Column="1">
+        <Rectangle HorizontalAlignment="Center" Height="1" Margin="0,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="690" Fill="Black" RenderTransformOrigin="0.5,1" Grid.Column="1">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1" />
@@ -52,19 +65,26 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="47" Margin="41,270,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Button Content="Notas" HorizontalAlignment="Left" Height="41" Margin="63,273,0,0" VerticalAlignment="Top" Width="105" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Nota" />
-        <Button Grid.Column="1" Content="Agregar Material" HorizontalAlignment="Left" UseLayoutRounding="True" Margin="24,129,0,0" VerticalAlignment="Top" Width="146" Height="39" Click="Button_Click_1" />
-        <Button Content="Estudiantes" HorizontalAlignment="Left" Height="40" Margin="55,386,0,0" VerticalAlignment="Top" Width="123" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_estudiantes" />
-        <Button Content="Anuncios" HorizontalAlignment="Left" Height="41" Margin="51,328,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="20" Click="Button_Anuncios" />
+        <Button Content="Notas" HorizontalAlignment="Left" Height="41" Margin="63,67,0,0" VerticalAlignment="Top" Width="115" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Nota" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Row="1" />
+        <Button Grid.Column="1" Content="Agregar Material" HorizontalAlignment="Left" UseLayoutRounding="True" Margin="540,77,0,0" VerticalAlignment="Top" Width="175" Height="39" Click="Button_Click_1" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold" />
+        <Button Content="Estudiantes" HorizontalAlignment="Center" Height="47" Margin="0,196,0,0" VerticalAlignment="Top" Width="196" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_estudiantes" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Row="1" />
+        <Button Content="Anuncios" HorizontalAlignment="Center" Height="44" Margin="0,134,0,0" VerticalAlignment="Top" Width="170" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Anuncios" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Row="1" />
 
-        <Button Click="BackButton_Click" Background="Transparent" Height="100" BorderThickness="0" Margin="57,494,72,29">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="59" Width="66">
-                <materialDesign:PackIcon Kind="ArrowBackCircle" Width="55" Foreground="#fff" Height="53" RenderTransformOrigin="0.336,0.381" />
-            </StackPanel>
+        <Button Click="BackButton_Click" BorderThickness="0" Margin="91,407,105,34" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180.072"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <ImageBrush ImageSource="/img/flecha.png"/>
+            </Button.Background>
         </Button>
 
-        <ListView x:Name="lvAsignacionesSemana" Width="650" Margin="47,190,42,16" Grid.Column="1">
+        <ListView x:Name="lvAsignacionesSemana" Margin="79,196,80,10" Grid.Column="1" Grid.RowSpan="2" FontFamily="Arial" FontSize="12" Foreground="Black">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding titulo}" />
@@ -75,11 +95,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="1" Content="Calificar" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top" Height="38" Width="111" Click="Button_Click_2"/>
-        <Rectangle HorizontalAlignment="Left" Height="47" Margin="42,216,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Button Content="Asistencia" HorizontalAlignment="Left" Height="41" Margin="61,219,0,0" VerticalAlignment="Top" Width="105" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="16" Click="Button_Asistencia" />
-        <Rectangle HorizontalAlignment="Left" Height="48" Margin="43,440,0,0" VerticalAlignment="Top" Width="149" Fill="#FF845E94" UseLayoutRounding="True" StrokeThickness="5" StrokeDashCap="Round" RadiusX="25" RadiusY="28" />
-        <Button Content="Notificaciones" HorizontalAlignment="Left" Height="40" Margin="45,444,0,0" VerticalAlignment="Top" Width="145" Background="{x:Null}" Foreground="#FF0A020E" BorderBrush="{x:Null}" FontSize="17" Click="Button_notificaciones" />
-        <Button Grid.Column="1" Content="Grupos" HorizontalAlignment="Left" Margin="577,66,0,0" VerticalAlignment="Top" Height="38" Width="111" Click="Grupos_click"/>
+        <Button Grid.Column="1" Content="Calificar" HorizontalAlignment="Left" Margin="25,78,0,0" VerticalAlignment="Top" Height="38" Width="110" Click="Button_Click_2" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
+        <Button Content="Asistencia" HorizontalAlignment="Center" Height="41" Margin="0,4,0,0" VerticalAlignment="Top" Width="190" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Asistencia" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Row="1" />
+        <Button Content="Notificaciones" HorizontalAlignment="Left" Height="44" Margin="4,259,0,0" VerticalAlignment="Top" Width="232" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_notificaciones" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Row="1" />
+        <Button Content="Grupos" HorizontalAlignment="Left" Margin="54,327,0,0" VerticalAlignment="Top" Height="50" Width="134" Click="Grupos_click" BorderBrush="{x:Null}" Background="{x:Null}" FontFamily="Segoe UI Emoji" FontSize="30" FontWeight="Bold" Grid.Row="1"/>
     </Grid>
 </Window>
