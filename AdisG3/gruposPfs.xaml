@@ -9,11 +9,11 @@
             <ColumnDefinition Width="329*"/>
             <ColumnDefinition Width="171*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Integrantes:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,143,0,0" FontSize="20" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
-        <ComboBox x:Name="cmbEstudiantes" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,149,0,0" Width="200" SelectionChanged="cmbEstudiantes_SelectionChanged" BorderBrush="#FF532D69" FontFamily="Arial"/>
+        <Label Content="Integrantes:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,143,0,0" FontSize="20" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        <ComboBox x:Name="cmbEstudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="191,149,0,0" Width="200" SelectionChanged="cmbEstudiantes_SelectionChanged" BorderBrush="#FF532D69" FontFamily="Arial"/>
 
-        <Label Content="Nombre:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,108,0,0" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="#FF532D69"/>
-        <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" Margin="229,99,230,520" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF532D69" FontFamily="Arial"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="67,108,0,0" FontSize="20" FontFamily="Segoe UI Emoji" Foreground="#FF532D69"/>
+        <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" Margin="191,99,268,520" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF532D69" FontFamily="Arial"/>
 
         <ListView x:Name="lstIntegrantes" HorizontalAlignment="Left" VerticalAlignment="Top" Height="422" Margin="51,202,0,0" Width="898" Grid.ColumnSpan="2" FontFamily="Arial" FontSize="12">
             <ListView.View>
@@ -28,8 +28,9 @@
 
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
         <Button  Click="BackButton_Click"  HorizontalAlignment="Left" Height="60" Margin="10,10,0,0" VerticalAlignment="Top" Width="77" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <Button Content="Crear grupo" FontSize="18" HorizontalAlignment="Left" Height="38" Margin="515,122,0,0" VerticalAlignment="Top" Width="143" Click="Crear_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-        <Button Content="Crear grupo aleatorio" FontSize="18" HorizontalAlignment="Left" Height="45" Margin="97,113,0,0" VerticalAlignment="Top" Width="215" Click="CrearAutomatico_Click" Grid.Column="1" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Button Content="Crear grupo" FontSize="18" HorizontalAlignment="Left" Height="38" Margin="409,122,0,0" VerticalAlignment="Top" Width="143" Click="Crear_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Button Content="Crear grupo aleatorio" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="564,122,0,0" VerticalAlignment="Top" Width="214" Click="CrearAutomatico_Click" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.ColumnSpan="2"/>
         <Label Content="Grupos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="430,0,0,0" FontSize="40" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
+        <Button Content="Eliminar grupos" FontSize="18" HorizontalAlignment="Left" Height="38" Margin="135,123,0,0" VerticalAlignment="Top" Width="164" Click="EliminarGr_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold" Grid.Column="1"/>
     </Grid>
 </Window>

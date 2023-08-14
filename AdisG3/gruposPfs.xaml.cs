@@ -225,7 +225,7 @@ namespace AdisG3
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show($"Estudiante {integrante} insertado en la base de datos con el grupo {nombreGrupo}");
+                            //MessageBox.Show($"Estudiante {integrante} insertado en la base de datos con el grupo {nombreGrupo}");
                         }
                     }
                 }
@@ -359,13 +359,87 @@ namespace AdisG3
             }
         }
 
-
-
-
         private void CrearAutomatico_Click(object sender, RoutedEventArgs e)
         {
+            // Clear any existing groups and student assignments
+            grupos.Clear();
+            estudiantesGrupos.Clear();
 
+            // Retrieve the list of students
+            List<string> studentNames = new List<string>(cmbEstudiantes.Items.Cast<string>());
+
+            // Set the maximum number of students per group
+            int maxStudentsPerGroup = 3;
+
+            // Create and populate the groups
+            int groupNumber = 1;
+            while (studentNames.Count > 0)
+            {
+                // Create a new group
+                List<string> groupStudents = new List<string>();
+
+                for (int i = 0; i < maxStudentsPerGroup && studentNames.Count > 0; i++)
+                {
+                    string student = studentNames[0];
+
+                    // Check if the student is not already assigned to a group
+                    if (!estudiantesGrupos.ContainsKey(student))
+                    {
+                        groupStudents.Add(student);
+                        studentNames.RemoveAt(0);
+
+                        // Assign the student to the current group
+                        estudiantesGrupos[student] = $"Grupo{groupNumber}";
+                    }
+                    else
+                    {
+                        // Move to the next student
+                        studentNames.RemoveAt(0);
+                        i--; // Decrement i to ensure we fill the group with the required number of students
+                    }
+                }
+
+                string groupName = $"Grupo{groupNumber}";
+
+                // Add the group to the ObservableCollection
+                grupos.Add(new Grupo { NombreGrupo = groupName, Integrantes = string.Join(", ", groupStudents) });
+
+                // Insert the group into the database
+                InsertarGrupoEnBaseDeDatos(groupName, groupStudents);
+
+                groupNumber++;
+            }
         }
+
+        private void EliminarGr_Click(object sender, RoutedEventArgs e)
+        {
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string truncateQuery = "TRUNCATE TABLE grupos";
+
+                    MySqlCommand command = new MySqlCommand(truncateQuery, connection);
+                    command.ExecuteNonQuery();
+
+                    // Clear any existing groups and student assignments
+                    grupos.Clear();
+                    estudiantesGrupos.Clear();
+
+                    MessageBox.Show("Todos los grupos han sido eliminados.");
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
     }
     public class Grupo
     {
