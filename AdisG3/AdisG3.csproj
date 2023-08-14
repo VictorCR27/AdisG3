@@ -194,6 +194,9 @@
     <Compile Include="notificacionesPfs.xaml.cs">
       <DependentUpon>notificacionesPfs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="notificacionesStd.xaml.cs">
+      <DependentUpon>notificacionesStd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profesor.xaml.cs">
       <DependentUpon>Profesor.xaml</DependentUpon>
     </Compile>
@@ -357,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="notificacionesPfs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="notificacionesStd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -76,5 +76,6 @@
             </ListView.View>
         </ListView>
         <Button Content="Asistencia" HorizontalAlignment="Left" Height="52" Margin="24,400,0,0" VerticalAlignment="Top" Width="193" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="asistencia_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
+        <Button Content="Notificaciones" HorizontalAlignment="Left" Height="52" Margin="7,476,0,0" VerticalAlignment="Top" Width="226" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="notificaciones_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
     </Grid>
 </Window>

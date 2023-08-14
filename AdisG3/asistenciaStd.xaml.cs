@@ -40,14 +40,14 @@ namespace AdisG3
         private void LoadEstudiantesFromDatabase()
         {
             string connString = conn_db.GetConnectionString();
-            selectedWeek = (int)cbox_semana.SelectedItem; // Actualiza la semana seleccionada
+            selectedWeek = (int)cbox_semana.SelectedIndex + 1; // Update selected week
 
             string query = "SELECT a.semana, a.estado_estudiante " +
                            "FROM estudiantes e " +
                            "JOIN asistencia a ON e.id_estudiante = a.id_estudiante " +
                            "WHERE e.id_estudiante = @id_estudiante AND a.semana = @semana AND a.id_curso = @id_cursoSeleccionado";
 
-            Estudiantes = new ObservableCollection<Estudiante>(); // Inicializa la colección
+            Estudiantes = new ObservableCollection<Estudiante>(); // Initialize the collection
 
             using (MySqlConnection studentsConnection = new MySqlConnection(connString))
             {
@@ -61,45 +61,35 @@ namespace AdisG3
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read()) // Loop through all the records
                         {
                             int semana = reader.GetInt32(0);
                             string estado = $"{reader.GetString(1)}";
-                            //string apellido2 = $"{reader.GetString(2)}";
-                            //string estado = $"{reader.GetString(3)}";
 
-                            // Agrega el estudiante a la colección
+                            // Add the student to the collection
                             Estudiantes.Add(new Estudiante
                             {
                                 semana = semana,
-                                //ApellidoPaterno = apellido1,
-                                //ApellidoMaterno = apellido2,
                                 estado_estudiante = estado
                             });
+                        }
 
-                            // Asignar la colección de estudiantes al ListView
-                            StudentListView.ItemsSource = Estudiantes;
-                        }
-                        else
-                        {
-                            // No hay asistencia registrada para la semana seleccionada, limpiar la lista
-                            StudentListView.ItemsSource = null;
-                        }
+                        // Assign the collection of students to the ListView
+                        StudentListView.ItemsSource = Estudiantes;
                     }
                 }
             }
         }
 
-
-
-
         private void Cbox_semana_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbox_semana.SelectedItem != null)
             {
+                selectedWeek = cbox_semana.SelectedIndex + 1; // Update selected week
                 LoadEstudiantesFromDatabase();
             }
         }
+
 
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

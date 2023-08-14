@@ -139,8 +139,6 @@ namespace AdisG3
             }
         }
 
-
-
         private void BtnAdjuntarArchivo_Click(object sender, RoutedEventArgs e)
         {
             // Show a file dialog to select the file

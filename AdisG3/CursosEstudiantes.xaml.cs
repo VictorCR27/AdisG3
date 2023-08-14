@@ -215,5 +215,12 @@ namespace AdisG3
         {
 
         }
+
+        private void notificaciones_button(object sender, RoutedEventArgs e)
+        {
+            notificacionesStd notificacionesStd = new notificacionesStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            notificacionesStd.Show();
+            this.Close();
+        }
     }
 }
