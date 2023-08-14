@@ -72,18 +72,19 @@ namespace AdisG3
                         {
                             AsignacionSemana tareaEnviada = new AsignacionSemana
                             {
-                                estudiante = reader.GetString("estudiante"),
+                                estudiante = reader.IsDBNull(reader.GetOrdinal("estudiante")) ? string.Empty : reader.GetString("estudiante"),
                                 idAsignacion = reader.GetInt32("asignacionesSemanas"),
-                                titulo = reader.GetString("titulo"),
-                                tipo = reader.GetString("tipo"),
-                                descripcion = reader.GetString("descripcion"),
+                                titulo = reader.IsDBNull(reader.GetOrdinal("titulo")) ? string.Empty : reader.GetString("titulo"),
+                                tipo = reader.IsDBNull(reader.GetOrdinal("tipo")) ? string.Empty : reader.GetString("tipo"),
+                                descripcion = reader.IsDBNull(reader.GetOrdinal("descripcion")) ? string.Empty : reader.GetString("descripcion"),
                                 FechaEntrega = reader.GetDateTime("FechaEntrega"),
                                 valor = reader.GetInt32("valor"),
-                                calificacion = reader.GetInt32("calificacion")
+                                calificacion = reader.IsDBNull(reader.GetOrdinal("calificacion")) ? 0 : reader.GetInt32("calificacion")
                             };
 
                             tareasEnviadas.Add(tareaEnviada);
                         }
+
                     }
                 }
             }

@@ -267,16 +267,29 @@ namespace AdisG3
         {
             if (cbox_semana.SelectedItem != null)
             {
-                int semanaSeleccionada = (int)cbox_semana.SelectedItem;
+                string selectedItemText = cbox_semana.SelectedItem.ToString();
 
-                foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
+                if (selectedItemText.StartsWith("Semana "))
                 {
-                    CargarTareasEnviadas(idEstudiante, semanaSeleccionada); // Pasa el valor de semanaSeleccionada
+                    string weekNumberText = selectedItemText.Substring(7); // Assuming "Semana " is always 7 characters
+                    if (int.TryParse(weekNumberText, out int semanaSeleccionada))
+                    {
+                        foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
+                        {
+                            CargarTareasEnviadas(idEstudiante, semanaSeleccionada);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error parsing selected week number.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid selected item format.");
                 }
             }
         }
-
-
 
     }
 }

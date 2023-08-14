@@ -13,6 +13,7 @@ namespace AdisG3
         public int id_estudiante;
         private int id_cursoSeleccionado;
         public int id_asignacionSemana;
+        private int asignacionSeleccionada;
 
         public int idProfesorSeleccionado { get; set; }
         public int Id_cursoSeleccionado { get; set; }
@@ -46,6 +47,12 @@ namespace AdisG3
         {
             string tareaTexto = txtTareaTexto.Text;
             string tareaArchivo = txtArchivoSeleccionado.Text;
+
+            if (string.IsNullOrWhiteSpace(tareaTexto) && string.IsNullOrWhiteSpace(tareaArchivo))
+            {
+                MessageBox.Show("Debe completar al menos uno de los campos: Tarea de Texto o Archivo.");
+                return;
+            }
 
             string connString = conn_db.GetConnectionString();
 
@@ -109,6 +116,11 @@ namespace AdisG3
                 string filePath = openFileDialog.FileName;
                 txtArchivoSeleccionado.Text = filePath;
             }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
     }

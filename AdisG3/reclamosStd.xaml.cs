@@ -87,5 +87,10 @@ namespace AdisG3
         {
             // No es necesario implementar este método si no realiza ninguna acción.
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -95,5 +95,12 @@ namespace AdisG3
             Profesor.Show();
             this.Close();
         }
+
+        private void btnhistorial_Click(object sender, RoutedEventArgs e)
+        {
+            historialAnuncios historialAnuncios = new historialAnuncios(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            historialAnuncios.Show();
+            this.Close();
+        }
     }
 }

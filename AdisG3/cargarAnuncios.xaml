@@ -22,5 +22,6 @@
         <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
         <Button x:Name="BackButton" Content="" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Height="65" Width="76" Click="BackButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
         <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Margin="321,225,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="101" SelectionBrush="{x:Null}" FontFamily="Arial" BorderBrush="#FF532D69" CaretBrush="{x:Null}"/>
+        <Button x:Name="historial" Content="Ver mis anuncios" HorizontalAlignment="Left" Height="50" Margin="738,19,0,0" VerticalAlignment="Top" Width="191" Click="btnhistorial_Click" Background="#FF532D69" BorderBrush="#FF532D69" FontSize="18" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
     </Grid>
 </Window>

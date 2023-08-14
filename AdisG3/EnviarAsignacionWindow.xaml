@@ -58,7 +58,9 @@
         <Label x:Name="lb_nuevaTarea" Content="Entrega" HorizontalAlignment="Center" Height="71" Margin="0,13,0,0" VerticalAlignment="Top" Width="154" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
         <Label Content="Información de la asignación" HorizontalAlignment="Left" Margin="87,71,0,0" VerticalAlignment="Top" Height="42" Width="346" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
         <Rectangle HorizontalAlignment="Center" Height="5" Margin="0,276,0,0" Stroke="#FF532D69" VerticalAlignment="Top" Width="982" Fill="#FF532D69"/>
-        <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="20,14,904,456"/>
     </Grid>
     
 </Window>

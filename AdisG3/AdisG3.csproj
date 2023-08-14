@@ -163,6 +163,9 @@
     <Compile Include="cargarEstudiantes.xaml.cs">
       <DependentUpon>cargarEstudiantes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="crearGrupos.xaml.cs">
+      <DependentUpon>crearGrupos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CursosEstudiantes.xaml.cs">
       <DependentUpon>CursosEstudiantes.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,9 @@
     </Compile>
     <Compile Include="gruposPfs.xaml.cs">
       <DependentUpon>gruposPfs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="historialAnuncios.xaml.cs">
+      <DependentUpon>historialAnuncios.xaml</DependentUpon>
     </Compile>
     <Compile Include="matricularManualmente.xaml.cs">
       <DependentUpon>matricularManualmente.xaml</DependentUpon>
@@ -277,6 +283,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="crearGrupos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CursosEstudiantes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -290,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="gruposPfs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="historialAnuncios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,7 +30,7 @@ namespace AdisG3
         private int idAsignacionSeleccionada;   
 
         private List<AsignacionSemana> asignacionesSemana;
-        
+        private object asignacionSeleccionada;
 
         public CursosEstudiantes(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "",int idProfesorSeleccionado = 0)
         {
@@ -58,6 +58,14 @@ namespace AdisG3
 
             // Agregar el evento de clic al ListView
             lvAsignacionesSemana.MouseDoubleClick += LvAsignacionesSemana_MouseDoubleClick;
+        }
+
+        public CursosEstudiantes(object asignacionSeleccionada, int id_estudiante, int id_cursoSeleccionado, int idProfesorSeleccionado)
+        {
+            this.asignacionSeleccionada = asignacionSeleccionada;
+            this.id_estudiante = id_estudiante;
+            this.id_cursoSeleccionado = id_cursoSeleccionado;
+            this.idProfesorSeleccionado = idProfesorSeleccionado;
         }
 
         private void LvAsignacionesSemana_MouseDoubleClick(object sender, MouseButtonEventArgs e)

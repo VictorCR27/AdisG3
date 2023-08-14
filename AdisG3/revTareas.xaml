@@ -2,23 +2,25 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Detalles de la tarea enviada"  WindowStyle="None" Height="650" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <TextBlock FontWeight="Bold" FontSize="40" Text="Detalles de la Tarea Enviada" Margin="240,10,240,584" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        Title="Detalles de la tarea enviada" WindowStyle="None"  Height="750" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0,3">
+        <TextBlock FontWeight="Bold" FontSize="40" Text="Detalles de la Tarea Enviada" Margin="261,19,144,600" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
 
-        <TextBlock FontSize="25" Text="Tarea de:" Margin="113,108,748,506" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
-        <TextBox x:Name="txtNombreEstudiante" HorizontalAlignment="Left" IsReadOnly="True" Height="28" Width="519" Margin="113,149,0,473" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" FontFamily="Arial" BorderBrush="{x:Null}"/>
+        <TextBlock FontSize="25" Text="Tarea de:" Margin="113,108,681,529" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        <TextBox x:Name="txtNombreEstudiante" HorizontalAlignment="Left" IsReadOnly="True" Width="519" Margin="113,151,0,557" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" FontFamily="Arial" BorderBrush="{x:Null}"/>
 
-        <TextBlock x:Name="txtTitulo" FontSize="25" Text="Título de la Tarea:" Margin="113,200,678,417" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
-        <TextBlock x:Name="txtTituloTarea" Text="" Margin="113,239,723,380" FontFamily="Arial"/>
+        <TextBlock x:Name="txtTitulo" FontSize="25" Text="Título de la Tarea:" Margin="113,200,656,420" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        <TextBlock x:Name="txtTituloTarea" Text="" Margin="113,239,583,429" FontFamily="Arial"/>
 
-        <TextBlock FontSize="25" Text="Tarea:" Margin="113,291,791,325" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
-        <TextBox x:Name="txtTareaTXT" IsReadOnly="True" Margin="113,330,105,214" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="Arial"/>
+        <TextBlock FontSize="25" Text="Tarea:" Margin="113,291,791,301" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        <TextBox x:Name="txtTareaTXT" IsReadOnly="True" Margin="113,330,105,281" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontFamily="Arial"/>
 
-        <TextBlock FontSize="25" Text="Archivo de la tarea:" Margin="113,464,653,150" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
+        <TextBlock FontSize="25" Text="Archivo de la tarea:" Margin="113,464,653,165" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
 
-        <TextBlock x:Name="txtTareaArchivo" Height="28" Margin="113,505,86,117" FontFamily="Arial"/>
-        <Button Content="Visualizar archivo" Click="DownloadButton_Click" Margin="113,578,701,40" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
-
+        <TextBlock x:Name="txtTareaArchivo" Margin="113,505,86,171" FontFamily="Arial"/>
+        <Button Content="Visualizar archivo" Click="DownloadButton_Click" Margin="110,611,689,104" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="20,14,904,456"/>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,16,913,681"/>
     </Grid>
 </Window>
