@@ -20,6 +20,8 @@ namespace AdisG3
         public int semanaSeleccionada { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
+        public int SumaCalificaciones { get; set; }
+
         public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
@@ -85,12 +87,23 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-                string query = @"SELECT te.id, e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
-                FROM asignacionesSemanas asg 
-                JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
-                JOIN estudiantes e ON e.id_estudiante = te.estudiante 
-                WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
-
+                string query = @"SELECT te.id,
+                                        e.nombre AS estudiante,
+                                        asg.asignacionesSemanas AS idAsignacion,
+                                        asg.titulo,
+                                        asg.tipo,
+                                        asg.descripcion,
+                                        asg.FechaEntrega,
+                                        asg.valor,
+                                        te.calificacion,
+                                        (SELECT SUM(te2.calificacion)
+                                         FROM TareasEnviadas te2
+                                         WHERE te2.estudiante = e.id_estudiante) AS sumaCalificaciones
+                                    FROM asignacionesSemanas asg 
+                                    JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
+                                    JOIN estudiantes e ON e.id_estudiante = te.estudiante 
+                                    WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana
+                                    ";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
@@ -114,7 +127,8 @@ namespace AdisG3
                                 FechaEntrega = reader.IsDBNull(reader.GetOrdinal("FechaEntrega")) ? DateTime.MinValue : reader.GetDateTime("FechaEntrega"),
                                 Valor = reader.IsDBNull(reader.GetOrdinal("valor")) ? 0.0 : reader.GetDouble("valor"),
                                 Calificacion = reader.IsDBNull(reader.GetOrdinal("calificacion")) ? -1 : reader.GetInt32("calificacion"),
-                                IdAsignacion = reader.IsDBNull(reader.GetOrdinal("idAsignacion")) ? -1 : reader.GetInt32("idAsignacion")
+                                IdAsignacion = reader.IsDBNull(reader.GetOrdinal("idAsignacion")) ? -1 : reader.GetInt32("idAsignacion"),
+                                SumaCalificaciones = reader.IsDBNull(reader.GetOrdinal("sumaCalificaciones")) ? 0 : reader.GetInt32("sumaCalificaciones")
                             };
 
                             tareasEnviadas.Add(tarea);
@@ -139,6 +153,7 @@ namespace AdisG3
             public int id { get; set; }
             public int IdAsignacion { get; set; }
             public string Tipo { get; internal set; }
+            public int SumaCalificaciones { get; internal set; }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -189,7 +204,7 @@ namespace AdisG3
                     int idEstudiante = GetIdEstudiante(tarea.Nombre);
 
                     // Convierte la calificación de double a int
-                    int calificacion = (int)tarea.Calificacion;
+                    int calificacion = Convert.ToInt32(tarea.Calificacion);
 
                     if (calificacion >= 0) // Verifica si se agregó una calificación válida
                     {
@@ -240,6 +255,7 @@ namespace AdisG3
                 MessageBox.Show("Error al calificar estudiantes: " + ex.Message);
             }
         }
+
 
         private void lvTareas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

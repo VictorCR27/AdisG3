@@ -41,8 +41,6 @@ namespace AdisG3
             get { return asignacionSemana; }
         }
 
-
-
         private void BtnEnviar_Click(object sender, RoutedEventArgs e)
         {
             string tareaTexto = txtTareaTexto.Text;
@@ -78,23 +76,60 @@ namespace AdisG3
                         id_asignacionSemana = Convert.ToInt32(asignacionCommand.ExecuteScalar());
                     }
 
-                    // Insertar la tarea en la tabla TareasEnviadas
-                    string insertQuery = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tareaTXT, tareaArchivo, id_asignacionSemana) " +
-                                        "VALUES (@id_profesor, @id_curso, @estudiante, @tareaTXT, @tareaArchivo, @id_asignacionSemana)";
+                    // Check if the student has already sent this assignment in the same week
+                    string checkQuery = "SELECT id FROM TareasEnviadas " +
+                                        "WHERE profesor = @id_profesor AND curso = @id_curso " +
+                                        "AND estudiante = @estudiante AND id_asignacionSemana = @id_asignacionSemana";
 
-                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                    using (MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
-                        insertCommand.Parameters.AddWithValue("@id_curso", id_curso);
-                        insertCommand.Parameters.AddWithValue("@estudiante", id_estudiante);
-                        insertCommand.Parameters.AddWithValue("@tareaTXT", tareaTexto);
-                        insertCommand.Parameters.AddWithValue("@tareaArchivo", tareaArchivo);
-                        insertCommand.Parameters.AddWithValue("@id_asignacionSemana", id_asignacionSemana);
+                        checkCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                        checkCommand.Parameters.AddWithValue("@id_curso", id_curso);
+                        checkCommand.Parameters.AddWithValue("@estudiante", id_estudiante);
+                        checkCommand.Parameters.AddWithValue("@id_asignacionSemana", id_asignacionSemana);
 
-                        insertCommand.ExecuteNonQuery();
+                        object existingAssignmentId = checkCommand.ExecuteScalar();
+
+                        if (existingAssignmentId != null)
+                        {
+                            // Update the existing assignment with the new data
+                            string updateQuery = "UPDATE TareasEnviadas " +
+                                                 "SET tareaTXT = @tareaTXT, tareaArchivo = @tareaArchivo " +
+                                                 "WHERE id = @existingAssignmentId";
+
+                            using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+                            {
+                                updateCommand.Parameters.AddWithValue("@tareaTXT", tareaTexto);
+                                updateCommand.Parameters.AddWithValue("@tareaArchivo", tareaArchivo);
+                                updateCommand.Parameters.AddWithValue("@existingAssignmentId", existingAssignmentId);
+
+                                updateCommand.ExecuteNonQuery();
+                            }
+
+                            MessageBox.Show("Tarea actualizada exitosamente.");
+                        }
+                        else
+                        {
+                            // Insert the assignment into the TareasEnviadas table
+                            string insertQuery = "INSERT INTO TareasEnviadas (profesor, curso, estudiante, tareaTXT, tareaArchivo, id_asignacionSemana) " +
+                                                "VALUES (@id_profesor, @id_curso, @estudiante, @tareaTXT, @tareaArchivo, @id_asignacionSemana)";
+
+                            using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                            {
+                                insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                insertCommand.Parameters.AddWithValue("@id_curso", id_curso);
+                                insertCommand.Parameters.AddWithValue("@estudiante", id_estudiante);
+                                insertCommand.Parameters.AddWithValue("@tareaTXT", tareaTexto);
+                                insertCommand.Parameters.AddWithValue("@tareaArchivo", tareaArchivo);
+                                insertCommand.Parameters.AddWithValue("@id_asignacionSemana", id_asignacionSemana);
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+
+                            MessageBox.Show("Tarea enviada exitosamente.");
+                        }
                     }
 
-                    MessageBox.Show("Tarea enviada exitosamente.");
                     this.Close();
                 }
             }
@@ -103,6 +138,7 @@ namespace AdisG3
                 MessageBox.Show("Error al enviar la tarea: " + ex.Message);
             }
         }
+
 
 
         private void BtnAdjuntarArchivo_Click(object sender, RoutedEventArgs e)
