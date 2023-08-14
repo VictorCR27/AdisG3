@@ -3,20 +3,52 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.ComponentModel;
 using System.Windows;
 
 namespace AdisG3
 {
     public partial class gruposPfs : Window
     {
+        public class Grupo : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private string nombreGrupo;
+            public string NombreGrupo
+            {
+                get { return nombreGrupo; }
+                set
+                {
+                    nombreGrupo = value;
+                    OnPropertyChanged("NombreGrupo");
+                }
+            }
+
+            private string integrantes;
+            public string Integrantes
+            {
+                get { return integrantes; }
+                set
+                {
+                    integrantes = value;
+                    OnPropertyChanged("Integrantes");
+                }
+            }
+
+            protected void OnPropertyChanged(string propertyName)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
         public int id_profesor { get; set; }
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
         private ObservableCollection<Grupo> grupos = new ObservableCollection<Grupo>();
 
-        private Dictionary<string, string> estudiantesGrupos = new Dictionary<string, string>();
 
+        private Dictionary<string, string> estudiantesGrupos = new Dictionary<string, string>();
 
         public gruposPfs(int id_profesor, int id_cursoSeleccionado, string nombreCursoSeleccionado)
         {
@@ -153,11 +185,15 @@ namespace AdisG3
                 string grupo = ObtenerGrupoDelEstudiante(selectedEstudiante);
                 if (!string.IsNullOrEmpty(grupo))
                 {
-                    List<string> integrantes = new List<string> { selectedEstudiante };
-                    grupos.Add(new Grupo { NombreGrupo = grupo, Integrantes = string.Join(", ", integrantes) });
+                    Grupo existingGrupo = grupos.FirstOrDefault(g => g.NombreGrupo == grupo);
+                    if (existingGrupo != null)
+                    {
+                        existingGrupo.Integrantes += $", {selectedEstudiante}";
+                    }
                 }
             }
         }
+
 
 
         private void InsertarGrupoEnBaseDeDatos(string nombreGrupo, List<string> integrantes)
@@ -248,9 +284,10 @@ namespace AdisG3
             }
         }
 
+        private void CrearAutomatico_Click(object sender, RoutedEventArgs e)
+        {
 
-
-
+        }
     }
     public class Grupo
     {

@@ -11,17 +11,20 @@
         <Label Content="Grupo:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,18,0,0" FontSize="20"/>
         <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" FontSize="17px" Margin="144,18,657,601"/>
 
-        <ListView x:Name="lstIntegrantes" HorizontalAlignment="Center" VerticalAlignment="Top" Width="942" Height="502" Margin="0,122,0,0">
+        <ListView x:Name="lstIntegrantes" HorizontalAlignment="Center" VerticalAlignment="Top" Height="502" Margin="0,122,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre del grupo" Width="300" DisplayMemberBinding="{Binding NombreGrupo}" />
-                    <GridViewColumn Header="Integrantes" Width="300" DisplayMemberBinding="{Binding Integrantes}" />
+                    <GridViewColumn Header="Integrantes" Width="{Binding ActualWidth, ElementName=lstIntegrantes}" DisplayMemberBinding="{Binding Integrantes}" />
                 </GridView>
             </ListView.View>
         </ListView>
 
+
+
         <materialDesign:PackIcon Kind="CloseCircle" Width="59" Foreground="#3f0e63" Height="38" Margin="933,11,0,0"/>
         <Button Click="BackButton_Click" Background="Transparent" BorderThickness="0" Margin="913,13,-44,605"/>
         <Button Content="Crear grupo" FontSize="14" HorizontalAlignment="Left" Height="29" Margin="367,64,0,0" VerticalAlignment="Top" Width="109" Click="Crear_Click"/>
+        <Button Content="Crear grupo aleatorio" FontSize="14" HorizontalAlignment="Left" Height="29" Margin="491,63,0,0" VerticalAlignment="Top" Width="186" Click="CrearAutomatico_Click"/>
     </Grid>
 </Window>
