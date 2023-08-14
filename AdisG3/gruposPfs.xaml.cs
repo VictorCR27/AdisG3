@@ -60,6 +60,7 @@ namespace AdisG3
 
             lstIntegrantes.ItemsSource = grupos;
 
+
             CargarEstudiantes();
             CargarEstudiantesGrupos();
 
@@ -188,11 +189,16 @@ namespace AdisG3
                     Grupo existingGrupo = grupos.FirstOrDefault(g => g.NombreGrupo == grupo);
                     if (existingGrupo != null)
                     {
-                        existingGrupo.Integrantes += $", {selectedEstudiante}";
+                        // Check if the student is already part of the group
+                        if (!existingGrupo.Integrantes.Contains(selectedEstudiante))
+                        {
+                            existingGrupo.Integrantes += $", {selectedEstudiante}";
+                        }
                     }
                 }
             }
         }
+
 
 
 
@@ -304,17 +310,21 @@ namespace AdisG3
                         if (grupoToUpdate != null)
                         {
                             grupoToUpdate.Integrantes = grupoToUpdate.Integrantes.Replace(selectedEstudiante, "");
+
+                            // Update the student's group in the database and dictionary
+                            ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
+                            estudiantesGrupos[selectedEstudiante] = nombreGrupo;
+
+                            // Add the student to the new group in the ObservableCollection
+                            Grupo newGroup = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
+                            if (newGroup != null)
+                            {
+                                newGroup.Integrantes += $", {selectedEstudiante}";
+                            }
                         }
-
-                        // Update the student's group in the database and dictionary
-                        ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
-                        estudiantesGrupos[selectedEstudiante] = nombreGrupo;
-
-                        // Add the student to the new group in the ObservableCollection
-                        Grupo newGroup = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
-                        if (newGroup != null)
+                        else
                         {
-                            newGroup.Integrantes += $", {selectedEstudiante}";
+                            MessageBox.Show($"El estudiante {selectedEstudiante} no existe en el grupo {existingGroup}");
                         }
                     }
                     else
@@ -348,6 +358,7 @@ namespace AdisG3
                 }
             }
         }
+
 
 
 
