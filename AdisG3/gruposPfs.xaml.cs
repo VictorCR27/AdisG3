@@ -255,6 +255,35 @@ namespace AdisG3
             this.Close();
         }
 
+        private void ActualizarGrupoEstudiante(string estudiante, string nuevoGrupo)
+        {
+            string connString = conn_db.GetConnectionString();
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string updateQuery = "UPDATE grupos SET grupo = @nuevoGrupo WHERE nombre = @estudiante";
+
+                    MySqlCommand command = new MySqlCommand(updateQuery, connection);
+                    command.Parameters.AddWithValue("@nuevoGrupo", nuevoGrupo);
+                    command.Parameters.AddWithValue("@estudiante", estudiante);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show($"Estudiante {estudiante} actualizado en la base de datos con el nuevo grupo {nuevoGrupo}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
 
         private void Crear_Click(object sender, RoutedEventArgs e)
         {
@@ -263,26 +292,51 @@ namespace AdisG3
 
             if (!string.IsNullOrEmpty(nombreGrupo) && !string.IsNullOrEmpty(selectedEstudiante))
             {
-                Grupo grupoExistente = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
-
-                if (grupoExistente != null)
+                // Check if the student is already in another group
+                if (estudiantesGrupos.ContainsKey(selectedEstudiante))
                 {
-                    grupoExistente.Integrantes += $", {selectedEstudiante}";
+                    string existingGroup = estudiantesGrupos[selectedEstudiante];
+
+                    // Update the student's group in the database
+                    ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
+
+                    // Update the student's group in the dictionary
+                    estudiantesGrupos[selectedEstudiante] = nombreGrupo;
+
+                    // Update the group's integrantes in the ObservableCollection
+                    Grupo grupoToUpdate = grupos.FirstOrDefault(g => g.NombreGrupo == existingGroup);
+                    if (grupoToUpdate != null)
+                    {
+                        grupoToUpdate.Integrantes = grupoToUpdate.Integrantes.Replace(selectedEstudiante, "");
+                    }
                 }
                 else
                 {
-                    grupos.Add(new Grupo
-                    {
-                        NombreGrupo = nombreGrupo,
-                        Integrantes = selectedEstudiante
-                    });
-                }
+                    Grupo grupoExistente = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
 
-                // Insert the group data into the database
-                List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
-                InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
+                    if (grupoExistente != null)
+                    {
+                        grupoExistente.Integrantes += $", {selectedEstudiante}";
+                    }
+                    else
+                    {
+                        grupos.Add(new Grupo
+                        {
+                            NombreGrupo = nombreGrupo,
+                            Integrantes = selectedEstudiante
+                        });
+                    }
+
+                    // Insert the group data into the database
+                    List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
+                    InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
+
+                    // Update the estudiantesGrupos dictionary
+                    estudiantesGrupos[selectedEstudiante] = nombreGrupo;
+                }
             }
         }
+
 
         private void CrearAutomatico_Click(object sender, RoutedEventArgs e)
         {
