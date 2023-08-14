@@ -32,13 +32,11 @@
         </ListView>
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
 
-
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,16,913,624"></Button>
         <Label Content="Calificar" HorizontalAlignment="Center" Height="58" Margin="0,18,0,0" VerticalAlignment="Top" Width="184" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
-        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="366,101,366,0" VerticalAlignment="Top" FontFamily="Arial" FontWeight="Bold">
+        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Height="40" Margin="352,99,380,0" VerticalAlignment="Top" FontFamily="Arial" FontWeight="Bold">
         </ComboBox>
-
+        
         <Button Content="Guardar" HorizontalAlignment="Left" Height="47" Margin="844,624,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold" FontSize="20" Background="#FF532D69"/>
-
     </Grid>
 </Window>

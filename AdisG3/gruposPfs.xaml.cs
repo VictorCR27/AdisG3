@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace AdisG3
@@ -28,6 +29,7 @@ namespace AdisG3
             lstIntegrantes.ItemsSource = grupos;
 
             CargarEstudiantes();
+            CargarEstudiantesGrupos();
 
             string connString = conn_db.GetConnectionString();
             string query = @"SELECT nombre, apellido1, apellido2 FROM estudiantes
@@ -97,6 +99,51 @@ namespace AdisG3
             }
         }
 
+        private void CargarEstudiantesGrupos()
+        {
+            string connString = conn_db.GetConnectionString();
+            string query = @"SELECT nombre, grupo FROM grupos WHERE id_curso = @id_cursoSeleccionado AND id_profesor = @id_profesor";
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@id_cursoSeleccionado", id_cursoSeleccionado);
+                    command.Parameters.AddWithValue("@id_profesor", id_profesor);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string nombreGrupo = reader["grupo"].ToString();
+                        string nombreEstudiante = reader["nombre"].ToString();
+
+                        // Find the existing group or create a new one
+                        Grupo grupo = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
+                        if (grupo == null)
+                        {
+                            grupo = new Grupo { NombreGrupo = nombreGrupo, Integrantes = nombreEstudiante };
+                            grupos.Add(grupo);
+                        }
+                        else
+                        {
+                            grupo.Integrantes += $", {nombreEstudiante}";
+                        }
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+
         private void cmbEstudiantes_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
@@ -113,7 +160,7 @@ namespace AdisG3
         }
 
 
-        private void InsertarGrupoEnBaseDeDatos(string nombreGrupo)
+        private void InsertarGrupoEnBaseDeDatos(string nombreGrupo, List<string> integrantes)
         {
             string connString = conn_db.GetConnectionString();
 
@@ -123,12 +170,12 @@ namespace AdisG3
                 {
                     connection.Open();
 
-                    foreach (Grupo grupo in grupos)
+                    foreach (string integrante in integrantes)
                     {
                         string insertGrupoQuery = "INSERT INTO grupos (nombre, grupo, id_curso, id_profesor) VALUES (@nombre, @grupo, @id_curso, @id_profesor)";
 
                         MySqlCommand command = new MySqlCommand(insertGrupoQuery, connection);
-                        command.Parameters.AddWithValue("@nombre", grupo.Integrantes);
+                        command.Parameters.AddWithValue("@nombre", integrante);
                         command.Parameters.AddWithValue("@grupo", nombreGrupo);
                         command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                         command.Parameters.AddWithValue("@id_profesor", id_profesor);
@@ -136,7 +183,7 @@ namespace AdisG3
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show($"Grupo {nombreGrupo} insertado en la base de datos con {grupo.Integrantes}");
+                            MessageBox.Show($"Estudiante {integrante} insertado en la base de datos con el grupo {nombreGrupo}");
                         }
                     }
                 }
@@ -147,25 +194,6 @@ namespace AdisG3
             }
         }
 
-        private void ObtenerGrupoDesdeTextBox()
-        {
-            string nombreGrupo = ObtenerGrupoDelEstudiante(txtNombreGrupo.Text);
-            if (!string.IsNullOrEmpty(nombreGrupo))
-            {
-                List<string> integrantes = new List<string>();
-
-                string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
-                if (!string.IsNullOrEmpty(selectedEstudiante))
-                {
-                    integrantes.Add(selectedEstudiante);
-                }
-
-                if (!string.IsNullOrEmpty(nombreGrupo) && integrantes.Count > 0)
-                {
-                    grupos.Add(new Grupo { NombreGrupo = nombreGrupo, Integrantes = string.Join(", ", integrantes) });
-                }
-            }
-        }
 
         private string ObtenerGrupoDelEstudiante(string estudiante)
         {
@@ -195,22 +223,32 @@ namespace AdisG3
         private void Crear_Click(object sender, RoutedEventArgs e)
         {
             string nombreGrupo = txtNombreGrupo.Text;
-            List<string> integrantes = new List<string>();
-
-            // Aquí debes obtener la lista de integrantes seleccionados desde tu lógica
-            // Por ejemplo, desde cmbEstudiantes_SelectionChanged
             string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
-            if (!string.IsNullOrEmpty(selectedEstudiante))
-            {
-                integrantes.Add(selectedEstudiante);
-            }
 
-            if (!string.IsNullOrEmpty(nombreGrupo) && integrantes.Count > 0)
+            if (!string.IsNullOrEmpty(nombreGrupo) && !string.IsNullOrEmpty(selectedEstudiante))
             {
-                string grupoNombreCompleto = $"{selectedEstudiante} - Profesor: {id_profesor} - Curso: {nombreCursoSeleccionado}";
-                grupos.Add(new Grupo { NombreGrupo = grupoNombreCompleto, Integrantes = string.Join(", ", integrantes) });
+                Grupo grupoExistente = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
+
+                if (grupoExistente != null)
+                {
+                    grupoExistente.Integrantes += $", {selectedEstudiante}";
+                }
+                else
+                {
+                    grupos.Add(new Grupo
+                    {
+                        NombreGrupo = nombreGrupo,
+                        Integrantes = selectedEstudiante
+                    });
+                }
+
+                // Insert the group data into the database
+                List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
+                InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
             }
         }
+
+
 
 
     }
