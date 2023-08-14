@@ -292,22 +292,34 @@ namespace AdisG3
 
             if (!string.IsNullOrEmpty(nombreGrupo) && !string.IsNullOrEmpty(selectedEstudiante))
             {
-                // Check if the student is already in another group
+                // Check if the student is already in any group
                 if (estudiantesGrupos.ContainsKey(selectedEstudiante))
                 {
                     string existingGroup = estudiantesGrupos[selectedEstudiante];
 
-                    // Update the student's group in the database
-                    ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
-
-                    // Update the student's group in the dictionary
-                    estudiantesGrupos[selectedEstudiante] = nombreGrupo;
-
-                    // Update the group's integrantes in the ObservableCollection
-                    Grupo grupoToUpdate = grupos.FirstOrDefault(g => g.NombreGrupo == existingGroup);
-                    if (grupoToUpdate != null)
+                    if (existingGroup != nombreGrupo)
                     {
-                        grupoToUpdate.Integrantes = grupoToUpdate.Integrantes.Replace(selectedEstudiante, "");
+                        // Remove the student from their existing group
+                        Grupo grupoToUpdate = grupos.FirstOrDefault(g => g.NombreGrupo == existingGroup);
+                        if (grupoToUpdate != null)
+                        {
+                            grupoToUpdate.Integrantes = grupoToUpdate.Integrantes.Replace(selectedEstudiante, "");
+                        }
+
+                        // Update the student's group in the database and dictionary
+                        ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
+                        estudiantesGrupos[selectedEstudiante] = nombreGrupo;
+
+                        // Add the student to the new group in the ObservableCollection
+                        Grupo newGroup = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
+                        if (newGroup != null)
+                        {
+                            newGroup.Integrantes += $", {selectedEstudiante}";
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {nombreGrupo}");
                     }
                 }
                 else
@@ -336,6 +348,7 @@ namespace AdisG3
                 }
             }
         }
+
 
 
         private void CrearAutomatico_Click(object sender, RoutedEventArgs e)
