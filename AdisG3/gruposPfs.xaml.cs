@@ -232,7 +232,7 @@ namespace AdisG3
 
                     foreach (string integrante in integrantes)
                     {
-                        string insertGrupoQuery = "INSERT INTO grupos (nombre, grupo, id_curso, id_profesor, id_std) VALUES (@nombre, @grupo, @id_curso, @id_profesor, @id_std)";
+                        string insertGrupoQuery = "INSERT INTO grupos (nombre, grupo, id_curso, id_profesor, id_estudiante) VALUES (@nombre, @grupo, @id_curso, @id_profesor, @id_estudiante)";
 
                         MySqlCommand command = new MySqlCommand(insertGrupoQuery, connection);
                         command.Parameters.AddWithValue("@nombre", integrante);
@@ -242,7 +242,7 @@ namespace AdisG3
 
                         // Obtener el id_estudiante correspondiente al estudiante actual
                         int id_estudiante = ObtenerIdEstudiante(integrante);
-                        command.Parameters.AddWithValue("@id_std", id_estudiante);
+                        command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
 
                         MessageBox.Show($"estudiante {id_estudiante}");
                         int rowsAffected = command.ExecuteNonQuery();
@@ -374,8 +374,9 @@ namespace AdisG3
 
         private void Crear_Click(object sender, RoutedEventArgs e)
         {
-            string nombreGrupo = txtNombreGrupo.Text;
-            string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
+         string nombreGrupo = txtNombreGrupo.Text;
+         string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
+        
 
             if (!string.IsNullOrEmpty(nombreGrupo) && !string.IsNullOrEmpty(selectedEstudiante))
             {
@@ -390,17 +391,37 @@ namespace AdisG3
 
                     if (grupoExistente != null)
                     {
-                        if (!grupoExistente.Integrantes.Contains(selectedEstudiante))
+                        if (!grupoExistente.Integrantes.Contains(selectedEstudiante) && !estudiantesGrupos.ContainsKey(selectedEstudiante))
                         {
+                           
+
+                            MessageBox.Show($"Ingresando persona duplicada {grupoExistente.Integrantes}");
+
+                            /*grupos.Add(new Grupo
+                            {
+                                NombreGrupo = nombreGrupo,
+                                Integrantes = selectedEstudiante
+                            });*/
+
+                            // Insert the group data into the database
+                            List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
+                            InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
+
+                            // Update the estudiantesGrupos dictionary
+                            estudiantesGrupos[selectedEstudiante] = nombreGrupo;
+
                             grupoExistente.Integrantes += $", {selectedEstudiante}";
                         }
                         else
                         {
-                            MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {nombreGrupo}");
+                            MessageBox.Show("Se paso al else");
+                            //MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {estudiantesGrupos[selectedEstudiante]}");
                         }
                     }
                     else
                     {
+                        
+
                         grupos.Add(new Grupo
                         {
                             NombreGrupo = nombreGrupo,
