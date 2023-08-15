@@ -20,8 +20,6 @@ namespace AdisG3
         public int semanaSeleccionada { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
-        public int SumaCalificaciones { get; set; }
-
         public calificar(int id_profesor = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "")
         {
             InitializeComponent();
@@ -87,24 +85,12 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-                string query = @"SELECT te.id,
-                                        CONCAT(e.nombre,' ',e.apellido1, ' ', e.apellido2) AS estudiante,
-                                        e.nombre AS estudiante,
-                                        asg.asignacionesSemanas AS idAsignacion,
-                                        asg.titulo,
-                                        asg.tipo,
-                                        asg.descripcion,
-                                        asg.FechaEntrega,
-                                        asg.valor,
-                                        te.calificacion,
-                                        (SELECT SUM(te2.calificacion)
-                                         FROM TareasEnviadas te2
-                                         WHERE te2.estudiante = e.id_estudiante) AS sumaCalificaciones
-                                    FROM asignacionesSemanas asg 
-                                    JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
-                                    JOIN estudiantes e ON e.id_estudiante = te.estudiante 
-                                    WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana
-                                    ";
+                string query = @"SELECT te.id, e.nombre AS estudiante, asg.asignacionesSemanas AS idAsignacion, asg.titulo, asg.tipo, asg.descripcion, asg.FechaEntrega, asg.valor, te.calificacion 
+                FROM asignacionesSemanas asg 
+                JOIN TareasEnviadas te ON asg.asignacionesSemanas = te.id_asignacionSemana
+                JOIN estudiantes e ON e.id_estudiante = te.estudiante 
+                WHERE te.profesor = @id_profesor AND te.curso = @id_curso AND asg.semana = @semana";
+
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id_profesor", id_profesor);
@@ -128,8 +114,7 @@ namespace AdisG3
                                 FechaEntrega = reader.IsDBNull(reader.GetOrdinal("FechaEntrega")) ? DateTime.MinValue : reader.GetDateTime("FechaEntrega"),
                                 Valor = reader.IsDBNull(reader.GetOrdinal("valor")) ? 0.0 : reader.GetDouble("valor"),
                                 Calificacion = reader.IsDBNull(reader.GetOrdinal("calificacion")) ? -1 : reader.GetInt32("calificacion"),
-                                IdAsignacion = reader.IsDBNull(reader.GetOrdinal("idAsignacion")) ? -1 : reader.GetInt32("idAsignacion"),
-                                SumaCalificaciones = reader.IsDBNull(reader.GetOrdinal("sumaCalificaciones")) ? 0 : reader.GetInt32("sumaCalificaciones")
+                                IdAsignacion = reader.IsDBNull(reader.GetOrdinal("idAsignacion")) ? -1 : reader.GetInt32("idAsignacion")
                             };
 
                             tareasEnviadas.Add(tarea);
@@ -205,7 +190,7 @@ namespace AdisG3
                     int idEstudiante = GetIdEstudiante(tarea.Nombre);
 
                     // Convierte la calificación de double a int
-                    int calificacion = Convert.ToInt32(tarea.Calificacion);
+                    int calificacion = (int)tarea.Calificacion;
 
                     if (calificacion >= 0) // Verifica si se agregó una calificación válida
                     {
@@ -257,7 +242,6 @@ namespace AdisG3
             }
         }
 
-
         private void lvTareas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lvTareas.SelectedItem != null)
@@ -282,31 +266,31 @@ namespace AdisG3
 
         private void cbox_semana_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbox_semana.SelectedItem != null)
-            {
-                string selectedItemText = cbox_semana.SelectedItem.ToString();
+            string selectedItemText = cbox_semana.SelectedItem.ToString();
 
-                if (selectedItemText.StartsWith("Semana "))
+            if (selectedItemText.StartsWith("Semana "))
+            {
+                string weekNumberText = selectedItemText.Substring(7);
+                if (int.TryParse(weekNumberText, out int semanaSeleccionada))
                 {
-                    string weekNumberText = selectedItemText.Substring(7); // Assuming "Semana " is always 7 characters
-                    if (int.TryParse(weekNumberText, out int semanaSeleccionada))
+                    foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
                     {
-                        foreach (int idEstudiante in GetIdEstudiantesFromTareasEnviadas())
-                        {
-                            CargarTareasEnviadas(idEstudiante, semanaSeleccionada);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error parsing selected week number.");
+                        CargarTareasEnviadas(idEstudiante, semanaSeleccionada);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Invalid selected item format.");
+                    MessageBox.Show("Error parsing selected week number.");
                 }
             }
+            else
+            {
+                MessageBox.Show("Invalid selected item format.");
+            }
+
         }
+
+
 
     }
 }
