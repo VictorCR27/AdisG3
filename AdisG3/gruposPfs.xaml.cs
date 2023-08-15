@@ -42,14 +42,11 @@ namespace AdisG3
                 }
             }
 
-            public virtual void OnPropertyChanged(string propertyName)
+            protected void OnPropertyChanged(string propertyName)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
-
-
         }
-
 
         public int id_profesor { get; set; }
 
@@ -315,12 +312,12 @@ namespace AdisG3
             this.Close();
         }
 
-       /* private void CrearGrupo_Click(object sender, RoutedEventArgs e)
+        private void CrearGrupo_Click(object sender, RoutedEventArgs e)
         {
             crearGrupos crearGrupos = new crearGrupos(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             crearGrupos.Show();
             this.Close();
-        }*/
+        }
 
         private void ActualizarGrupoEstudiante(string estudiante, string nuevoGrupo)
         {
@@ -354,7 +351,6 @@ namespace AdisG3
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show($"Estudiante {estudiante} actualizado en la base de datos con el nuevo grupo {nuevoGrupo}");
-                                
                             }
                         }
                         else
@@ -372,37 +368,22 @@ namespace AdisG3
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-            ActualizarDatosListView();
-        }
-
-        private void ActualizarDatosListView()
-        {
-            grupos.Clear(); // Limpia la colección actual
-
-            // Vuelve a cargar los datos de la base de datos y actualiza la colección
-            CargarEstudiantesGrupos();
-
-            // Notifica a la interfaz de usuario que los datos han cambiado
-            lstIntegrantes.ItemsSource = null;
-            lstIntegrantes.ItemsSource = grupos;
-
         }
 
 
 
         private void Crear_Click(object sender, RoutedEventArgs e)
         {
-            string nombreGrupo = txtNombreGrupo.Text;
-            string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
-            
+         string nombreGrupo = txtNombreGrupo.Text;
+         string selectedEstudiante = cmbEstudiantes.SelectedItem as string;
+        
 
             if (!string.IsNullOrEmpty(nombreGrupo) && !string.IsNullOrEmpty(selectedEstudiante))
             {
                 // Check if the student is already in any group
                 if (estudiantesGrupos.ContainsKey(selectedEstudiante))
-                {                   
+                {
                     MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {estudiantesGrupos[selectedEstudiante]}");
-                    
                 }
                 else
                 {
@@ -410,35 +391,37 @@ namespace AdisG3
 
                     if (grupoExistente != null)
                     {
-                        if (!grupoExistente.Integrantes.Contains(selectedEstudiante) || !estudiantesGrupos.ContainsKey(selectedEstudiante))
+                        if (!grupoExistente.Integrantes.Contains(selectedEstudiante) && !estudiantesGrupos.ContainsKey(selectedEstudiante))
                         {
+                           
+
+                            MessageBox.Show($"Ingresando persona duplicada {grupoExistente.Integrantes}");
+
+                            /*grupos.Add(new Grupo
+                            {
+                                NombreGrupo = nombreGrupo,
+                                Integrantes = selectedEstudiante
+                            });*/
+
                             // Insert the group data into the database
                             List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
-                            
                             InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
-                            
+
                             // Update the estudiantesGrupos dictionary
                             estudiantesGrupos[selectedEstudiante] = nombreGrupo;
 
-                            // Update the group in the database
-                            ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
-
                             grupoExistente.Integrantes += $", {selectedEstudiante}";
-
-                            // Notificar a la interfaz de usuario sobre el cambio en los datos
-                            grupoExistente.OnPropertyChanged("Integrantes");
-                            
                         }
                         else
                         {
-                            MessageBox.Show("Se pasó al else");
-                            MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {estudiantesGrupos[selectedEstudiante]}");
-                            
+                            MessageBox.Show("Se paso al else");
+                            //MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {estudiantesGrupos[selectedEstudiante]}");
                         }
-                        
                     }
                     else
                     {
+                        
+
                         grupos.Add(new Grupo
                         {
                             NombreGrupo = nombreGrupo,
@@ -451,17 +434,10 @@ namespace AdisG3
 
                         // Update the estudiantesGrupos dictionary
                         estudiantesGrupos[selectedEstudiante] = nombreGrupo;
-                        
-
-                        // Notificar a la interfaz de usuario sobre el cambio en los datos
-                        //OnPropertyChanged("grupos");
                     }
                 }
             }
-            ActualizarDatosListView();
-
         }
-
 
 
 

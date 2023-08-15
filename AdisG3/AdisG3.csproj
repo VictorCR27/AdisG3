@@ -170,6 +170,9 @@
       <DependentUpon>CursosEstudiantes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Datos_Tareas.cs" />
+    <Compile Include="DetalleAnuncio.xaml.cs">
+      <DependentUpon>DetalleAnuncio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="editarTarea.xaml.cs">
       <DependentUpon>editarTarea.xaml</DependentUpon>
     </Compile>
@@ -297,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CursosEstudiantes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetalleAnuncio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

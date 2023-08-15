@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Title="historialAnuncios" Height="607" Width="960" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1000">
-    
+
     <Grid>
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,914,586"/>
@@ -17,10 +17,20 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" Width="150"/>
-                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" Width="300"/>
+                    <GridViewColumn Header="Profesor" DisplayMemberBinding="{Binding Profesor}" Width="150"/>
+                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" Width="260"/>
+                    <GridViewColumn Header="" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Ver más" Click="VerMasButton_Click" Width="100" Tag="{Binding}" Margin="5"/>
+                                    <Button Content="Eliminar" Click="EliminarButton_Click" Width="100" Tag="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}}" Margin="5"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-
     </Grid>
 </Window>
