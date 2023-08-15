@@ -47,7 +47,10 @@ namespace AdisG3
             {
                 connection.Open();
 
-                string query = "SELECT titulo, descripcion FROM anuncios WHERE id_curso = @idCurso AND id_profesor = @idProfesor";
+                string query = "SELECT a.titulo, a.descripcion, p.nombre " +
+                                             "FROM anuncios a " +
+                                             "INNER JOIN profesores p ON a.id_profesor = p.id_profesor " +
+                                             "WHERE a.id_curso = @idCurso AND a.id_profesor = @idProfesor";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -61,7 +64,8 @@ namespace AdisG3
                             Anuncio anuncio = new Anuncio
                             {
                                 Titulo = reader.GetString("titulo"),
-                                Descripcion = reader.GetString("descripcion")
+                                Descripcion = reader.GetString("descripcion"),
+                                Profesor = reader.GetString("nombre")
                             };
 
                             anuncios.Add(anuncio);
@@ -73,10 +77,26 @@ namespace AdisG3
             lvAnuncios.ItemsSource = anuncios;
         }
 
+        private void VerMasButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button verMasButton = sender as Button;
+            if (verMasButton != null)
+            {
+                Anuncio selectedAnuncio = verMasButton.DataContext as Anuncio;
+                if (selectedAnuncio != null)
+                {
+                    DetalleAnuncio ventanaDetalles = new DetalleAnuncio(selectedAnuncio.Titulo, selectedAnuncio.Descripcion, selectedAnuncio.Profesor);
+                    ventanaDetalles.ShowDialog();
+                }
+            }
+        }
+
         public class Anuncio
         {
+            public int Id { get; set; } // Agregar esta propiedad para el id_anuncios
             public string Titulo { get; set; }
             public string Descripcion { get; set; }
+            public string Profesor { get; set; }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -84,6 +104,16 @@ namespace AdisG3
             CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             CursosEstudiantes.Show();
             this.Close();
+        }
+
+        private void lvAnuncios_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void lvAnuncios_SelectionChanged1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

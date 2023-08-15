@@ -12,11 +12,22 @@
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,914,586"/>
         <Label Content="Anuncios" FontSize="40px" Margin="409,21,409,570" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-        <ListView x:Name="lvAnuncios" Margin="79,101,70,92" Foreground="Black" FontFamily="Arial" FontSize="15">
+        <ListView x:Name="lvAnuncios" Margin="25,101,19,25" Foreground="Black" FontFamily="Arial" FontSize="15" SelectionChanged="lvAnuncios_SelectionChanged1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" Width="150"/>
-                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" Width="300"/>
+                    <GridViewColumn Header="Profesor" DisplayMemberBinding="{Binding Profesor}" Width="150"/>
+                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" Width="260"/>
+                    <GridViewColumn Header="" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Ver más" Click="VerMasButton_Click" Width="100" Tag="{Binding}" Margin="5"/>
+                                    
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
