@@ -95,14 +95,20 @@ namespace AdisG3
                                 SumaCalificaciones = reader.IsDBNull(reader.GetOrdinal("sumaCalificaciones")) ? 0 : reader.GetInt32("sumaCalificaciones")
                             };
 
+                           
                             tareasEnviadas.Add(tarea);
+                            
                         }
 
+
                         lvTareas.ItemsSource = tareasEnviadas;
+
+                       
                     }
                 }
             }
         }
+
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
