@@ -10,6 +10,6 @@
         <Rectangle HorizontalAlignment="Left" Height="360" Margin="112,179,0,0" Stroke="#FF532D69" VerticalAlignment="Top" Width="821"/>
         <Label Content="Digite su reclamo" HorizontalAlignment="Left" Margin="112,115,0,0" VerticalAlignment="Top" Height="42" Width="211" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="20,22,922,578"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="20,14,922,586"/>
     </Grid>
 </Window>
