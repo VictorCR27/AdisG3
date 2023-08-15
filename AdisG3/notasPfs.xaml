@@ -9,28 +9,48 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="notasPfs" Height="690" Width="1050" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
+
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PresenteColor" Color="Green"/>
+        <SolidColorBrush x:Key="JustificadoColor" Color="Yellow"/>
+        <SolidColorBrush x:Key="AusenteColor" Color="Red"/>
+    </Window.Resources>
+    
     <Grid>
-        <ListView x:Name="lvTareas" Margin="9,159,17,42" SelectionChanged="lvTareas_SelectionChanged" IsSynchronizedWithCurrentItem="True" FontFamily="Arial" FontSize="12" Foreground="Black">
+        <ListView x:Name="lvTareas" Margin="310,152,310,38" SelectionChanged="lvTareas_SelectionChanged" IsSynchronizedWithCurrentItem="True" FontFamily="Arial" FontSize="12" Foreground="Black">
             <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
-                    <!--<GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" />
-                    <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding Tipo}" />
-                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" />
-                    <GridViewColumn Header="Fecha de Entrega" DisplayMemberBinding="{Binding FechaEntrega}" />
-                    <GridViewColumn Header="Valor" DisplayMemberBinding="{Binding Valor}" />-->
-                    <!--<GridViewColumn Header="Calificación">
+                    <GridViewColumn Header="Suma de Calificaciones" DisplayMemberBinding="{Binding SumaCalificaciones}" Width="200"/>
+                    <GridViewColumn Header="Estado" Width="150">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Width="50" Text="{Binding Calificacion, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Ellipse Width="16" Height="16" Margin="0,0,5,0">
+                                        <Ellipse.Style>
+                                            <Style TargetType="{x:Type Ellipse}">
+                                                <Setter Property="Fill" Value="{StaticResource PresenteColor}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Attendance}" Value="Ausente">
+                                                        <Setter Property="Fill" Value="{StaticResource AusenteColor}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Attendance}" Value="Justificado">
+                                                        <Setter Property="Fill" Value="{StaticResource JustificadoColor}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Ellipse.Style>
+                                    </Ellipse>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
-                    <GridViewColumn Header="Suma de Calificaciones" DisplayMemberBinding="{Binding SumaCalificaciones}" Width="200"/>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
 
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,16,913,624"></Button>
