@@ -67,7 +67,7 @@
 
         <Button x:Name="btn_iniciarSesion" Content="Iniciar Sesión" Click="EnviarButton_Click"  FontSize="18" Width="154" Height="37" Background="#FF532D69" Foreground="White" Margin="476,304,170,76" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
 
-        <Button Content="Recuperar contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#FF5271FF" BorderThickness="0" Padding="0" Margin="363,244,313,141" FontFamily="Arial" BorderBrush="#FF5271FF"/>
+        <!--<Button Content="Recuperar contraseña" Click="ResetButton_Click" FontSize="11" Background="Transparent" Foreground="#FF5271FF" BorderThickness="0" Padding="0" Margin="363,244,313,141" FontFamily="Arial" BorderBrush="#FF5271FF"/>-->
         <Canvas x:Name="rectangulo_morado" HorizontalAlignment="Center" Height="82" Margin="0,368,0,0" VerticalAlignment="Top" Width="800" Background="#FF532D69" Grid.RowSpan="2"/>
         <Button x:Name="boton_back" Click="BackButton_Click" Height="50" BorderThickness="0" Margin="10,384,722,16" Grid.RowSpan="2" BorderBrush="#FF532D69" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
