@@ -6,26 +6,36 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AdisG3"
         WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="notasPfs" Height="607" Width="960" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1000">
+        Title="notasPfs" Height="690" Width="1050" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
-        <ComboBox x:Name="cbox_semana" SelectedValuePath="Content" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top" Width="296" Height="31" BorderBrush="#FF532D69" SelectionChanged="ComboBox_SelectionChanged_1" RenderTransformOrigin="0.38,0.237" FontWeight="Bold" FontFamily="Arial" />
-        <Label x:Name="semana_titulo" Content="Calificaciones" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top" Width="260" FontSize="40" FontWeight="Bold" RenderTransformOrigin="0.509,0.347" Height="56" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" />
-        <ListView x:Name="lvAsignacionesSemana" Margin="42,188,43,39" SelectionChanged="lvAsignacionesSemana_SelectionChanged" FontFamily="Arial" FontSize="12" Foreground="Black">
+        <ListView x:Name="lvTareas" Margin="9,159,17,95" SelectionChanged="lvTareas_SelectionChanged" IsSynchronizedWithCurrentItem="True" FontFamily="Arial" FontSize="12" Foreground="Black">
+            <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding estudiante}" Width="110" />
-                    <GridViewColumn Header="Título" DisplayMemberBinding="{Binding titulo}" />
-                    <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding tipo}" />
-                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding descripcion}" />
+                    <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
+                    <!--<GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" />
+                    <GridViewColumn Header="Tipo" DisplayMemberBinding="{Binding Tipo}" />
+                    <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" />
                     <GridViewColumn Header="Fecha de Entrega" DisplayMemberBinding="{Binding FechaEntrega}" />
-                    <GridViewColumn Header="Valor" DisplayMemberBinding="{Binding valor}" />
-                    <GridViewColumn Header="Calificación Obtenida" DisplayMemberBinding="{Binding calificacion}" Width="190"/>
+                    <GridViewColumn Header="Valor" DisplayMemberBinding="{Binding Valor}" />-->
+                    <!--<GridViewColumn Header="Calificación">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="50" Text="{Binding Calificacion, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
+                    <GridViewColumn Header="Suma de Calificaciones" DisplayMemberBinding="{Binding SumaCalificaciones}" Width="200"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
-        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,11,913,589"/>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
+
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,16,913,624"></Button>
+        <Label Content="Calificar" HorizontalAlignment="Center" Height="58" Margin="0,18,0,0" VerticalAlignment="Top" Width="184" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
+        <ComboBox Name="cbox_semana" SelectionChanged="cbox_semana_SelectionChanged" Margin="325,96,384,0" VerticalAlignment="Top" Height="27"></ComboBox>
     </Grid>
 </Window>
 

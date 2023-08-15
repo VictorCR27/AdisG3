@@ -49,7 +49,7 @@ namespace AdisG3
                             string apellido1Usuario = perfilReader.GetString("apellido1");
                             string apellido2Usuario = perfilReader.GetString("apellido2");
                             string correoUsuario = perfilReader.GetString("correo");
-                            string password = perfilReader.GetString("password");
+                            //string password = perfilReader.GetString("password");
 
                             // Combinar los apellidos y nombre en un solo campo
                             string nombreCompleto = $"{nombreUsuario} {apellido1Usuario} {apellido2Usuario}";
@@ -57,7 +57,7 @@ namespace AdisG3
                             // Mostrar la información en los controles de la interfaz
                             NombreTextBlock.Text = nombreCompleto;
                             CorreoTextBlock.Text = correoUsuario;
-                            passwordtxt.Text = password;
+                            //passwordtxt.Text = password;
                         }
                     }
                 }

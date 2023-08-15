@@ -49,11 +49,6 @@
                                 <TextBlock Text="Correo electrónico:" Foreground="Black" FontSize="16" Width="176"/>
                                 <TextBlock x:Name="CorreoTextBlock" Foreground="Black" FontSize="16" Background="#fff" Padding="5" Width="168"/>
                             </StackPanel>
-
-                            <StackPanel Margin="0,0,0,10">
-                                <TextBlock Text="Contraseña:" Foreground="Black" FontSize="16" Width="172"/>
-                                <TextBlock x:Name="passwordtxt" Foreground="Black" FontSize="16" Background="#fff" Padding="5" Width="168"/>
-                            </StackPanel>
                         </StackPanel>
                     </Grid>
 

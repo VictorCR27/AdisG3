@@ -88,6 +88,7 @@ namespace AdisG3
             {
                 connection.Open();
                 string query = @"SELECT te.id,
+                                        CONCAT(e.nombre,' ',e.apellido1, ' ', e.apellido2) AS estudiante,
                                         e.nombre AS estudiante,
                                         asg.asignacionesSemanas AS idAsignacion,
                                         asg.titulo,

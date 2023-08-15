@@ -63,7 +63,7 @@ namespace AdisG3
                             // Mostrar la información en los controles de la interfaz
                             NombreTextBlock.Text = nombreCompleto;
                             CorreoTextBlock.Text = correoUsuario;
-                            passwordtxt.Text = password;
+                            //passwordtxt.Text = password;
                         }
                     }
                 }
