@@ -20,8 +20,11 @@ namespace AdisG3
                 get { return nombreGrupo; }
                 set
                 {
-                    nombreGrupo = value;
-                    OnPropertyChanged("NombreGrupo");
+                    if (nombreGrupo != value)
+                    {
+                        nombreGrupo = value;
+                        OnPropertyChanged("NombreGrupo");
+                    }
                 }
             }
 
@@ -31,8 +34,11 @@ namespace AdisG3
                 get { return integrantes; }
                 set
                 {
-                    integrantes = value;
-                    OnPropertyChanged("Integrantes");
+                    if (integrantes != value)
+                    {
+                        integrantes = value;
+                        OnPropertyChanged("Integrantes");
+                    }
                 }
             }
 
@@ -41,6 +47,7 @@ namespace AdisG3
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         public int id_profesor { get; set; }
 
         private int id_std;  
@@ -322,16 +329,38 @@ namespace AdisG3
                 {
                     connection.Open();
 
-                    string updateQuery = "UPDATE grupos SET grupo = @nuevoGrupo WHERE nombre = @estudiante";
+                    string query = "SELECT grupo FROM grupos WHERE nombre = @estudiante";
 
-                    MySqlCommand command = new MySqlCommand(updateQuery, connection);
-                    command.Parameters.AddWithValue("@nuevoGrupo", nuevoGrupo);
+                    MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@estudiante", estudiante);
 
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
                     {
-                       // MessageBox.Show($"Estudiante {estudiante} actualizado en la base de datos con el nuevo grupo {nuevoGrupo}");
+                        string existingGroup = result.ToString();
+                        if (existingGroup != nuevoGrupo)
+                        {
+                            string updateQuery = "UPDATE grupos SET grupo = @nuevoGrupo WHERE nombre = @estudiante";
+
+                            command = new MySqlCommand(updateQuery, connection);
+                            command.Parameters.AddWithValue("@nuevoGrupo", nuevoGrupo);
+                            command.Parameters.AddWithValue("@estudiante", estudiante);
+
+                            int rowsAffected = command.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show($"Estudiante {estudiante} actualizado en la base de datos con el nuevo grupo {nuevoGrupo}");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"El estudiante {estudiante} ya está en el grupo {nuevoGrupo}");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontró el grupo del estudiante {estudiante}");
                     }
                 }
                 catch (Exception ex)
@@ -340,6 +369,7 @@ namespace AdisG3
                 }
             }
         }
+
 
 
         private void Crear_Click(object sender, RoutedEventArgs e)
@@ -352,36 +382,7 @@ namespace AdisG3
                 // Check if the student is already in any group
                 if (estudiantesGrupos.ContainsKey(selectedEstudiante))
                 {
-                    string existingGroup = estudiantesGrupos[selectedEstudiante];
-
-                    if (existingGroup != nombreGrupo)
-                    {
-                        // Remove the student from their existing group
-                        Grupo grupoToUpdate = grupos.FirstOrDefault(g => g.NombreGrupo == existingGroup);
-                        if (grupoToUpdate != null)
-                        {
-                            grupoToUpdate.Integrantes = grupoToUpdate.Integrantes.Replace(selectedEstudiante, "");
-
-                            // Update the student's group in the database and dictionary
-                            ActualizarGrupoEstudiante(selectedEstudiante, nombreGrupo);
-                            estudiantesGrupos[selectedEstudiante] = nombreGrupo;
-
-                            // Add the student to the new group in the ObservableCollection
-                            Grupo newGroup = grupos.FirstOrDefault(g => g.NombreGrupo == nombreGrupo);
-                            if (newGroup != null)
-                            {
-                                newGroup.Integrantes += $", {selectedEstudiante}";
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show($"El estudiante {selectedEstudiante} no existe en el grupo {existingGroup}");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {nombreGrupo}");
-                    }
+                    MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {estudiantesGrupos[selectedEstudiante]}");
                 }
                 else
                 {
@@ -389,7 +390,14 @@ namespace AdisG3
 
                     if (grupoExistente != null)
                     {
-                        grupoExistente.Integrantes += $", {selectedEstudiante}";
+                        if (!grupoExistente.Integrantes.Contains(selectedEstudiante))
+                        {
+                            grupoExistente.Integrantes += $", {selectedEstudiante}";
+                        }
+                        else
+                        {
+                            MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {nombreGrupo}");
+                        }
                     }
                     else
                     {
@@ -398,17 +406,20 @@ namespace AdisG3
                             NombreGrupo = nombreGrupo,
                             Integrantes = selectedEstudiante
                         });
+
+                        // Insert the group data into the database
+                        List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
+                        InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
+
+                        // Update the estudiantesGrupos dictionary
+                        estudiantesGrupos[selectedEstudiante] = nombreGrupo;
                     }
-
-                    // Insert the group data into the database
-                    List<string> selectedEstudiantes = new List<string> { selectedEstudiante };
-                    InsertarGrupoEnBaseDeDatos(nombreGrupo, selectedEstudiantes);
-
-                    // Update the estudiantesGrupos dictionary
-                    estudiantesGrupos[selectedEstudiante] = nombreGrupo;
                 }
             }
         }
+
+
+
 
         private void CrearAutomatico_Click(object sender, RoutedEventArgs e)
         {

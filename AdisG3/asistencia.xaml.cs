@@ -121,7 +121,6 @@ namespace AdisG3
 
         private void Guardar_Click(object sender, RoutedEventArgs e)
         {
-
             if (cbox_semana.SelectedItem == null)
             {
                 MessageBox.Show("Por favor, selecciona una semana válida.");
@@ -133,104 +132,99 @@ namespace AdisG3
             {
                 connection.Open();
 
-                if (cbox_semana.SelectedItem == null)
-                {
-                    MessageBox.Show("Por favor, selecciona una semana válida.");
-                    return;
-                }
-
                 string selectedWeekStr = cbox_semana.SelectedItem.ToString();
-                if (selectedWeekStr.StartsWith("Semana ") && int.TryParse(selectedWeekStr.Substring(7), out int selectedWeek))
+                if (!string.IsNullOrEmpty(selectedWeekStr) && selectedWeekStr.StartsWith("Semana ") && int.TryParse(selectedWeekStr.Substring(7), out int selectedWeek))
                 {
-                    // Aquí tienes el valor de selectedWeek como un entero válido
-                    // Resto de tu código...
+                    foreach (Estudiante estudiante in Estudiantes)
+                    {
+                        ListViewItem listViewItem = StudentListView
+                            .ItemContainerGenerator
+                            .ContainerFromItem(estudiante) as ListViewItem;
+
+                        if (listViewItem != null)
+                        {
+                            ComboBox comboBox = FindVisualChild<ComboBox>(listViewItem);
+                            if (comboBox != null)
+                            {
+                                if (comboBox.SelectedItem != null)
+                                {
+                                    string asistencia1 = comboBox.SelectedItem.ToString();
+                                    string asistencia = asistencia1.Substring(38).Trim();
+
+                                    string existingQuery = "SELECT COUNT(*) FROM asistencia " +
+                                                           "WHERE id_profesor = @id_profesor " +
+                                                           "AND id_curso = @id_curso " +
+                                                           "AND id_estudiante = @id_estudiante " +
+                                                           "AND semana = @semana";
+
+                                    using (MySqlCommand existingCommand = new MySqlCommand(existingQuery, connection))
+                                    {
+                                        existingCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                        existingCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                                        existingCommand.Parameters.AddWithValue("@id_estudiante", estudiante?.id_estudiante); // Null check here
+                                        existingCommand.Parameters.AddWithValue("@semana", selectedWeek);
+
+                                        int existingCount = Convert.ToInt32(existingCommand.ExecuteScalar());
+
+                                        if (existingCount > 0)
+                                        {
+                                            // Si ya existe un registro, realizar una actualización en lugar de inserción
+                                            string updateQuery = "UPDATE asistencia " +
+                                                                 "SET estado_estudiante = @estado_estudiante " +
+                                                                 "WHERE id_profesor = @id_profesor " +
+                                                                 "AND id_curso = @id_curso " +
+                                                                 "AND id_estudiante = @id_estudiante " +
+                                                                 "AND semana = @semana";
+
+                                            using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+                                            {
+                                                updateCommand.Parameters.AddWithValue("@estado_estudiante", asistencia);
+                                                updateCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                                updateCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                                                updateCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
+                                                updateCommand.Parameters.AddWithValue("@semana", selectedWeek);
+                                                updateCommand.ExecuteNonQuery();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //asistencia = asistencia.Substring(39);
+                                            // Si no existe un registro, realizar la inserción
+                                            string insertQuery = "INSERT INTO asistencia (id_profesor, id_curso, id_estudiante, nombre, estado_estudiante, semana) " +
+                                                                 "VALUES (@id_profesor, @id_curso, @id_estudiante, @nombre, @estado_estudiante, @semana)";
+
+                                            using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                                            {
+                                                insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
+                                                insertCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
+                                                insertCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
+                                                insertCommand.Parameters.AddWithValue("@nombre", estudiante.Nombre);
+                                                insertCommand.Parameters.AddWithValue("@estado_estudiante", asistencia);
+                                                insertCommand.Parameters.AddWithValue("@semana", selectedWeek);
+                                                insertCommand.ExecuteNonQuery();
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Por favor, selecciona un estado de asistencia para todos los estudiantes.");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+
+                    MessageBox.Show("Asistencia guardada correctamente.");
                 }
                 else
                 {
                     MessageBox.Show("La semana seleccionada no tiene el formato esperado.");
                     return;
                 }
-
-
-                foreach (Estudiante estudiante in Estudiantes)
-                {
-                    // Buscar el ListViewItem correspondiente al estudiante
-                    ListViewItem listViewItem = StudentListView
-                        .ItemContainerGenerator
-                        .ContainerFromItem(estudiante) as ListViewItem;
-
-                    if (listViewItem != null)
-                    {
-                        // Busca el ComboBox dentro del ListViewItem
-                        ComboBox comboBox = FindVisualChild<ComboBox>(listViewItem);
-                        if (comboBox != null)
-                        {
-                            // Obtén el valor de asistencia del ComboBox para cada estudiante
-                            string asistencia1 = comboBox.SelectedItem.ToString();
-                            string asistencia = asistencia1.Substring(38).Trim();
-
-                            // Verificar si ya existe un registro para la semana seleccionada
-                            string existingQuery = "SELECT COUNT(*) FROM asistencia " +
-                                                   "WHERE id_profesor = @id_profesor " +
-                                                   "AND id_curso = @id_curso " +
-                                                   "AND id_estudiante = @id_estudiante " +
-                                                   "AND semana = @semana";
-
-                            using (MySqlCommand existingCommand = new MySqlCommand(existingQuery, connection))
-                            {
-                                existingCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
-                                existingCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
-                                existingCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
-                                existingCommand.Parameters.AddWithValue("@semana", selectedWeek);
-
-                                int existingCount = Convert.ToInt32(existingCommand.ExecuteScalar());
-
-                                if (existingCount > 0)
-                                {
-                                    // Si ya existe un registro, realizar una actualización en lugar de inserción
-                                    string updateQuery = "UPDATE asistencia " +
-                                                         "SET estado_estudiante = @estado_estudiante " +
-                                                         "WHERE id_profesor = @id_profesor " +
-                                                         "AND id_curso = @id_curso " +
-                                                         "AND id_estudiante = @id_estudiante " +
-                                                         "AND semana = @semana";
-
-                                    using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
-                                    {
-                                        updateCommand.Parameters.AddWithValue("@estado_estudiante", asistencia);
-                                        updateCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
-                                        updateCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
-                                        updateCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
-                                        updateCommand.Parameters.AddWithValue("@semana", selectedWeek);
-                                        updateCommand.ExecuteNonQuery();
-                                    }
-                                }
-                                else
-                                {
-                                    //asistencia = asistencia.Substring(39);
-                                    // Si no existe un registro, realizar la inserción
-                                    string insertQuery = "INSERT INTO asistencia (id_profesor, id_curso, id_estudiante, nombre, estado_estudiante, semana) " +
-                                                         "VALUES (@id_profesor, @id_curso, @id_estudiante, @nombre, @estado_estudiante, @semana)";
-
-                                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
-                                    {
-                                        insertCommand.Parameters.AddWithValue("@id_profesor", id_profesor);
-                                        insertCommand.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
-                                        insertCommand.Parameters.AddWithValue("@id_estudiante", estudiante.id_estudiante);
-                                        insertCommand.Parameters.AddWithValue("@nombre", estudiante.Nombre);
-                                        insertCommand.Parameters.AddWithValue("@estado_estudiante", asistencia);
-                                        insertCommand.Parameters.AddWithValue("@semana", selectedWeek);
-                                        insertCommand.ExecuteNonQuery();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                MessageBox.Show("Asistencia guardada correctamente.");
             }
         }
+
 
 
         private ListViewItem FindListViewItemFromEstudiante(ListView listView, Estudiante estudiante)

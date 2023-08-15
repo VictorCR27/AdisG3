@@ -34,8 +34,8 @@ namespace AdisG3
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            restablecerPassword restablecerPassword = new restablecerPassword();
-            restablecerPassword.Show();
+            restablecerPasswordPfs restablecerPasswordPfs = new restablecerPasswordPfs();
+            restablecerPasswordPfs.Show();
             this.Close();
         }
 

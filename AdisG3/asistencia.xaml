@@ -10,6 +10,12 @@
         WindowStyle="None"
         Title="Asistencia" Height="600" Width="900">
 
+    <Window.Resources>
+        <SolidColorBrush x:Key="PresenteColor" Color="Green"/>
+        <SolidColorBrush x:Key="JustificadoColor" Color="Yellow"/>
+        <SolidColorBrush x:Key="AusenteColor" Color="Red"/>
+    </Window.Resources>
+
 
     <Grid>
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,15,813,535"/>
@@ -35,8 +41,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-
                 </GridView>
             </ListView.View>
         </ListView>
