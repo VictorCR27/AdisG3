@@ -50,7 +50,7 @@ namespace AdisG3
 
         public int id_profesor { get; set; }
 
-        private int id_std;  
+        private int id_std;
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
@@ -100,7 +100,7 @@ namespace AdisG3
                         id_std = Convert.ToInt32(id_estudiante);  // Asignar a la variable id_std
 
                     }
-                    
+
                     reader.Close();
                 }
                 catch (Exception ex)
