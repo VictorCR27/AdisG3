@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="notasPfs" Height="690" Width="1050" ResizeMode="NoResize"  MinHeight="650" MinWidth="1000">
     <Grid>
-        <ListView x:Name="lvTareas" Margin="9,159,17,95" SelectionChanged="lvTareas_SelectionChanged" IsSynchronizedWithCurrentItem="True" FontFamily="Arial" FontSize="12" Foreground="Black">
+        <ListView x:Name="lvTareas" Margin="9,159,17,42" SelectionChanged="lvTareas_SelectionChanged" IsSynchronizedWithCurrentItem="True" FontFamily="Arial" FontSize="12" Foreground="Black">
             <!-- Definir las columnas del ListView para mostrar información -->
             <ListView.View>
                 <GridView>

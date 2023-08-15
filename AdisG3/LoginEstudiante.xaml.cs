@@ -33,6 +33,13 @@ namespace AdisG3
             string password = txtPassword.Password;
             int id_estudiante = 0;
 
+            // Verificar si el correo termina con "ulacit.ed.cr"
+            if (!correo.EndsWith("ulacit.ed.cr", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("El correo no es válido para iniciar sesión.");
+                return;
+            }
+
             // Cadena de conexión
             string connString = conn_db.GetConnectionString();
 
@@ -52,7 +59,6 @@ namespace AdisG3
                         if (reader.Read())
                         {
                             id_estudiante = reader.GetInt32("id_estudiante");
-          
                         }
                         else
                         {
@@ -67,5 +73,6 @@ namespace AdisG3
             inicioEstudiante.Show();
             this.Close();
         }
+
     }
 }

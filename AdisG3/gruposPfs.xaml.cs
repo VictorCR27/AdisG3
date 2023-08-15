@@ -42,6 +42,8 @@ namespace AdisG3
             }
         }
         public int id_profesor { get; set; }
+
+        private int id_std;  
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
@@ -65,7 +67,7 @@ namespace AdisG3
             CargarEstudiantesGrupos();
 
             string connString = conn_db.GetConnectionString();
-            string query = @"SELECT nombre, apellido1, apellido2 FROM estudiantes
+            string query = @"SELECT nombre, apellido1, apellido2, estudiantes.id_estudiante FROM estudiantes
                             JOIN estudiantesMatriculados ON estudiantes.id_estudiante = estudiantesMatriculados.id_estudiante
                             WHERE id_curso = @id_cursoSeleccionado AND id_profesor = @id_profesor";
 
@@ -85,8 +87,13 @@ namespace AdisG3
                     {
                         string nombreEstudiante = $"{reader["nombre"]} {reader["apellido1"]} {reader["apellido2"]}";
                         cmbEstudiantes.Items.Add(nombreEstudiante);
-                    }
 
+                        string id_estudiante = $"{reader["id_estudiante"]}";
+
+                        id_std = Convert.ToInt32(id_estudiante);  // Asignar a la variable id_std
+
+                    }
+                    
                     reader.Close();
                 }
                 catch (Exception ex)
@@ -101,7 +108,7 @@ namespace AdisG3
             cmbEstudiantes.Items.Clear();
 
             string connString = conn_db.GetConnectionString();
-            string query = @"SELECT nombre, apellido1, apellido2 FROM estudiantes
+            string query = @"SELECT nombre, apellido1, apellido2, estudiantes.id_estudiante FROM estudiantes
                             JOIN estudiantesMatriculados ON estudiantes.id_estudiante = estudiantesMatriculados.id_estudiante
                             WHERE id_curso = @id_cursoSeleccionado AND id_profesor = @id_profesor";
 
@@ -120,7 +127,11 @@ namespace AdisG3
                     while (reader.Read())
                     {
                         string nombreEstudiante = $"{reader["nombre"]} {reader["apellido1"]} {reader["apellido2"]}";
+                        string id_estudiante = $"{reader["id_estudiante"]}";
                         cmbEstudiantes.Items.Add(nombreEstudiante);
+
+                        //int id_std = Convert.ToInt32(id_estudiante);
+
                     }
 
                     reader.Close();
@@ -214,7 +225,7 @@ namespace AdisG3
 
                     foreach (string integrante in integrantes)
                     {
-                        string insertGrupoQuery = "INSERT INTO grupos (nombre, grupo, id_curso, id_profesor) VALUES (@nombre, @grupo, @id_curso, @id_profesor)";
+                        string insertGrupoQuery = "INSERT INTO grupos (nombre, grupo, id_curso, id_profesor, id_std) VALUES (@nombre, @grupo, @id_curso, @id_profesor, @id_std)";
 
                         MySqlCommand command = new MySqlCommand(insertGrupoQuery, connection);
                         command.Parameters.AddWithValue("@nombre", integrante);
@@ -222,6 +233,11 @@ namespace AdisG3
                         command.Parameters.AddWithValue("@id_curso", id_cursoSeleccionado);
                         command.Parameters.AddWithValue("@id_profesor", id_profesor);
 
+                        // Obtener el id_estudiante correspondiente al estudiante actual
+                        int id_estudiante = ObtenerIdEstudiante(integrante);
+                        command.Parameters.AddWithValue("@id_std", id_estudiante);
+
+                        MessageBox.Show($"estudiante {id_estudiante}");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
@@ -235,6 +251,41 @@ namespace AdisG3
                 }
             }
         }
+
+        private int ObtenerIdEstudiante(string nombreEstudiante)
+        {
+            string connString = conn_db.GetConnectionString();
+            string query = "SELECT id_estudiante FROM estudiantes WHERE CONCAT(nombre, ' ', apellido1, ' ', apellido2) = @nombreEstudiante";
+
+            using (MySqlConnection connection = new MySqlConnection(connString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@nombreEstudiante", nombreEstudiante);
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontró el id_estudiante para {nombreEstudiante}");
+                        return -1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return -1;
+                }
+            }
+        }
+
 
 
         private string ObtenerGrupoDelEstudiante(string estudiante)
@@ -280,7 +331,7 @@ namespace AdisG3
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
-                        MessageBox.Show($"Estudiante {estudiante} actualizado en la base de datos con el nuevo grupo {nuevoGrupo}");
+                       // MessageBox.Show($"Estudiante {estudiante} actualizado en la base de datos con el nuevo grupo {nuevoGrupo}");
                     }
                 }
                 catch (Exception ex)

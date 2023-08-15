@@ -47,8 +47,8 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Button Content="Notas" HorizontalAlignment="Left" Height="52" Margin="50,244,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Nota" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
-        <Button Content="Anuncios" HorizontalAlignment="Left" Height="52" Margin="38,320,0,0" VerticalAlignment="Top" Width="164" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Anuncios" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
+        <Button Content="Notas" HorizontalAlignment="Left" Height="52" Margin="50,226,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Nota" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
+        <Button Content="Anuncios" HorizontalAlignment="Left" Height="52" Margin="38,298,0,0" VerticalAlignment="Top" Width="164" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="Button_Anuncios" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
 
         <Button Click="BackButton_Click" BorderThickness="0" Margin="87,610,112,37" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
@@ -75,7 +75,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Asistencia" HorizontalAlignment="Left" Height="52" Margin="24,400,0,0" VerticalAlignment="Top" Width="193" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="asistencia_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
-        <Button Content="Notificaciones" HorizontalAlignment="Left" Height="52" Margin="7,476,0,0" VerticalAlignment="Top" Width="226" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="notificaciones_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
+        <Button Content="Asistencia" HorizontalAlignment="Left" Height="52" Margin="24,370,0,0" VerticalAlignment="Top" Width="193" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="asistencia_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
+        <Button Content="Notificaciones" HorizontalAlignment="Left" Height="52" Margin="7,440,0,0" VerticalAlignment="Top" Width="226" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="notificaciones_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
+        <Button Content="Grupos" HorizontalAlignment="Left" Height="52" Margin="7,516,0,0" VerticalAlignment="Top" Width="226" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="30" Click="grupos_button" FontFamily="Segoe UI Emoji" FontWeight="Bold" />
     </Grid>
 </Window>

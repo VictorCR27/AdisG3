@@ -179,6 +179,9 @@
     <Compile Include="gruposPfs.xaml.cs">
       <DependentUpon>gruposPfs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gruposStd.xaml.cs">
+      <DependentUpon>gruposStd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="historialAnuncios.xaml.cs">
       <DependentUpon>historialAnuncios.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="gruposPfs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gruposStd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

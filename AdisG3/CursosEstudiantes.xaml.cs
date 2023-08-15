@@ -222,5 +222,12 @@ namespace AdisG3
             notificacionesStd.Show();
             this.Close();
         }
+
+        private void grupos_button(object sender, RoutedEventArgs e)
+        {
+            gruposStd gruposStd = new gruposStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            gruposStd.Show();
+            this.Close();
+        }
     }
 }

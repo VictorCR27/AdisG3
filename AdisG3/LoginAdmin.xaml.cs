@@ -45,6 +45,13 @@ namespace AdisG3
             string password = txtPassword.Password;
             int id_profesor = 0;
 
+            // Verificar si el correo termina con "ulacit.ed.cr"
+            if (!correo.EndsWith("ulacit.ed.cr", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("El correo no es válido para iniciar sesión.");
+                return;
+            }
+
             // Cadena de conexión
             string connString = conn_db.GetConnectionString();
 
@@ -73,9 +80,11 @@ namespace AdisG3
                     }
                 }
             }
+
             administradorInicio administradorInicio = new administradorInicio(id_profesor);
             administradorInicio.Show();
             this.Close();
         }
+
     }
 }
