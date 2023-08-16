@@ -12,7 +12,7 @@
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,914,586"/>
         <Label Content="Notificaciones" FontSize="40px" Margin="343,21,390,570" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-        <ListView x:Name="StudentListView" Margin="79,101,70,92" Foreground="Black" FontFamily="Arial" FontSize="15">
+        <ListView x:Name="StudentListView" Margin="79,101,70,92" Foreground="Black" FontFamily="Arial" FontSize="12">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" Width="700"/>

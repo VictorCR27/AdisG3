@@ -13,7 +13,7 @@
         <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0"/>
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,914,586"/>
         <Label Content="Historial Anuncios" FontSize="40px" Margin="333,19,309,572" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontWeight="Bold"/>
-        <ListView x:Name="lvAnuncios" Margin="69,116,72,67" Foreground="Black" FontFamily="Arial" FontSize="15" SelectionChanged="lvAnuncios_SelectionChanged1">
+        <ListView x:Name="lvAnuncios" Margin="69,116,72,67" Foreground="Black" FontFamily="Arial" FontSize="12" SelectionChanged="lvAnuncios_SelectionChanged1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Título" DisplayMemberBinding="{Binding Titulo}" Width="150"/>

@@ -14,17 +14,19 @@ namespace AdisG3
         private int id_cursoSeleccionado;
         public int id_asignacionSemana;
         private int asignacionSeleccionada;
+        public string nombreCursoSeleccionado { get; set; }
 
         public int idProfesorSeleccionado { get; set; }
         public int Id_cursoSeleccionado { get; set; }
 
-        public EnviarAsignacionWindow(AsignacionSemana asignacionSemana, int id_estudiante = 0, int id_cursoSeleccionado = 0, int idProfesorSeleccionado = 0)
+        public EnviarAsignacionWindow(AsignacionSemana asignacionSemana, int id_estudiante, int id_cursoSeleccionado, int idProfesorSeleccionado, string nombreCursoSeleccionado)
         {
             InitializeComponent();
             this.asignacionSemana = asignacionSemana;
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.idProfesorSeleccionado = idProfesorSeleccionado;
+            this.nombreCursoSeleccionado = nombreCursoSeleccionado;
 
 
             // Set the DataContext to the current instance of EnviarAsignacionWindow (this)
@@ -154,6 +156,8 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
+            CursosEstudiantes.Show();
             this.Close();
         }
 

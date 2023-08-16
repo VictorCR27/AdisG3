@@ -11,10 +11,10 @@
         Title="crearGrupos" Height="450" Width="800">
     <Grid>
         <Label Content="Integrantes:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="97,112,0,0" FontSize="20" Foreground="#FF532D69"/>
-        <ComboBox x:Name="cmbEstudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="227,112,0,0" Width="200" SelectionChanged="cmbEstudiantes_SelectionChanged"/>
+        <ComboBox x:Name="cmbEstudiantes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="227,112,0,0" Width="200" SelectionChanged="cmbEstudiantes_SelectionChanged" FontFamily="Arial"/>
 
         <Label Content="Nombre:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="97,66,0,0" FontSize="20" Foreground="#FF532D69" FontFamily="Segoe UI Emoji"/>
-        <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" FontSize="17px" Margin="227,66,376,354"/>
+        <TextBox x:Name="txtNombreGrupo" TextWrapping="Wrap" Margin="227,66,376,354" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" FontFamily="Arial"/>
 
         <ListView x:Name="lstIntegrantes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="725" Height="268" Margin="36,158,0,0" FontFamily="Arial" FontSize="12">
             <ListView.View>

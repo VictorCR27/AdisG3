@@ -43,17 +43,19 @@
             </Grid.RowDefinitions>
 
             <!-- Espacio para ingresar texto -->
-            <TextBox x:Name="txtTareaTexto" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="0" BorderBrush="#FF532D69" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" Margin="47,310,49,0" />
+            <Rectangle HorizontalAlignment="Center" Margin="0,310,0,0" Stroke="#FF532D69" Width="868"/>
+            <Rectangle HorizontalAlignment="Left" Height="16" Margin="185,284,0,0" Stroke="#FF532D69" VerticalAlignment="Top" Width="730"/>
+
+            <!-- Espacio para ingresar texto -->
+            <TextBox x:Name="txtTareaTexto" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Row="0" BorderBrush="#FF532D69" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" Margin="47,310,49,0" FontFamily="Arial" />
 
             <!-- Botón para enviar la tarea con el texto -->
             <Button x:Name="btnEnviar" Grid.Row="1" Margin="665,10,90,10" Content="Enviar" Click="BtnEnviar_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
 
             <!-- Espacio para cargar un archivo -->
             <Button x:Name="btnAdjuntarArchivo" Content="Adjuntar archivo" Click="BtnAdjuntarArchivo_Click" Margin="90,10,665,10" Grid.Row="1" Background="#FF532D69" BorderBrush="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold" />
-            <TextBlock x:Name="txtArchivoSeleccionado" Margin="185,284,47,0" VerticalAlignment="Top" Foreground="Black"/>
+            <TextBlock x:Name="txtArchivoSeleccionado" Margin="185,284,47,0" VerticalAlignment="Top" Foreground="Black" FontFamily="Arial"/>
             <Label Content="Archivo adjuntado" HorizontalAlignment="Left" Height="21" Margin="71,284,0,0" VerticalAlignment="Top" Width="109" Foreground="#FF532D69" FontFamily="Arial"/>
-            <Rectangle HorizontalAlignment="Center" Margin="0,310,0,0" Stroke="#FF532D69" Width="868"/>
-            <Rectangle HorizontalAlignment="Left" Height="16" Margin="185,284,0,0" Stroke="#FF532D69" VerticalAlignment="Top" Width="730"/>
         </Grid>
         <Label x:Name="lb_nuevaTarea" Content="Entrega" HorizontalAlignment="Center" Height="71" Margin="0,13,0,0" VerticalAlignment="Top" Width="154" FontFamily="Segoe UI Emoji" FontSize="40" Foreground="#FF532D69" FontWeight="Bold"/>
         <Label Content="Información de la asignación" HorizontalAlignment="Left" Margin="87,71,0,0" VerticalAlignment="Top" Height="42" Width="346" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Background="Transparent" RenderTransformOrigin="0.5,0.507"/>

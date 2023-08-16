@@ -90,6 +90,8 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
+            CursosEstudiantes.Show();
             this.Close();
         }
     }

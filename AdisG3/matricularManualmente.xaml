@@ -20,11 +20,11 @@
 
         <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="6,14,709,386"></Button>
 
-        <TextBox x:Name="txt_nombre" HorizontalAlignment="Center" Height="34" Margin="0,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged"/>
+        <TextBox x:Name="txt_nombre" HorizontalAlignment="Center" Height="34" Margin="0,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_nombre_TextChanged" FontFamily="Arial"/>
         <TextBox x:Name="txt_apellido1" HorizontalAlignment="Center" Height="34" Margin="0,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_apellido1_TextChanged"/>
-        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Center" Height="34" TextWrapping="Wrap" VerticalAlignment="Center" Width="182" TextChanged="txt_apellido2_TextChanged"/>
+        <TextBox x:Name="txt_apellido2" HorizontalAlignment="Center" Height="34" TextWrapping="Wrap" VerticalAlignment="Center" Width="182" TextChanged="txt_apellido2_TextChanged" FontFamily="Arial"/>
         <TextBox x:Name="txt_correo" HorizontalAlignment="Center" Height="34" Margin="0,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_correo_TextChanged"/>
-        <TextBox x:Name="txt_password" HorizontalAlignment="Center" Height="34" Margin="0,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged"/>
+        <TextBox x:Name="txt_password" HorizontalAlignment="Center" Height="34" Margin="0,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" TextChanged="txt_password_TextChanged" FontFamily="Arial"/>
 
         <Button x:Name="btn_matricular" Content="Guardar" HorizontalAlignment="Left" Margin="657,374,0,0" VerticalAlignment="Top" Click="btn_matricular_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="18" FontWeight="Bold"/>
 

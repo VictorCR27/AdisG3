@@ -80,12 +80,15 @@ namespace AdisG3
                 idAsignacionSeleccionada = asignacionSeleccionada.idAsignacion;
 
                 // Abrir la ventana para enviar la asignación y pasar la asignación seleccionada y el idProfesorSeleccionado a esa ventana
-                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada, id_estudiante, id_cursoSeleccionado, idProfesorSeleccionado);
-                enviarAsignacionWindow.ShowDialog();
+                EnviarAsignacionWindow enviarAsignacionWindow = new EnviarAsignacionWindow(asignacionSeleccionada, id_estudiante, id_cursoSeleccionado, idProfesorSeleccionado, nombreCursoSeleccionado);
+                enviarAsignacionWindow.Show();
+                
 
                 // Refresh the assignments after closing the EnviarAsignacionWindow to show any updates
                 CargarAsignacionesSemana((int)cbox_semana.SelectedItem);
             }
+
+            this.Close();
         }
 
 

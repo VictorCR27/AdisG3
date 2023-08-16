@@ -46,7 +46,8 @@ namespace AdisG3
 
                 // Abrir la ventana para ver la tarea enviada
                 reclamosStd reclamosStd = new reclamosStd(tareaEnviadaSeleccionada, id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado, idAsignacionSeleccionada);
-                reclamosStd.ShowDialog();
+                reclamosStd.Show();
+                this.Close();
             }
         }
 

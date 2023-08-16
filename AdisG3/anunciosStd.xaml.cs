@@ -79,6 +79,7 @@ namespace AdisG3
 
         private void VerMasButton_Click(object sender, RoutedEventArgs e)
         {
+
             Button verMasButton = sender as Button;
             if (verMasButton != null)
             {
@@ -86,9 +87,11 @@ namespace AdisG3
                 if (selectedAnuncio != null)
                 {
                     DetalleAnuncio ventanaDetalles = new DetalleAnuncio(selectedAnuncio.Titulo, selectedAnuncio.Descripcion, selectedAnuncio.Profesor);
-                    ventanaDetalles.ShowDialog();
+                    ventanaDetalles.Show();
                 }
             }
+
+            
         }
 
         public class Anuncio
