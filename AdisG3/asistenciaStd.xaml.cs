@@ -13,19 +13,21 @@ namespace AdisG3
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
+        public int idProfesorSeleccionado { get; set; }
+
         public int selectedWeek;
 
         public ObservableCollection<Estudiante> Estudiantes { get; set; }
 
 
-        public asistenciaStd(int id_estudiante, int id_cursoSeleccionado, string nombreCursoSeleccionado)
+        public asistenciaStd(int id_estudiante, int id_cursoSeleccionado, string nombreCursoSeleccionado, int idProfesorSeleccionado)
         {
             InitializeComponent();
 
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
-
+            this.idProfesorSeleccionado = idProfesorSeleccionado;
             // Llena el ComboBox con las semanas del 1 al 15
             for (int semana = 1; semana <= 15; semana++)
             {
@@ -94,7 +96,7 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             CursosEstudiantes.Show();
             this.Close();
         }

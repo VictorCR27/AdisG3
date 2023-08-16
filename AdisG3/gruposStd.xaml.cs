@@ -11,15 +11,18 @@ namespace AdisG3
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
 
+        public int idProfesorSeleccionado { get; set; }
+
         private ObservableCollection<string> estudiantes = new ObservableCollection<string>();
 
-        public gruposStd(int id_estudiante, int id_cursoSeleccionado, string nombreCursoSeleccionado)
+        public gruposStd(int id_estudiante, int id_cursoSeleccionado, string nombreCursoSeleccionado, int idProfesorSeleccionado)
         {
             InitializeComponent();
 
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
             this.nombreCursoSeleccionado = nombreCursoSeleccionado;
+            this.idProfesorSeleccionado = idProfesorSeleccionado;
 
             CargarEstudiantes();
         }
@@ -34,8 +37,8 @@ namespace AdisG3
                                    g.grupo AS nombre_grupo
                             FROM estudiantes e
                             JOIN estudiantesMatriculados em ON e.id_estudiante = em.id_estudiante
-                            JOIN grupos g ON em.id_curso = g.id_curso AND e.id_estudiante = g.id_std
-                            WHERE em.id_curso = @id_cursoSeleccionado AND g.grupo = (SELECT grupo FROM grupos WHERE id_curso = @id_cursoSeleccionado AND id_std = @id_estudiante);
+                            JOIN grupos g ON em.id_curso = g.id_curso AND e.id_estudiante = g.id_estudiante
+                            WHERE em.id_curso = @id_cursoSeleccionado AND g.grupo = (SELECT grupo FROM grupos WHERE id_curso = @id_cursoSeleccionado AND id_estudiante = @id_estudiante);
                             ";
 
             using (MySqlConnection connection = new MySqlConnection(connString))
@@ -71,7 +74,7 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             CursosEstudiantes.Show();
             this.Close();
         }

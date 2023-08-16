@@ -24,10 +24,11 @@ namespace AdisG3
         public int id_cursoSeleccionado { get; set; }
         public string nombreCursoSeleccionado { get; set; }
         public int idProfesorSeleccionado { get; set; }
- 
-        public anunciosStd(int id_estudiante = 0, int id_cursoSeleccionado = 0, string nombreCursoSeleccionado = "", int idProfesorSeleccionado = 0)
+
+        public anunciosStd(int id_estudiante, int id_cursoSeleccionado, string nombreCursoSeleccionado, int idProfesorSeleccionado)
         {
             InitializeComponent();
+
 
             this.id_estudiante = id_estudiante;
             this.id_cursoSeleccionado = id_cursoSeleccionado;
@@ -35,7 +36,11 @@ namespace AdisG3
             this.idProfesorSeleccionado = idProfesorSeleccionado;
 
             LoadAnuncios();
+
         }
+
+
+
 
         private void LoadAnuncios()
         {
@@ -90,16 +95,18 @@ namespace AdisG3
                 }
             }
         }
+    
+    public class Anuncio
+    {
+        public int Id { get; set; } // Agregar esta propiedad para el id_anuncios
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public string Profesor { get; set; }
 
-        public class Anuncio
-        {
-            public int Id { get; set; } // Agregar esta propiedad para el id_anuncios
-            public string Titulo { get; set; }
-            public string Descripcion { get; set; }
-            public string Profesor { get; set; }
-        }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+    }
+
+    private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             CursosEstudiantes.Show();
@@ -107,11 +114,6 @@ namespace AdisG3
         }
 
         private void lvAnuncios_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void lvAnuncios_SelectionChanged1(object sender, SelectionChangedEventArgs e)
         {
 
         }

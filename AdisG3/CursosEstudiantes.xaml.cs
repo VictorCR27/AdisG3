@@ -206,7 +206,7 @@ namespace AdisG3
 
         private void asistencia_button(object sender, RoutedEventArgs e)
         {
-             asistenciaStd asistenciaStd = new asistenciaStd(id_estudiante,id_cursoSeleccionado,nombreCursoSeleccionado);
+             asistenciaStd asistenciaStd = new asistenciaStd(id_estudiante,id_cursoSeleccionado,nombreCursoSeleccionado, idProfesorSeleccionado);
              asistenciaStd.Show();
              this.Close();
         }
@@ -218,14 +218,14 @@ namespace AdisG3
 
         private void notificaciones_button(object sender, RoutedEventArgs e)
         {
-            notificacionesStd notificacionesStd = new notificacionesStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            notificacionesStd notificacionesStd = new notificacionesStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             notificacionesStd.Show();
             this.Close();
         }
 
         private void grupos_button(object sender, RoutedEventArgs e)
         {
-            gruposStd gruposStd = new gruposStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado);
+            gruposStd gruposStd = new gruposStd(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
             gruposStd.Show();
             this.Close();
         }
