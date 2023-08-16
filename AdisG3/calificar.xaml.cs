@@ -238,7 +238,7 @@ namespace AdisG3
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al calificar estudiantes: " + ex.Message);
+               // MessageBox.Show("Error al calificar estudiantes: " + ex.Message);
             }
         }
 
