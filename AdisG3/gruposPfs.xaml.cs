@@ -108,7 +108,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
@@ -148,7 +148,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
@@ -192,7 +192,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
@@ -257,7 +257,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
@@ -290,7 +290,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                     return -1;
                 }
             }
@@ -369,7 +369,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                 }
             }
             ActualizarDatosListView();
@@ -542,7 +542,7 @@ namespace AdisG3
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
                 }
             }
         }
