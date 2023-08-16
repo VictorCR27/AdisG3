@@ -87,7 +87,7 @@ namespace AdisG3
                 if (selectedAnuncio != null)
                 {
                     DetalleAnuncio ventanaDetalles = new DetalleAnuncio(selectedAnuncio.Titulo, selectedAnuncio.Descripcion, selectedAnuncio.Profesor);
-                    ventanaDetalles.Show();
+                    ventanaDetalles.ShowDialog();
                 }
             }
 

@@ -16,11 +16,10 @@
         <Label Content="Profesor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="133,209,0,0" Grid.Column="1" Foreground="#FF532D69" FontFamily="Segoe UI Emoji" FontSize="25" Height="41" Width="100"/>
         <TextBox x:Name="txtNombreProfesor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Margin="296,217,0,0" IsReadOnly="True" Grid.Column="1" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" FontFamily="Arial" BorderBrush="#FF532D69" Height="23"/>
         <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="120" Margin="296,310,0,0" IsReadOnly="True" Grid.Column="1" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#FF532D69" FontFamily="Arial"/>
-
-        <Button Content="" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,873,431" Click="CerrarButton_Click" Grid.Column="1" Height="57" Width="71" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="{x:Null}"/>
         <Label x:Name="lb_nuevoAnuncio" Content="Detalles" HorizontalAlignment="Left" Height="72" Margin="417,10,0,0" VerticalAlignment="Top" Width="158" FontFamily="Segoe UI Emoji" FontSize="40" FontWeight="Bold" Background="{x:Null}" Foreground="#FF532D69" Grid.Column="1"/>
         <Label x:Name="lb_titulo" Content="Título" HorizontalAlignment="Left" Height="54" Margin="133,132,0,0" VerticalAlignment="Top" Width="83" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Grid.Column="1"/>
         <Label x:Name="lb_descripcion" Content="Descripción" HorizontalAlignment="Left" Height="43" Margin="133,288,0,0" VerticalAlignment="Top" Width="141" Foreground="#FF532D69" FontSize="25" FontFamily="Segoe UI Emoji" Grid.Column="1"/>
-        <materialDesign:PackIcon Kind="CloseCircle" Width="77" Foreground="#3f0e63" Height="55" Margin="10,10,0,0" Grid.ColumnSpan="2"/>
+        <materialDesign:PackIcon Kind="CloseCircle"  Width="77" Foreground="#3f0e63" Height="55" Margin="10,11,0,0" Grid.ColumnSpan="2"/>
+        <Button Click="BackButton_Click" Background="Transparent" Height="50" BorderThickness="0" Margin="10,14,874,436" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

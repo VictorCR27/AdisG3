@@ -35,8 +35,7 @@ namespace AdisG3
             txtNombreProfesor.Text = nombreProfesor;
         }
 
-
-        private void CerrarButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

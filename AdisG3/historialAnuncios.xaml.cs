@@ -76,8 +76,8 @@ namespace AdisG3
                 if (selectedAnuncio != null)
                 {
                     DetalleAnuncio ventanaDetalles = new DetalleAnuncio(selectedAnuncio.Titulo, selectedAnuncio.Descripcion, selectedAnuncio.Profesor);
-                    ventanaDetalles.Show();
-                    this.Close();
+                    ventanaDetalles.ShowDialog();
+                    //this.Close();
                 }
             }
         }
@@ -141,8 +141,8 @@ namespace AdisG3
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Profesor Profesor = new Profesor(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
-            Profesor.Show();
+            cargarAnuncios cargarAnuncios = new cargarAnuncios(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            cargarAnuncios.Show();
             this.Close();
         }
 

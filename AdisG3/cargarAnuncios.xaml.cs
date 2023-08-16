@@ -100,6 +100,7 @@ namespace AdisG3
         {
             historialAnuncios historialAnuncios = new historialAnuncios(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
             historialAnuncios.Show();
+            this.Close();
         }
     }
 }
