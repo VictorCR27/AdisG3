@@ -131,7 +131,8 @@ namespace AdisG3
                             MessageBox.Show("Tarea enviada exitosamente.");
                         }
                     }
-
+                    CursosEstudiantes CursosEstudiantes = new CursosEstudiantes(id_estudiante, id_cursoSeleccionado, nombreCursoSeleccionado, idProfesorSeleccionado);
+                    CursosEstudiantes.Show();
                     this.Close();
                 }
             }
