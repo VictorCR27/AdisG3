@@ -239,8 +239,11 @@ namespace AdisG3
 
         private void EditarTarea_Closed(object sender, EventArgs e)
         {
+            
+            
             if (cbox_semana.SelectedItem != null && int.TryParse(cbox_semana.SelectedItem.ToString().Replace("Semana ", ""), out int semana))
             {
+                this.Close();
                 CargarAsignacionesSemana(semana);
             }
             else
@@ -261,8 +264,11 @@ namespace AdisG3
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             AgregarTarea agregar_Tarea = new AgregarTarea(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
+            
+            agregar_Tarea.Show();
+            this.Close();
             agregar_Tarea.Closed += AgregarTarea_Closed;
-            agregar_Tarea.ShowDialog();
+
         }
         private void AgregarTarea_Closed(object sender, EventArgs e)
         {

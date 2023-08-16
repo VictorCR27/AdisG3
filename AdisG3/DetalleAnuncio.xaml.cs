@@ -19,9 +19,13 @@ namespace AdisG3
     /// </summary>
     public partial class DetalleAnuncio : Window
     {
+        
         public DetalleAnuncio(string titulo, string descripcion, string nombreProfesor)
         {
             InitializeComponent();
+
+
+           
 
             // Asignar los datos del anuncio a los TextBox
             txtTitulo.Text = titulo;

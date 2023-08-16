@@ -132,7 +132,7 @@ namespace AdisG3
                 string nombreAsignacion = txt_nombre_tarea.Text;
                 string descripcion = txt_descripcion_tarea.Text;
                 string tipo = txt_categoria_tarea.Text;
-                DateTime fechaEntrega;
+
                 int valor;
 
                 if (!int.TryParse(txt_valor_tarea.Text, out valor) || valor < 0 || valor > 100)
