@@ -23,8 +23,8 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Ver más" Click="VerMasButton_Click" Width="100" Tag="{Binding}" Margin="5"/>
-                                    <Button Content="Eliminar" Click="EliminarButton_Click" Width="100" Tag="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}}" Margin="5"/>
+                                    <Button Content="Ver más" Click="VerMasButton_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontSize="18" FontFamily="Segoe UI Emoji" FontWeight="Bold" Width="100" Tag="{Binding}" Margin="5"/>
+                                    <Button Content="Eliminar" Click="EliminarButton_Click" BorderBrush="#FF532D69" Background="#FF532D69" FontSize="18" FontFamily="Segoe UI Emoji" FontWeight="Bold" Width="100" Tag="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}}" Margin="5"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
