@@ -34,8 +34,8 @@ namespace AdisG3
             using (MySqlConnection connection = new MySqlConnection(connString))
             {
                 connection.Open();
-
-                string query = "SELECT a.titulo, a.descripcion, p.nombre " +
+                //Traer id_anuncio ya que sale como 0
+                string query = "SELECT a.id_anuncios, a.titulo, a.descripcion, p.nombre " +
                                "FROM anuncios a " +
                                "INNER JOIN profesores p ON a.id_profesor = p.id_profesor " +
                                "WHERE a.id_curso = @idCurso AND a.id_profesor = @idProfesor";
@@ -51,6 +51,7 @@ namespace AdisG3
                         {
                             Anuncio anuncio = new Anuncio
                             {
+                                Id = reader.GetInt16("id_anuncios"),
                                 Titulo = reader.GetString("titulo"),
                                 Descripcion = reader.GetString("descripcion"),
                                 Profesor = reader.GetString("nombre")
@@ -87,10 +88,12 @@ namespace AdisG3
                 Anuncio anuncioAEliminar = eliminarButton.DataContext as Anuncio;
                 if (anuncioAEliminar != null)
                 {
+
                     if (MessageBox.Show("¿Estás seguro de que deseas eliminar este anuncio?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         // Realizar la eliminación en la base de datos
                         EliminarAnuncio(anuncioAEliminar);
+                        //MessageBox.Show(anuncioAEliminar.Id.ToString());
 
                         // Remover el anuncio de la lista
                         var historialAnunciosList = lvAnuncios.ItemsSource as List<Anuncio>;
@@ -112,7 +115,7 @@ namespace AdisG3
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@idAnuncio", id_anuncios); // Usar la propiedad Id
+                    command.Parameters.AddWithValue("@idAnuncio", anuncio.Id); // Usar la propiedad Id
 
                     int rowsAffected = command.ExecuteNonQuery();
 
