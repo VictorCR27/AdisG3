@@ -284,7 +284,7 @@ namespace AdisG3
                     }
                     else
                     {
-                        MessageBox.Show($"No se encontró el id_estudiante para {nombreEstudiante}");
+                        //MessageBox.Show($"No se encontró el id_estudiante para {nombreEstudiante}");
                         return -1;
                     }
                 }
@@ -315,12 +315,6 @@ namespace AdisG3
             this.Close();
         }
 
-        /* private void CrearGrupo_Click(object sender, RoutedEventArgs e)
-         {
-             crearGrupos crearGrupos = new crearGrupos(id_profesor, id_cursoSeleccionado, nombreCursoSeleccionado);
-             crearGrupos.Show();
-             this.Close();
-         }*/
 
         private void ActualizarGrupoEstudiante(string estudiante, string nuevoGrupo)
         {
@@ -431,7 +425,6 @@ namespace AdisG3
                         }
                         else
                         {
-                            MessageBox.Show("Se pasó al else");
                             MessageBox.Show($"El estudiante {selectedEstudiante} ya está en el grupo {estudiantesGrupos[selectedEstudiante]}");
 
                         }
