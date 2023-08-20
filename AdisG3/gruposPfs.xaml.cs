@@ -247,7 +247,7 @@ namespace AdisG3
                         int id_estudiante = ObtenerIdEstudiante(integrante);
                         command.Parameters.AddWithValue("@id_estudiante", id_estudiante);
 
-                        MessageBox.Show($"estudiante {id_estudiante}");
+                        //MessageBox.Show($"estudiante {id_estudiante}");
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
